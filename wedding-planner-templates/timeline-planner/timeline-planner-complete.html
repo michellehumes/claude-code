@@ -1,0 +1,1372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wedding Timeline & Checklist Planner — Premium Etsy Template</title>
+  <link rel="stylesheet" href="../assets/design-system.css">
+  <style>
+    /* Additional page-specific styles for Timeline Planner */
+    .cover-ornament {
+      width: 60px;
+      height: 1px;
+      background: var(--sage-accent);
+      margin: 24px auto;
+    }
+
+    .cover-date {
+      font-family: var(--font-sans);
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      color: var(--muted-charcoal);
+      margin-top: 40px;
+    }
+
+    .names-field {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      color: var(--charcoal-text);
+      border-bottom: 1px solid var(--taupe-rules);
+      min-width: 280px;
+      padding-bottom: 8px;
+      text-align: center;
+    }
+
+    .date-field {
+      font-family: var(--font-sans);
+      font-size: 14px;
+      color: var(--charcoal-text);
+      border-bottom: 1px solid var(--taupe-rules);
+      min-width: 200px;
+      padding-bottom: 6px;
+      text-align: center;
+      letter-spacing: 0.1em;
+    }
+
+    .timeline-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .timeline-badge {
+      background: var(--transparent-sage);
+      padding: 8px 16px;
+      font-family: var(--font-sans);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--charcoal-text);
+    }
+
+    .checklist-section {
+      margin-bottom: 32px;
+    }
+
+    .checklist-section-header {
+      font-family: var(--font-sans);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--sage-accent);
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--sage-accent);
+      margin-bottom: 16px;
+      display: inline-block;
+    }
+
+    .checklist-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 11px 0;
+      border-bottom: 1px solid var(--light-taupe);
+    }
+
+    .checklist-item:last-child {
+      border-bottom: none;
+    }
+
+    .checkbox {
+      width: 14px;
+      height: 14px;
+      border: 1px solid var(--taupe-rules);
+      border-radius: 2px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .checklist-text {
+      font-family: var(--font-sans);
+      font-size: 11px;
+      color: var(--charcoal-text);
+      line-height: 1.5;
+    }
+
+    .checklist-note {
+      font-family: var(--font-sans);
+      font-size: 10px;
+      color: var(--muted-charcoal);
+      margin-top: 4px;
+      font-style: italic;
+    }
+
+    .priority-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--sage-accent);
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 5px;
+    }
+
+    .wedding-day-section {
+      margin-bottom: 28px;
+    }
+
+    .wedding-day-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .wedding-day-time {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--charcoal-text);
+      min-width: 80px;
+    }
+
+    .wedding-day-divider {
+      flex: 1;
+      height: 1px;
+      background: var(--taupe-rules);
+    }
+
+    .wedding-day-item {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 16px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--light-taupe);
+    }
+
+    .wedding-day-time-slot {
+      font-family: var(--font-sans);
+      font-size: 11px;
+      color: var(--muted-charcoal);
+      border-bottom: 1px solid var(--taupe-rules);
+      padding-bottom: 4px;
+    }
+
+    .wedding-day-activity {
+      font-family: var(--font-sans);
+      font-size: 11px;
+      color: var(--charcoal-text);
+      border-bottom: 1px solid var(--taupe-rules);
+      padding-bottom: 4px;
+    }
+
+    .notes-line {
+      border-bottom: 1px solid var(--light-taupe);
+      height: 36px;
+    }
+
+    .notes-section-title {
+      font-family: var(--font-sans);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--sage-accent);
+      margin-bottom: 20px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--sage-accent);
+      display: inline-block;
+    }
+
+    .quote-box {
+      background: var(--transparent-sage);
+      padding: 24px 32px;
+      text-align: center;
+      margin: 24px 0;
+    }
+
+    .quote-text {
+      font-family: var(--font-serif);
+      font-size: 16px;
+      font-style: italic;
+      color: var(--charcoal-text);
+      line-height: 1.6;
+    }
+
+    .countdown-box {
+      border: 1px solid var(--taupe-rules);
+      padding: 20px;
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .countdown-label {
+      font-family: var(--font-sans);
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted-charcoal);
+      margin-bottom: 8px;
+    }
+
+    .countdown-value {
+      font-family: var(--font-serif);
+      font-size: 28px;
+      color: var(--charcoal-text);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════
+       PAGE 1: COVER
+       ═══════════════════════════════════════════ -->
+  <div class="page page--cover">
+    <div style="margin-bottom: 60px;">
+      <div class="label" style="margin-bottom: 16px;">THE</div>
+      <h1 class="title-hero">Wedding</h1>
+      <h1 class="title-hero" style="font-style: italic;">Timeline</h1>
+      <div class="cover-ornament"></div>
+      <h2 class="title-cover">& Checklist</h2>
+    </div>
+
+    <div style="margin-top: 40px;">
+      <div class="names-field">&nbsp;</div>
+      <div class="label" style="margin-top: 12px;">NAMES</div>
+    </div>
+
+    <div style="margin-top: 32px;">
+      <div class="date-field">&nbsp;</div>
+      <div class="label" style="margin-top: 12px;">WEDDING DATE</div>
+    </div>
+
+    <div class="page-footer">
+      <span></span>
+      <span class="page-number">01</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       PAGE 2: ENGAGEMENT → 12 MONTHS OUT
+       ═══════════════════════════════════════════ -->
+  <div class="page">
+    <div class="timeline-header">
+      <h1 class="title-page" style="margin-bottom: 0;">Getting Started</h1>
+      <div class="timeline-badge">12+ Months</div>
+    </div>
+
+    <div class="quote-box">
+      <p class="quote-text">Begin with the big decisions. Everything else will follow.</p>
+    </div>
+
+    <div class="checklist-section">
+      <div class="checklist-section-header">First Steps</div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Announce your engagement</div>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Celebrate with close family and friends</div>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Set your wedding date (or a few options)</div>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Determine your overall budget</div>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Discuss who will contribute financially</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="checklist-section">
+      <div class="checklist-section-header">Big Decisions</div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Decide on wedding style and vision</div>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Create initial guest list estimate</div>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Research and tour potential venues</div>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Book your ceremony and reception venue</div>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Hire a wedding planner (if desired)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="checklist-section">
+      <div class="checklist-section-header">Early Bookings</div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Research photographers and videographers</div>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Book photography and video</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span class="page-number">12+ MONTHS OUT</span>
+      <span class="page-number">02</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       PAGE 3: 9-6 MONTHS OUT
+       ═══════════════════════════════════════════ -->
+  <div class="page">
+    <div class="timeline-header">
+      <h1 class="title-page" style="margin-bottom: 0;">Building Momentum</h1>
+      <div class="timeline-badge">9-6 Months</div>
+    </div>
+
+    <div class="checklist-section">
+      <div class="checklist-section-header">Vendors</div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Book caterer or finalize venue catering</div>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Hire florist and discuss vision</div>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Book band or DJ</div>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Hire officiant</div>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Research and book hair and makeup artists</div>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Book transportation (if needed)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="checklist-section">
+      <div class="checklist-section-header">Attire</div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Begin wedding dress shopping</div>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Order wedding dress (allow 4-6 months)</div>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Begin shopping for wedding party attire</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="checklist-section">
+      <div class="checklist-section-header">Planning</div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Choose wedding party members</div>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Start wedding registry</div>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Reserve hotel room blocks</div>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Book rehearsal dinner venue</div>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Plan honeymoon and book travel</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span class="page-number">9-6 MONTHS OUT</span>
+      <span class="page-number">03</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       PAGE 4: 6-3 MONTHS OUT
+       ═══════════════════════════════════════════ -->
+  <div class="page">
+    <div class="timeline-header">
+      <h1 class="title-page" style="margin-bottom: 0;">Details Coming Together</h1>
+      <div class="timeline-badge">6-3 Months</div>
+    </div>
+
+    <div class="checklist-section">
+      <div class="checklist-section-header">Stationery</div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Order save-the-dates (if not already sent)</div>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Design and order wedding invitations</div>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Plan ceremony programs</div>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Finalize guest list and addresses</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="checklist-section">
+      <div class="checklist-section-header">Details</div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Schedule cake or dessert tasting</div>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Order wedding cake or desserts</div>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Plan wedding favors</div>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Purchase wedding bands</div>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Book calligrapher (if using)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="checklist-section">
+      <div class="checklist-section-header">Vendors</div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Schedule menu tasting with caterer</div>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Finalize floral designs and order</div>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Plan rental items (tables, chairs, linens)</div>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Schedule dress fittings</div>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Arrange alterations timeline</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span class="page-number">6-3 MONTHS OUT</span>
+      <span class="page-number">04</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       PAGE 5: 90-DAY COUNTDOWN
+       ═══════════════════════════════════════════ -->
+  <div class="page">
+    <div class="timeline-header">
+      <h1 class="title-page" style="margin-bottom: 0;">Final Stretch</h1>
+      <div class="timeline-badge">90 Days</div>
+    </div>
+
+    <div class="countdown-box">
+      <div class="countdown-label">Days Until Your Wedding</div>
+      <div class="countdown-value">90</div>
+    </div>
+
+    <div class="checklist-section">
+      <div class="checklist-section-header">Invitations</div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Mail wedding invitations (8-10 weeks out)</div>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Set up RSVP tracking system</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="checklist-section">
+      <div class="checklist-section-header">Beauty & Attire</div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Schedule hair and makeup trial</div>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Finalize wedding party attire</div>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Order groom's attire</div>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Purchase accessories and shoes</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="checklist-section">
+      <div class="checklist-section-header">Legal & Logistics</div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Apply for marriage license</div>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Confirm honeymoon reservations</div>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Update passport if needed</div>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Create day-of emergency kit</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="checklist-section">
+      <div class="checklist-section-header">Planning</div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Finalize seating chart (first draft)</div>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Write personal vows (if applicable)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span class="page-number">90-DAY COUNTDOWN</span>
+      <span class="page-number">05</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       PAGE 6: 30 DAYS OUT
+       ═══════════════════════════════════════════ -->
+  <div class="page">
+    <div class="timeline-header">
+      <h1 class="title-page" style="margin-bottom: 0;">One Month Away</h1>
+      <div class="timeline-badge">30 Days</div>
+    </div>
+
+    <div class="countdown-box">
+      <div class="countdown-label">Days Until Your Wedding</div>
+      <div class="countdown-value">30</div>
+    </div>
+
+    <div class="checklist-section">
+      <div class="checklist-section-header">Final Confirmations</div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Follow up on any outstanding RSVPs</div>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Submit final guest count to caterer</div>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Confirm all vendor arrival times</div>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Finalize seating arrangements</div>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Create detailed wedding day timeline</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="checklist-section">
+      <div class="checklist-section-header">Attire</div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Final dress fitting</div>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Pick up wedding dress</div>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Final suit or tux fitting</div>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Break in wedding shoes</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="checklist-section">
+      <div class="checklist-section-header">Preparations</div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Create playlist for DJ/band</div>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Send photo list to photographer</div>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Prepare toasts and speeches</div>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Arrange wedding party gifts</div>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Prepare vendor tip envelopes</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span class="page-number">30 DAYS OUT</span>
+      <span class="page-number">06</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       PAGE 7: WEEK OF
+       ═══════════════════════════════════════════ -->
+  <div class="page">
+    <div class="timeline-header">
+      <h1 class="title-page" style="margin-bottom: 0;">Wedding Week</h1>
+      <div class="timeline-badge">7 Days</div>
+    </div>
+
+    <div class="quote-box">
+      <p class="quote-text">The details are handled. Now it's time to enjoy every moment.</p>
+    </div>
+
+    <div class="checklist-section">
+      <div class="checklist-section-header">Final Details</div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Confirm all vendor deliveries and timing</div>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Share timeline with wedding party</div>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Prepare day-of contact list</div>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Assign day-of tasks to helpers</div>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Pack honeymoon bags</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="checklist-section">
+      <div class="checklist-section-header">Rehearsal & Dinner</div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Attend ceremony rehearsal</div>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Give wedding party gifts</div>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Enjoy rehearsal dinner</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="checklist-section">
+      <div class="checklist-section-header">Day Before</div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Confirm wedding day transportation</div>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Lay out all wedding day items</div>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Get a good night's rest</div>
+        </div>
+      </div>
+      <div class="checklist-item">
+        <div class="checkbox"></div>
+        <div>
+          <div class="checklist-text">Confirm rings are accessible</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span class="page-number">WEDDING WEEK</span>
+      <span class="page-number">07</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       PAGE 8: WEDDING DAY TIMELINE
+       ═══════════════════════════════════════════ -->
+  <div class="page">
+    <h1 class="title-page">Wedding Day Timeline</h1>
+
+    <p style="font-family: var(--font-sans); font-size: 11px; color: var(--muted-charcoal); margin-bottom: 32px; line-height: 1.6;">
+      Customize this timeline to fit your day. Share with your wedding party and vendors.
+    </p>
+
+    <div class="wedding-day-section">
+      <div class="wedding-day-header">
+        <span class="wedding-day-time">MORNING</span>
+        <div class="wedding-day-divider"></div>
+      </div>
+      <div class="wedding-day-item">
+        <div class="wedding-day-time-slot">&nbsp;</div>
+        <div class="wedding-day-activity">&nbsp;</div>
+      </div>
+      <div class="wedding-day-item">
+        <div class="wedding-day-time-slot">&nbsp;</div>
+        <div class="wedding-day-activity">&nbsp;</div>
+      </div>
+      <div class="wedding-day-item">
+        <div class="wedding-day-time-slot">&nbsp;</div>
+        <div class="wedding-day-activity">&nbsp;</div>
+      </div>
+    </div>
+
+    <div class="wedding-day-section">
+      <div class="wedding-day-header">
+        <span class="wedding-day-time">AFTERNOON</span>
+        <div class="wedding-day-divider"></div>
+      </div>
+      <div class="wedding-day-item">
+        <div class="wedding-day-time-slot">&nbsp;</div>
+        <div class="wedding-day-activity">&nbsp;</div>
+      </div>
+      <div class="wedding-day-item">
+        <div class="wedding-day-time-slot">&nbsp;</div>
+        <div class="wedding-day-activity">&nbsp;</div>
+      </div>
+      <div class="wedding-day-item">
+        <div class="wedding-day-time-slot">&nbsp;</div>
+        <div class="wedding-day-activity">&nbsp;</div>
+      </div>
+    </div>
+
+    <div class="wedding-day-section">
+      <div class="wedding-day-header">
+        <span class="wedding-day-time">CEREMONY</span>
+        <div class="wedding-day-divider"></div>
+      </div>
+      <div class="wedding-day-item">
+        <div class="wedding-day-time-slot">&nbsp;</div>
+        <div class="wedding-day-activity">&nbsp;</div>
+      </div>
+      <div class="wedding-day-item">
+        <div class="wedding-day-time-slot">&nbsp;</div>
+        <div class="wedding-day-activity">&nbsp;</div>
+      </div>
+    </div>
+
+    <div class="wedding-day-section">
+      <div class="wedding-day-header">
+        <span class="wedding-day-time">RECEPTION</span>
+        <div class="wedding-day-divider"></div>
+      </div>
+      <div class="wedding-day-item">
+        <div class="wedding-day-time-slot">&nbsp;</div>
+        <div class="wedding-day-activity">&nbsp;</div>
+      </div>
+      <div class="wedding-day-item">
+        <div class="wedding-day-time-slot">&nbsp;</div>
+        <div class="wedding-day-activity">&nbsp;</div>
+      </div>
+      <div class="wedding-day-item">
+        <div class="wedding-day-time-slot">&nbsp;</div>
+        <div class="wedding-day-activity">&nbsp;</div>
+      </div>
+      <div class="wedding-day-item">
+        <div class="wedding-day-time-slot">&nbsp;</div>
+        <div class="wedding-day-activity">&nbsp;</div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span class="page-number">WEDDING DAY</span>
+      <span class="page-number">08</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       PAGE 9: NOTES - VENDOR CONTACT LIST
+       ═══════════════════════════════════════════ -->
+  <div class="page">
+    <h1 class="title-page">Notes</h1>
+
+    <div class="notes-section-title">Vendor Contact List</div>
+
+    <p style="font-family: var(--font-sans); font-size: 11px; color: var(--muted-charcoal); margin-bottom: 24px; line-height: 1.6;">
+      Keep all vendor contacts in one place for easy reference on the wedding day.
+    </p>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
+      <div>
+        <div style="margin-bottom: 20px;">
+          <div class="label" style="margin-bottom: 6px;">Venue</div>
+          <div class="notes-line" style="height: 28px;"></div>
+        </div>
+        <div style="margin-bottom: 20px;">
+          <div class="label" style="margin-bottom: 6px;">Photographer</div>
+          <div class="notes-line" style="height: 28px;"></div>
+        </div>
+        <div style="margin-bottom: 20px;">
+          <div class="label" style="margin-bottom: 6px;">Videographer</div>
+          <div class="notes-line" style="height: 28px;"></div>
+        </div>
+        <div style="margin-bottom: 20px;">
+          <div class="label" style="margin-bottom: 6px;">Caterer</div>
+          <div class="notes-line" style="height: 28px;"></div>
+        </div>
+        <div style="margin-bottom: 20px;">
+          <div class="label" style="margin-bottom: 6px;">Florist</div>
+          <div class="notes-line" style="height: 28px;"></div>
+        </div>
+        <div style="margin-bottom: 20px;">
+          <div class="label" style="margin-bottom: 6px;">DJ / Band</div>
+          <div class="notes-line" style="height: 28px;"></div>
+        </div>
+      </div>
+      <div>
+        <div style="margin-bottom: 20px;">
+          <div class="label" style="margin-bottom: 6px;">Officiant</div>
+          <div class="notes-line" style="height: 28px;"></div>
+        </div>
+        <div style="margin-bottom: 20px;">
+          <div class="label" style="margin-bottom: 6px;">Hair Stylist</div>
+          <div class="notes-line" style="height: 28px;"></div>
+        </div>
+        <div style="margin-bottom: 20px;">
+          <div class="label" style="margin-bottom: 6px;">Makeup Artist</div>
+          <div class="notes-line" style="height: 28px;"></div>
+        </div>
+        <div style="margin-bottom: 20px;">
+          <div class="label" style="margin-bottom: 6px;">Transportation</div>
+          <div class="notes-line" style="height: 28px;"></div>
+        </div>
+        <div style="margin-bottom: 20px;">
+          <div class="label" style="margin-bottom: 6px;">Cake / Desserts</div>
+          <div class="notes-line" style="height: 28px;"></div>
+        </div>
+        <div style="margin-bottom: 20px;">
+          <div class="label" style="margin-bottom: 6px;">Rentals</div>
+          <div class="notes-line" style="height: 28px;"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span class="page-number">NOTES</span>
+      <span class="page-number">09</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       PAGE 10: NOTES - GUEST CONSIDERATIONS
+       ═══════════════════════════════════════════ -->
+  <div class="page">
+    <h1 class="title-page">Notes</h1>
+
+    <div class="notes-section-title">Guest Considerations</div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 40px;">
+      <div>
+        <div class="label" style="margin-bottom: 12px;">Dietary Restrictions</div>
+        <div class="notes-line"></div>
+        <div class="notes-line"></div>
+        <div class="notes-line"></div>
+        <div class="notes-line"></div>
+        <div class="notes-line"></div>
+      </div>
+      <div>
+        <div class="label" style="margin-bottom: 12px;">Accessibility Needs</div>
+        <div class="notes-line"></div>
+        <div class="notes-line"></div>
+        <div class="notes-line"></div>
+        <div class="notes-line"></div>
+        <div class="notes-line"></div>
+      </div>
+    </div>
+
+    <div class="notes-section-title">VIP Notes</div>
+
+    <p style="font-family: var(--font-sans); font-size: 11px; color: var(--muted-charcoal); margin-bottom: 16px; line-height: 1.6;">
+      Special seating, family dynamics, or other considerations to remember.
+    </p>
+
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+
+    <div class="page-footer">
+      <span class="page-number">NOTES</span>
+      <span class="page-number">10</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       PAGE 11: NOTES - CEREMONY DETAILS
+       ═══════════════════════════════════════════ -->
+  <div class="page">
+    <h1 class="title-page">Notes</h1>
+
+    <div class="notes-section-title">Ceremony Details</div>
+
+    <div style="margin-bottom: 32px;">
+      <div class="label" style="margin-bottom: 12px;">Readings & Readers</div>
+      <div class="notes-line"></div>
+      <div class="notes-line"></div>
+      <div class="notes-line"></div>
+      <div class="notes-line"></div>
+    </div>
+
+    <div style="margin-bottom: 32px;">
+      <div class="label" style="margin-bottom: 12px;">Music Selections</div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+        <div>
+          <div style="font-family: var(--font-sans); font-size: 10px; color: var(--muted-charcoal); margin-bottom: 8px;">Processional</div>
+          <div class="notes-line" style="height: 28px;"></div>
+        </div>
+        <div>
+          <div style="font-family: var(--font-sans); font-size: 10px; color: var(--muted-charcoal); margin-bottom: 8px;">Recessional</div>
+          <div class="notes-line" style="height: 28px;"></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-bottom: 32px;">
+      <div class="label" style="margin-bottom: 12px;">Special Rituals or Traditions</div>
+      <div class="notes-line"></div>
+      <div class="notes-line"></div>
+      <div class="notes-line"></div>
+    </div>
+
+    <div>
+      <div class="label" style="margin-bottom: 12px;">Vow Notes</div>
+      <div class="notes-line"></div>
+      <div class="notes-line"></div>
+      <div class="notes-line"></div>
+      <div class="notes-line"></div>
+      <div class="notes-line"></div>
+    </div>
+
+    <div class="page-footer">
+      <span class="page-number">NOTES</span>
+      <span class="page-number">11</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       PAGE 12: NOTES - RECEPTION DETAILS
+       ═══════════════════════════════════════════ -->
+  <div class="page">
+    <h1 class="title-page">Notes</h1>
+
+    <div class="notes-section-title">Reception Details</div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 32px;">
+      <div>
+        <div class="label" style="margin-bottom: 12px;">First Dance Song</div>
+        <div class="notes-line" style="height: 28px;"></div>
+      </div>
+      <div>
+        <div class="label" style="margin-bottom: 12px;">Parent Dances</div>
+        <div class="notes-line" style="height: 28px;"></div>
+      </div>
+    </div>
+
+    <div style="margin-bottom: 32px;">
+      <div class="label" style="margin-bottom: 12px;">Must-Play Songs</div>
+      <div class="notes-line"></div>
+      <div class="notes-line"></div>
+      <div class="notes-line"></div>
+    </div>
+
+    <div style="margin-bottom: 32px;">
+      <div class="label" style="margin-bottom: 12px;">Do Not Play</div>
+      <div class="notes-line"></div>
+      <div class="notes-line"></div>
+    </div>
+
+    <div>
+      <div class="label" style="margin-bottom: 12px;">Toast Order</div>
+      <div style="display: flex; gap: 16px; margin-bottom: 12px;">
+        <span style="font-family: var(--font-sans); font-size: 11px; color: var(--muted-charcoal); width: 20px;">1.</span>
+        <div class="notes-line" style="flex: 1; height: 28px;"></div>
+      </div>
+      <div style="display: flex; gap: 16px; margin-bottom: 12px;">
+        <span style="font-family: var(--font-sans); font-size: 11px; color: var(--muted-charcoal); width: 20px;">2.</span>
+        <div class="notes-line" style="flex: 1; height: 28px;"></div>
+      </div>
+      <div style="display: flex; gap: 16px; margin-bottom: 12px;">
+        <span style="font-family: var(--font-sans); font-size: 11px; color: var(--muted-charcoal); width: 20px;">3.</span>
+        <div class="notes-line" style="flex: 1; height: 28px;"></div>
+      </div>
+      <div style="display: flex; gap: 16px;">
+        <span style="font-family: var(--font-sans); font-size: 11px; color: var(--muted-charcoal); width: 20px;">4.</span>
+        <div class="notes-line" style="flex: 1; height: 28px;"></div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span class="page-number">NOTES</span>
+      <span class="page-number">12</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       PAGE 13: NOTES - PHOTO SHOT LIST
+       ═══════════════════════════════════════════ -->
+  <div class="page">
+    <h1 class="title-page">Notes</h1>
+
+    <div class="notes-section-title">Photo Shot List</div>
+
+    <p style="font-family: var(--font-sans); font-size: 11px; color: var(--muted-charcoal); margin-bottom: 24px; line-height: 1.6;">
+      Share this list with your photographer to ensure no important moments are missed.
+    </p>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
+      <div>
+        <div class="label" style="margin-bottom: 16px;">Getting Ready</div>
+        <div class="checklist-item">
+          <div class="checkbox"></div>
+          <div class="checklist-text">Dress hanging / detail shots</div>
+        </div>
+        <div class="checklist-item">
+          <div class="checkbox"></div>
+          <div class="checklist-text">Bride getting into dress</div>
+        </div>
+        <div class="checklist-item">
+          <div class="checkbox"></div>
+          <div class="checklist-text">Wedding party preparation</div>
+        </div>
+        <div class="checklist-item">
+          <div class="checkbox"></div>
+          <div class="checklist-text">First look with parent</div>
+        </div>
+        <div style="margin-top: 24px;">
+          <div class="label" style="margin-bottom: 16px;">Ceremony</div>
+          <div class="checklist-item">
+            <div class="checkbox"></div>
+            <div class="checklist-text">Walking down the aisle</div>
+          </div>
+          <div class="checklist-item">
+            <div class="checkbox"></div>
+            <div class="checklist-text">Vow exchange</div>
+          </div>
+          <div class="checklist-item">
+            <div class="checkbox"></div>
+            <div class="checklist-text">Ring exchange</div>
+          </div>
+          <div class="checklist-item">
+            <div class="checkbox"></div>
+            <div class="checklist-text">First kiss</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="label" style="margin-bottom: 16px;">Portraits</div>
+        <div class="checklist-item">
+          <div class="checkbox"></div>
+          <div class="checklist-text">Couple portraits</div>
+        </div>
+        <div class="checklist-item">
+          <div class="checkbox"></div>
+          <div class="checklist-text">Wedding party</div>
+        </div>
+        <div class="checklist-item">
+          <div class="checkbox"></div>
+          <div class="checklist-text">Immediate family</div>
+        </div>
+        <div class="checklist-item">
+          <div class="checkbox"></div>
+          <div class="checklist-text">Extended family</div>
+        </div>
+        <div style="margin-top: 24px;">
+          <div class="label" style="margin-bottom: 16px;">Reception</div>
+          <div class="checklist-item">
+            <div class="checkbox"></div>
+            <div class="checklist-text">First dance</div>
+          </div>
+          <div class="checklist-item">
+            <div class="checkbox"></div>
+            <div class="checklist-text">Parent dances</div>
+          </div>
+          <div class="checklist-item">
+            <div class="checkbox"></div>
+            <div class="checklist-text">Cake cutting</div>
+          </div>
+          <div class="checklist-item">
+            <div class="checkbox"></div>
+            <div class="checklist-text">Bouquet / garter toss</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 24px;">
+      <div class="label" style="margin-bottom: 12px;">Additional Must-Have Shots</div>
+      <div class="notes-line"></div>
+      <div class="notes-line"></div>
+    </div>
+
+    <div class="page-footer">
+      <span class="page-number">NOTES</span>
+      <span class="page-number">13</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       PAGE 14: NOTES - GENERAL
+       ═══════════════════════════════════════════ -->
+  <div class="page">
+    <h1 class="title-page">Notes</h1>
+
+    <div class="notes-section-title">Additional Notes</div>
+
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+
+    <div class="page-footer">
+      <span class="page-number">NOTES</span>
+      <span class="page-number">14</span>
+    </div>
+  </div>
+
+</body>
+</html>
