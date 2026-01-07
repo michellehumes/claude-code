@@ -387,6 +387,52 @@ body {
 }
 
 /* ═══════════════════════════════════════════
+   PREMIUM DESIGN ENHANCEMENTS
+   ═══════════════════════════════════════════ */
+
+/* Subtle gradient backgrounds for feature boxes */
+.feature-box-gradient {
+  background: linear-gradient(180deg, rgba(183, 193, 178, 0.08) 0%, rgba(183, 193, 178, 0.04) 100%);
+  border-top: 1px solid rgba(183, 193, 178, 0.3);
+  border-bottom: 1px solid rgba(183, 193, 178, 0.3);
+}
+
+/* Elegant circular checkboxes */
+.checkbox-circle {
+  width: 16px;
+  height: 16px;
+  border: 1px solid var(--taupe-rules);
+  border-radius: 50%;
+}
+
+/* Premium feature box */
+.premium-box {
+  background: linear-gradient(180deg, rgba(183, 193, 178, 0.1) 0%, rgba(183, 193, 178, 0.05) 100%);
+  border: 1px solid rgba(183, 193, 178, 0.25);
+  padding: 32px 40px;
+}
+
+/* Section markers with accent */
+.section-marker {
+  font-family: var(--font-sans);
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--sage-accent);
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--sage-accent);
+  display: inline-block;
+}
+
+/* Currency styling */
+.currency-symbol {
+  font-family: var(--font-sans);
+  font-size: 0.75em;
+  color: var(--muted-charcoal);
+}
+
+/* ═══════════════════════════════════════════
    CANVA RECREATION NOTES
    ═══════════════════════════════════════════
 
@@ -402,10 +448,18 @@ body {
    - Lines: Use rectangle, 1px height, color #CFC6BC
    - Accent lines: Rectangle, 2px height, color #B7C1B2
    - Checkboxes: Square shape, 14x14px, 1px border #CFC6BC
+   - Premium checkboxes: Circle shape, 16x16px, 1px border #CFC6BC
 
    SPACING:
    - Margins: 0.75-1 inch all sides
    - Section gaps: 24-32px
    - Line item gaps: 10-12px
+
+   PREMIUM TOUCHES:
+   - Use subtle gradient backgrounds for feature boxes
+   - Currency symbols slightly smaller and muted
+   - Page subtitles in light weight (300) for elegance
+   - Generous padding creates breathing room
+   - Section markers with sage accent underline
 
    ═══════════════════════════════════════════ */

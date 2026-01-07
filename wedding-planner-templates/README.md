@@ -1,28 +1,42 @@
 # Premium Wedding Planner Templates for Etsy
 
-Two luxury minimalist wedding planning products designed for Canva editing, print, and iPad (GoodNotes) use.
+Luxury minimalist wedding planning products designed for Canva editing, print, and iPad (GoodNotes) use.
 
 ---
 
 ## Products Included
 
-### 1. Minimal Wedding Budget Planner (12 pages)
-Make budgeting feel calm, controlled, and non-intimidating.
+### 1. The Minimal Wedding Budget Planner — Premium Edition (12 pages)
 
-| Page | Content |
-|------|---------|
-| 01 | Cover |
-| 02 | Budget Overview |
-| 03 | Category Breakdown (Part 1) |
-| 04 | Category Breakdown (Part 2) |
-| 05 | Vendor Payment Tracker |
-| 06 | Deposit Due Dates Timeline |
-| 07 | Expected vs Actual Spending |
-| 08 | Monthly Spend Snapshot |
-| 09 | Final Cost Summary |
-| 10 | Notes - Vendor Contacts |
-| 11 | Notes - Budget Adjustments |
-| 12 | Notes - General |
+**Design Philosophy:** Make wedding budgeting feel *calm, controlled, and non-intimidating*. Every page is designed to reduce anxiety and provide clarity.
+
+**NEW: Premium Version Available** (`minimal-budget-planner-premium.html`)
+
+| Page | Content | Design Goal |
+|------|---------|-------------|
+| 01 | Cover | Luxury typography, calm elegance |
+| 02 | Budget Overview | High-level view, anxiety-reducing |
+| 03 | Category Breakdown (Part 1) | Elegant structure, not spreadsheet-like |
+| 04 | Category Breakdown (Part 2) | Continuation with breathing room |
+| 05 | Vendor Payment Tracker | Visual hierarchy over gridlines |
+| 06 | Deposit Due Dates | Timeline-style, chronological clarity |
+| 07 | Expected vs Actual | Simple comparison, easy variance scanning |
+| 08 | Monthly Spend Snapshot | One-page financial clarity |
+| 09 | Final Cost Summary | Closure and confidence |
+| 10 | Notes - Vendor Contacts | Intentional card-style layout |
+| 11 | Notes - Budget Adjustments | Structured change tracking |
+| 12 | Notes - General | Designed lines, not blank paper |
+
+**Premium Design Features:**
+- Subtle gradient backgrounds for feature sections
+- Elegant circular checkboxes
+- Typography-driven hierarchy (serif titles, sans-serif body)
+- Currency symbols subtly muted
+- Page subtitles in light weight for elegance
+- Generous margins and breathing room throughout
+- Section markers with sage accent underlines
+- Feature boxes with soft borders
+- Works beautifully in both print and digital (iPad)
 
 ### 2. Wedding Timeline & Checklist Planner (14 pages)
 Eliminate planning anxiety by showing "what to do next."
@@ -214,12 +228,13 @@ Color: #5A5A5A
 ```
 wedding-planner-templates/
 ├── assets/
-│   └── design-system.css      # Complete design specifications
+│   └── design-system.css                    # Complete design specifications
 ├── budget-planner/
-│   └── budget-planner-complete.html    # All 12 pages
+│   ├── budget-planner-complete.html         # Original 12 pages
+│   └── minimal-budget-planner-premium.html  # NEW: Premium edition (recommended)
 ├── timeline-planner/
-│   └── timeline-planner-complete.html  # All 14 pages
-└── README.md                  # This file
+│   └── timeline-planner-complete.html       # All 14 pages
+└── README.md                                # This file
 ```
 
 ---
@@ -228,10 +243,13 @@ wedding-planner-templates/
 
 Open the HTML files in any web browser to see the complete designs:
 
-1. `budget-planner/budget-planner-complete.html`
-2. `timeline-planner/timeline-planner-complete.html`
+1. `budget-planner/minimal-budget-planner-premium.html` — **RECOMMENDED** Premium budget planner
+2. `budget-planner/budget-planner-complete.html` — Original budget planner
+3. `timeline-planner/timeline-planner-complete.html` — Timeline checklist planner
 
 Each page is displayed at actual print size (8.5 x 11 inches) with accurate typography and spacing.
+
+**Tip:** Use your browser's print preview (Cmd/Ctrl + P) to see exactly how pages will look when exported to PDF.
 
 ---
 
