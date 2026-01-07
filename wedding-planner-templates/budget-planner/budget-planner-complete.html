@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minimal Wedding Budget Planner — Premium Etsy Template</title>
+  <link rel="stylesheet" href="../assets/design-system.css">
+  <style>
+    /* Additional page-specific styles */
+    .cover-ornament {
+      width: 60px;
+      height: 1px;
+      background: var(--sage-accent);
+      margin: 24px auto;
+    }
+
+    .cover-year {
+      font-family: var(--font-sans);
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      color: var(--muted-charcoal);
+      margin-top: 40px;
+    }
+
+    .names-field {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      color: var(--charcoal-text);
+      border-bottom: 1px solid var(--taupe-rules);
+      min-width: 280px;
+      padding-bottom: 8px;
+      text-align: center;
+    }
+
+    .budget-total-box {
+      background: var(--transparent-sage);
+      padding: 28px 40px;
+      text-align: center;
+      margin: 32px 0;
+    }
+
+    .budget-total-label {
+      font-family: var(--font-sans);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted-charcoal);
+      margin-bottom: 8px;
+    }
+
+    .budget-total-amount {
+      font-family: var(--font-serif);
+      font-size: 36px;
+      color: var(--charcoal-text);
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 4px;
+    }
+
+    .budget-total-amount span {
+      font-size: 20px;
+    }
+
+    .budget-total-line {
+      border-bottom: 1px solid var(--taupe-rules);
+      min-width: 180px;
+      display: inline-block;
+    }
+
+    .overview-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--light-taupe);
+    }
+
+    .overview-row:last-child {
+      border-bottom: none;
+    }
+
+    .overview-category {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--charcoal-text);
+    }
+
+    .overview-amount {
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+    }
+
+    .overview-amount-symbol {
+      font-family: var(--font-sans);
+      font-size: 11px;
+      color: var(--muted-charcoal);
+    }
+
+    .overview-amount-line {
+      border-bottom: 1px solid var(--taupe-rules);
+      width: 100px;
+    }
+
+    .category-section {
+      margin-bottom: 32px;
+    }
+
+    .category-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--taupe-rules);
+      margin-bottom: 16px;
+    }
+
+    .category-title {
+      font-family: var(--font-sans);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--charcoal-text);
+    }
+
+    .category-subtotal {
+      font-family: var(--font-sans);
+      font-size: 11px;
+      color: var(--muted-charcoal);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .category-subtotal-line {
+      border-bottom: 1px solid var(--taupe-rules);
+      width: 80px;
+    }
+
+    .line-item {
+      display: grid;
+      grid-template-columns: 1fr 100px 100px;
+      gap: 16px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--light-taupe);
+      align-items: end;
+    }
+
+    .line-item-name {
+      font-family: var(--font-sans);
+      font-size: 11px;
+      color: var(--charcoal-text);
+      border-bottom: 1px solid var(--taupe-rules);
+      padding-bottom: 4px;
+    }
+
+    .line-item-amount {
+      font-family: var(--font-sans);
+      font-size: 11px;
+      color: var(--muted-charcoal);
+      border-bottom: 1px solid var(--taupe-rules);
+      padding-bottom: 4px;
+      display: flex;
+      align-items: baseline;
+      gap: 2px;
+    }
+
+    .vendor-row {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 80px 80px 80px;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--light-taupe);
+      align-items: end;
+    }
+
+    .vendor-header {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 80px 80px 80px;
+      gap: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--taupe-rules);
+      margin-bottom: 4px;
+    }
+
+    .vendor-header-text {
+      font-family: var(--font-sans);
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted-charcoal);
+    }
+
+    .vendor-field {
+      border-bottom: 1px solid var(--taupe-rules);
+      min-height: 20px;
+    }
+
+    .timeline-row {
+      display: grid;
+      grid-template-columns: 100px 1fr 100px 60px;
+      gap: 16px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--light-taupe);
+      align-items: center;
+    }
+
+    .timeline-date {
+      font-family: var(--font-sans);
+      font-size: 11px;
+      color: var(--muted-charcoal);
+      border-bottom: 1px solid var(--taupe-rules);
+      padding-bottom: 4px;
+    }
+
+    .timeline-vendor {
+      font-family: var(--font-sans);
+      font-size: 11px;
+      color: var(--charcoal-text);
+      border-bottom: 1px solid var(--taupe-rules);
+      padding-bottom: 4px;
+    }
+
+    .comparison-section {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 16px;
+    }
+
+    .comparison-header {
+      font-family: var(--font-sans);
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted-charcoal);
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--taupe-rules);
+    }
+
+    .comparison-row {
+      display: contents;
+    }
+
+    .comparison-cell {
+      padding: 12px 0;
+      border-bottom: 1px solid var(--light-taupe);
+      font-family: var(--font-sans);
+      font-size: 11px;
+      color: var(--charcoal-text);
+    }
+
+    .comparison-cell--input {
+      border-bottom: 1px solid var(--taupe-rules);
+    }
+
+    .month-box {
+      text-align: center;
+      padding: 20px;
+      border: 1px solid var(--taupe-rules);
+    }
+
+    .month-name {
+      font-family: var(--font-sans);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted-charcoal);
+      margin-bottom: 12px;
+    }
+
+    .month-amount {
+      font-family: var(--font-serif);
+      font-size: 18px;
+      color: var(--charcoal-text);
+      border-bottom: 1px solid var(--taupe-rules);
+      display: inline-block;
+      min-width: 80px;
+      padding-bottom: 4px;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--taupe-rules);
+    }
+
+    .summary-label {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--charcoal-text);
+    }
+
+    .summary-value {
+      font-family: var(--font-serif);
+      font-size: 24px;
+      color: var(--charcoal-text);
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+    }
+
+    .summary-value-line {
+      border-bottom: 1px solid var(--taupe-rules);
+      min-width: 120px;
+    }
+
+    .notes-line {
+      border-bottom: 1px solid var(--light-taupe);
+      height: 36px;
+    }
+
+    .notes-section-title {
+      font-family: var(--font-sans);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--sage-accent);
+      margin-bottom: 20px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--sage-accent);
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════
+       PAGE 1: COVER
+       ═══════════════════════════════════════════ -->
+  <div class="page page--cover">
+    <div style="margin-bottom: 60px;">
+      <div class="label" style="margin-bottom: 16px;">THE</div>
+      <h1 class="title-hero">Wedding</h1>
+      <h1 class="title-hero" style="font-style: italic;">Budget</h1>
+      <div class="cover-ornament"></div>
+      <h2 class="title-cover">Planner</h2>
+    </div>
+
+    <div style="margin-top: 40px;">
+      <div class="names-field">&nbsp;</div>
+      <div class="label" style="margin-top: 12px;">NAMES</div>
+    </div>
+
+    <div class="cover-year">2 0 2 5</div>
+
+    <div class="page-footer">
+      <span></span>
+      <span class="page-number">01</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       PAGE 2: BUDGET OVERVIEW
+       ═══════════════════════════════════════════ -->
+  <div class="page">
+    <h1 class="title-page">Budget Overview</h1>
+
+    <div class="budget-total-box">
+      <div class="budget-total-label">Total Wedding Budget</div>
+      <div class="budget-total-amount">
+        <span>$</span>
+        <div class="budget-total-line">&nbsp;</div>
+      </div>
+    </div>
+
+    <div class="title-section" style="margin-top: 32px;">Category Allocations</div>
+
+    <div style="flex: 1;">
+      <div class="overview-row">
+        <span class="overview-category">Venue & Catering</span>
+        <div class="overview-amount">
+          <span class="overview-amount-symbol">$</span>
+          <div class="overview-amount-line">&nbsp;</div>
+        </div>
+      </div>
+      <div class="overview-row">
+        <span class="overview-category">Photography & Video</span>
+        <div class="overview-amount">
+          <span class="overview-amount-symbol">$</span>
+          <div class="overview-amount-line">&nbsp;</div>
+        </div>
+      </div>
+      <div class="overview-row">
+        <span class="overview-category">Florals & Decor</span>
+        <div class="overview-amount">
+          <span class="overview-amount-symbol">$</span>
+          <div class="overview-amount-line">&nbsp;</div>
+        </div>
+      </div>
+      <div class="overview-row">
+        <span class="overview-category">Attire & Beauty</span>
+        <div class="overview-amount">
+          <span class="overview-amount-symbol">$</span>
+          <div class="overview-amount-line">&nbsp;</div>
+        </div>
+      </div>
+      <div class="overview-row">
+        <span class="overview-category">Music & Entertainment</span>
+        <div class="overview-amount">
+          <span class="overview-amount-symbol">$</span>
+          <div class="overview-amount-line">&nbsp;</div>
+        </div>
+      </div>
+      <div class="overview-row">
+        <span class="overview-category">Stationery & Invitations</span>
+        <div class="overview-amount">
+          <span class="overview-amount-symbol">$</span>
+          <div class="overview-amount-line">&nbsp;</div>
+        </div>
+      </div>
+      <div class="overview-row">
+        <span class="overview-category">Transportation & Lodging</span>
+        <div class="overview-amount">
+          <span class="overview-amount-symbol">$</span>
+          <div class="overview-amount-line">&nbsp;</div>
+        </div>
+      </div>
+      <div class="overview-row">
+        <span class="overview-category">Gifts & Favors</span>
+        <div class="overview-amount">
+          <span class="overview-amount-symbol">$</span>
+          <div class="overview-amount-line">&nbsp;</div>
+        </div>
+      </div>
+      <div class="overview-row">
+        <span class="overview-category">Miscellaneous</span>
+        <div class="overview-amount">
+          <span class="overview-amount-symbol">$</span>
+          <div class="overview-amount-line">&nbsp;</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span class="page-number">BUDGET OVERVIEW</span>
+      <span class="page-number">02</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       PAGE 3: CATEGORY BREAKDOWN - PART 1
+       ═══════════════════════════════════════════ -->
+  <div class="page">
+    <h1 class="title-page">Category Breakdown</h1>
+
+    <!-- Venue & Catering -->
+    <div class="category-section">
+      <div class="category-header">
+        <span class="category-title">Venue & Catering</span>
+        <div class="category-subtotal">
+          <span>Subtotal</span>
+          <span>$</span>
+          <div class="category-subtotal-line">&nbsp;</div>
+        </div>
+      </div>
+      <div class="line-item">
+        <div class="line-item-name">&nbsp;</div>
+        <div class="line-item-amount"><span style="color: var(--muted-charcoal);">$</span></div>
+        <div class="line-item-amount"><span style="color: var(--muted-charcoal);">$</span></div>
+      </div>
+      <div class="line-item">
+        <div class="line-item-name">&nbsp;</div>
+        <div class="line-item-amount"><span style="color: var(--muted-charcoal);">$</span></div>
+        <div class="line-item-amount"><span style="color: var(--muted-charcoal);">$</span></div>
+      </div>
+      <div class="line-item">
+        <div class="line-item-name">&nbsp;</div>
+        <div class="line-item-amount"><span style="color: var(--muted-charcoal);">$</span></div>
+        <div class="line-item-amount"><span style="color: var(--muted-charcoal);">$</span></div>
+      </div>
+      <div style="display: flex; justify-content: flex-end; gap: 16px; margin-top: 8px;">
+        <span style="font-size: 9px; color: var(--muted-charcoal); letter-spacing: 0.1em; text-transform: uppercase;">Estimated</span>
+        <span style="font-size: 9px; color: var(--muted-charcoal); letter-spacing: 0.1em; text-transform: uppercase; width: 100px;">Actual</span>
+      </div>
+    </div>
+
+    <!-- Photography & Video -->
+    <div class="category-section">
+      <div class="category-header">
+        <span class="category-title">Photography & Video</span>
+        <div class="category-subtotal">
+          <span>Subtotal</span>
+          <span>$</span>
+          <div class="category-subtotal-line">&nbsp;</div>
+        </div>
+      </div>
+      <div class="line-item">
+        <div class="line-item-name">&nbsp;</div>
+        <div class="line-item-amount"><span style="color: var(--muted-charcoal);">$</span></div>
+        <div class="line-item-amount"><span style="color: var(--muted-charcoal);">$</span></div>
+      </div>
+      <div class="line-item">
+        <div class="line-item-name">&nbsp;</div>
+        <div class="line-item-amount"><span style="color: var(--muted-charcoal);">$</span></div>
+        <div class="line-item-amount"><span style="color: var(--muted-charcoal);">$</span></div>
+      </div>
+      <div class="line-item">
+        <div class="line-item-name">&nbsp;</div>
+        <div class="line-item-amount"><span style="color: var(--muted-charcoal);">$</span></div>
+        <div class="line-item-amount"><span style="color: var(--muted-charcoal);">$</span></div>
+      </div>
+    </div>
+
+    <!-- Florals & Decor -->
+    <div class="category-section">
+      <div class="category-header">
+        <span class="category-title">Florals & Decor</span>
+        <div class="category-subtotal">
+          <span>Subtotal</span>
+          <span>$</span>
+          <div class="category-subtotal-line">&nbsp;</div>
+        </div>
+      </div>
+      <div class="line-item">
+        <div class="line-item-name">&nbsp;</div>
+        <div class="line-item-amount"><span style="color: var(--muted-charcoal);">$</span></div>
+        <div class="line-item-amount"><span style="color: var(--muted-charcoal);">$</span></div>
+      </div>
+      <div class="line-item">
+        <div class="line-item-name">&nbsp;</div>
+        <div class="line-item-amount"><span style="color: var(--muted-charcoal);">$</span></div>
+        <div class="line-item-amount"><span style="color: var(--muted-charcoal);">$</span></div>
+      </div>
+      <div class="line-item">
+        <div class="line-item-name">&nbsp;</div>
+        <div class="line-item-amount"><span style="color: var(--muted-charcoal);">$</span></div>
+        <div class="line-item-amount"><span style="color: var(--muted-charcoal);">$</span></div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span class="page-number">CATEGORY BREAKDOWN</span>
+      <span class="page-number">03</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       PAGE 4: CATEGORY BREAKDOWN - PART 2
+       ═══════════════════════════════════════════ -->
+  <div class="page">
+    <h1 class="title-page">Category Breakdown</h1>
+
+    <!-- Attire & Beauty -->
+    <div class="category-section">
+      <div class="category-header">
+        <span class="category-title">Attire & Beauty</span>
+        <div class="category-subtotal">
+          <span>Subtotal</span>
+          <span>$</span>
+          <div class="category-subtotal-line">&nbsp;</div>
+        </div>
+      </div>
+      <div class="line-item">
+        <div class="line-item-name">&nbsp;</div>
+        <div class="line-item-amount"><span style="color: var(--muted-charcoal);">$</span></div>
+        <div class="line-item-amount"><span style="color: var(--muted-charcoal);">$</span></div>
+      </div>
+      <div class="line-item">
+        <div class="line-item-name">&nbsp;</div>
+        <div class="line-item-amount"><span style="color: var(--muted-charcoal);">$</span></div>
+        <div class="line-item-amount"><span style="color: var(--muted-charcoal);">$</span></div>
+      </div>
+      <div class="line-item">
+        <div class="line-item-name">&nbsp;</div>
+        <div class="line-item-amount"><span style="color: var(--muted-charcoal);">$</span></div>
+        <div class="line-item-amount"><span style="color: var(--muted-charcoal);">$</span></div>
+      </div>
+    </div>
+
+    <!-- Music & Entertainment -->
+    <div class="category-section">
+      <div class="category-header">
+        <span class="category-title">Music & Entertainment</span>
+        <div class="category-subtotal">
+          <span>Subtotal</span>
+          <span>$</span>
+          <div class="category-subtotal-line">&nbsp;</div>
+        </div>
+      </div>
+      <div class="line-item">
+        <div class="line-item-name">&nbsp;</div>
+        <div class="line-item-amount"><span style="color: var(--muted-charcoal);">$</span></div>
+        <div class="line-item-amount"><span style="color: var(--muted-charcoal);">$</span></div>
+      </div>
+      <div class="line-item">
+        <div class="line-item-name">&nbsp;</div>
+        <div class="line-item-amount"><span style="color: var(--muted-charcoal);">$</span></div>
+        <div class="line-item-amount"><span style="color: var(--muted-charcoal);">$</span></div>
+      </div>
+    </div>
+
+    <!-- Stationery -->
+    <div class="category-section">
+      <div class="category-header">
+        <span class="category-title">Stationery & Invitations</span>
+        <div class="category-subtotal">
+          <span>Subtotal</span>
+          <span>$</span>
+          <div class="category-subtotal-line">&nbsp;</div>
+        </div>
+      </div>
+      <div class="line-item">
+        <div class="line-item-name">&nbsp;</div>
+        <div class="line-item-amount"><span style="color: var(--muted-charcoal);">$</span></div>
+        <div class="line-item-amount"><span style="color: var(--muted-charcoal);">$</span></div>
+      </div>
+      <div class="line-item">
+        <div class="line-item-name">&nbsp;</div>
+        <div class="line-item-amount"><span style="color: var(--muted-charcoal);">$</span></div>
+        <div class="line-item-amount"><span style="color: var(--muted-charcoal);">$</span></div>
+      </div>
+    </div>
+
+    <!-- Miscellaneous -->
+    <div class="category-section">
+      <div class="category-header">
+        <span class="category-title">Miscellaneous & Buffer</span>
+        <div class="category-subtotal">
+          <span>Subtotal</span>
+          <span>$</span>
+          <div class="category-subtotal-line">&nbsp;</div>
+        </div>
+      </div>
+      <div class="line-item">
+        <div class="line-item-name">&nbsp;</div>
+        <div class="line-item-amount"><span style="color: var(--muted-charcoal);">$</span></div>
+        <div class="line-item-amount"><span style="color: var(--muted-charcoal);">$</span></div>
+      </div>
+      <div class="line-item">
+        <div class="line-item-name">&nbsp;</div>
+        <div class="line-item-amount"><span style="color: var(--muted-charcoal);">$</span></div>
+        <div class="line-item-amount"><span style="color: var(--muted-charcoal);">$</span></div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span class="page-number">CATEGORY BREAKDOWN</span>
+      <span class="page-number">04</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       PAGE 5: VENDOR PAYMENT TRACKER
+       ═══════════════════════════════════════════ -->
+  <div class="page">
+    <h1 class="title-page">Vendor Payment Tracker</h1>
+
+    <div class="vendor-header">
+      <span class="vendor-header-text">Vendor Name</span>
+      <span class="vendor-header-text">Service</span>
+      <span class="vendor-header-text">Total Due</span>
+      <span class="vendor-header-text">Paid</span>
+      <span class="vendor-header-text">Balance</span>
+    </div>
+
+    <div class="vendor-row">
+      <div class="vendor-field">&nbsp;</div>
+      <div class="vendor-field">&nbsp;</div>
+      <div class="vendor-field">&nbsp;</div>
+      <div class="vendor-field">&nbsp;</div>
+      <div class="vendor-field">&nbsp;</div>
+    </div>
+    <div class="vendor-row">
+      <div class="vendor-field">&nbsp;</div>
+      <div class="vendor-field">&nbsp;</div>
+      <div class="vendor-field">&nbsp;</div>
+      <div class="vendor-field">&nbsp;</div>
+      <div class="vendor-field">&nbsp;</div>
+    </div>
+    <div class="vendor-row">
+      <div class="vendor-field">&nbsp;</div>
+      <div class="vendor-field">&nbsp;</div>
+      <div class="vendor-field">&nbsp;</div>
+      <div class="vendor-field">&nbsp;</div>
+      <div class="vendor-field">&nbsp;</div>
+    </div>
+    <div class="vendor-row">
+      <div class="vendor-field">&nbsp;</div>
+      <div class="vendor-field">&nbsp;</div>
+      <div class="vendor-field">&nbsp;</div>
+      <div class="vendor-field">&nbsp;</div>
+      <div class="vendor-field">&nbsp;</div>
+    </div>
+    <div class="vendor-row">
+      <div class="vendor-field">&nbsp;</div>
+      <div class="vendor-field">&nbsp;</div>
+      <div class="vendor-field">&nbsp;</div>
+      <div class="vendor-field">&nbsp;</div>
+      <div class="vendor-field">&nbsp;</div>
+    </div>
+    <div class="vendor-row">
+      <div class="vendor-field">&nbsp;</div>
+      <div class="vendor-field">&nbsp;</div>
+      <div class="vendor-field">&nbsp;</div>
+      <div class="vendor-field">&nbsp;</div>
+      <div class="vendor-field">&nbsp;</div>
+    </div>
+    <div class="vendor-row">
+      <div class="vendor-field">&nbsp;</div>
+      <div class="vendor-field">&nbsp;</div>
+      <div class="vendor-field">&nbsp;</div>
+      <div class="vendor-field">&nbsp;</div>
+      <div class="vendor-field">&nbsp;</div>
+    </div>
+    <div class="vendor-row">
+      <div class="vendor-field">&nbsp;</div>
+      <div class="vendor-field">&nbsp;</div>
+      <div class="vendor-field">&nbsp;</div>
+      <div class="vendor-field">&nbsp;</div>
+      <div class="vendor-field">&nbsp;</div>
+    </div>
+    <div class="vendor-row">
+      <div class="vendor-field">&nbsp;</div>
+      <div class="vendor-field">&nbsp;</div>
+      <div class="vendor-field">&nbsp;</div>
+      <div class="vendor-field">&nbsp;</div>
+      <div class="vendor-field">&nbsp;</div>
+    </div>
+    <div class="vendor-row">
+      <div class="vendor-field">&nbsp;</div>
+      <div class="vendor-field">&nbsp;</div>
+      <div class="vendor-field">&nbsp;</div>
+      <div class="vendor-field">&nbsp;</div>
+      <div class="vendor-field">&nbsp;</div>
+    </div>
+
+    <div style="margin-top: auto; padding-top: 24px; border-top: 1px solid var(--taupe-rules); display: flex; justify-content: flex-end; gap: 40px;">
+      <div style="text-align: right;">
+        <span style="font-size: 10px; color: var(--muted-charcoal); letter-spacing: 0.1em; text-transform: uppercase;">Total Paid</span>
+        <div style="font-family: var(--font-serif); font-size: 18px; margin-top: 4px;">$ <span style="border-bottom: 1px solid var(--taupe-rules); display: inline-block; min-width: 80px;">&nbsp;</span></div>
+      </div>
+      <div style="text-align: right;">
+        <span style="font-size: 10px; color: var(--muted-charcoal); letter-spacing: 0.1em; text-transform: uppercase;">Total Remaining</span>
+        <div style="font-family: var(--font-serif); font-size: 18px; margin-top: 4px;">$ <span style="border-bottom: 1px solid var(--taupe-rules); display: inline-block; min-width: 80px;">&nbsp;</span></div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span class="page-number">PAYMENT TRACKER</span>
+      <span class="page-number">05</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       PAGE 6: DEPOSIT DUE DATES TIMELINE
+       ═══════════════════════════════════════════ -->
+  <div class="page">
+    <h1 class="title-page">Deposit Due Dates</h1>
+
+    <p style="font-family: var(--font-sans); font-size: 11px; color: var(--muted-charcoal); margin-bottom: 32px; line-height: 1.6;">
+      Track all upcoming payments to stay ahead of deadlines and avoid late fees.
+    </p>
+
+    <div style="display: grid; grid-template-columns: 100px 1fr 100px 50px; gap: 16px; margin-bottom: 8px;">
+      <span class="vendor-header-text">Due Date</span>
+      <span class="vendor-header-text">Vendor / Item</span>
+      <span class="vendor-header-text">Amount</span>
+      <span class="vendor-header-text" style="text-align: center;">Paid</span>
+    </div>
+    <div class="divider" style="margin-bottom: 8px;"></div>
+
+    <div class="timeline-row">
+      <div class="timeline-date">&nbsp;</div>
+      <div class="timeline-vendor">&nbsp;</div>
+      <div class="timeline-date">$</div>
+      <div style="display: flex; justify-content: center;"><div class="checkbox"></div></div>
+    </div>
+    <div class="timeline-row">
+      <div class="timeline-date">&nbsp;</div>
+      <div class="timeline-vendor">&nbsp;</div>
+      <div class="timeline-date">$</div>
+      <div style="display: flex; justify-content: center;"><div class="checkbox"></div></div>
+    </div>
+    <div class="timeline-row">
+      <div class="timeline-date">&nbsp;</div>
+      <div class="timeline-vendor">&nbsp;</div>
+      <div class="timeline-date">$</div>
+      <div style="display: flex; justify-content: center;"><div class="checkbox"></div></div>
+    </div>
+    <div class="timeline-row">
+      <div class="timeline-date">&nbsp;</div>
+      <div class="timeline-vendor">&nbsp;</div>
+      <div class="timeline-date">$</div>
+      <div style="display: flex; justify-content: center;"><div class="checkbox"></div></div>
+    </div>
+    <div class="timeline-row">
+      <div class="timeline-date">&nbsp;</div>
+      <div class="timeline-vendor">&nbsp;</div>
+      <div class="timeline-date">$</div>
+      <div style="display: flex; justify-content: center;"><div class="checkbox"></div></div>
+    </div>
+    <div class="timeline-row">
+      <div class="timeline-date">&nbsp;</div>
+      <div class="timeline-vendor">&nbsp;</div>
+      <div class="timeline-date">$</div>
+      <div style="display: flex; justify-content: center;"><div class="checkbox"></div></div>
+    </div>
+    <div class="timeline-row">
+      <div class="timeline-date">&nbsp;</div>
+      <div class="timeline-vendor">&nbsp;</div>
+      <div class="timeline-date">$</div>
+      <div style="display: flex; justify-content: center;"><div class="checkbox"></div></div>
+    </div>
+    <div class="timeline-row">
+      <div class="timeline-date">&nbsp;</div>
+      <div class="timeline-vendor">&nbsp;</div>
+      <div class="timeline-date">$</div>
+      <div style="display: flex; justify-content: center;"><div class="checkbox"></div></div>
+    </div>
+    <div class="timeline-row">
+      <div class="timeline-date">&nbsp;</div>
+      <div class="timeline-vendor">&nbsp;</div>
+      <div class="timeline-date">$</div>
+      <div style="display: flex; justify-content: center;"><div class="checkbox"></div></div>
+    </div>
+    <div class="timeline-row">
+      <div class="timeline-date">&nbsp;</div>
+      <div class="timeline-vendor">&nbsp;</div>
+      <div class="timeline-date">$</div>
+      <div style="display: flex; justify-content: center;"><div class="checkbox"></div></div>
+    </div>
+
+    <div class="page-footer">
+      <span class="page-number">DEPOSIT TIMELINE</span>
+      <span class="page-number">06</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       PAGE 7: EXPECTED VS ACTUAL SPENDING
+       ═══════════════════════════════════════════ -->
+  <div class="page">
+    <h1 class="title-page">Expected vs Actual</h1>
+
+    <div class="comparison-section" style="margin-bottom: 32px;">
+      <div class="comparison-header">Category</div>
+      <div class="comparison-header">Expected</div>
+      <div class="comparison-header">Actual</div>
+      <div class="comparison-header">Difference</div>
+    </div>
+
+    <div class="comparison-section">
+      <div class="comparison-cell">Venue & Catering</div>
+      <div class="comparison-cell comparison-cell--input">$</div>
+      <div class="comparison-cell comparison-cell--input">$</div>
+      <div class="comparison-cell comparison-cell--input">$</div>
+
+      <div class="comparison-cell">Photography & Video</div>
+      <div class="comparison-cell comparison-cell--input">$</div>
+      <div class="comparison-cell comparison-cell--input">$</div>
+      <div class="comparison-cell comparison-cell--input">$</div>
+
+      <div class="comparison-cell">Florals & Decor</div>
+      <div class="comparison-cell comparison-cell--input">$</div>
+      <div class="comparison-cell comparison-cell--input">$</div>
+      <div class="comparison-cell comparison-cell--input">$</div>
+
+      <div class="comparison-cell">Attire & Beauty</div>
+      <div class="comparison-cell comparison-cell--input">$</div>
+      <div class="comparison-cell comparison-cell--input">$</div>
+      <div class="comparison-cell comparison-cell--input">$</div>
+
+      <div class="comparison-cell">Music & Entertainment</div>
+      <div class="comparison-cell comparison-cell--input">$</div>
+      <div class="comparison-cell comparison-cell--input">$</div>
+      <div class="comparison-cell comparison-cell--input">$</div>
+
+      <div class="comparison-cell">Stationery</div>
+      <div class="comparison-cell comparison-cell--input">$</div>
+      <div class="comparison-cell comparison-cell--input">$</div>
+      <div class="comparison-cell comparison-cell--input">$</div>
+
+      <div class="comparison-cell">Transportation</div>
+      <div class="comparison-cell comparison-cell--input">$</div>
+      <div class="comparison-cell comparison-cell--input">$</div>
+      <div class="comparison-cell comparison-cell--input">$</div>
+
+      <div class="comparison-cell">Gifts & Favors</div>
+      <div class="comparison-cell comparison-cell--input">$</div>
+      <div class="comparison-cell comparison-cell--input">$</div>
+      <div class="comparison-cell comparison-cell--input">$</div>
+
+      <div class="comparison-cell">Miscellaneous</div>
+      <div class="comparison-cell comparison-cell--input">$</div>
+      <div class="comparison-cell comparison-cell--input">$</div>
+      <div class="comparison-cell comparison-cell--input">$</div>
+    </div>
+
+    <div style="margin-top: auto; padding-top: 24px; border-top: 2px solid var(--taupe-rules);">
+      <div class="comparison-section">
+        <div style="font-family: var(--font-sans); font-weight: 600; font-size: 12px;">TOTAL</div>
+        <div style="font-family: var(--font-serif); font-size: 18px;">$ <span style="border-bottom: 1px solid var(--taupe-rules); min-width: 60px; display: inline-block;">&nbsp;</span></div>
+        <div style="font-family: var(--font-serif); font-size: 18px;">$ <span style="border-bottom: 1px solid var(--taupe-rules); min-width: 60px; display: inline-block;">&nbsp;</span></div>
+        <div style="font-family: var(--font-serif); font-size: 18px;">$ <span style="border-bottom: 1px solid var(--taupe-rules); min-width: 60px; display: inline-block;">&nbsp;</span></div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span class="page-number">BUDGET COMPARISON</span>
+      <span class="page-number">07</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       PAGE 8: MONTHLY SPEND SNAPSHOT
+       ═══════════════════════════════════════════ -->
+  <div class="page">
+    <h1 class="title-page">Monthly Spending</h1>
+
+    <p style="font-family: var(--font-sans); font-size: 11px; color: var(--muted-charcoal); margin-bottom: 40px; line-height: 1.6;">
+      Track your spending month by month to maintain control over your budget throughout the planning process.
+    </p>
+
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 40px;">
+      <div class="month-box">
+        <div class="month-name">Month 1</div>
+        <div class="month-amount">$</div>
+      </div>
+      <div class="month-box">
+        <div class="month-name">Month 2</div>
+        <div class="month-amount">$</div>
+      </div>
+      <div class="month-box">
+        <div class="month-name">Month 3</div>
+        <div class="month-amount">$</div>
+      </div>
+      <div class="month-box">
+        <div class="month-name">Month 4</div>
+        <div class="month-amount">$</div>
+      </div>
+      <div class="month-box">
+        <div class="month-name">Month 5</div>
+        <div class="month-amount">$</div>
+      </div>
+      <div class="month-box">
+        <div class="month-name">Month 6</div>
+        <div class="month-amount">$</div>
+      </div>
+      <div class="month-box">
+        <div class="month-name">Month 7</div>
+        <div class="month-amount">$</div>
+      </div>
+      <div class="month-box">
+        <div class="month-name">Month 8</div>
+        <div class="month-amount">$</div>
+      </div>
+      <div class="month-box">
+        <div class="month-name">Month 9</div>
+        <div class="month-amount">$</div>
+      </div>
+      <div class="month-box">
+        <div class="month-name">Month 10</div>
+        <div class="month-amount">$</div>
+      </div>
+      <div class="month-box">
+        <div class="month-name">Month 11</div>
+        <div class="month-amount">$</div>
+      </div>
+      <div class="month-box">
+        <div class="month-name">Month 12</div>
+        <div class="month-amount">$</div>
+      </div>
+    </div>
+
+    <div style="background: var(--transparent-sage); padding: 24px; display: flex; justify-content: space-between; align-items: center;">
+      <span style="font-family: var(--font-sans); font-size: 11px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase;">Cumulative Total</span>
+      <div style="font-family: var(--font-serif); font-size: 24px;">$ <span style="border-bottom: 1px solid var(--taupe-rules); min-width: 120px; display: inline-block;">&nbsp;</span></div>
+    </div>
+
+    <div class="page-footer">
+      <span class="page-number">MONTHLY SNAPSHOT</span>
+      <span class="page-number">08</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       PAGE 9: FINAL COST SUMMARY
+       ═══════════════════════════════════════════ -->
+  <div class="page">
+    <h1 class="title-page">Final Cost Summary</h1>
+
+    <div style="background: var(--transparent-sage); padding: 32px; text-align: center; margin-bottom: 40px;">
+      <div style="font-family: var(--font-sans); font-size: 10px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted-charcoal); margin-bottom: 12px;">Original Budget</div>
+      <div style="font-family: var(--font-serif); font-size: 32px; color: var(--charcoal-text);">$ <span style="border-bottom: 1px solid var(--taupe-rules); min-width: 140px; display: inline-block;">&nbsp;</span></div>
+    </div>
+
+    <div class="summary-row">
+      <span class="summary-label">Total Venue & Catering</span>
+      <div class="summary-value">$ <span class="summary-value-line">&nbsp;</span></div>
+    </div>
+    <div class="summary-row">
+      <span class="summary-label">Total Photography & Video</span>
+      <div class="summary-value">$ <span class="summary-value-line">&nbsp;</span></div>
+    </div>
+    <div class="summary-row">
+      <span class="summary-label">Total Florals & Decor</span>
+      <div class="summary-value">$ <span class="summary-value-line">&nbsp;</span></div>
+    </div>
+    <div class="summary-row">
+      <span class="summary-label">Total Attire & Beauty</span>
+      <div class="summary-value">$ <span class="summary-value-line">&nbsp;</span></div>
+    </div>
+    <div class="summary-row">
+      <span class="summary-label">Total Entertainment</span>
+      <div class="summary-value">$ <span class="summary-value-line">&nbsp;</span></div>
+    </div>
+    <div class="summary-row">
+      <span class="summary-label">Total Other Expenses</span>
+      <div class="summary-value">$ <span class="summary-value-line">&nbsp;</span></div>
+    </div>
+
+    <div style="margin-top: auto; padding: 24px; border: 2px solid var(--sage-accent); display: flex; justify-content: space-between; align-items: center;">
+      <span style="font-family: var(--font-sans); font-size: 14px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;">Final Total</span>
+      <div style="font-family: var(--font-serif); font-size: 28px;">$ <span style="border-bottom: 2px solid var(--charcoal-text); min-width: 140px; display: inline-block;">&nbsp;</span></div>
+    </div>
+
+    <div class="page-footer">
+      <span class="page-number">FINAL SUMMARY</span>
+      <span class="page-number">09</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       PAGE 10: NOTES - VENDOR CONTACTS
+       ═══════════════════════════════════════════ -->
+  <div class="page">
+    <h1 class="title-page">Notes</h1>
+
+    <div class="notes-section-title">Vendor Contacts</div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px;">
+      <div>
+        <div style="margin-bottom: 24px;">
+          <div class="label" style="margin-bottom: 8px;">Vendor</div>
+          <div class="notes-line"></div>
+        </div>
+        <div style="margin-bottom: 24px;">
+          <div class="label" style="margin-bottom: 8px;">Contact</div>
+          <div class="notes-line"></div>
+        </div>
+        <div style="margin-bottom: 24px;">
+          <div class="label" style="margin-bottom: 8px;">Phone / Email</div>
+          <div class="notes-line"></div>
+        </div>
+        <div class="divider" style="margin: 32px 0;"></div>
+        <div style="margin-bottom: 24px;">
+          <div class="label" style="margin-bottom: 8px;">Vendor</div>
+          <div class="notes-line"></div>
+        </div>
+        <div style="margin-bottom: 24px;">
+          <div class="label" style="margin-bottom: 8px;">Contact</div>
+          <div class="notes-line"></div>
+        </div>
+        <div style="margin-bottom: 24px;">
+          <div class="label" style="margin-bottom: 8px;">Phone / Email</div>
+          <div class="notes-line"></div>
+        </div>
+      </div>
+      <div>
+        <div style="margin-bottom: 24px;">
+          <div class="label" style="margin-bottom: 8px;">Vendor</div>
+          <div class="notes-line"></div>
+        </div>
+        <div style="margin-bottom: 24px;">
+          <div class="label" style="margin-bottom: 8px;">Contact</div>
+          <div class="notes-line"></div>
+        </div>
+        <div style="margin-bottom: 24px;">
+          <div class="label" style="margin-bottom: 8px;">Phone / Email</div>
+          <div class="notes-line"></div>
+        </div>
+        <div class="divider" style="margin: 32px 0;"></div>
+        <div style="margin-bottom: 24px;">
+          <div class="label" style="margin-bottom: 8px;">Vendor</div>
+          <div class="notes-line"></div>
+        </div>
+        <div style="margin-bottom: 24px;">
+          <div class="label" style="margin-bottom: 8px;">Contact</div>
+          <div class="notes-line"></div>
+        </div>
+        <div style="margin-bottom: 24px;">
+          <div class="label" style="margin-bottom: 8px;">Phone / Email</div>
+          <div class="notes-line"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span class="page-number">NOTES</span>
+      <span class="page-number">10</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       PAGE 11: NOTES - BUDGET ADJUSTMENTS
+       ═══════════════════════════════════════════ -->
+  <div class="page">
+    <h1 class="title-page">Notes</h1>
+
+    <div class="notes-section-title">Budget Adjustments</div>
+
+    <p style="font-family: var(--font-sans); font-size: 11px; color: var(--muted-charcoal); margin-bottom: 32px; line-height: 1.6;">
+      Record any changes to your original budget allocations and the reasons behind them.
+    </p>
+
+    <div style="display: grid; grid-template-columns: 100px 1fr 100px; gap: 16px; margin-bottom: 12px;">
+      <span class="vendor-header-text">Date</span>
+      <span class="vendor-header-text">Adjustment Details</span>
+      <span class="vendor-header-text">Amount</span>
+    </div>
+    <div class="divider" style="margin-bottom: 8px;"></div>
+
+    <div style="display: grid; grid-template-columns: 100px 1fr 100px; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--light-taupe);">
+      <div style="border-bottom: 1px solid var(--taupe-rules); height: 24px;"></div>
+      <div style="border-bottom: 1px solid var(--taupe-rules); height: 24px;"></div>
+      <div style="border-bottom: 1px solid var(--taupe-rules); height: 24px;"></div>
+    </div>
+    <div style="display: grid; grid-template-columns: 100px 1fr 100px; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--light-taupe);">
+      <div style="border-bottom: 1px solid var(--taupe-rules); height: 24px;"></div>
+      <div style="border-bottom: 1px solid var(--taupe-rules); height: 24px;"></div>
+      <div style="border-bottom: 1px solid var(--taupe-rules); height: 24px;"></div>
+    </div>
+    <div style="display: grid; grid-template-columns: 100px 1fr 100px; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--light-taupe);">
+      <div style="border-bottom: 1px solid var(--taupe-rules); height: 24px;"></div>
+      <div style="border-bottom: 1px solid var(--taupe-rules); height: 24px;"></div>
+      <div style="border-bottom: 1px solid var(--taupe-rules); height: 24px;"></div>
+    </div>
+    <div style="display: grid; grid-template-columns: 100px 1fr 100px; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--light-taupe);">
+      <div style="border-bottom: 1px solid var(--taupe-rules); height: 24px;"></div>
+      <div style="border-bottom: 1px solid var(--taupe-rules); height: 24px;"></div>
+      <div style="border-bottom: 1px solid var(--taupe-rules); height: 24px;"></div>
+    </div>
+    <div style="display: grid; grid-template-columns: 100px 1fr 100px; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--light-taupe);">
+      <div style="border-bottom: 1px solid var(--taupe-rules); height: 24px;"></div>
+      <div style="border-bottom: 1px solid var(--taupe-rules); height: 24px;"></div>
+      <div style="border-bottom: 1px solid var(--taupe-rules); height: 24px;"></div>
+    </div>
+    <div style="display: grid; grid-template-columns: 100px 1fr 100px; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--light-taupe);">
+      <div style="border-bottom: 1px solid var(--taupe-rules); height: 24px;"></div>
+      <div style="border-bottom: 1px solid var(--taupe-rules); height: 24px;"></div>
+      <div style="border-bottom: 1px solid var(--taupe-rules); height: 24px;"></div>
+    </div>
+    <div style="display: grid; grid-template-columns: 100px 1fr 100px; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--light-taupe);">
+      <div style="border-bottom: 1px solid var(--taupe-rules); height: 24px;"></div>
+      <div style="border-bottom: 1px solid var(--taupe-rules); height: 24px;"></div>
+      <div style="border-bottom: 1px solid var(--taupe-rules); height: 24px;"></div>
+    </div>
+    <div style="display: grid; grid-template-columns: 100px 1fr 100px; gap: 16px; padding: 16px 0;">
+      <div style="border-bottom: 1px solid var(--taupe-rules); height: 24px;"></div>
+      <div style="border-bottom: 1px solid var(--taupe-rules); height: 24px;"></div>
+      <div style="border-bottom: 1px solid var(--taupe-rules); height: 24px;"></div>
+    </div>
+
+    <div class="page-footer">
+      <span class="page-number">NOTES</span>
+      <span class="page-number">11</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       PAGE 12: NOTES - GENERAL
+       ═══════════════════════════════════════════ -->
+  <div class="page">
+    <h1 class="title-page">Notes</h1>
+
+    <div class="notes-section-title">Additional Notes</div>
+
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+
+    <div class="page-footer">
+      <span class="page-number">NOTES</span>
+      <span class="page-number">12</span>
+    </div>
+  </div>
+
+</body>
+</html>

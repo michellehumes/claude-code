@@ -1,0 +1,411 @@
+/*
+ * WEDDING PLANNER DESIGN SYSTEM
+ * Premium Minimalist Aesthetic for Etsy
+ *
+ * This CSS defines the complete design system.
+ * Recreate these exact specifications in Canva.
+ */
+
+/* ═══════════════════════════════════════════
+   COLOR PALETTE
+   ═══════════════════════════════════════════ */
+:root {
+  /* Primary Colors */
+  --ivory-bg: #F8F6F2;
+  --taupe-rules: #CFC6BC;
+  --sage-accent: #B7C1B2;
+  --charcoal-text: #2E2E2E;
+
+  /* Secondary/Supporting */
+  --soft-gray: #E8E4DE;
+  --light-taupe: #E5DFD8;
+  --muted-charcoal: #5A5A5A;
+
+  /* Functional */
+  --white: #FFFFFF;
+  --transparent-sage: rgba(183, 193, 178, 0.15);
+}
+
+/* ═══════════════════════════════════════════
+   TYPOGRAPHY
+   ═══════════════════════════════════════════ */
+
+/* Import fonts - In Canva use: Playfair Display + Montserrat */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Montserrat:wght@300;400;500;600&display=swap');
+
+:root {
+  /* Font Families */
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Montserrat', 'Helvetica Neue', sans-serif;
+
+  /* Font Sizes - Print (8.5x11 inch) */
+  --title-hero: 48px;
+  --title-cover: 36px;
+  --title-page: 28px;
+  --title-section: 14px;
+  --body-large: 12px;
+  --body-regular: 11px;
+  --body-small: 10px;
+  --caption: 9px;
+
+  /* Letter Spacing */
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.1em;
+  --tracking-ultra: 0.2em;
+
+  /* Line Heights */
+  --leading-tight: 1.2;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.8;
+}
+
+/* ═══════════════════════════════════════════
+   PAGE DIMENSIONS
+   ═══════════════════════════════════════════ */
+:root {
+  /* US Letter - Print */
+  --page-width: 8.5in;
+  --page-height: 11in;
+
+  /* Margins */
+  --margin-outer: 0.75in;
+  --margin-inner: 1in;
+  --margin-top: 0.875in;
+  --margin-bottom: 0.75in;
+
+  /* Content Area */
+  --content-width: calc(var(--page-width) - var(--margin-outer) - var(--margin-inner));
+}
+
+/* ═══════════════════════════════════════════
+   BASE STYLES
+   ═══════════════════════════════════════════ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  background: #888;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+/* ═══════════════════════════════════════════
+   PAGE CONTAINER
+   ═══════════════════════════════════════════ */
+.page {
+  width: 8.5in;
+  height: 11in;
+  background: var(--ivory-bg);
+  padding: 0.875in 0.75in 0.75in 1in;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+}
+
+.page--cover {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+/* ═══════════════════════════════════════════
+   TYPOGRAPHY CLASSES
+   ═══════════════════════════════════════════ */
+
+/* Hero Title - Cover pages only */
+.title-hero {
+  font-family: var(--font-serif);
+  font-size: var(--title-hero);
+  font-weight: 400;
+  color: var(--charcoal-text);
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--leading-tight);
+}
+
+/* Cover Subtitle */
+.title-cover {
+  font-family: var(--font-serif);
+  font-size: var(--title-cover);
+  font-weight: 400;
+  color: var(--charcoal-text);
+  letter-spacing: var(--tracking-tight);
+}
+
+/* Page Title */
+.title-page {
+  font-family: var(--font-serif);
+  font-size: var(--title-page);
+  font-weight: 400;
+  color: var(--charcoal-text);
+  letter-spacing: var(--tracking-tight);
+  margin-bottom: 0.5in;
+}
+
+/* Section Header - ALL CAPS */
+.title-section {
+  font-family: var(--font-sans);
+  font-size: var(--title-section);
+  font-weight: 500;
+  color: var(--charcoal-text);
+  letter-spacing: var(--tracking-ultra);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+/* Body Text */
+.body-text {
+  font-family: var(--font-sans);
+  font-size: var(--body-regular);
+  font-weight: 400;
+  color: var(--charcoal-text);
+  line-height: var(--leading-normal);
+}
+
+.body-text--small {
+  font-size: var(--body-small);
+}
+
+.body-text--muted {
+  color: var(--muted-charcoal);
+}
+
+/* Labels */
+.label {
+  font-family: var(--font-sans);
+  font-size: var(--caption);
+  font-weight: 500;
+  color: var(--muted-charcoal);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+}
+
+/* ═══════════════════════════════════════════
+   DECORATIVE ELEMENTS
+   ═══════════════════════════════════════════ */
+
+/* Thin divider line */
+.divider {
+  width: 100%;
+  height: 1px;
+  background: var(--taupe-rules);
+}
+
+.divider--short {
+  width: 2in;
+}
+
+.divider--center {
+  margin: 0 auto;
+}
+
+/* Accent line */
+.accent-line {
+  width: 40px;
+  height: 2px;
+  background: var(--sage-accent);
+}
+
+/* Subtle box for highlighting */
+.highlight-box {
+  background: var(--transparent-sage);
+  padding: 20px 24px;
+  border-left: 2px solid var(--sage-accent);
+}
+
+/* ═══════════════════════════════════════════
+   FORM ELEMENTS
+   ═══════════════════════════════════════════ */
+
+/* Input line - for writing */
+.input-line {
+  border-bottom: 1px solid var(--taupe-rules);
+  min-height: 28px;
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 4px;
+}
+
+.input-line--tall {
+  min-height: 36px;
+}
+
+/* Checkbox */
+.checkbox {
+  width: 14px;
+  height: 14px;
+  border: 1px solid var(--taupe-rules);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+/* Amount field */
+.amount-field {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.amount-field::before {
+  content: '$';
+  font-family: var(--font-sans);
+  font-size: var(--body-regular);
+  color: var(--muted-charcoal);
+}
+
+/* ═══════════════════════════════════════════
+   LAYOUT UTILITIES
+   ═══════════════════════════════════════════ */
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.items-center { align-items: center; }
+.items-end { align-items: flex-end; }
+.justify-between { justify-content: space-between; }
+.justify-center { justify-content: center; }
+.gap-sm { gap: 8px; }
+.gap-md { gap: 16px; }
+.gap-lg { gap: 24px; }
+.gap-xl { gap: 32px; }
+
+.mt-auto { margin-top: auto; }
+.mb-sm { margin-bottom: 8px; }
+.mb-md { margin-bottom: 16px; }
+.mb-lg { margin-bottom: 24px; }
+.mb-xl { margin-bottom: 32px; }
+
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+
+.w-full { width: 100%; }
+.flex-1 { flex: 1; }
+
+/* ═══════════════════════════════════════════
+   GRID LAYOUTS
+   ═══════════════════════════════════════════ */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 24px;
+}
+
+/* ═══════════════════════════════════════════
+   SPECIFIC COMPONENTS
+   ═══════════════════════════════════════════ */
+
+/* Category card - for budget sections */
+.category-card {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--taupe-rules);
+}
+
+.category-card:last-child {
+  border-bottom: none;
+}
+
+/* Timeline item */
+.timeline-item {
+  display: flex;
+  gap: 16px;
+  padding: 12px 0;
+}
+
+.timeline-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--sage-accent);
+  border-radius: 50%;
+  margin-top: 4px;
+  flex-shrink: 0;
+}
+
+/* Checklist item */
+.checklist-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--light-taupe);
+}
+
+.checklist-item:last-child {
+  border-bottom: none;
+}
+
+/* Page footer */
+.page-footer {
+  position: absolute;
+  bottom: 0.5in;
+  left: 1in;
+  right: 0.75in;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.page-number {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  color: var(--muted-charcoal);
+  letter-spacing: var(--tracking-wide);
+}
+
+/* ═══════════════════════════════════════════
+   PRINT STYLES
+   ═══════════════════════════════════════════ */
+@media print {
+  body {
+    background: none;
+    padding: 0;
+  }
+
+  .page {
+    box-shadow: none;
+    page-break-after: always;
+    page-break-inside: avoid;
+  }
+
+  .page:last-child {
+    page-break-after: auto;
+  }
+}
+
+/* ═══════════════════════════════════════════
+   CANVA RECREATION NOTES
+   ═══════════════════════════════════════════
+
+   DOCUMENT SETUP:
+   - Size: 8.5 x 11 inches (US Letter)
+   - Background: #F8F6F2
+
+   FONTS TO USE:
+   - Headers: Playfair Display (Regular)
+   - Body: Montserrat (Light/Regular/Medium)
+
+   ELEMENTS:
+   - Lines: Use rectangle, 1px height, color #CFC6BC
+   - Accent lines: Rectangle, 2px height, color #B7C1B2
+   - Checkboxes: Square shape, 14x14px, 1px border #CFC6BC
+
+   SPACING:
+   - Margins: 0.75-1 inch all sides
+   - Section gaps: 24-32px
+   - Line item gaps: 10-12px
+
+   ═══════════════════════════════════════════ */
