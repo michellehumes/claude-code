@@ -1,0 +1,119 @@
+Date,Merchant,Category,Account,Original Statement,Notes,Amount,Tags,Owner
+2026-10-01,BILL PAY 12 Harbor                             ON-LINE No Account Number ON 08-29,Rent,CHECKING (...4688),BILL PAY 12 Harbor                             ON-LINE No Account Number ON 08-29,,-7500.00,,Shared
+2026-07-25,Lord Camden Inn,Hotel,Michelle's Sapphire Reserve (...1041),LORD CAMDEN INN,,-1470.57,,Shared
+2026-02-11,Woodstock Inn & Resort,Hotel,Venture (...4522),WOODSTOCK INN & RESORT,,-867.91,,Shared
+2026-01-09,Spotify,Music,Venture (...4522),Spotify USA,,-11.99,,Shared
+2026-01-09,Geico,Car Insurance,Venture (...4522),GEICO *AUTO,,-152.51,,Shared
+2026-01-09,BMW,Car Payment,CHECKING (...4688),BMW BANK         BMWFS PYMT 260108       XXXXX9987 Grayford Per1005773689,,-751.00,,Shared
+2026-01-09,Riverhead Brew House,Restaurants & Bars,Gray's Amex Gold Card (...2003),RIVERHEAD BREW HOUSE,,-123.11,,Shared
+2026-01-09,Target,Shopping,Target Circle Card (...2828),TARGET 1818 076 6905,,-130.36,,Shared
+2026-01-09,OpenAI,Subscriptions,Michelle's Freedom Unlimited (...9759),OPENAI *CHATGPT SUBSCR,,-217.75,,Shared
+2026-01-09,Lyft,Taxi & Ride Shares,Michelle's Sapphire Reserve (...1041),LYFT   *1 RIDE 07-19,,0.79,,Shared
+2026-01-09,Robinhood,Transfer,Bugs Checking (...3045),ORIG CO NAME:ROBINHOOD CO ENTRY DESCR:DEBITS SEC:WEB IND ID:108300146 ORIG ID:5326394001,,-200.00,,Shared
+2026-01-09,PayPal,Transfer,Bugs Checking (...3045),ORIG CO NAME:PAYPAL CO ENTRY DESCR:TRANSFER SEC:WEB IND ID:PAYPALCRYPTOHUB ORIG ID:PAYPALCRYP,,-51.10,,Shared
+2026-01-09,PayPal,Transfer,Bugs Checking (...3045),ORIG CO NAME:PAYPAL CO ENTRY DESCR:TRANSFER SEC:WEB IND ID:ADD TO BALANCE ORIG ID:PAYPALSD22,,-50.00,,Shared
+2026-01-09,BMW,Transfer,BMW X3 xDrive30i,,,525.71,,Shared
+2026-01-09,BMW,Transfer,Car Loan,,,525.71,,Shared
+2026-01-08,Robinhood,Transfer,Bugs Checking (...3045),Online RealTime payment to Robinhood Securities transaction#: 9066279 REFERENCE#:7009066279RX 01/08,,-200.00,,Shared
+2026-01-08,Robinhood,Transfer,Bugs Checking (...3045),Online RealTime payment to Robinhood Securities transaction#: 9066932 REFERENCE#:7009066932RX 01/08,,-100.00,,Shared
+2026-01-08,Webxfr Transfer Web,Transfer,Bugs Checking (...3045),PNCBK CK WEBXFR TRANSFER 16176159619 WEB ID: 3770527921,,-100.00,,Shared
+2026-01-08,Sagtown Coffee,Delivery & Takeout,Gray's Amex Gold Card (...2003),AplPay SAGTOWN COFFESag Harbor NY,,-26.14,,Shared
+2026-01-08,JP Morgan Chase,Transfer,CHECKING (...4688),"ONLINE TRANSFER TO JPMORGAN CHASE BANK, NA CHK XXXXX3045 G. PERKINS REF #F20WDKYBZH ON 01/08/26",,-5000.00,,Shared
+2026-01-08,Hamptonchutney.com,Restaurants & Bars,Venture (...4522),HAMPTONCHUTNEY.COM,,-19.37,,Shared
+2026-01-08,Robinhood,Transfer,Interest Checking (...1583),*0146 DEBITS ROBINHOOD ACH WEB,,-200.00,,Shared
+2026-01-08,Robinhood,Transfer,Interest Checking (...1583),*0146 DEBITS ROBINHOOD ACH WEB,,-25.00,,Shared
+2026-01-08,Reverse Web Single,Transfer,Interest Checking (...1583),REVERSE ACH WEB SINGLE,,2539.00,,Shared
+2026-01-08,Chase,Transfer,Interest Checking (...1583),MICHELLE E HUME P2P CHASBK CK WEBXFR ACH WEB PAYMENT,,2000.00,,Shared
+2026-01-08,E Hampton,Restaurants & Bars,Gray's Amex Platinum Card® (...1007),E HAMPTON 631 329-6666,,-169.65,,Shared
+2026-01-07,Stop & Shop,Groceries,Gray's Amex Gold Card (...2003),AplPay STOP & SHOP 2EAST HAMPTON NY,,-20.04,,Shared
+2026-01-07,Addepar,Paychecks,CHECKING (...4688),"ADDEPAR, INC     Payroll                           Grayford Perkins",,5005.08,,Gray Perkins
+2026-01-06,Bridgehampton Wine Cellarbridgehamptonny,Groceries,USAA Rate Advantage Platinum Visa (...9385),BRIDGEHAMPTON WINE CELLARBRIDGEHAMPTONNY,,-45.68,,Shared
+2026-01-06,Lyft,Taxi & Ride Shares,Michelle's Sapphire Reserve (...1041),LYFT   *2 RIDES 07-02,,0.79,,Shared
+2026-01-06,Citarella,Groceries,Gray's Amex Gold Card (...2003),AplPay CITARELLA 000EAST HAMPTON NY,,-14.15,,Shared
+2026-01-06,Bluevine,Shelzy's Designs,Bugs Checking (...3045),Shelzys Designs Bluevine CCD ID: 2330165191,,-200.00,,Shared
+2026-01-06,Webxfr Transfer Web,Transfer,Bugs Checking (...3045),PNCBK CK WEBXFR TRANSFER 16145496485 WEB ID: 3770527921,,-2000.00,,Shared
+2026-01-06,Webxfr P Michelle E Hume Web,Transfer,Bugs Checking (...3045),PNCBK CK WEBXFR P2P MICHELLE E HUME WEB ID: 1770527921,,322.46,,Shared
+2026-01-06,Venmo,Transfer,CHECKING (...4688),VENMO            PAYMENT    260106 1047439197616   GRAY PERKINS,,-200.00,,Shared
+2026-01-06,U-Haul,Storage Units,Venture (...4522),U-HAULCONSUMERS TIRE,,-43.00,,Shared
+2026-01-06,"Patrick Noles ""Fantasy""",Experience,Grays Venmo,"Patrick Noles ""Fantasy""",Fantasy,-200.00,,Gray Perkins
+2026-01-05,Amazon,Shopping,Amazon Prime Card (...5990),AMAZON MKTPL*GB9PW2LJ3,,-57.11,,Shared
+2026-01-05,Stop & Shop,Groceries,Gray's Amex Gold Card (...2003),AplPay STOP & SHOP 2EAST HAMPTON NY,,-69.31,,Shared
+2026-01-05,Amazon,Shopping,Amazon Prime Card (...5990),AMAZON MKTPLACE PMTS,,14.07,,Shared
+2026-01-05,Amazon,Shopping,Amazon Prime Card (...5990),AMAZON MKTPL*YQ1E53IP3,,-30.44,,Shared
+2026-01-05,CASH APP*MICHELLE HUMES Oakland CA 01/05,Transfer,Shelzys Designs (...5301),CASH APP*MICHELLE HUMES Oakland CA 01/05,,-100.00,,Michelle Humes
+2026-01-05,Shopify,Shelzy's Designs,Michelle's Sapphire Reserve (...1041),PAYPAL *SHOPIFY,,-46.68,,Shared
+2026-01-05,Lyft,Taxi & Ride Shares,Michelle's Sapphire Reserve (...1041),LYFT   *1 RIDE 06-28,,1.58,,Shared
+2026-01-05,ONLINE TRANSFER FROM PERKINS E PRIME CHECKING XXXXXX6826 REF #IB0RVF82HZ ON 04/01/25,Airline,CHECKING (...4688),ONLINE TRANSFER FROM PERKINS E EVERYDAY CHECKING XXXXXX6826 REF #IB0WCLZFX8 ON 01/05/26,,2000.00,,Shared
+2026-01-05,ONLINE TRANSFER FROM PERKINS E PRIME CHECKING XXXXXX6826 REF #IB0RVF82HZ ON 04/01/25,Howdy Dollars,CHECKING (...4688),ONLINE TRANSFER FROM PERKINS E EVERYDAY CHECKING XXXXXX6826 REF #IB0WCLZFX8 ON 01/05/26,,500.00,,Shared
+2026-01-05,PayPal,Transfer,Bugs Checking (...3045),PAYPAL TRANSFER PPD ID: PAYPALSD11,,255.86,,Shared
+2026-01-05,PayPal,Transfer,Bugs Checking (...3045),PAYPAL TRANSFER PPD ID: PAYPALSD11,,383.25,,Shared
+2026-01-05,PayPal,Transfer,Bugs Checking (...3045),PAYPAL TRANSFER PAYPALCRYPTOHUB WEB ID: PAYPALCRYP,,-204.00,,Shared
+2026-01-05,Coinbase,Transfer,Bugs Checking (...3045),Coinbase.com GE77BHFY GE77BHFY2e82 WEB ID: 1455293997,,-200.00,,Shared
+2026-01-05,Coinbase,Transfer,Bugs Checking (...3045),COINBASE INC. 92EC7A11 RTL-8XD6KZHH WEB ID: 1327000623,,-200.00,,Shared
+2026-01-05,Coinbase,Transfer,Bugs Checking (...3045),COINBASE INC. 1CD85729 RTL-Z5XAFYXD WEB ID: 1327000623,,-300.00,,Shared
+2026-01-05,Coinbase,Transfer,Bugs Checking (...3045),COINBASE INC. 1CD85729 RTL-X9YWCVHM WEB ID: 1327000623,,-200.00,,Shared
+2026-01-05,Coinbase,Transfer,Bugs Checking (...3045),COINBASE INC. 1CD85729 RTL-KCSHR5AR WEB ID: 1327000623,,-200.00,,Shared
+2026-01-05,Certificate of Origin Runway,Shelzy's Designs,Shelzys Designs (...5301),ORIG CO NAME:RUNWAY ORIG ID:4270465600 DESC DATE: CO ENTRY DESCR:RUNWAY STASEC:WEB TRACE#:111000022899395 EED:260105 IND ID:ST-A8C7R0K1Z3T9 IND NAME:SHELZY S DESIGNS LLC TRN: 0052899395TC,,-16.31,,Michelle Humes
+2026-01-05,Amazon,Shopping,Interest Checking (...1583),RTP Received AMAZON.COM 01/05 *5255,,14.44,,Shared
+2026-01-05,eBay,Shopping,Venture (...4522),eBay O*26-14033-02904,,-23.32,,Shared
+2026-01-05,Starbucks,Delivery & Takeout,Venture (...4522),STARBUCKSXXXXXXXXXXX,,-15.00,,Shared
+2026-01-05,Scottycameron.com,Shopping,Venture (...4522),SCOTTYCAMERON.COM,,-141.88,,Shared
+2026-01-05,Payrix,Storage Units,Venture (...4522),PY *GOODFRIEND SELF STORA,,-211.00,,Shared
+2026-01-05,Airport Parking,Parking,Venture (...4522),MACARTHUR AIRPORT PARKIN,,-257.92,,Shared
+2026-01-05,Costco,Gas & Car Wash,Venture (...4522),COSTCO GAS #0230,,-25.63,,Shared
+2026-01-05,Costco,Shopping,Venture (...4522),WWW COSTCO COM,,-146.81,,Shared
+2026-01-05,Crane Payment Innovations,Delivery & Takeout,Venture (...4522),CPI*VITA VENDING INC,,-3.65,,Shared
+2026-01-05,Breeze Aviation Group,Airline,Venture (...4522),"BREEZE AVIATION GROUP,",,-4.50,,Shared
+2026-01-05,Breeze Aviation Group,Airline,Venture (...4522),"BREEZE AVIATION GROUP,",,-4.50,,Shared
+2026-01-05,All County Vending,Delivery & Takeout,Venture (...4522),All County Vending,,-3.00,,Shared
+2026-01-05,Apple,Subscriptions,Venture (...4522),APPLE.COM/BILL,,-2.99,,Shared
+2026-01-04,Amazon,Shopping,Amazon Prime Card (...5990),AMAZON MKTPL*0514P8R43,,-26.97,,Shared
+2026-01-04,Villa Italian Specialt,Delivery & Takeout,Michelle's Sapphire Reserve (...1041),VILLA ITALIAN SPECIALTIES,,-31.60,,Shared
+2026-01-04,Otter.ai,Subscriptions,Michelle's Freedom Unlimited (...9759),OTTER.AI,,-18.50,,Shared
+2026-01-04,Stripe,Transfer,Shelzys Designs (...5301),"REAL TIME PAYMENT CREDIT RECD FROM ABA/CONTR BNK-121042882 FROM: Stripe, Inc./STRIPE INC. REF: ST-9HFUND1ZNIAD4JPVH INFO: TEXT-/VXR/00100000243210901RmtInf-ST-9HFUND1ZNIAD4JPVHS8Q LINK.COM ACCOUNT VERIFICATION IID: 20260104121000248P1BPFAO65701159390 RECD: 20:12:33 TRN: 1502592004GB",,0.01,,Michelle Humes
+2026-01-04,Citarella,Groceries,Gray's Amex Gold Card (...2003),AplPay CITARELLA 000EAST HAMPTON NY,,-28.91,,Shared
+2026-01-03,Long Island Aquarium,Shopping,Michelle's Sapphire Reserve (...1041),LONG ISLAND AQUARIUM (PO,,-10.60,,Shared
+2026-01-03,Amazon,Shopping,Interest Checking (...1583),RTP Received AMAZON.COM 01/03 *3554,,172.19,,Shared
+2026-01-03,Amazon,Shopping,Amazon Prime Card (...5990),AMAZON MKTPLACE PMTS,,47.85,,Shared
+2026-01-03,Amazon,Shopping,Amazon Prime Card (...5990),AMAZON MKTPLACE PMTS,,65.20,,Shared
+2026-01-03,Google,Subscriptions,Michelle's Freedom Unlimited (...9759),GOOGLE *SVCSGDP.0743-5,,-27.21,,Shared
+2026-01-03,Lovable,Subscriptions,Michelle's Freedom Unlimited (...9759),LOVABLE,,-27.19,,Shared
+2026-01-03,Lyft,Taxi & Ride Shares,Michelle's Sapphire Reserve (...1041),LYFT   *MEMB ANNUAL,,-216.66,,Shared
+2026-01-03,Hulu,Subscriptions,Michelle's Marriott Bonvoy Brilliant® American Express® Card (...5005),HULU 888-439-4858 CA,,-12.99,,Shared
+2026-01-03,UBER EATS,Delivery & Takeout,Gray's Amex Platinum Card® (...1007),UBER EATS help.uber.com CA,,-33.03,,Shared
+2026-01-03,Public Service Enterprise Group,Electric & Gas,Venture (...4522),PSEG LI RESIDENTIAL,,-264.97,,Shared
+2026-01-02,Platinum Digital Entertainment,Subscriptions,Gray's Amex Platinum Card® (...1007),Platinum Digital Entertainment Credit,,25.00,,Shared
+2026-01-02,Amazon,Shopping,Amazon Prime Card (...5990),AMAZON MKTPLACE PMTS,,20.34,,Shared
+2026-01-02,Nuuly,Shopping,Michelle's Sapphire Reserve (...1041),NUULY,,-363.57,,Shared
+2026-01-02,Nuuly,Shopping,Michelle's Sapphire Reserve (...1041),NUULY,,-200.97,,Shared
+2026-01-02,Nuuly,Shopping,Michelle's Sapphire Reserve (...1041),NUULY,,-133.98,,Shared
+2026-01-02,Nuuly,Shopping,Michelle's Sapphire Reserve (...1041),NUULY,,-109.86,,Shared
+2026-01-02,Nuuly,Shopping,Michelle's Sapphire Reserve (...1041),NUULY,,-104.27,,Shared
+2026-01-02,Nuuly,Shopping,Michelle's Sapphire Reserve (...1041),NUULY,,-80.07,,Shared
+2026-01-02,Youtube TV,Youtube TV,Gray's Amex Platinum Card® (...1007),GOOGLE *YOUTUBE TV G.CO/HELPPAY# CA,,-82.99,,Shared
+2026-01-02,Breeze Aviation Group,Airline,Gray's Amex Platinum Card® (...1007),BREEZE AIRWAYS BreezCOTTONWOOD HEIGHTS UT,,-175.00,,Shared
+2026-01-02,Online Transfer to Checking 5301,Transfer,Bugs Checking (...3045),Online Transfer to CHK ...5301 transaction#: 27555350934 01/02,,-172.19,,Shared
+2026-01-02,Interest Charge,Financial Fees,Michelle's Freedom Unlimited (...9759),PURCHASE INTEREST CHARGE,,-55.09,,Shared
+2026-01-02,Online Transfer from Checking 3045,Transfer,Shelzys Designs (...5301),Online Transfer from CHK ...3045 transaction#: 27555350934,,172.19,,Michelle Humes
+2026-01-02,Ring Premium Plan,Ring Insurance,Venture (...4522),RING PREMIUM PLAN,,2.00,,Shared
+2026-01-02,OpenAI,Subscriptions,Venture (...4522),OPENAI *CHATGPT SUBSCR,,-21.78,,Shared
+2026-01-02,Kaplan Dearborn Ppi,Miscellaneous ,Venture (...4522),KAPLAN-DEARBORN-PPI,,-20.66,,Shared
+2026-01-02,Kaplan Dearborn Ppi,Miscellaneous ,Venture (...4522),KAPLAN-DEARBORN-PPI,,-20.66,,Shared
+2026-01-02,Kaplan Dearborn Ppi,Miscellaneous ,Venture (...4522),KAPLAN-DEARBORN-PPI,,-20.66,,Shared
+2026-01-02,Kaplan Dearborn Ppi,Miscellaneous ,Venture (...4522),KAPLAN-DEARBORN-PPI,,-9.00,,Shared
+2026-01-02,Kaplan Dearborn Ppi,Miscellaneous ,Venture (...4522),KAPLAN-DEARBORN-PPI,,-9.00,,Shared
+2026-01-02,Adjustment for Balance Trans,Transfer,Gray's Amex Gold Card (...2003),CR ADJ FOR BALANCE TRANS,,480.96,,Shared
+2026-01-02,Membership Fee,Subscriptions,Gray's Amex Platinum Card® (...1007),MEMBERSHIP FEE,,-195.00,,Shared
+2026-01-02,Walmart+,Shopping,Michelle's Platinum Card® (...7008),WMT PLUS JAN 2026 WALMART.COM AR,,-14.10,,Shared
+2026-01-02,Chase,Transfer,Interest Checking (...1583),*4593 TRANSFER CHASBK CK WEBXFR ACH WEB,,-322.46,,Shared
+2026-01-02,USAA,Credit Card Payment,Interest Checking (...1583),*1771 CREDIT CRDUSAA.COM PAYMNT ACH WEB USAA.COM CRD,,-2539.00,,Shared
+2026-01-01,Amazon,Shopping,Amazon Prime Card (...5990),AMAZON MKTPL*OX3YH7KF3,,-14.07,,Shared
+2026-01-01,Etsy,Shopping,Michelle's Slate Card (...0443),Etsy.com*US,,-10.86,,Shared
+2026-01-01,Venmo,Transfer,CHECKING (...4688),VENMO            PAYMENT    251228 1047230969431   GRAY PERKINS,,-5000.00,,Shared
+2026-01-01,Zelle,Rent,CHECKING (...4688),ZELLE TO  ALEXIS MANCO ON 12/28 REF # WFCT0ZMXG949,,-1000.00,,Shared
+2026-01-01,Zelle,Rent,CHECKING (...4688),ZELLE TO  ALEXIS MANCO ON 12/27 REF # WFCT0ZMTZRK6,,-1000.00,,Shared
+2026-01-01,Alexis Manco,Rent,Grays Venmo,"Alexis Manco ""Remaining Jan Rent""",Remaining Jan Rent,-5000.00,,Shared
+2026-01-01,Zelle,Rent,CHECKING (...4688),ZELLE TO  ALEXIS MANCO ON 12/26 REF # WFCT0ZMRF4CD RENT PAYMENT  WILL COME IN SEVERAL PAYMENTS,,-500.00,,Shared
+2026-01-01,Breeze Aviation Group,Airline,Gray's Amex Platinum Card® (...1007),BREEZE AIRWAYS BreezCOTTONWOOD HEIGHTS UT,,-1504.34,,Shared
+2026-01-01,American Airlines,Airline,Gray's Amex Platinum Card® (...1007),AMERICAN AIRLINES 800-433-7300 TX,,-315.48,,Shared
+2026-01-01,American Airlines,Airline,Gray's Amex Platinum Card® (...1007),AMERICAN AIRLINES 800-433-7300 TX,,-315.48,,Shared

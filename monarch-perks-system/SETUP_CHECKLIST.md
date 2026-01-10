@@ -1,205 +1,183 @@
 # Monarch Credit Card Perks Tracker - Setup Checklist
 
-## Prerequisites
-- [ ] Google account with access to Google Sheets and Google Drive
-- [ ] Monarch Finance account with ability to export CSVs
-- [ ] Your Balances CSV export (Date, Balance, Account columns)
-- [ ] Your Transactions CSV export (2026 transactions)
+## Your Cards (Pre-configured)
+
+The system has been pre-configured with your 11 credit cards from Monarch:
+
+| Card ID | Card Name | Issuer | Last4 | Annual Fee |
+|---------|-----------|--------|-------|------------|
+| MSR_1041 | Michelle's Sapphire Reserve | Chase | 1041 | $550 |
+| GAPP_1007 | Gray's Amex Platinum Card® | Amex | 1007 | $695 |
+| GAGC_2003 | Gray's Amex Gold Card | Amex | 2003 | $250 |
+| MPC_7008 | Michelle's Platinum Card® | Amex | 7008 | $695 |
+| MMBB_5005 | Michelle's Marriott Bonvoy Brilliant® | Amex | 5005 | $650 |
+| MFU_9759 | Michelle's Freedom Unlimited | Chase | 9759 | $0 |
+| MSC_0443 | Michelle's Slate Card | Chase | 0443 | $0 |
+| VEN_4522 | Venture | Capital One | 4522 | $95 |
+| APC_5990 | Amazon Prime Card | Chase | 5990 | $0 |
+| TCC_2828 | Target Circle Card | Target | 2828 | $0 |
+| USAA_9385 | USAA Rate Advantage Platinum Visa | USAA | 9385 | $0 |
+
+**Total Annual Fees: ~$2,935**
 
 ---
 
-## Step 1: Create Google Sheet
+## Quick Start (5 minutes)
 
-1. [ ] Go to [sheets.google.com](https://sheets.google.com)
-2. [ ] Click **+ Blank** to create a new spreadsheet
-3. [ ] Name it: `Credit Card Perks Tracker 2026`
-4. [ ] Note the URL - you'll see something like: `https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID/edit`
+### Step 1: Create Google Sheet
+1. Go to [sheets.google.com](https://sheets.google.com)
+2. Click **+ Blank** to create a new spreadsheet
+3. Name it: `Credit Card Perks Tracker 2026`
 
----
+### Step 2: Add the Code
+1. Go to **Extensions → Apps Script**
+2. Delete the default code in `Code.gs`
+3. Copy the ENTIRE contents of `Code.gs` from this repository
+4. Paste into the editor
+5. Press **Ctrl+S** to save
+6. Name the project: `MonarchPerksTracker`
 
-## Step 2: Open Apps Script Editor
+### Step 3: Run Quick Setup
+1. Select `quickSetupWithMyData` from the function dropdown
+2. Click **Run** (▶️)
+3. Click **Review Permissions** → **Advanced** → **Go to MonarchPerksTracker** → **Allow**
+4. Wait for setup to complete
 
-1. [ ] In your new Google Sheet, go to **Extensions** → **Apps Script**
-2. [ ] This opens the Apps Script editor in a new tab
-3. [ ] You'll see a default `Code.gs` file with an empty `myFunction()`
+This creates all tabs AND pre-populates your 11 cards and 25 perks.
 
----
+### Step 4: Import Your Transactions
+1. Go back to your Google Sheet
+2. Open the **Config** tab
+3. Find the row "Paste Transactions CSV below this row:"
+4. Paste your Monarch transactions CSV content below that row
+5. Go to **🎯 Perks Tracker → Import Data → Ingest Transactions CSV (from Config tab)**
 
-## Step 3: Install the Code
-
-1. [ ] Delete all existing code in `Code.gs`
-2. [ ] Open the `Code.gs` file from this repository
-3. [ ] Copy the ENTIRE contents (Ctrl+A, Ctrl+C)
-4. [ ] Paste into the Apps Script editor (Ctrl+V)
-5. [ ] Click the **Save** icon (💾) or press Ctrl+S
-6. [ ] Name the project: `MonarchPerksTracker`
-
----
-
-## Step 4: Run Initial Setup
-
-1. [ ] In the Apps Script editor, select `setupSheet_IfNeeded` from the function dropdown
-2. [ ] Click **Run** (▶️)
-3. [ ] When prompted, click **Review Permissions**
-4. [ ] Click **Advanced** → **Go to MonarchPerksTracker (unsafe)**
-5. [ ] Click **Allow** to grant permissions
-6. [ ] Wait for the setup to complete (~10-30 seconds)
-7. [ ] Return to your Google Sheet - you should see all tabs created
-
-### Tabs Created:
-- ✅ Cards
-- ✅ Perks Catalog
-- ✅ Merchant_Aliases (pre-seeded with 40+ aliases)
-- ✅ Monarch Categories Map (pre-seeded)
-- ✅ Transactions_2026
-- ✅ Perk Usage 2026
-- ✅ Dashboard
-- ✅ Config
-- ✅ Log
+### Step 5: Run the Pipeline
+1. Go to **🎯 Perks Tracker → Run Full Pipeline**
+2. Wait for completion
+3. Check the **Dashboard** tab!
 
 ---
 
-## Step 5: Configure CSV Ingestion (Choose ONE method)
+## Your Pre-Configured Perks (25 total)
 
-### Option A: Paste Method (Recommended for first-time setup)
+### Michelle's Sapphire Reserve (MSR_1041) - 4 perks
+- $300 Travel Credit (annual)
+- Global Entry/TSA PreCheck (every 4 years)
+- DoorDash DashPass (annual)
+- Lyft Pink (annual)
 
-1. [ ] Export Balances CSV from Monarch
-2. [ ] Open the **Config** tab in your Google Sheet
-3. [ ] Find the row "Paste Balances CSV below this row:"
-4. [ ] Paste your CSV content directly below that row
-5. [ ] Go to **🎯 Perks Tracker** menu → **Ingest Balances CSV (from Config tab)**
+### Gray's Amex Platinum (GAPP_1007) - 8 perks
+- $200 Uber Credit ($15-35/mo)
+- $200 Airline Fee Credit (annual)
+- $100 Saks Credit ($50 twice/year)
+- $200 Hotel Credit (annual)
+- $189 CLEAR Credit (annual)
+- $240 Digital Entertainment ($20/mo)
+- $155 Walmart+ Credit (annual)
+- $300 Equinox Credit ($25/mo)
 
-6. [ ] Export Transactions CSV from Monarch
-7. [ ] Find the row "Paste Transactions CSV below this row:"
-8. [ ] Paste your CSV content directly below that row
-9. [ ] Go to **🎯 Perks Tracker** menu → **Ingest Transactions CSV (from Config tab)**
+### Michelle's Platinum (MPC_7008) - 7 perks
+- $200 Uber Credit ($15-35/mo)
+- $200 Airline Fee Credit (annual)
+- $100 Saks Credit ($50 twice/year)
+- $200 Hotel Credit (annual)
+- $155 Walmart+ Credit (annual)
+- $240 Digital Entertainment ($20/mo)
+- $189 CLEAR Credit (annual)
 
-### Option B: Google Drive Method (For recurring updates)
+### Gray's Amex Gold (GAGC_2003) - 3 perks
+- $120 Dining Credit ($10/mo)
+- $120 Uber Cash ($10/mo)
+- $84 Dunkin' Credit ($7/mo)
 
-1. [ ] Create a folder in Google Drive for your Monarch exports
-2. [ ] Upload your `Balances_*.csv` file to that folder
-3. [ ] Upload your `transactions-*.csv` file to that folder
-4. [ ] Copy the folder ID from the URL: `https://drive.google.com/drive/folders/YOUR_FOLDER_ID`
-5. [ ] In the Sheet, go to **🎯 Perks Tracker** → **Settings** → **Set Drive Folder ID**
-6. [ ] Paste the folder ID and click OK
-7. [ ] Go to **🎯 Perks Tracker** → **Ingest Balances CSV (from Drive)**
-8. [ ] Go to **🎯 Perks Tracker** → **Ingest Transactions CSV (from Drive)**
+### Marriott Bonvoy Brilliant (MMBB_5005) - 3 perks
+- $300 Dining Credit (annual)
+- $300 Hotel Credit (annual)
+- Free Night Award (~$500 value)
 
----
+### Capital One Venture (VEN_4522) - 2 perks
+- $100 Travel Credit (annual)
+- Anniversary Miles (~$100 value)
 
-## Step 6: Review and Normalize Cards
-
-1. [ ] Go to the **Cards** tab
-2. [ ] Review the extracted credit cards
-3. [ ] **Delete** any non-credit-card accounts that slipped through
-4. [ ] **Fill in** the Annual Fee column for each card
-5. [ ] **Adjust** Benefit Year Start Month if different from January (1)
-   - e.g., if your card anniversary is in March, enter `3`
-6. [ ] Go to **🎯 Perks Tracker** → **Normalize Cards** to regenerate IDs if needed
-
----
-
-## Step 7: Set Up Your Perks Catalog
-
-### Option A: Use Sample Perks as Starting Point
-
-1. [ ] In Apps Script, run the function `seedSamplePerks`
-2. [ ] Return to the **Perks Catalog** tab
-3. [ ] Edit the **Card ID** column to match YOUR actual Card IDs from the Cards tab
-4. [ ] Delete perks for cards you don't have
-5. [ ] Adjust Annual Values to match your specific card version
-
-### Option B: Build from Scratch
-
-Add a row for each perk with:
-
-| Column | Description | Example |
-|--------|-------------|---------|
-| Perk ID | Unique identifier | `CSR_TRAVEL` |
-| Card ID | Must match Cards tab | `CSR_1234` |
-| Card Name | Human-readable | `Chase Sapphire Reserve` |
-| Perk Name | Perk description | `$300 Travel Credit` |
-| Category | Travel/Dining/Retail/etc | `Travel` |
-| Annual Value | Dollar amount | `300` |
-| Frequency | monthly/quarterly/annual/every_4_years | `annual` |
-| Reset Rule | calendar/anniversary | `anniversary` |
-| Merchant Keywords | Pipe-separated | `airline\|hotel\|lyft\|uber` |
-| Monarch Category Match | Pipe-separated | `travel\|flights\|hotels` |
-| Amount Pattern | Optional | `=100` or `15-35` or `~50` |
-| Notes | Any notes | `Airline incidentals only` |
+**Total Annual Perk Value: ~$4,500+**
 
 ---
 
-## Step 8: Run the Full Pipeline
+## Tabs Created
 
-1. [ ] Go to **🎯 Perks Tracker** → **Run Full Pipeline**
-2. [ ] Wait for completion (~30-60 seconds depending on data volume)
-3. [ ] Check the **Dashboard** tab for your results!
+| Tab | Purpose |
+|-----|---------|
+| **Cards** | Your 11 credit cards with IDs and fees |
+| **Perks Catalog** | 25 perks with matching rules |
+| **Merchant_Aliases** | 45+ merchant name mappings |
+| **Monarch Categories Map** | Category translations |
+| **Transactions_2026** | Your imported transactions |
+| **Perk Usage 2026** | Usage tracking and pacing |
+| **Dashboard** | Summary and action items |
+| **Config** | CSV paste area |
+| **Log** | Execution history |
 
 ---
 
-## Step 9: Install Nightly Trigger (Optional)
+## Menu Reference
 
-1. [ ] Go to **🎯 Perks Tracker** → **Install Nightly Trigger**
-2. [ ] This will automatically run the pipeline at 2 AM daily
-3. [ ] If using Drive method, new CSVs will be auto-ingested
+| Menu Item | What It Does |
+|-----------|--------------|
+| **⚡ Quick Setup** | Creates tabs + adds your cards + adds your perks |
+| **📋 Setup Sheet Only** | Creates tabs only (no data) |
+| **Import Data → Ingest Transactions CSV** | Imports pasted CSV |
+| **Seed Data → Add My Cards** | Adds your 11 specific cards |
+| **Seed Data → Add My Perks** | Adds your 25 specific perks |
+| **▶️ Run Full Pipeline** | Normalize → Match → Calculate → Dashboard |
+| **⏰ Install Nightly Trigger** | Auto-run at 2 AM daily |
 
 ---
 
-## Step 10: Verify Everything Works
+## Sample Transactions Detected
 
-- [ ] **Cards tab**: Shows all your credit cards with IDs
-- [ ] **Transactions_2026 tab**: Shows your transactions with Matched Perk IDs
-- [ ] **Perk Usage 2026 tab**: Shows usage, remaining value, and pacing status
-- [ ] **Dashboard tab**: Shows summary metrics and "behind" perks
-- [ ] **Log tab**: Shows execution history
+From your Monarch data, I detected these perk-eligible transactions:
+
+| Transaction | Card | Potential Perk |
+|-------------|------|----------------|
+| Lord Camden Inn ($1,470.57) | MSR_1041 | $300 Travel Credit |
+| Woodstock Inn ($867.91) | VEN_4522 | Travel/Hotel |
+| Lyft ($216.66 + refunds) | MSR_1041 | Travel Credit |
+| Uber Eats ($33.03) | GAPP_1007 | Uber Credit |
+| Breeze Airways ($1,504.34 + $175) | GAPP_1007 | Airline Fee Credit |
+| American Airlines ($630.96) | GAPP_1007 | Airline Fee Credit |
+| Walmart+ ($14.10) | MPC_7008 | Walmart+ Credit |
+| Hulu ($12.99) | MMBB_5005 | Digital Entertainment |
+| YouTube TV ($82.99) | GAPP_1007 | Digital Entertainment |
+| Spotify ($11.99) | VEN_4522 | - |
 
 ---
 
 ## Troubleshooting
 
-### "No new cards to add"
-- Your accounts may not contain credit card keywords
-- Manually add cards to the Cards tab
+### "No perks found to match"
+- Run **Seed Data → Add My Perks** first
+- Check the **Perks Catalog** tab has data
 
-### Transactions not matching to perks
-1. Check the **Merchant_Aliases** tab - add missing aliases
-2. Check the **Perks Catalog** - ensure Merchant Keywords are correct
-3. Check the **Transactions_2026** Card ID column - ensure cards are matched
+### Transactions not matching cards
+- Check **Cards** tab has your cards
+- Verify the account names match (last 4 digits are key)
 
-### "Behind" perks seem wrong
-- Check the card's **Benefit Year Start Month** in Cards tab
-- Check the perk's **Frequency** and **Reset Rule** in Perks Catalog
+### Pacing seems off
+- Check **Benefit Year Start Month** in Cards tab
+- Verify **Frequency** in Perks Catalog (monthly vs annual)
 
-### Duplicates appearing
-- The dedupe key is: Transaction ID (if present) OR Date+Merchant+Amount+Account+Description
-- If duplicates have different Transaction IDs, they'll both appear
-- Manually delete true duplicates if needed
-
----
-
-## Quick Reference: Menu Options
-
-| Menu Item | What It Does |
-|-----------|--------------|
-| Setup Sheet (if needed) | Creates all tabs and seed data |
-| Ingest Balances CSV (from Config tab) | Parses pasted CSV, adds new cards |
-| Ingest Transactions CSV (from Config tab) | Parses pasted CSV, adds new transactions |
-| Ingest Balances CSV (from Drive) | Reads CSV from configured Drive folder |
-| Ingest Transactions CSV (from Drive) | Reads CSV from configured Drive folder |
-| Normalize Cards | Re-parses cards, generates missing IDs |
-| Match Perks to Transactions | Scores and assigns perks to transactions |
-| Calculate Usage & Pacing | Computes YTD usage and status |
-| Update Dashboard | Refreshes dashboard metrics and tables |
-| Run Full Pipeline | Runs normalize → match → calculate → dashboard |
-| Install Nightly Trigger | Sets up 2 AM daily automation |
-| Remove All Triggers | Removes all automated runs |
+### Need to re-run from scratch
+1. Delete all data rows (keep headers) in each tab
+2. Run **Quick Setup** again
+3. Re-import transactions
 
 ---
 
-## Next Steps
+## Next Steps After Setup
 
-1. Review the [MAINTENANCE_GUIDE.md](./MAINTENANCE_GUIDE.md) for ongoing usage
-2. Customize Merchant_Aliases for your specific merchants
-3. Add all your card perks to the Perks Catalog
-4. Set up monthly export routine from Monarch
+1. **Review Perks Catalog** - Adjust values for your specific card versions
+2. **Add missing perks** - Some cards may have perks not pre-configured
+3. **Check Dashboard** - See which perks you're behind on
+4. **Set up nightly trigger** - For automatic daily updates
+5. **Export new transactions monthly** - Re-import to keep data fresh

@@ -91,12 +91,18 @@ const ISSUER_PATTERNS = [
 function onOpen() {
   const ui = SpreadsheetApp.getUi();
   ui.createMenu('🎯 Perks Tracker')
-    .addItem('📋 Setup Sheet (if needed)', 'setupSheet_IfNeeded')
+    .addItem('⚡ Quick Setup (Cards + Perks)', 'quickSetupWithMyData')
+    .addItem('📋 Setup Sheet Only', 'setupSheet_IfNeeded')
     .addSeparator()
-    .addItem('📥 Ingest Balances CSV (from Config tab)', 'ingestBalancesFromConfigTab')
-    .addItem('📥 Ingest Transactions CSV (from Config tab)', 'ingestTransactionsFromConfigTab')
-    .addItem('📥 Ingest Balances CSV (from Drive)', 'ingestBalancesCSV')
-    .addItem('📥 Ingest Transactions CSV (from Drive)', 'ingestTransactionsCSV')
+    .addSubMenu(ui.createMenu('📥 Import Data')
+      .addItem('Ingest Transactions CSV (from Config tab)', 'ingestTransactionsFromConfigTab')
+      .addItem('Ingest Balances CSV (from Config tab)', 'ingestBalancesFromConfigTab')
+      .addItem('Ingest Transactions CSV (from Drive)', 'ingestTransactionsCSV')
+      .addItem('Ingest Balances CSV (from Drive)', 'ingestBalancesCSV'))
+    .addSubMenu(ui.createMenu('🃏 Seed Data')
+      .addItem('Add My Cards (11 cards)', 'seedMyCards')
+      .addItem('Add My Perks (25 perks)', 'seedMyPerks')
+      .addItem('Add Generic Sample Perks', 'seedSamplePerks'))
     .addSeparator()
     .addItem('🔄 Normalize Cards', 'normalizeCards')
     .addItem('🔗 Match Perks to Transactions', 'matchPerks')
@@ -2003,12 +2009,146 @@ function logMessage(level, message) {
 }
 
 // ============================================================================
-// SAMPLE PERKS CATALOG SEEDER (Optional - run manually)
+// YOUR SPECIFIC CARDS - PRE-POPULATED FROM MONARCH DATA
 // ============================================================================
 
 /**
- * Seeds sample perks for common credit cards
- * Run this manually if you want starter data
+ * Seeds YOUR specific credit cards extracted from Monarch transactions
+ * Run this to pre-populate your Cards tab with your actual cards
+ */
+function seedMyCards() {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const sheet = ss.getSheetByName(CONFIG.TABS.CARDS);
+
+  if (!sheet) {
+    SpreadsheetApp.getUi().alert('Run Setup first!');
+    return;
+  }
+
+  // Your actual cards from Monarch data
+  const myCards = [
+    // Card ID, Issuer, Card Name, Last4, Open/Closed, Annual Fee, Benefit Year Start Month, Notes
+    ['MSR_1041', 'Chase', "Michelle's Sapphire Reserve (...1041)", '1041', 'Open', 550, 1, 'Chase Sapphire Reserve - Travel benefits'],
+    ['GAPP_1007', 'Amex', "Gray's Amex Platinum Card® (...1007)", '1007', 'Open', 695, 1, 'Amex Platinum - Premium travel card'],
+    ['GAGC_2003', 'Amex', "Gray's Amex Gold Card (...2003)", '2003', 'Open', 250, 1, 'Amex Gold - Dining & groceries'],
+    ['MPC_7008', 'Amex', "Michelle's Platinum Card® (...7008)", '7008', 'Open', 695, 1, 'Amex Platinum'],
+    ['MMBB_5005', 'Amex', "Michelle's Marriott Bonvoy Brilliant® (...5005)", '5005', 'Open', 650, 1, 'Marriott Bonvoy Brilliant'],
+    ['MFU_9759', 'Chase', "Michelle's Freedom Unlimited (...9759)", '9759', 'Open', 0, 1, 'Chase Freedom Unlimited - No AF'],
+    ['MSC_0443', 'Chase', "Michelle's Slate Card (...0443)", '0443', 'Open', 0, 1, 'Chase Slate - Balance transfer'],
+    ['VEN_4522', 'Capital One', 'Venture (...4522)', '4522', 'Open', 95, 1, 'Capital One Venture'],
+    ['APC_5990', 'Chase', 'Amazon Prime Card (...5990)', '5990', 'Open', 0, 1, 'Amazon Prime Visa - 5% Amazon'],
+    ['TCC_2828', 'Target', 'Target Circle Card (...2828)', '2828', 'Open', 0, 1, 'Target Circle Card - 5% Target'],
+    ['USAA_9385', 'USAA', 'USAA Rate Advantage Platinum Visa (...9385)', '9385', 'Open', 0, 1, 'USAA Rate Advantage']
+  ];
+
+  // Check if cards already exist
+  if (sheet.getLastRow() > 1) {
+    const confirm = SpreadsheetApp.getUi().alert(
+      'Cards tab already has data. Overwrite?',
+      SpreadsheetApp.getUi().ButtonSet.YES_NO
+    );
+    if (confirm !== SpreadsheetApp.getUi().Button.YES) return;
+    sheet.getRange(2, 1, sheet.getLastRow() - 1, 8).clear();
+  }
+
+  if (myCards.length > 0) {
+    sheet.getRange(2, 1, myCards.length, 8).setValues(myCards);
+  }
+
+  logMessage('INFO', `Seeded ${myCards.length} cards from your Monarch data`);
+  SpreadsheetApp.getUi().alert(`✅ Added ${myCards.length} credit cards from your Monarch data!`);
+}
+
+/**
+ * Seeds YOUR specific perks for your actual cards
+ * These are customized for your card portfolio
+ */
+function seedMyPerks() {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const sheet = ss.getSheetByName(CONFIG.TABS.PERKS_CATALOG);
+
+  if (!sheet) {
+    SpreadsheetApp.getUi().alert('Run Setup first!');
+    return;
+  }
+
+  // Only seed if empty
+  if (sheet.getLastRow() > 1) {
+    const confirm = SpreadsheetApp.getUi().alert(
+      'Perks catalog already has data. Overwrite?',
+      SpreadsheetApp.getUi().ButtonSet.YES_NO
+    );
+    if (confirm !== SpreadsheetApp.getUi().Button.YES) return;
+    sheet.getRange(2, 1, sheet.getLastRow() - 1, 12).clear();
+  }
+
+  // Perks matched to YOUR specific cards (Card IDs match seedMyCards)
+  const myPerks = [
+    // ========== Michelle's Sapphire Reserve (MSR_1041) ==========
+    ['MSR_TRAVEL', 'MSR_1041', "Michelle's Sapphire Reserve", '$300 Travel Credit', 'Travel', 300, 'annual', 'anniversary', 'airline|hotel|airbnb|lyft|uber|lord camden|woodstock inn|breeze|american airlines', 'travel|hotel|airline|taxi & ride shares', '', '$300 annual travel credit'],
+    ['MSR_GE', 'MSR_1041', "Michelle's Sapphire Reserve", 'Global Entry/TSA PreCheck', 'Fees', 100, 'every_4_years', 'anniversary', 'global entry|tsa precheck|clear', '', '=100', 'Every 4 years'],
+    ['MSR_DOORDASH', 'MSR_1041', "Michelle's Sapphire Reserve", 'DoorDash DashPass', 'Subscriptions', 60, 'annual', 'calendar', 'doordash', 'delivery & takeout', '', 'Free DashPass ($5/mo credit value)'],
+    ['MSR_LYFT', 'MSR_1041', "Michelle's Sapphire Reserve", 'Lyft Pink', 'Travel', 0, 'annual', 'calendar', 'lyft', 'taxi & ride shares', '', 'Free Lyft Pink membership'],
+
+    // ========== Gray's Amex Platinum (GAPP_1007) ==========
+    ['GAPP_UBER', 'GAPP_1007', "Gray's Amex Platinum Card®", 'Uber Credit', 'Travel', 200, 'monthly', 'calendar', 'uber|uber eats', 'taxi & ride shares|delivery & takeout', '15-35', '$15/mo ($35 Dec)'],
+    ['GAPP_AIRLINE', 'GAPP_1007', "Gray's Amex Platinum Card®", 'Airline Fee Credit', 'Travel', 200, 'annual', 'calendar', 'breeze|american airlines|delta|united|airline', 'airline', '', 'Select one airline - incidentals'],
+    ['GAPP_SAKS', 'GAPP_1007', "Gray's Amex Platinum Card®", 'Saks Credit', 'Retail', 100, 'annual', 'calendar', 'saks|saks fifth avenue', 'shopping|clothing', '', '$50 Jan-Jun, $50 Jul-Dec'],
+    ['GAPP_HOTEL', 'GAPP_1007', "Gray's Amex Platinum Card®", 'Hotel Credit', 'Travel', 200, 'annual', 'calendar', 'hotel collection|fine hotels|lord camden|woodstock', 'hotel', '', 'FHR/THC bookings'],
+    ['GAPP_CLEAR', 'GAPP_1007', "Gray's Amex Platinum Card®", 'CLEAR Credit', 'Fees', 189, 'annual', 'calendar', 'clear', '', '~189', 'CLEAR membership'],
+    ['GAPP_DIGITAL', 'GAPP_1007', "Gray's Amex Platinum Card®", 'Digital Entertainment', 'Entertainment', 240, 'monthly', 'calendar', 'disney+|hulu|espn+|peacock|nyt|audible|youtube tv', 'streaming|subscriptions|youtube tv', '~20', '$20/month'],
+    ['GAPP_WALMART', 'GAPP_1007', "Gray's Amex Platinum Card®", 'Walmart+ Credit', 'Subscriptions', 155, 'annual', 'calendar', 'walmart+|walmart plus|wmt plus', 'shopping', '~13', 'Annual Walmart+ membership'],
+    ['GAPP_EQUINOX', 'GAPP_1007', "Gray's Amex Platinum Card®", 'Equinox Credit', 'Fitness', 300, 'annual', 'calendar', 'equinox|soulcycle', 'gym|fitness', '', '$25/month'],
+
+    // ========== Michelle's Amex Platinum (MPC_7008) ==========
+    ['MPC_UBER', 'MPC_7008', "Michelle's Platinum Card®", 'Uber Credit', 'Travel', 200, 'monthly', 'calendar', 'uber|uber eats', 'taxi & ride shares|delivery & takeout', '15-35', '$15/mo ($35 Dec)'],
+    ['MPC_AIRLINE', 'MPC_7008', "Michelle's Platinum Card®", 'Airline Fee Credit', 'Travel', 200, 'annual', 'calendar', 'breeze|american airlines|delta|united|airline', 'airline', '', 'Select one airline'],
+    ['MPC_SAKS', 'MPC_7008', "Michelle's Platinum Card®", 'Saks Credit', 'Retail', 100, 'annual', 'calendar', 'saks|saks fifth avenue', 'shopping|clothing', '', '$50 Jan-Jun, $50 Jul-Dec'],
+    ['MPC_HOTEL', 'MPC_7008', "Michelle's Platinum Card®", 'Hotel Credit', 'Travel', 200, 'annual', 'calendar', 'hotel collection|fine hotels', 'hotel', '', 'FHR/THC bookings'],
+    ['MPC_WALMART', 'MPC_7008', "Michelle's Platinum Card®", 'Walmart+ Credit', 'Subscriptions', 155, 'annual', 'calendar', 'walmart+|walmart plus|wmt plus', 'shopping', '~13', 'Annual Walmart+ membership'],
+    ['MPC_DIGITAL', 'MPC_7008', "Michelle's Platinum Card®", 'Digital Entertainment', 'Entertainment', 240, 'monthly', 'calendar', 'disney+|hulu|espn+|peacock|nyt|audible', 'streaming|subscriptions', '~20', '$20/month'],
+    ['MPC_CLEAR', 'MPC_7008', "Michelle's Platinum Card®", 'CLEAR Credit', 'Fees', 189, 'annual', 'calendar', 'clear', '', '~189', 'CLEAR membership'],
+
+    // ========== Gray's Amex Gold (GAGC_2003) ==========
+    ['GAGC_DINING', 'GAGC_2003', "Gray's Amex Gold Card", 'Dining Credit', 'Dining', 120, 'monthly', 'calendar', 'grubhub|seamless|cheesecake factory|goldbelly|wine.com|milk bar', 'restaurants & bars|delivery & takeout', '10', '$10/month at partners'],
+    ['GAGC_UBER', 'GAGC_2003', "Gray's Amex Gold Card", 'Uber Cash', 'Travel', 120, 'monthly', 'calendar', 'uber|uber eats', 'taxi & ride shares|delivery & takeout', '10', '$10/month Uber Cash'],
+    ['GAGC_DUNKIN', 'GAGC_2003', "Gray's Amex Gold Card", "Dunkin' Credit", 'Dining', 84, 'monthly', 'calendar', 'dunkin', 'delivery & takeout|coffee', '7', '$7/month'],
+
+    // ========== Marriott Bonvoy Brilliant (MMBB_5005) ==========
+    ['MMBB_DINING', 'MMBB_5005', "Michelle's Marriott Bonvoy Brilliant®", 'Dining Credit', 'Dining', 300, 'annual', 'calendar', 'marriott|restaurant|dining', 'restaurants & bars', '', '$25/month at Marriott restaurants'],
+    ['MMBB_HOTEL', 'MMBB_5005', "Michelle's Marriott Bonvoy Brilliant®", 'Hotel Credit', 'Travel', 300, 'annual', 'anniversary', 'marriott|ritz|westin|sheraton|w hotel', 'hotel', '', '$300 Marriott Bonvoy credit'],
+    ['MMBB_FNC', 'MMBB_5005', "Michelle's Marriott Bonvoy Brilliant®", 'Free Night Award', 'Travel', 500, 'annual', 'anniversary', '', '', '', '85K points free night (est. $500 value)'],
+
+    // ========== Capital One Venture (VEN_4522) ==========
+    ['VEN_TRAVEL', 'VEN_4522', 'Venture', 'Travel Credit', 'Travel', 100, 'annual', 'anniversary', 'capital one travel', 'travel', '', '$100 Global Entry/TSA credit'],
+    ['VEN_ANNIVERSARY', 'VEN_4522', 'Venture', 'Anniversary Miles', 'Travel', 100, 'annual', 'anniversary', '', '', '', '10K miles annually (est. $100)'],
+  ];
+
+  if (myPerks.length > 0) {
+    sheet.getRange(2, 1, myPerks.length, 12).setValues(myPerks);
+  }
+
+  logMessage('INFO', `Seeded ${myPerks.length} perks for your cards`);
+  SpreadsheetApp.getUi().alert(`✅ Added ${myPerks.length} perks for your credit cards!\n\nReview and adjust values in Perks Catalog as needed.`);
+}
+
+/**
+ * Quick setup: runs full setup + seeds your cards + seeds your perks
+ */
+function quickSetupWithMyData() {
+  setupSheet_IfNeeded();
+  seedMyCards();
+  seedMyPerks();
+  SpreadsheetApp.getUi().alert('✅ Quick setup complete!\n\nYour cards and perks have been added.\n\nNext steps:\n1. Paste your Transactions CSV in Config tab\n2. Run "Ingest Transactions CSV"\n3. Run "Run Full Pipeline"');
+}
+
+// ============================================================================
+// SAMPLE PERKS CATALOG SEEDER (Generic - for reference)
+// ============================================================================
+
+/**
+ * Seeds generic sample perks for common credit cards
+ * Use seedMyPerks() instead for your specific cards
  */
 function seedSamplePerks() {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
