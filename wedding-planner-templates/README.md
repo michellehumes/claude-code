@@ -1,12 +1,28 @@
 # Premium Wedding Planner Templates for Etsy
 
-Two luxury minimalist wedding planning products designed for Canva editing, print, and iPad (GoodNotes) use.
+Three luxury minimalist wedding planning products designed for Canva editing, print, iPad (GoodNotes), and interactive web use.
+
+**Personalized for: Michelle & Gray**
 
 ---
 
 ## Products Included
 
-### 1. Minimal Wedding Budget Planner (12 pages)
+### 1. Interactive Wedding Command Dashboard (Web)
+A beautiful interactive dashboard with real-time countdown, budget tracking, task management, and theme customization.
+
+**Features:**
+- Live countdown to wedding day
+- Progress tracking with visual indicators
+- Budget manager with category breakdowns
+- This week's tasks checklist
+- Day-of timeline preview
+- Vendor status tracking
+- 5 color themes (Sage, Blush, Neutral, Gold, Navy)
+- 20+ planning tabs overview
+- Mobile-responsive design
+
+### 2. Minimal Wedding Budget Planner (12 pages)
 Make budgeting feel calm, controlled, and non-intimidating.
 
 | Page | Content |
@@ -24,7 +40,7 @@ Make budgeting feel calm, controlled, and non-intimidating.
 | 11 | Notes - Budget Adjustments |
 | 12 | Notes - General |
 
-### 2. Wedding Timeline & Checklist Planner (14 pages)
+### 3. Wedding Timeline & Checklist Planner (14 pages)
 Eliminate planning anxiety by showing "what to do next."
 
 | Page | Content |
@@ -215,6 +231,8 @@ Color: #5A5A5A
 wedding-planner-templates/
 ├── assets/
 │   └── design-system.css      # Complete design specifications
+├── command-dashboard/
+│   └── wedding-command-dashboard.html  # Interactive web dashboard
 ├── budget-planner/
 │   └── budget-planner-complete.html    # All 12 pages
 ├── timeline-planner/
@@ -228,10 +246,11 @@ wedding-planner-templates/
 
 Open the HTML files in any web browser to see the complete designs:
 
-1. `budget-planner/budget-planner-complete.html`
-2. `timeline-planner/timeline-planner-complete.html`
+1. `command-dashboard/wedding-command-dashboard.html` - Interactive dashboard (best viewed in modern browser)
+2. `budget-planner/budget-planner-complete.html` - Print-ready budget planner
+3. `timeline-planner/timeline-planner-complete.html` - Print-ready timeline planner
 
-Each page is displayed at actual print size (8.5 x 11 inches) with accurate typography and spacing.
+The printable pages are displayed at actual print size (8.5 x 11 inches) with accurate typography and spacing. The interactive dashboard is responsive and works on desktop and mobile.
 
 ---
 
