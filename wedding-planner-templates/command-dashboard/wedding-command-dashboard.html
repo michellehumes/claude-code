@@ -1,0 +1,640 @@
+<!doctype html>
+<html lang="en" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wedding Command Dashboard — Michelle & Gray</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      box-sizing: border-box;
+    }
+
+    .font-display {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+    }
+
+    .font-body {
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+
+    @keyframes pulse-soft {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+
+    .animate-fade-in {
+      animation: fadeInUp 0.6s ease-out forwards;
+    }
+
+    .animate-delay-1 { animation-delay: 0.1s; opacity: 0; }
+    .animate-delay-2 { animation-delay: 0.2s; opacity: 0; }
+    .animate-delay-3 { animation-delay: 0.3s; opacity: 0; }
+    .animate-delay-4 { animation-delay: 0.4s; opacity: 0; }
+    .animate-delay-5 { animation-delay: 0.5s; opacity: 0; }
+
+    .shimmer-border {
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+      background-size: 200% 100%;
+      animation: shimmer 3s infinite;
+    }
+
+    .progress-ring {
+      transform: rotate(-90deg);
+    }
+
+    .theme-btn {
+      transition: all 0.3s ease;
+    }
+
+    .theme-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    .theme-btn.active {
+      ring: 3px;
+      transform: scale(1.15);
+    }
+
+    .card-hover {
+      transition: all 0.3s ease;
+    }
+
+    .card-hover:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+    }
+
+    .tab-item {
+      transition: all 0.2s ease;
+    }
+
+    .tab-item:hover {
+      background: rgba(255,255,255,0.1);
+    }
+
+    .checklist-item {
+      transition: all 0.2s ease;
+    }
+
+    .checklist-item:hover {
+      padding-left: 8px;
+    }
+
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: rgba(0,0,0,0.05);
+      border-radius: 3px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: rgba(0,0,0,0.15);
+      border-radius: 3px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(0,0,0,0.25);
+    }
+  </style>
+</head>
+<body class="h-full font-body">
+  <div id="app-wrapper" class="h-full w-full overflow-auto" style="background: linear-gradient(135deg, #f8f6f3 0%, #f0ebe4 50%, #e8e2d9 100%);">
+    <!-- Decorative Elements -->
+    <div class="fixed top-0 left-0 w-full h-full pointer-events-none overflow-hidden">
+      <div class="absolute top-10 right-10 w-64 h-64 rounded-full opacity-20" style="background: radial-gradient(circle, #d4a574 0%, transparent 70%);"></div>
+      <div class="absolute bottom-20 left-10 w-48 h-48 rounded-full opacity-15" style="background: radial-gradient(circle, #9caf88 0%, transparent 70%);"></div>
+      <div class="absolute top-1/2 left-1/4 w-32 h-32 rounded-full opacity-10" style="background: radial-gradient(circle, #e8b4b8 0%, transparent 70%);"></div>
+    </div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-4 py-8">
+      <!-- Header Section -->
+      <header class="text-center mb-10 animate-fade-in">
+        <div class="inline-flex items-center gap-3 mb-4">
+          <div class="w-12 h-px bg-gradient-to-r from-transparent via-amber-600 to-transparent"></div>
+          <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="#b8860b" stroke-width="1.5">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+          </svg>
+          <div class="w-12 h-px bg-gradient-to-r from-transparent via-amber-600 to-transparent"></div>
+        </div>
+        <h1 id="couple-names" class="font-display text-5xl md:text-6xl font-light tracking-wide mb-2" style="color: #2c2c2c;">Michelle & Gray</h1>
+        <p id="welcome-message" class="font-body text-sm uppercase tracking-[0.3em] mb-3" style="color: #8b7355;">Your dream wedding awaits</p>
+        <p id="wedding-date" class="font-display text-2xl italic" style="color: #b8860b;">September 14, 2025</p>
+        <p id="venue-name" class="font-body text-sm mt-1" style="color: #666;">Rosewood Gardens</p>
+      </header>
+
+      <!-- Theme Selector -->
+      <div class="flex justify-center gap-3 mb-8 animate-fade-in animate-delay-1">
+        <button onclick="setTheme('sage')" class="theme-btn w-8 h-8 rounded-full border-2 border-white shadow-md" style="background: linear-gradient(135deg, #9caf88, #7d9b69);" title="Sage"></button>
+        <button onclick="setTheme('blush')" class="theme-btn w-8 h-8 rounded-full border-2 border-white shadow-md" style="background: linear-gradient(135deg, #e8b4b8, #d4939a);" title="Blush"></button>
+        <button onclick="setTheme('neutral')" class="theme-btn w-8 h-8 rounded-full border-2 border-white shadow-md active" style="background: linear-gradient(135deg, #c9c0b5, #a89f94);" title="Neutral"></button>
+        <button onclick="setTheme('gold')" class="theme-btn w-8 h-8 rounded-full border-2 border-white shadow-md" style="background: linear-gradient(135deg, #d4a574, #b8860b);" title="Elegant Gold"></button>
+        <button onclick="setTheme('navy')" class="theme-btn w-8 h-8 rounded-full border-2 border-white shadow-md" style="background: linear-gradient(135deg, #2c3e50, #1a252f);" title="Classic Navy"></button>
+      </div>
+
+      <!-- Quick Stats Bar -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 animate-fade-in animate-delay-2">
+        <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-4 text-center card-hover border border-white/50">
+          <p class="text-3xl font-display font-semibold" id="days-count" style="color: #b8860b;">127</p>
+          <p class="text-xs uppercase tracking-wider mt-1" style="color: #666;">Days to Go</p>
+        </div>
+        <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-4 text-center card-hover border border-white/50">
+          <p class="text-3xl font-display font-semibold" id="tasks-percent" style="color: #9caf88;">85%</p>
+          <p class="text-xs uppercase tracking-wider mt-1" style="color: #666;">Tasks Done</p>
+        </div>
+        <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-4 text-center card-hover border border-white/50">
+          <p class="text-3xl font-display font-semibold" id="guest-count" style="color: #e8b4b8;">142</p>
+          <p class="text-xs uppercase tracking-wider mt-1" style="color: #666;">Guests</p>
+        </div>
+        <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-4 text-center card-hover border border-white/50">
+          <p class="text-3xl font-display font-semibold" id="budget-total" style="color: #2c3e50;">$24.5K</p>
+          <p class="text-xs uppercase tracking-wider mt-1" style="color: #666;">Budget</p>
+        </div>
+      </div>
+
+      <!-- Main Dashboard Grid -->
+      <div class="grid lg:grid-cols-3 gap-6 mb-8">
+        <!-- Left Column - Progress & Budget -->
+        <div class="space-y-6 animate-fade-in animate-delay-3">
+          <!-- Overall Progress Card -->
+          <div class="bg-white/80 backdrop-blur-sm rounded-3xl p-6 card-hover border border-white/50">
+            <h2 class="font-display text-xl mb-4 flex items-center gap-2" style="color: #2c2c2c;">
+              <svg class="w-5 h-5" fill="none" stroke="#b8860b" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              Planning Progress
+            </h2>
+            <div class="flex justify-center mb-4 relative">
+              <svg class="w-32 h-32 progress-ring" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="40" fill="none" stroke="#e8e2d9" stroke-width="8"/>
+                <circle cx="50" cy="50" r="40" fill="none" stroke="url(#progressGradient)" stroke-width="8" stroke-linecap="round" stroke-dasharray="251.2" stroke-dashoffset="37.68"/>
+                <defs>
+                  <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" style="stop-color:#9caf88"/>
+                    <stop offset="100%" style="stop-color:#b8860b"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+              <div class="absolute inset-0 flex items-center justify-center">
+                <div class="text-center">
+                  <p class="text-3xl font-display font-bold" style="color: #2c2c2c;">85%</p>
+                  <p class="text-xs" style="color: #666;">Complete</p>
+                </div>
+              </div>
+            </div>
+            <div class="space-y-2">
+              <div class="flex justify-between text-sm">
+                <span style="color: #666;">Venue & Catering</span>
+                <span class="font-medium" style="color: #9caf88;">✓ Done</span>
+              </div>
+              <div class="flex justify-between text-sm">
+                <span style="color: #666;">Invitations</span>
+                <span class="font-medium" style="color: #b8860b;">In Progress</span>
+              </div>
+              <div class="flex justify-between text-sm">
+                <span style="color: #666;">Final Details</span>
+                <span style="color: #999;">Upcoming</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Budget Overview -->
+          <div class="bg-white/80 backdrop-blur-sm rounded-3xl p-6 card-hover border border-white/50">
+            <h2 class="font-display text-xl mb-4 flex items-center gap-2" style="color: #2c2c2c;">
+              <svg class="w-5 h-5" fill="none" stroke="#b8860b" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              Budget Manager
+            </h2>
+            <div class="space-y-3">
+              <div>
+                <div class="flex justify-between text-sm mb-1">
+                  <span style="color: #666;">Venue</span>
+                  <span style="color: #2c2c2c;">$8,500 / $9,000</span>
+                </div>
+                <div class="h-2 bg-gray-100 rounded-full overflow-hidden">
+                  <div class="h-full rounded-full" style="width: 94%; background: linear-gradient(90deg, #9caf88, #7d9b69);"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between text-sm mb-1">
+                  <span style="color: #666;">Catering</span>
+                  <span style="color: #2c2c2c;">$6,200 / $7,000</span>
+                </div>
+                <div class="h-2 bg-gray-100 rounded-full overflow-hidden">
+                  <div class="h-full rounded-full" style="width: 89%; background: linear-gradient(90deg, #e8b4b8, #d4939a);"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between text-sm mb-1">
+                  <span style="color: #666;">Photography</span>
+                  <span style="color: #2c2c2c;">$3,500 / $4,000</span>
+                </div>
+                <div class="h-2 bg-gray-100 rounded-full overflow-hidden">
+                  <div class="h-full rounded-full" style="width: 87%; background: linear-gradient(90deg, #d4a574, #b8860b);"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between text-sm mb-1">
+                  <span style="color: #666;">Florals</span>
+                  <span style="color: #2c2c2c;">$1,800 / $2,500</span>
+                </div>
+                <div class="h-2 bg-gray-100 rounded-full overflow-hidden">
+                  <div class="h-full rounded-full" style="width: 72%; background: linear-gradient(90deg, #c9c0b5, #a89f94);"></div>
+                </div>
+              </div>
+            </div>
+            <div class="mt-4 pt-4 border-t border-gray-100">
+              <div class="flex justify-between">
+                <span class="font-medium" style="color: #2c2c2c;">Total Spent</span>
+                <span class="font-display text-xl font-bold" style="color: #b8860b;">$20,000</span>
+              </div>
+              <div class="flex justify-between text-sm mt-1">
+                <span style="color: #666;">Remaining</span>
+                <span style="color: #9caf88;">$4,500</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Center Column - Tabs Preview -->
+        <div class="animate-fade-in animate-delay-4">
+          <div class="bg-white/80 backdrop-blur-sm rounded-3xl overflow-hidden card-hover border border-white/50">
+            <div class="p-4 border-b border-gray-100" style="background: linear-gradient(135deg, rgba(184,134,11,0.1), rgba(156,175,136,0.1));">
+              <h2 class="font-display text-xl flex items-center gap-2" style="color: #2c2c2c;">
+                <svg class="w-5 h-5" fill="none" stroke="#b8860b" stroke-width="2" viewBox="0 0 24 24">
+                  <path d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+                20+ Planning Tabs
+              </h2>
+              <p class="text-xs mt-1" style="color: #666;">Complete wedding binder system</p>
+            </div>
+            <div class="max-h-80 overflow-y-auto p-2">
+              <div class="space-y-1">
+                <div class="tab-item flex items-center gap-3 p-3 rounded-xl cursor-pointer" style="background: rgba(156,175,136,0.15);">
+                  <span class="text-lg">📊</span>
+                  <div>
+                    <p class="font-medium text-sm" style="color: #2c2c2c;">Command Dashboard</p>
+                    <p class="text-xs" style="color: #666;">Instant progress metrics</p>
+                  </div>
+                </div>
+                <div class="tab-item flex items-center gap-3 p-3 rounded-xl cursor-pointer">
+                  <span class="text-lg">💰</span>
+                  <div>
+                    <p class="font-medium text-sm" style="color: #2c2c2c;">Budget Manager</p>
+                    <p class="text-xs" style="color: #666;">With pie charts & tracking</p>
+                  </div>
+                </div>
+                <div class="tab-item flex items-center gap-3 p-3 rounded-xl cursor-pointer">
+                  <span class="text-lg">👥</span>
+                  <div>
+                    <p class="font-medium text-sm" style="color: #2c2c2c;">Guest List & RSVP</p>
+                    <p class="text-xs" style="color: #666;">Meal preferences & seating</p>
+                  </div>
+                </div>
+                <div class="tab-item flex items-center gap-3 p-3 rounded-xl cursor-pointer">
+                  <span class="text-lg">🪑</span>
+                  <div>
+                    <p class="font-medium text-sm" style="color: #2c2c2c;">Seating Chart</p>
+                    <p class="text-xs" style="color: #666;">Printable layout</p>
+                  </div>
+                </div>
+                <div class="tab-item flex items-center gap-3 p-3 rounded-xl cursor-pointer">
+                  <span class="text-lg">🏪</span>
+                  <div>
+                    <p class="font-medium text-sm" style="color: #2c2c2c;">Vendor Tracking</p>
+                    <p class="text-xs" style="color: #666;">Contracts & payments</p>
+                  </div>
+                </div>
+                <div class="tab-item flex items-center gap-3 p-3 rounded-xl cursor-pointer">
+                  <span class="text-lg">⏰</span>
+                  <div>
+                    <p class="font-medium text-sm" style="color: #2c2c2c;">Day-of Timeline</p>
+                    <p class="text-xs" style="color: #666;">Minute-by-minute schedule</p>
+                  </div>
+                </div>
+                <div class="tab-item flex items-center gap-3 p-3 rounded-xl cursor-pointer">
+                  <span class="text-lg">🎁</span>
+                  <div>
+                    <p class="font-medium text-sm" style="color: #2c2c2c;">Gift Tracker</p>
+                    <p class="text-xs" style="color: #666;">Thank you log included</p>
+                  </div>
+                </div>
+                <div class="tab-item flex items-center gap-3 p-3 rounded-xl cursor-pointer">
+                  <span class="text-lg">✈️</span>
+                  <div>
+                    <p class="font-medium text-sm" style="color: #2c2c2c;">Honeymoon Budget</p>
+                    <p class="text-xs" style="color: #666;">Plan your getaway</p>
+                  </div>
+                </div>
+                <div class="tab-item flex items-center gap-3 p-3 rounded-xl cursor-pointer">
+                  <span class="text-lg">📸</span>
+                  <div>
+                    <p class="font-medium text-sm" style="color: #2c2c2c;">Photo Shot List</p>
+                    <p class="text-xs" style="color: #666;">Never miss a moment</p>
+                  </div>
+                </div>
+                <div class="tab-item flex items-center gap-3 p-3 rounded-xl cursor-pointer">
+                  <span class="text-lg">💒</span>
+                  <div>
+                    <p class="font-medium text-sm" style="color: #2c2c2c;">Ceremony Details</p>
+                    <p class="text-xs" style="color: #666;">Vows, music & more</p>
+                  </div>
+                </div>
+                <div class="tab-item flex items-center gap-3 p-3 rounded-xl cursor-pointer">
+                  <span class="text-lg">🍽️</span>
+                  <div>
+                    <p class="font-medium text-sm" style="color: #2c2c2c;">Reception Details</p>
+                    <p class="text-xs" style="color: #666;">Menu & entertainment</p>
+                  </div>
+                </div>
+                <div class="tab-item flex items-center gap-3 p-3 rounded-xl cursor-pointer">
+                  <span class="text-lg">🚨</span>
+                  <div>
+                    <p class="font-medium text-sm" style="color: #2c2c2c;">Emergency Quick Access</p>
+                    <p class="text-xs" style="color: #666;">Day-of essentials</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="p-3 text-center border-t border-gray-100" style="background: rgba(184,134,11,0.05);">
+              <p class="text-xs" style="color: #b8860b;">+ 8 more tabs included</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column - Timeline & Checklist -->
+        <div class="space-y-6 animate-fade-in animate-delay-5">
+          <!-- Upcoming Tasks -->
+          <div class="bg-white/80 backdrop-blur-sm rounded-3xl p-6 card-hover border border-white/50">
+            <h2 class="font-display text-xl mb-4 flex items-center gap-2" style="color: #2c2c2c;">
+              <svg class="w-5 h-5" fill="none" stroke="#b8860b" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
+              </svg>
+              This Week's Tasks
+            </h2>
+            <div class="space-y-3">
+              <label class="checklist-item flex items-center gap-3 cursor-pointer">
+                <input type="checkbox" class="w-5 h-5 rounded-full border-2 border-gray-300 text-amber-600 focus:ring-amber-500" checked>
+                <span class="text-sm line-through" style="color: #999;">Finalize menu selections</span>
+              </label>
+              <label class="checklist-item flex items-center gap-3 cursor-pointer">
+                <input type="checkbox" class="w-5 h-5 rounded-full border-2 border-gray-300 text-amber-600 focus:ring-amber-500" checked>
+                <span class="text-sm line-through" style="color: #999;">Send invitations</span>
+              </label>
+              <label class="checklist-item flex items-center gap-3 cursor-pointer">
+                <input type="checkbox" class="w-5 h-5 rounded-full border-2 border-gray-300 text-amber-600 focus:ring-amber-500">
+                <span class="text-sm" style="color: #2c2c2c;">Book hair & makeup trial</span>
+              </label>
+              <label class="checklist-item flex items-center gap-3 cursor-pointer">
+                <input type="checkbox" class="w-5 h-5 rounded-full border-2 border-gray-300 text-amber-600 focus:ring-amber-500">
+                <span class="text-sm" style="color: #2c2c2c;">Confirm photographer timeline</span>
+              </label>
+              <label class="checklist-item flex items-center gap-3 cursor-pointer">
+                <input type="checkbox" class="w-5 h-5 rounded-full border-2 border-gray-300 text-amber-600 focus:ring-amber-500">
+                <span class="text-sm" style="color: #2c2c2c;">Order wedding favors</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Day-of Timeline Preview -->
+          <div class="bg-white/80 backdrop-blur-sm rounded-3xl p-6 card-hover border border-white/50">
+            <h2 class="font-display text-xl mb-4 flex items-center gap-2" style="color: #2c2c2c;">
+              <svg class="w-5 h-5" fill="none" stroke="#b8860b" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              Wedding Day Timeline
+            </h2>
+            <div class="relative pl-4 border-l-2" style="border-color: #e8e2d9;">
+              <div class="mb-4 relative">
+                <div class="absolute -left-[21px] w-3 h-3 rounded-full" style="background: #9caf88;"></div>
+                <p class="font-medium text-sm" style="color: #2c2c2c;">10:00 AM</p>
+                <p class="text-xs" style="color: #666;">Hair & Makeup begins</p>
+              </div>
+              <div class="mb-4 relative">
+                <div class="absolute -left-[21px] w-3 h-3 rounded-full" style="background: #e8b4b8;"></div>
+                <p class="font-medium text-sm" style="color: #2c2c2c;">2:00 PM</p>
+                <p class="text-xs" style="color: #666;">First look photos</p>
+              </div>
+              <div class="mb-4 relative">
+                <div class="absolute -left-[21px] w-3 h-3 rounded-full" style="background: #b8860b;"></div>
+                <p class="font-medium text-sm" style="color: #2c2c2c;">4:30 PM</p>
+                <p class="text-xs" style="color: #666;">Ceremony begins</p>
+              </div>
+              <div class="relative">
+                <div class="absolute -left-[21px] w-3 h-3 rounded-full" style="background: #d4a574;"></div>
+                <p class="font-medium text-sm" style="color: #2c2c2c;">6:00 PM</p>
+                <p class="text-xs" style="color: #666;">Reception & dinner</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Vendor Quick View -->
+          <div class="bg-white/80 backdrop-blur-sm rounded-3xl p-6 card-hover border border-white/50">
+            <h2 class="font-display text-xl mb-4 flex items-center gap-2" style="color: #2c2c2c;">
+              <svg class="w-5 h-5" fill="none" stroke="#b8860b" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+              </svg>
+              Vendors
+            </h2>
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <span class="w-8 h-8 rounded-full flex items-center justify-center text-sm" style="background: rgba(156,175,136,0.2);">📷</span>
+                  <span class="text-sm" style="color: #2c2c2c;">Photographer</span>
+                </div>
+                <span class="text-xs px-2 py-1 rounded-full" style="background: rgba(156,175,136,0.2); color: #7d9b69;">Booked</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <span class="w-8 h-8 rounded-full flex items-center justify-center text-sm" style="background: rgba(232,180,184,0.2);">💐</span>
+                  <span class="text-sm" style="color: #2c2c2c;">Florist</span>
+                </div>
+                <span class="text-xs px-2 py-1 rounded-full" style="background: rgba(156,175,136,0.2); color: #7d9b69;">Booked</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <span class="w-8 h-8 rounded-full flex items-center justify-center text-sm" style="background: rgba(184,134,11,0.2);">🎵</span>
+                  <span class="text-sm" style="color: #2c2c2c;">DJ / Band</span>
+                </div>
+                <span class="text-xs px-2 py-1 rounded-full" style="background: rgba(184,134,11,0.2); color: #b8860b;">Pending</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature Highlights -->
+      <div class="bg-white/60 backdrop-blur-sm rounded-3xl p-6 mb-8 border border-white/50 animate-fade-in animate-delay-5">
+        <h2 class="font-display text-2xl text-center mb-6" style="color: #2c2c2c;">What's Included</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="text-center p-4">
+            <div class="w-12 h-12 mx-auto mb-3 rounded-2xl flex items-center justify-center" style="background: linear-gradient(135deg, rgba(156,175,136,0.3), rgba(156,175,136,0.1));">
+              <span class="text-2xl">📊</span>
+            </div>
+            <p class="font-medium text-sm" style="color: #2c2c2c;">20+ Tabs</p>
+            <p class="text-xs" style="color: #666;">Complete system</p>
+          </div>
+          <div class="text-center p-4">
+            <div class="w-12 h-12 mx-auto mb-3 rounded-2xl flex items-center justify-center" style="background: linear-gradient(135deg, rgba(232,180,184,0.3), rgba(232,180,184,0.1));">
+              <span class="text-2xl">🖨️</span>
+            </div>
+            <p class="font-medium text-sm" style="color: #2c2c2c;">PDF Printables</p>
+            <p class="text-xs" style="color: #666;">Ready to print</p>
+          </div>
+          <div class="text-center p-4">
+            <div class="w-12 h-12 mx-auto mb-3 rounded-2xl flex items-center justify-center" style="background: linear-gradient(135deg, rgba(184,134,11,0.3), rgba(184,134,11,0.1));">
+              <span class="text-2xl">🎨</span>
+            </div>
+            <p class="font-medium text-sm" style="color: #2c2c2c;">5 Themes</p>
+            <p class="text-xs" style="color: #666;">Color options</p>
+          </div>
+          <div class="text-center p-4">
+            <div class="w-12 h-12 mx-auto mb-3 rounded-2xl flex items-center justify-center" style="background: linear-gradient(135deg, rgba(44,62,80,0.3), rgba(44,62,80,0.1));">
+              <span class="text-2xl">🎬</span>
+            </div>
+            <p class="font-medium text-sm" style="color: #2c2c2c;">Video Guide</p>
+            <p class="text-xs" style="color: #666;">Easy setup</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Compatibility Bar -->
+      <div class="text-center pb-8 animate-fade-in animate-delay-5">
+        <p class="text-xs uppercase tracking-wider mb-3" style="color: #666;">Works With</p>
+        <div class="flex justify-center items-center gap-6 flex-wrap">
+          <div class="flex items-center gap-2 px-4 py-2 bg-white/50 rounded-full">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="#34a853">
+              <path d="M19.5 3H4.5C3.12 3 2 4.12 2 5.5v13C2 19.88 3.12 21 4.5 21h15c1.38 0 2.5-1.12 2.5-2.5v-13C22 4.12 20.88 3 19.5 3zm-7 3h6v1.5h-6V6zm0 3h6v1.5h-6V9zm-7-3h5v5h-5V6zm0 6.5h12v5h-12v-5z"/>
+            </svg>
+            <span class="text-xs font-medium" style="color: #2c2c2c;">Google Sheets</span>
+          </div>
+          <div class="flex items-center gap-2 px-4 py-2 bg-white/50 rounded-full">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="#217346">
+              <path d="M21.17 3H7.5v5.25h2.25V5.17h9.42v13.66h-9.42v-3.08H7.5V21h13.67c.46 0 .83-.37.83-.83V3.83c0-.46-.37-.83-.83-.83zM7.5 15.75h4.5l-1.69-1.69 2.44-2.44-1.06-1.06-2.44 2.44-1.69-1.69v4.44z"/>
+            </svg>
+            <span class="text-xs font-medium" style="color: #2c2c2c;">Excel</span>
+          </div>
+          <div class="flex items-center gap-2 px-4 py-2 bg-white/50 rounded-full">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="#555">
+              <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+            </svg>
+            <span class="text-xs font-medium" style="color: #2c2c2c;">Numbers</span>
+          </div>
+          <div class="flex items-center gap-2 px-4 py-2 bg-white/50 rounded-full">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="#f40f02">
+              <path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"/>
+            </svg>
+            <span class="text-xs font-medium" style="color: #2c2c2c;">PDF</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const defaultConfig = {
+      couple_names: 'Michelle & Gray',
+      wedding_date: 'September 14, 2025',
+      venue_name: 'Rosewood Gardens',
+      welcome_message: 'Your dream wedding awaits',
+      primary_color: '#b8860b',
+      secondary_color: '#9caf88',
+      accent_color: '#e8b4b8',
+      background_color: '#f8f6f3',
+      text_color: '#2c2c2c'
+    };
+
+    let config = { ...defaultConfig };
+
+    const themes = {
+      sage: {
+        primary: '#7d9b69',
+        secondary: '#9caf88',
+        accent: '#c5d4b5'
+      },
+      blush: {
+        primary: '#d4939a',
+        secondary: '#e8b4b8',
+        accent: '#f2d4d7'
+      },
+      neutral: {
+        primary: '#b8860b',
+        secondary: '#9caf88',
+        accent: '#e8b4b8'
+      },
+      gold: {
+        primary: '#b8860b',
+        secondary: '#d4a574',
+        accent: '#e8d4b8'
+      },
+      navy: {
+        primary: '#2c3e50',
+        secondary: '#34495e',
+        accent: '#5d7b93'
+      }
+    };
+
+    function setTheme(themeName) {
+      const theme = themes[themeName];
+      if (!theme) return;
+
+      document.querySelectorAll('.theme-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+
+      // Update gradient backgrounds, accents etc based on theme
+      const progressCircle = document.querySelector('circle[stroke="url(#progressGradient)"]');
+      if (progressCircle) {
+        const gradient = document.getElementById('progressGradient');
+        if (gradient) {
+          gradient.querySelector('stop:first-child').style.stopColor = theme.secondary;
+          gradient.querySelector('stop:last-child').style.stopColor = theme.primary;
+        }
+      }
+    }
+
+    function calculateDaysToGo() {
+      const weddingDateStr = config.wedding_date || defaultConfig.wedding_date;
+      const parsed = new Date(weddingDateStr);
+      if (!isNaN(parsed.getTime())) {
+        const today = new Date();
+        const diffTime = parsed - today;
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        document.getElementById('days-count').textContent = diffDays > 0 ? diffDays : '0';
+      }
+    }
+
+    function updateDisplay() {
+      document.getElementById('couple-names').textContent = config.couple_names || defaultConfig.couple_names;
+      document.getElementById('wedding-date').textContent = config.wedding_date || defaultConfig.wedding_date;
+      document.getElementById('venue-name').textContent = config.venue_name || defaultConfig.venue_name;
+      document.getElementById('welcome-message').textContent = config.welcome_message || defaultConfig.welcome_message;
+      calculateDaysToGo();
+    }
+
+    // Initialize
+    updateDisplay();
+  </script>
+</body>
+</html>
