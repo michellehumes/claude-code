@@ -1,0 +1,12 @@
+Name,Email,Phone,RSVP,Meal,Table,Plus One,Notes
+John Smith,john@email.com,555-1234,Attending,Beef,1,Jane Smith,Best man
+Jane Smith,jane@email.com,555-1235,Attending,Chicken,1,,Best man's wife
+Sarah Johnson,sarah@email.com,555-5678,Attending,Vegetarian,2,,Aunt
+Mike Brown,mike@email.com,555-9012,Declined,,,,College friend
+Emily Davis,emily@email.com,555-3456,Pending,,,Tom Davis,Cousin
+Tom Davis,,,Pending,,,,Emily's plus one
+Robert Wilson,robert@email.com,555-7890,Attending,Beef,3,Lisa Wilson,Uncle
+Lisa Wilson,,,Attending,Fish,3,,Aunt
+Jennifer Lee,jennifer@email.com,555-2345,No Response,,,,Work friend
+David Martinez,david@email.com,555-6789,Attending,Chicken,4,Maria Martinez,Neighbor
+Maria Martinez,,,Attending,Vegetarian,4,,
