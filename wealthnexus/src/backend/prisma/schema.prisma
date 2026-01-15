@@ -1,0 +1,746 @@
+// WealthNexus Database Schema
+// Prisma Schema for PostgreSQL
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================
+// TENANT & ORGANIZATION
+// ============================================
+
+model Tenant {
+  id               String   @id @default(uuid())
+  name             String
+  subdomain        String   @unique
+  subscriptionTier String   @map("subscription_tier")
+  settings         Json     @default("{}")
+  createdAt        DateTime @default(now()) @map("created_at")
+  updatedAt        DateTime @updatedAt @map("updated_at")
+
+  users               User[]
+  clients             Client[]
+  households          Household[]
+  accounts            Account[]
+  portfolios          Portfolio[]
+  securities          Security[]
+  positions           Position[]
+  transactions        Transaction[]
+  modelPortfolios     ModelPortfolio[]
+  feeSchedules        FeeSchedule[]
+  invoices            Invoice[]
+  reports             Report[]
+  auditLogs           AuditLog[]
+  alternativeInvestments AlternativeInvestment[]
+  capitalCalls        CapitalCall[]
+  benchmarks          Benchmark[]
+  alerts              Alert[]
+  documents           Document[]
+
+  @@map("tenants")
+}
+
+model User {
+  id           String    @id @default(uuid())
+  tenantId     String    @map("tenant_id")
+  email        String
+  passwordHash String?   @map("password_hash")
+  firstName    String?   @map("first_name")
+  lastName     String?   @map("last_name")
+  role         UserRole
+  permissions  Json      @default("[]")
+  mfaEnabled   Boolean   @default(false) @map("mfa_enabled")
+  mfaSecret    String?   @map("mfa_secret")
+  lastLogin    DateTime? @map("last_login")
+  isActive     Boolean   @default(true) @map("is_active")
+  createdAt    DateTime  @default(now()) @map("created_at")
+  updatedAt    DateTime  @updatedAt @map("updated_at")
+
+  tenant    Tenant     @relation(fields: [tenantId], references: [id])
+  auditLogs AuditLog[]
+  reports   Report[]
+
+  @@unique([tenantId, email])
+  @@map("users")
+}
+
+enum UserRole {
+  ADMIN
+  ADVISOR
+  ANALYST
+  VIEWER
+  CLIENT
+}
+
+// ============================================
+// CLIENT MANAGEMENT
+// ============================================
+
+model Client {
+  id               String       @id @default(uuid())
+  tenantId         String       @map("tenant_id")
+  externalId       String?      @map("external_id")
+  type             ClientType
+  name             String
+  taxIdEncrypted   Bytes?       @map("tax_id_encrypted")
+  email            String?
+  phone            String?
+  address          Json?
+  kycStatus        KYCStatus?   @map("kyc_status")
+  riskProfile      RiskProfile? @map("risk_profile")
+  inceptionDate    DateTime?    @map("inception_date")
+  metadata         Json         @default("{}")
+  createdAt        DateTime     @default(now()) @map("created_at")
+  updatedAt        DateTime     @updatedAt @map("updated_at")
+
+  tenant           Tenant            @relation(fields: [tenantId], references: [id])
+  accounts         Account[]
+  householdMembers HouseholdMember[]
+  primaryHouseholds Household[]      @relation("PrimaryContact")
+  invoices         Invoice[]
+  documents        Document[]
+
+  @@unique([tenantId, externalId])
+  @@map("clients")
+}
+
+enum ClientType {
+  INDIVIDUAL
+  JOINT
+  TRUST
+  LLC
+  CORPORATION
+  PARTNERSHIP
+  FOUNDATION
+  DAF
+  IRA_TRADITIONAL
+  IRA_ROTH
+  IRA_SEP
+  PENSION
+  CUSTODIAL
+  ESTATE
+  OTHER
+}
+
+enum KYCStatus {
+  PENDING
+  VERIFIED
+  EXPIRED
+  FAILED
+}
+
+enum RiskProfile {
+  CONSERVATIVE
+  MODERATELY_CONSERVATIVE
+  MODERATE
+  MODERATELY_AGGRESSIVE
+  AGGRESSIVE
+}
+
+model Household {
+  id               String   @id @default(uuid())
+  tenantId         String   @map("tenant_id")
+  name             String
+  primaryContactId String?  @map("primary_contact_id")
+  createdAt        DateTime @default(now()) @map("created_at")
+  updatedAt        DateTime @updatedAt @map("updated_at")
+
+  tenant         Tenant            @relation(fields: [tenantId], references: [id])
+  primaryContact Client?           @relation("PrimaryContact", fields: [primaryContactId], references: [id])
+  members        HouseholdMember[]
+
+  @@map("households")
+}
+
+model HouseholdMember {
+  householdId  String @map("household_id")
+  clientId     String @map("client_id")
+  relationship String?
+
+  household Household @relation(fields: [householdId], references: [id])
+  client    Client    @relation(fields: [clientId], references: [id])
+
+  @@id([householdId, clientId])
+  @@map("household_members")
+}
+
+// ============================================
+// ACCOUNTS & PORTFOLIOS
+// ============================================
+
+model Account {
+  id            String        @id @default(uuid())
+  tenantId      String        @map("tenant_id")
+  clientId      String        @map("client_id")
+  accountNumber String        @map("account_number")
+  accountType   AccountType   @map("account_type")
+  custodianId   String?       @map("custodian_id")
+  status        AccountStatus @default(ACTIVE)
+  taxStatus     TaxStatus?    @map("tax_status")
+  inceptionDate DateTime?     @map("inception_date")
+  metadata      Json          @default("{}")
+  createdAt     DateTime      @default(now()) @map("created_at")
+  updatedAt     DateTime      @updatedAt @map("updated_at")
+
+  tenant            Tenant             @relation(fields: [tenantId], references: [id])
+  client            Client             @relation(fields: [clientId], references: [id])
+  custodian         Custodian?         @relation(fields: [custodianId], references: [id])
+  positions         Position[]
+  transactions      Transaction[]
+  portfolioAccounts PortfolioAccount[]
+  modelAssignment   AccountModelAssignment?
+  capitalCalls      CapitalCall[]
+
+  @@unique([tenantId, accountNumber])
+  @@map("accounts")
+}
+
+enum AccountType {
+  BROKERAGE
+  IRA_TRADITIONAL
+  IRA_ROTH
+  IRA_SEP
+  IRA_SIMPLE
+  PENSION_401K
+  TRUST
+  CUSTODIAL
+  JOINT
+  CORPORATE
+  PARTNERSHIP
+  OTHER
+}
+
+enum AccountStatus {
+  ACTIVE
+  INACTIVE
+  CLOSED
+  PENDING
+}
+
+enum TaxStatus {
+  TAXABLE
+  TAX_DEFERRED
+  TAX_EXEMPT
+}
+
+model Portfolio {
+  id            String        @id @default(uuid())
+  tenantId      String        @map("tenant_id")
+  name          String
+  portfolioType PortfolioType @map("portfolio_type")
+  benchmarkId   String?       @map("benchmark_id")
+  inceptionDate DateTime?     @map("inception_date")
+  settings      Json          @default("{}")
+  createdAt     DateTime      @default(now()) @map("created_at")
+  updatedAt     DateTime      @updatedAt @map("updated_at")
+
+  tenant     Tenant             @relation(fields: [tenantId], references: [id])
+  benchmark  Benchmark?         @relation(fields: [benchmarkId], references: [id])
+  accounts   PortfolioAccount[]
+  valuations PortfolioValuation[]
+
+  @@map("portfolios")
+}
+
+enum PortfolioType {
+  MODEL
+  COMPOSITE
+  ACCOUNT
+  HOUSEHOLD
+}
+
+model PortfolioAccount {
+  portfolioId String  @map("portfolio_id")
+  accountId   String  @map("account_id")
+  weight      Decimal? @db.Decimal(10, 6)
+
+  portfolio Portfolio @relation(fields: [portfolioId], references: [id])
+  account   Account   @relation(fields: [accountId], references: [id])
+
+  @@id([portfolioId, accountId])
+  @@map("portfolio_accounts")
+}
+
+// ============================================
+// SECURITIES & HOLDINGS
+// ============================================
+
+model Security {
+  id            String       @id @default(uuid())
+  tenantId      String?      @map("tenant_id") // null for global securities
+  symbol        String?
+  cusip         String?
+  isin          String?
+  sedol         String?
+  name          String
+  securityType  SecurityType @map("security_type")
+  assetClass    AssetClass?  @map("asset_class")
+  subAssetClass String?      @map("sub_asset_class")
+  currency      String       @default("USD")
+  exchange      String?
+  sector        String?
+  industry      String?
+  metadata      Json         @default("{}")
+  createdAt     DateTime     @default(now()) @map("created_at")
+  updatedAt     DateTime     @updatedAt @map("updated_at")
+
+  tenant       Tenant?        @relation(fields: [tenantId], references: [id])
+  positions    Position[]
+  transactions Transaction[]
+  prices       MarketPrice[]
+
+  @@map("securities")
+}
+
+enum SecurityType {
+  EQUITY
+  FIXED_INCOME
+  MUTUAL_FUND
+  ETF
+  OPTION
+  FUTURE
+  FOREX
+  COMMODITY
+  REAL_ESTATE
+  PRIVATE_EQUITY
+  HEDGE_FUND
+  CRYPTO
+  CASH
+  OTHER
+}
+
+enum AssetClass {
+  EQUITY
+  FIXED_INCOME
+  CASH
+  ALTERNATIVES
+  REAL_ESTATE
+  COMMODITIES
+  OTHER
+}
+
+model Position {
+  id              String   @id @default(uuid())
+  tenantId        String   @map("tenant_id")
+  accountId       String   @map("account_id")
+  securityId      String   @map("security_id")
+  quantity        Decimal  @db.Decimal(20, 8)
+  costBasis       Decimal? @map("cost_basis") @db.Decimal(20, 4)
+  acquisitionDate DateTime? @map("acquisition_date")
+  lotId           String?  @map("lot_id")
+  asOfDate        DateTime @map("as_of_date") @db.Date
+  createdAt       DateTime @default(now()) @map("created_at")
+
+  tenant   Tenant   @relation(fields: [tenantId], references: [id])
+  account  Account  @relation(fields: [accountId], references: [id])
+  security Security @relation(fields: [securityId], references: [id])
+
+  @@unique([accountId, securityId, lotId, asOfDate])
+  @@index([accountId, asOfDate])
+  @@map("positions")
+}
+
+model Transaction {
+  id              String          @id @default(uuid())
+  tenantId        String          @map("tenant_id")
+  accountId       String          @map("account_id")
+  securityId      String?         @map("security_id")
+  transactionType TransactionType @map("transaction_type")
+  tradeDate       DateTime        @map("trade_date") @db.Date
+  settlementDate  DateTime?       @map("settlement_date") @db.Date
+  quantity        Decimal?        @db.Decimal(20, 8)
+  price           Decimal?        @db.Decimal(20, 8)
+  amount          Decimal         @db.Decimal(20, 4)
+  fees            Decimal         @default(0) @db.Decimal(20, 4)
+  currency        String          @default("USD")
+  description     String?
+  externalId      String?         @map("external_id")
+  source          String?
+  metadata        Json            @default("{}")
+  createdAt       DateTime        @default(now()) @map("created_at")
+
+  tenant   Tenant    @relation(fields: [tenantId], references: [id])
+  account  Account   @relation(fields: [accountId], references: [id])
+  security Security? @relation(fields: [securityId], references: [id])
+
+  @@index([accountId, tradeDate])
+  @@map("transactions")
+}
+
+enum TransactionType {
+  BUY
+  SELL
+  DIVIDEND
+  INTEREST
+  DEPOSIT
+  WITHDRAWAL
+  TRANSFER_IN
+  TRANSFER_OUT
+  FEE
+  TAX
+  SPLIT
+  MERGER
+  SPINOFF
+  OTHER
+}
+
+// ============================================
+// MARKET DATA
+// ============================================
+
+model MarketPrice {
+  securityId    String   @map("security_id")
+  priceDate     DateTime @map("price_date") @db.Date
+  openPrice     Decimal? @map("open_price") @db.Decimal(20, 8)
+  highPrice     Decimal? @map("high_price") @db.Decimal(20, 8)
+  lowPrice      Decimal? @map("low_price") @db.Decimal(20, 8)
+  closePrice    Decimal? @map("close_price") @db.Decimal(20, 8)
+  adjustedClose Decimal? @map("adjusted_close") @db.Decimal(20, 8)
+  volume        BigInt?
+  source        String?
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  security Security @relation(fields: [securityId], references: [id])
+
+  @@id([securityId, priceDate])
+  @@map("market_prices")
+}
+
+model PortfolioValuation {
+  id              String   @id @default(uuid())
+  tenantId        String   @map("tenant_id")
+  portfolioId     String   @map("portfolio_id")
+  valuationDate   DateTime @map("valuation_date") @db.Date
+  marketValue     Decimal  @map("market_value") @db.Decimal(20, 4)
+  cashValue       Decimal? @map("cash_value") @db.Decimal(20, 4)
+  accruedIncome   Decimal? @map("accrued_income") @db.Decimal(20, 4)
+  totalValue      Decimal  @map("total_value") @db.Decimal(20, 4)
+  dailyReturn     Decimal? @map("daily_return") @db.Decimal(12, 8)
+  mtdReturn       Decimal? @map("mtd_return") @db.Decimal(12, 8)
+  ytdReturn       Decimal? @map("ytd_return") @db.Decimal(12, 8)
+  inceptionReturn Decimal? @map("inception_return") @db.Decimal(12, 8)
+  createdAt       DateTime @default(now()) @map("created_at")
+
+  portfolio Portfolio @relation(fields: [portfolioId], references: [id])
+
+  @@unique([portfolioId, valuationDate])
+  @@map("portfolio_valuations")
+}
+
+model Benchmark {
+  id          String   @id @default(uuid())
+  tenantId    String?  @map("tenant_id")
+  symbol      String
+  name        String
+  description String?
+  isActive    Boolean  @default(true) @map("is_active")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  tenant     Tenant?     @relation(fields: [tenantId], references: [id])
+  portfolios Portfolio[]
+
+  @@map("benchmarks")
+}
+
+// ============================================
+// ALTERNATIVE INVESTMENTS
+// ============================================
+
+model AlternativeInvestment {
+  id               String                @id @default(uuid())
+  tenantId         String                @map("tenant_id")
+  name             String
+  investmentType   AlternativeType       @map("investment_type")
+  managerName      String?               @map("manager_name")
+  vintageYear      Int?                  @map("vintage_year")
+  commitmentAmount Decimal?              @map("commitment_amount") @db.Decimal(20, 4)
+  calledAmount     Decimal               @default(0) @map("called_amount") @db.Decimal(20, 4)
+  distributedAmount Decimal              @default(0) @map("distributed_amount") @db.Decimal(20, 4)
+  currentNav       Decimal?              @map("current_nav") @db.Decimal(20, 4)
+  navDate          DateTime?             @map("nav_date") @db.Date
+  currency         String                @default("USD")
+  documents        Json                  @default("[]")
+  metadata         Json                  @default("{}")
+  createdAt        DateTime              @default(now()) @map("created_at")
+  updatedAt        DateTime              @updatedAt @map("updated_at")
+
+  tenant       Tenant        @relation(fields: [tenantId], references: [id])
+  capitalCalls CapitalCall[]
+
+  @@map("alternative_investments")
+}
+
+enum AlternativeType {
+  PRIVATE_EQUITY
+  VENTURE_CAPITAL
+  HEDGE_FUND
+  REAL_ESTATE
+  PRIVATE_CREDIT
+  INFRASTRUCTURE
+  NATURAL_RESOURCES
+  COLLECTIBLES
+  DIGITAL_ASSETS
+  OTHER
+}
+
+model CapitalCall {
+  id           String           @id @default(uuid())
+  tenantId     String           @map("tenant_id")
+  investmentId String           @map("investment_id")
+  accountId    String           @map("account_id")
+  callDate     DateTime         @map("call_date") @db.Date
+  dueDate      DateTime         @map("due_date") @db.Date
+  amount       Decimal          @db.Decimal(20, 4)
+  status       CapitalCallStatus @default(PENDING)
+  documentUrl  String?          @map("document_url")
+  createdAt    DateTime         @default(now()) @map("created_at")
+
+  tenant     Tenant                @relation(fields: [tenantId], references: [id])
+  investment AlternativeInvestment @relation(fields: [investmentId], references: [id])
+  account    Account               @relation(fields: [accountId], references: [id])
+
+  @@map("capital_calls")
+}
+
+enum CapitalCallStatus {
+  PENDING
+  PAID
+  OVERDUE
+  CANCELLED
+}
+
+// ============================================
+// MODELS & REBALANCING
+// ============================================
+
+model ModelPortfolio {
+  id                 String   @id @default(uuid())
+  tenantId           String   @map("tenant_id")
+  name               String
+  description        String?
+  targetAllocations  Json     @map("target_allocations")
+  rebalanceFrequency String?  @map("rebalance_frequency")
+  driftThreshold     Decimal? @map("drift_threshold") @db.Decimal(5, 2)
+  isActive           Boolean  @default(true) @map("is_active")
+  createdAt          DateTime @default(now()) @map("created_at")
+  updatedAt          DateTime @updatedAt @map("updated_at")
+
+  tenant      Tenant                   @relation(fields: [tenantId], references: [id])
+  assignments AccountModelAssignment[]
+
+  @@map("model_portfolios")
+}
+
+model AccountModelAssignment {
+  accountId    String   @id @map("account_id")
+  modelId      String   @map("model_id")
+  assignedDate DateTime @map("assigned_date") @db.Date
+  restrictions Json     @default("{}")
+
+  account Account        @relation(fields: [accountId], references: [id])
+  model   ModelPortfolio @relation(fields: [modelId], references: [id])
+
+  @@map("account_model_assignments")
+}
+
+// ============================================
+// BILLING
+// ============================================
+
+model FeeSchedule {
+  id               String         @id @default(uuid())
+  tenantId         String         @map("tenant_id")
+  name             String
+  feeType          FeeType        @map("fee_type")
+  tiers            Json
+  billingFrequency BillingFrequency? @map("billing_frequency")
+  advanceArrears   String?        @map("advance_arrears")
+  minimumFee       Decimal?       @map("minimum_fee") @db.Decimal(20, 4)
+  maximumFee       Decimal?       @map("maximum_fee") @db.Decimal(20, 4)
+  isActive         Boolean        @default(true) @map("is_active")
+  createdAt        DateTime       @default(now()) @map("created_at")
+
+  tenant Tenant @relation(fields: [tenantId], references: [id])
+
+  @@map("fee_schedules")
+}
+
+enum FeeType {
+  AUM
+  FLAT
+  PERFORMANCE
+  HOURLY
+  HYBRID
+}
+
+enum BillingFrequency {
+  MONTHLY
+  QUARTERLY
+  ANNUALLY
+}
+
+model Invoice {
+  id                 String        @id @default(uuid())
+  tenantId           String        @map("tenant_id")
+  clientId           String        @map("client_id")
+  invoiceNumber      String        @map("invoice_number")
+  billingPeriodStart DateTime      @map("billing_period_start") @db.Date
+  billingPeriodEnd   DateTime      @map("billing_period_end") @db.Date
+  subtotal           Decimal       @db.Decimal(20, 4)
+  adjustments        Decimal       @default(0) @db.Decimal(20, 4)
+  total              Decimal       @db.Decimal(20, 4)
+  status             InvoiceStatus @default(DRAFT)
+  dueDate            DateTime?     @map("due_date") @db.Date
+  paidDate           DateTime?     @map("paid_date") @db.Date
+  lineItems          Json          @map("line_items")
+  createdAt          DateTime      @default(now()) @map("created_at")
+
+  tenant Tenant @relation(fields: [tenantId], references: [id])
+  client Client @relation(fields: [clientId], references: [id])
+
+  @@unique([tenantId, invoiceNumber])
+  @@map("invoices")
+}
+
+enum InvoiceStatus {
+  DRAFT
+  SENT
+  PAID
+  OVERDUE
+  CANCELLED
+}
+
+// ============================================
+// REPORTING
+// ============================================
+
+model Report {
+  id           String       @id @default(uuid())
+  tenantId     String       @map("tenant_id")
+  userId       String       @map("user_id")
+  reportType   String       @map("report_type")
+  name         String
+  parameters   Json
+  fileUrl      String?      @map("file_url")
+  status       ReportStatus @default(PENDING)
+  generatedAt  DateTime?    @map("generated_at")
+  createdAt    DateTime     @default(now()) @map("created_at")
+
+  tenant Tenant @relation(fields: [tenantId], references: [id])
+  user   User   @relation(fields: [userId], references: [id])
+
+  @@map("reports")
+}
+
+enum ReportStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+}
+
+// ============================================
+// DOCUMENTS
+// ============================================
+
+model Document {
+  id           String       @id @default(uuid())
+  tenantId     String       @map("tenant_id")
+  clientId     String?      @map("client_id")
+  documentType String       @map("document_type")
+  name         String
+  fileUrl      String       @map("file_url")
+  fileSize     Int?         @map("file_size")
+  mimeType     String?      @map("mime_type")
+  metadata     Json         @default("{}")
+  createdAt    DateTime     @default(now()) @map("created_at")
+
+  tenant Tenant  @relation(fields: [tenantId], references: [id])
+  client Client? @relation(fields: [clientId], references: [id])
+
+  @@map("documents")
+}
+
+// ============================================
+// CUSTODIANS
+// ============================================
+
+model Custodian {
+  id           String   @id @default(uuid())
+  name         String
+  code         String   @unique
+  apiEndpoint  String?  @map("api_endpoint")
+  isActive     Boolean  @default(true) @map("is_active")
+  capabilities Json     @default("{}")
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  accounts Account[]
+
+  @@map("custodians")
+}
+
+// ============================================
+// ALERTS & NOTIFICATIONS
+// ============================================
+
+model Alert {
+  id          String      @id @default(uuid())
+  tenantId    String      @map("tenant_id")
+  alertType   AlertType   @map("alert_type")
+  severity    AlertSeverity
+  title       String
+  message     String
+  entityType  String?     @map("entity_type")
+  entityId    String?     @map("entity_id")
+  isRead      Boolean     @default(false) @map("is_read")
+  isDismissed Boolean     @default(false) @map("is_dismissed")
+  createdAt   DateTime    @default(now()) @map("created_at")
+
+  tenant Tenant @relation(fields: [tenantId], references: [id])
+
+  @@map("alerts")
+}
+
+enum AlertType {
+  DRIFT
+  COMPLIANCE
+  DATA_QUALITY
+  CAPITAL_CALL
+  PERFORMANCE
+  SYSTEM
+}
+
+enum AlertSeverity {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+// ============================================
+// AUDIT LOG
+// ============================================
+
+model AuditLog {
+  id         String   @id @default(uuid())
+  tenantId   String   @map("tenant_id")
+  userId     String?  @map("user_id")
+  action     String
+  entityType String   @map("entity_type")
+  entityId   String?  @map("entity_id")
+  changes    Json?
+  ipAddress  String?  @map("ip_address")
+  userAgent  String?  @map("user_agent")
+  timestamp  DateTime @default(now())
+
+  tenant Tenant @relation(fields: [tenantId], references: [id])
+  user   User?  @relation(fields: [userId], references: [id])
+
+  @@index([tenantId, timestamp])
+  @@map("audit_log")
+}
