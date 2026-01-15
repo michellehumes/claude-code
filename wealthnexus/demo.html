@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WealthNexus - Next-Generation Wealth Management</title>
+    <title>WealthNexus - Next-Generation Wealth Management Platform</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -11,20 +11,13 @@
                 extend: {
                     colors: {
                         primary: {
-                            50: '#E8EEF5',
-                            100: '#D1DDEB',
-                            200: '#A3BBD7',
-                            300: '#7599C3',
-                            400: '#4777AF',
-                            500: '#1E3A5F',
-                            600: '#182E4C',
-                            700: '#122339',
+                            50: '#E8EEF5', 100: '#D1DDEB', 200: '#A3BBD7',
+                            300: '#7599C3', 400: '#4777AF', 500: '#1E3A5F',
+                            600: '#182E4C', 700: '#122339', 800: '#0C1826'
                         },
                         accent: {
-                            300: '#66CFCF',
-                            400: '#33BFBF',
-                            500: '#00A3A3',
-                            600: '#008282',
+                            50: '#E6F7F7', 100: '#CCF0F0', 300: '#66CFCF',
+                            400: '#33BFBF', 500: '#00A3A3', 600: '#008282'
                         }
                     }
                 }
@@ -33,1108 +26,669 @@
     </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+        :root {
+            --space-xs: 0.25rem; --space-sm: 0.5rem; --space-md: 1rem;
+            --space-lg: 1.5rem; --space-xl: 2rem; --space-2xl: 3rem;
+            --radius-sm: 0.375rem; --radius-md: 0.5rem; --radius-lg: 0.75rem; --radius-xl: 1rem;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+        }
+
         body { font-family: 'Inter', system-ui, sans-serif; }
-        .modal { display: none; }
-        .modal.active { display: flex; }
-        .tab-content { display: none; }
-        .tab-content.active { display: block; }
+
+        /* View states */
+        #marketing-view { display: block; }
+        #demo-view { display: none; }
+        body.demo-mode #marketing-view { display: none; }
+        body.demo-mode #demo-view { display: flex; }
+
+        /* Sticky header */
+        .header-sticky { position: sticky; top: 0; z-index: 40; transition: box-shadow 0.2s; }
+        .header-sticky.scrolled { box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+
+        /* Focus states */
+        button:focus-visible, a:focus-visible, input:focus-visible {
+            outline: 2px solid #00A3A3; outline-offset: 2px;
+        }
+
+        /* Tab content */
+        .tab-panel { display: none; }
+        .tab-panel.active { display: block; }
+
+        /* Mobile sidebar */
+        .sidebar-overlay { display: none; }
+        body.sidebar-open .sidebar-overlay { display: block; }
+
+        @media (max-width: 768px) {
+            .demo-sidebar {
+                position: fixed; left: 0; top: 0; z-index: 50;
+                transform: translateX(-100%); transition: transform 0.3s;
+            }
+            body.sidebar-open .demo-sidebar { transform: translateX(0); }
+        }
+
+        /* Transitions */
+        .fade-in { animation: fadeIn 0.2s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* Table responsiveness */
+        .table-responsive { overflow-x: auto; -webkit-overflow-scrolling: touch; }
     </style>
 </head>
 <body>
-    <div id="landing-page" class="min-h-screen bg-gradient-to-br from-primary-500 to-primary-700">
-        <!-- Navigation -->
-        <nav class="container mx-auto px-6 py-4">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-2">
-                    <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
-                        <span class="text-primary-500 font-bold text-xl">W</span>
+    <!-- ========== MARKETING VIEW ========== -->
+    <div id="marketing-view" class="min-h-screen bg-gradient-to-br from-primary-500 to-primary-700">
+
+        <!-- Header -->
+        <header class="header-sticky bg-primary-500/95 backdrop-blur-sm">
+            <div class="container mx-auto px-6 py-3">
+                <div class="flex items-center justify-between">
+                    <a href="#" class="flex items-center space-x-2" aria-label="WealthNexus Home">
+                        <div class="w-9 h-9 bg-white rounded-lg flex items-center justify-center">
+                            <span class="text-primary-500 font-bold text-lg">W</span>
+                        </div>
+                        <span class="text-white text-lg font-bold">WealthNexus</span>
+                    </a>
+                    <nav class="hidden md:flex items-center space-x-6">
+                        <a href="#features" class="text-white/80 hover:text-white text-sm transition-colors">Features</a>
+                        <a href="#pricing" class="text-white/80 hover:text-white text-sm transition-colors">Pricing</a>
+                        <a href="#calculator" class="text-white/80 hover:text-white text-sm transition-colors">ROI Calculator</a>
+                    </nav>
+                    <div class="flex items-center space-x-3">
+                        <button onclick="enterDemo()" class="text-white/90 hover:text-white text-sm font-medium transition-colors">Sign In</button>
+                        <button onclick="enterDemo()" class="bg-accent-500 hover:bg-accent-600 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors">
+                            Request Demo
+                        </button>
                     </div>
-                    <span class="text-white text-xl font-bold">WealthNexus</span>
-                </div>
-                <div class="flex items-center space-x-4">
-                    <button onclick="openDemo()" class="text-white hover:text-accent-300 transition-colors">Sign In</button>
-                    <button onclick="openDemo()" class="bg-accent-500 hover:bg-accent-600 text-white px-4 py-2 rounded-lg transition-colors">Request Demo</button>
                 </div>
             </div>
-        </nav>
+        </header>
 
-        <!-- Hero Section -->
-        <main class="container mx-auto px-6 py-20">
-            <div class="max-w-4xl mx-auto text-center">
-                <h1 class="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
-                    Next-Generation<br>
-                    <span class="text-accent-400">Wealth Management</span>
-                </h1>
-                <p class="text-xl text-primary-100 mb-8 max-w-2xl mx-auto">
-                    Enterprise-grade portfolio management with AI-powered analytics.
-                    Deploy in days, not months. Built for advisors who demand more.
-                </p>
-                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                    <button onclick="openDemo()" class="bg-white text-primary-500 hover:bg-primary-50 px-8 py-3 rounded-lg font-semibold text-lg transition-colors w-full sm:w-auto">
-                        Start Free Trial
-                    </button>
-                    <button onclick="openDemo()" class="border-2 border-white text-white hover:bg-white/10 px-8 py-3 rounded-lg font-semibold text-lg transition-colors w-full sm:w-auto">
-                        Watch Demo
-                    </button>
-                </div>
-            </div>
-
-            <!-- Feature Cards -->
-            <div class="grid md:grid-cols-3 gap-6 mt-20">
-                <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 text-white">
-                    <div class="w-12 h-12 bg-accent-500 rounded-lg flex items-center justify-center mb-4">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                        </svg>
+        <main>
+            <!-- Hero Section -->
+            <section class="container mx-auto px-6 py-16 md:py-20">
+                <div class="max-w-3xl mx-auto text-center">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-5 leading-tight">
+                        Wealth Management<br><span class="text-accent-400">Built for Scale</span>
+                    </h1>
+                    <p class="text-lg text-primary-100 mb-8 max-w-2xl mx-auto">
+                        Unified portfolio management, reporting, and AI-powered insights.
+                        Trusted by RIAs and family offices managing $100M to $10B+.
+                    </p>
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-3 mb-6">
+                        <button onclick="enterDemo()" class="bg-white text-primary-600 hover:bg-primary-50 px-6 py-3 rounded-lg font-semibold transition-colors w-full sm:w-auto">
+                            Request Demo
+                        </button>
+                        <button onclick="enterDemo()" class="border-2 border-white/80 text-white hover:bg-white/10 px-6 py-3 rounded-lg font-semibold transition-colors w-full sm:w-auto">
+                            Start Free Trial
+                        </button>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">7-Day Deployment</h3>
-                    <p class="text-primary-200">
-                        Go live in days, not months. Our streamlined onboarding gets you up and running fast.
+                    <p class="text-sm text-primary-200">
+                        350+ custodian integrations • 99.9% uptime SLA • Go live in ~7 days
                     </p>
                 </div>
+            </section>
 
-                <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 text-white">
-                    <div class="w-12 h-12 bg-accent-500 rounded-lg flex items-center justify-center mb-4">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                        </svg>
+            <!-- Stats Row -->
+            <section class="container mx-auto px-6 pb-16">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+                    <div class="bg-white/10 backdrop-blur rounded-xl p-5 text-center">
+                        <p class="text-3xl font-bold text-white">350+</p>
+                        <p class="text-sm text-primary-200 mt-1">Custodian Integrations</p>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">AI-Powered Insights</h3>
-                    <p class="text-primary-200">
-                        Native AI assistant that understands your portfolios and helps you make better decisions.
-                    </p>
-                </div>
-
-                <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 text-white">
-                    <div class="w-12 h-12 bg-accent-500 rounded-lg flex items-center justify-center mb-4">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
+                    <div class="bg-white/10 backdrop-blur rounded-xl p-5 text-center">
+                        <p class="text-3xl font-bold text-white">99.9%</p>
+                        <p class="text-sm text-primary-200 mt-1">Uptime SLA</p>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">Transparent Pricing</h3>
-                    <p class="text-primary-200">
-                        No hidden fees. Plans starting at $499/month. Enterprise features at SMB prices.
-                    </p>
+                    <div class="bg-white/10 backdrop-blur rounded-xl p-5 text-center">
+                        <p class="text-3xl font-bold text-white">~7 days</p>
+                        <p class="text-sm text-primary-200 mt-1">Avg. Deployment</p>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur rounded-xl p-5 text-center">
+                        <p class="text-3xl font-bold text-white">24/7</p>
+                        <p class="text-sm text-primary-200 mt-1">Support Available</p>
+                    </div>
                 </div>
-            </div>
+            </section>
 
-            <!-- Stats Section -->
-            <div class="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-                <div>
-                    <div class="text-4xl font-bold text-white">350+</div>
-                    <div class="text-primary-200">Custodian Integrations</div>
+            <!-- Features Section -->
+            <section id="features" class="container mx-auto px-6 pb-20">
+                <h2 class="text-2xl md:text-3xl font-bold text-white text-center mb-10">Everything You Need to Scale</h2>
+                <div class="grid md:grid-cols-3 gap-5 max-w-5xl mx-auto">
+                    <div class="bg-white/10 backdrop-blur rounded-xl p-6">
+                        <div class="w-11 h-11 bg-accent-500 rounded-lg flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold text-white mb-2">Portfolio Analytics</h3>
+                        <p class="text-primary-200 text-sm">TWR, MWR, and custom benchmarks. Real-time performance across all asset classes including alternatives.</p>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur rounded-xl p-6">
+                        <div class="w-11 h-11 bg-accent-500 rounded-lg flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold text-white mb-2">Client Reporting</h3>
+                        <p class="text-primary-200 text-sm">White-labeled reports with your branding. Automated delivery and client portal access.</p>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur rounded-xl p-6">
+                        <div class="w-11 h-11 bg-accent-500 rounded-lg flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold text-white mb-2">NexusAI Assistant</h3>
+                        <p class="text-primary-200 text-sm">Natural language queries across your data. Concentration alerts, rebalancing suggestions, and more.</p>
+                    </div>
                 </div>
-                <div>
-                    <div class="text-4xl font-bold text-white">99.9%</div>
-                    <div class="text-primary-200">Uptime SLA</div>
-                </div>
-                <div>
-                    <div class="text-4xl font-bold text-white">7 days</div>
-                    <div class="text-primary-200">Average Deployment</div>
-                </div>
-                <div>
-                    <div class="text-4xl font-bold text-white">24/7</div>
-                    <div class="text-primary-200">Support Available</div>
-                </div>
-            </div>
+            </section>
 
             <!-- Pricing Section -->
-            <div class="mt-24">
-                <h2 class="text-3xl font-bold text-white text-center mb-4">Simple, Transparent Pricing</h2>
-                <p class="text-primary-200 text-center mb-12 max-w-2xl mx-auto">No hidden fees. No surprises. Choose the plan that fits your firm.</p>
-
-                <div class="grid md:grid-cols-4 gap-6">
-                    <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 text-white">
-                        <h3 class="text-lg font-semibold mb-1">Starter</h3>
-                        <p class="text-primary-200 text-sm mb-4">For emerging RIAs</p>
-                        <div class="mb-4">
-                            <span class="text-3xl font-bold">$499</span>
-                            <span class="text-primary-200">/month</span>
-                        </div>
-                        <p class="text-sm text-primary-200 mb-4">+ 2.5 bps on AUM</p>
-                        <ul class="text-sm space-y-2 text-primary-100">
-                            <li>✓ Up to 100 clients</li>
-                            <li>✓ 3 user seats</li>
-                            <li>✓ Core portfolio management</li>
-                            <li>✓ Basic reporting</li>
-                            <li>✓ Client portal</li>
-                        </ul>
-                    </div>
-
-                    <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 text-white border-2 border-accent-500">
-                        <div class="bg-accent-500 text-xs font-semibold px-2 py-1 rounded inline-block mb-2">POPULAR</div>
-                        <h3 class="text-lg font-semibold mb-1">Growth</h3>
-                        <p class="text-primary-200 text-sm mb-4">For growing firms</p>
-                        <div class="mb-4">
-                            <span class="text-3xl font-bold">$999</span>
-                            <span class="text-primary-200">/month</span>
-                        </div>
-                        <p class="text-sm text-primary-200 mb-4">+ 2.0 bps on AUM</p>
-                        <ul class="text-sm space-y-2 text-primary-100">
-                            <li>✓ Up to 500 clients</li>
-                            <li>✓ 10 user seats</li>
-                            <li>✓ Advanced reporting</li>
-                            <li>✓ Model portfolios</li>
-                            <li>✓ API access</li>
-                        </ul>
-                    </div>
-
-                    <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 text-white">
-                        <h3 class="text-lg font-semibold mb-1">Professional</h3>
-                        <p class="text-primary-200 text-sm mb-4">For established firms</p>
-                        <div class="mb-4">
-                            <span class="text-3xl font-bold">$2,499</span>
-                            <span class="text-primary-200">/month</span>
-                        </div>
-                        <p class="text-sm text-primary-200 mb-4">+ 1.5 bps on AUM</p>
-                        <ul class="text-sm space-y-2 text-primary-100">
-                            <li>✓ Unlimited clients</li>
-                            <li>✓ 50 user seats</li>
-                            <li>✓ NexusAI assistant</li>
-                            <li>✓ Trading automation</li>
-                            <li>✓ White-label portal</li>
-                        </ul>
-                    </div>
-
-                    <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 text-white">
-                        <h3 class="text-lg font-semibold mb-1">Enterprise</h3>
-                        <p class="text-primary-200 text-sm mb-4">For large institutions</p>
-                        <div class="mb-4">
-                            <span class="text-3xl font-bold">Custom</span>
-                        </div>
-                        <p class="text-sm text-primary-200 mb-4">Volume discounts</p>
-                        <ul class="text-sm space-y-2 text-primary-100">
-                            <li>✓ Everything in Pro</li>
-                            <li>✓ Unlimited users</li>
-                            <li>✓ Dedicated support</li>
-                            <li>✓ Custom SLA</li>
-                            <li>✓ On-premise option</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Comparison Section -->
-            <div class="mt-24">
-                <h2 class="text-3xl font-bold text-white text-center mb-4">Why Switch from Addepar?</h2>
-                <p class="text-primary-200 text-center mb-12 max-w-2xl mx-auto">Same enterprise capabilities. Fraction of the cost. Better experience.</p>
-
-                <div class="bg-white/10 backdrop-blur-lg rounded-xl overflow-hidden">
-                    <table class="w-full text-white">
-                        <thead>
-                            <tr class="border-b border-white/20">
-                                <th class="text-left p-4">Feature</th>
-                                <th class="text-center p-4">Addepar</th>
-                                <th class="text-center p-4 bg-accent-500/20">WealthNexus</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="border-b border-white/10">
-                                <td class="p-4">Annual Cost ($500M AUM)</td>
-                                <td class="text-center p-4 text-primary-200">~$120,000</td>
-                                <td class="text-center p-4 bg-accent-500/10 font-semibold text-accent-300">~$22,000</td>
-                            </tr>
-                            <tr class="border-b border-white/10">
-                                <td class="p-4">Implementation Time</td>
-                                <td class="text-center p-4 text-primary-200">30-90 days</td>
-                                <td class="text-center p-4 bg-accent-500/10 font-semibold text-accent-300">7 days</td>
-                            </tr>
-                            <tr class="border-b border-white/10">
-                                <td class="p-4">Mobile App</td>
-                                <td class="text-center p-4 text-primary-200">Poor reviews</td>
-                                <td class="text-center p-4 bg-accent-500/10 font-semibold text-accent-300">Best-in-class</td>
-                            </tr>
-                            <tr class="border-b border-white/10">
-                                <td class="p-4">AI Features</td>
-                                <td class="text-center p-4 text-primary-200">Limited add-ons</td>
-                                <td class="text-center p-4 bg-accent-500/10 font-semibold text-accent-300">Native throughout</td>
-                            </tr>
-                            <tr>
-                                <td class="p-4">Pricing Transparency</td>
-                                <td class="text-center p-4 text-primary-200">Opaque</td>
-                                <td class="text-center p-4 bg-accent-500/10 font-semibold text-accent-300">Fully transparent</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- ROI Calculator Section -->
-            <div class="mt-24" id="roi-calculator">
-                <h2 class="text-3xl font-bold text-white text-center mb-4">Calculate Your Savings</h2>
-                <p class="text-primary-200 text-center mb-12 max-w-2xl mx-auto">See how much you could save by switching from Addepar to WealthNexus.</p>
-
-                <div class="bg-white rounded-2xl p-8 max-w-4xl mx-auto shadow-2xl">
-                    <div class="mb-8">
-                        <label class="block text-gray-700 font-semibold mb-4">Your Assets Under Management (AUM)</label>
-                        <input type="range" id="aum-slider" min="100" max="2000" value="500" class="w-full h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-accent-500">
-                        <div class="flex justify-between text-sm text-gray-500 mt-2">
-                            <span>$100M</span>
-                            <span>$500M</span>
-                            <span>$1B</span>
-                            <span>$2B</span>
-                        </div>
-                        <div class="text-center mt-4">
-                            <span class="text-4xl font-bold text-primary-500">$<span id="aum-display">500</span>M</span>
-                        </div>
-                    </div>
-
-                    <div class="grid md:grid-cols-3 gap-6 mb-8">
-                        <div class="bg-red-50 rounded-xl p-6 text-center">
-                            <p class="text-sm text-red-600 font-medium mb-2">Addepar Annual Cost</p>
-                            <p class="text-3xl font-bold text-red-600">$<span id="addepar-cost">120,000</span></p>
-                        </div>
-                        <div class="bg-green-50 rounded-xl p-6 text-center">
-                            <p class="text-sm text-green-600 font-medium mb-2">WealthNexus Annual Cost</p>
-                            <p class="text-3xl font-bold text-green-600">$<span id="wealthnexus-cost">22,000</span></p>
-                        </div>
-                        <div class="bg-accent-50 rounded-xl p-6 text-center border-2 border-accent-500">
-                            <p class="text-sm text-accent-600 font-medium mb-2">Your Annual Savings</p>
-                            <p class="text-3xl font-bold text-accent-600">$<span id="savings">98,000</span></p>
-                        </div>
-                    </div>
-
-                    <div class="bg-gray-50 rounded-xl p-6">
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="text-gray-600">5-Year Total Savings</span>
-                            <span class="text-2xl font-bold text-accent-600">$<span id="five-year-savings">490,000</span></span>
-                        </div>
-                        <div class="w-full bg-gray-200 rounded-full h-4">
-                            <div id="savings-bar" class="bg-gradient-to-r from-accent-500 to-green-500 h-4 rounded-full transition-all duration-500" style="width: 82%"></div>
-                        </div>
-                        <p class="text-sm text-gray-500 mt-2 text-center">You save <span id="savings-percent">82</span>% compared to Addepar</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Mobile App Preview Section -->
-            <div class="mt-24">
-                <h2 class="text-3xl font-bold text-white text-center mb-4">Best-in-Class Mobile Experience</h2>
-                <p class="text-primary-200 text-center mb-12 max-w-2xl mx-auto">Unlike Addepar's poorly-rated app, WealthNexus mobile is built for advisors on the go.</p>
-
-                <div class="flex flex-col lg:flex-row items-center justify-center gap-12">
-                    <!-- Phone Mockup -->
-                    <div class="relative">
-                        <div class="w-72 h-[580px] bg-gray-900 rounded-[3rem] p-3 shadow-2xl">
-                            <div class="w-full h-full bg-white rounded-[2.5rem] overflow-hidden">
-                                <!-- Phone Screen Content -->
-                                <div class="bg-primary-500 px-6 py-4">
-                                    <div class="flex items-center justify-between">
-                                        <div class="flex items-center space-x-2">
-                                            <div class="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
-                                                <span class="text-primary-500 font-bold text-sm">W</span>
-                                            </div>
-                                            <span class="text-white font-semibold">WealthNexus</span>
-                                        </div>
-                                        <div class="w-8 h-8 bg-white/20 rounded-full"></div>
-                                    </div>
-                                </div>
-                                <div class="p-4 space-y-4">
-                                    <div class="bg-gray-50 rounded-xl p-4">
-                                        <p class="text-xs text-gray-500 mb-1">Total AUM</p>
-                                        <p class="text-2xl font-bold text-gray-900">$847.2M</p>
-                                        <p class="text-xs text-green-600">↑ 2.4% today</p>
-                                    </div>
-                                    <div class="grid grid-cols-2 gap-3">
-                                        <div class="bg-gray-50 rounded-xl p-3">
-                                            <p class="text-xs text-gray-500">Clients</p>
-                                            <p class="text-lg font-bold text-gray-900">342</p>
-                                        </div>
-                                        <div class="bg-gray-50 rounded-xl p-3">
-                                            <p class="text-xs text-gray-500">YTD Return</p>
-                                            <p class="text-lg font-bold text-green-600">+12.8%</p>
-                                        </div>
-                                    </div>
-                                    <div class="bg-gray-50 rounded-xl p-3">
-                                        <p class="text-xs text-gray-500 mb-2">Quick Actions</p>
-                                        <div class="grid grid-cols-4 gap-2">
-                                            <div class="flex flex-col items-center">
-                                                <div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center mb-1">
-                                                    <svg class="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-                                                </div>
-                                                <span class="text-[10px] text-gray-600">Trade</span>
-                                            </div>
-                                            <div class="flex flex-col items-center">
-                                                <div class="w-10 h-10 bg-accent-100 rounded-full flex items-center justify-center mb-1">
-                                                    <svg class="w-5 h-5 text-accent-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                                                </div>
-                                                <span class="text-[10px] text-gray-600">Reports</span>
-                                            </div>
-                                            <div class="flex flex-col items-center">
-                                                <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center mb-1">
-                                                    <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                                                </div>
-                                                <span class="text-[10px] text-gray-600">Clients</span>
-                                            </div>
-                                            <div class="flex flex-col items-center">
-                                                <div class="w-10 h-10 bg-yellow-100 rounded-full flex items-center justify-center mb-1">
-                                                    <svg class="w-5 h-5 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
-                                                </div>
-                                                <span class="text-[10px] text-gray-600">AI</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-3">
-                                        <div class="flex items-center space-x-2">
-                                            <svg class="w-4 h-4 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
-                                            <span class="text-xs text-yellow-800">3 portfolios need rebalancing</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Notch -->
-                        <div class="absolute top-6 left-1/2 transform -translate-x-1/2 w-24 h-6 bg-gray-900 rounded-full"></div>
-                    </div>
-
-                    <!-- Mobile Features List -->
-                    <div class="text-white max-w-md">
-                        <div class="space-y-6">
-                            <div class="flex items-start space-x-4">
-                                <div class="w-10 h-10 bg-accent-500 rounded-lg flex items-center justify-center flex-shrink-0">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
-                                </div>
-                                <div>
-                                    <h4 class="font-semibold mb-1">Native iOS & Android Apps</h4>
-                                    <p class="text-primary-200 text-sm">Purpose-built for each platform, not a web wrapper.</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start space-x-4">
-                                <div class="w-10 h-10 bg-accent-500 rounded-lg flex items-center justify-center flex-shrink-0">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
-                                </div>
-                                <div>
-                                    <h4 class="font-semibold mb-1">Real-Time Push Notifications</h4>
-                                    <p class="text-primary-200 text-sm">Instant alerts for trades, drift, and client activity.</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start space-x-4">
-                                <div class="w-10 h-10 bg-accent-500 rounded-lg flex items-center justify-center flex-shrink-0">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4"></path></svg>
-                                </div>
-                                <div>
-                                    <h4 class="font-semibold mb-1">Biometric Security</h4>
-                                    <p class="text-primary-200 text-sm">Face ID, Touch ID, and fingerprint authentication.</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start space-x-4">
-                                <div class="w-10 h-10 bg-accent-500 rounded-lg flex items-center justify-center flex-shrink-0">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
-                                </div>
-                                <div>
-                                    <h4 class="font-semibold mb-1">NexusAI on Mobile</h4>
-                                    <p class="text-primary-200 text-sm">Ask questions about your portfolios anywhere.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="mt-8 flex items-center space-x-4">
-                            <div class="bg-white/10 px-4 py-2 rounded-lg flex items-center space-x-2">
-                                <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-                                <span class="text-sm">App Store</span>
-                            </div>
-                            <div class="bg-white/10 px-4 py-2 rounded-lg flex items-center space-x-2">
-                                <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor"><path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/></svg>
-                                <span class="text-sm">Google Play</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Client Portal Preview Section -->
-            <div class="mt-24">
-                <h2 class="text-3xl font-bold text-white text-center mb-4">White-Label Client Portal</h2>
-                <p class="text-primary-200 text-center mb-12 max-w-2xl mx-auto">Give your clients a beautiful, branded experience they'll love. Fully customizable to match your firm's identity.</p>
-
-                <div class="bg-white rounded-2xl shadow-2xl overflow-hidden max-w-5xl mx-auto">
-                    <!-- Browser Chrome -->
-                    <div class="bg-gray-100 px-4 py-3 flex items-center space-x-2 border-b">
-                        <div class="flex space-x-2">
-                            <div class="w-3 h-3 bg-red-400 rounded-full"></div>
-                            <div class="w-3 h-3 bg-yellow-400 rounded-full"></div>
-                            <div class="w-3 h-3 bg-green-400 rounded-full"></div>
-                        </div>
-                        <div class="flex-1 mx-4">
-                            <div class="bg-white rounded-lg px-4 py-1 text-sm text-gray-500 flex items-center space-x-2">
-                                <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
-                                <span>client.yourfirm.com</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Portal Content -->
-                    <div class="p-8">
-                        <div class="flex items-center justify-between mb-8">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-12 h-12 bg-primary-500 rounded-lg flex items-center justify-center">
-                                    <span class="text-white font-bold text-lg">YF</span>
-                                </div>
-                                <div>
-                                    <h3 class="font-bold text-gray-900">Your Firm Name</h3>
-                                    <p class="text-sm text-gray-500">Wealth Management</p>
-                                </div>
-                            </div>
-                            <div class="flex items-center space-x-4">
-                                <span class="text-sm text-gray-600">Welcome, Robert</span>
-                                <div class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center">
-                                    <span class="text-gray-600 font-medium">RW</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="grid md:grid-cols-3 gap-6 mb-8">
-                            <div class="bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl p-6 text-white">
-                                <p class="text-sm opacity-80 mb-1">Total Portfolio Value</p>
-                                <p class="text-3xl font-bold">$2,847,392</p>
-                                <p class="text-sm mt-2 opacity-80">↑ $47,291 today (+1.69%)</p>
-                            </div>
-                            <div class="bg-gray-50 rounded-xl p-6">
-                                <p class="text-sm text-gray-500 mb-1">YTD Performance</p>
-                                <p class="text-3xl font-bold text-green-600">+14.2%</p>
-                                <p class="text-sm text-gray-500 mt-2">vs. Benchmark: +10.8%</p>
-                            </div>
-                            <div class="bg-gray-50 rounded-xl p-6">
-                                <p class="text-sm text-gray-500 mb-1">Next Review</p>
-                                <p class="text-3xl font-bold text-gray-900">Jan 28</p>
-                                <p class="text-sm text-gray-500 mt-2">Quarterly Check-in</p>
-                            </div>
-                        </div>
-
-                        <div class="grid md:grid-cols-2 gap-6">
-                            <div class="bg-gray-50 rounded-xl p-6">
-                                <h4 class="font-semibold text-gray-800 mb-4">Asset Allocation</h4>
-                                <div class="flex items-center space-x-4">
-                                    <div class="w-32 h-32 relative">
-                                        <svg viewBox="0 0 36 36" class="w-32 h-32 transform -rotate-90">
-                                            <circle cx="18" cy="18" r="16" fill="none" stroke="#e5e7eb" stroke-width="3"></circle>
-                                            <circle cx="18" cy="18" r="16" fill="none" stroke="#1E3A5F" stroke-width="3" stroke-dasharray="45 100" stroke-linecap="round"></circle>
-                                            <circle cx="18" cy="18" r="16" fill="none" stroke="#00A3A3" stroke-width="3" stroke-dasharray="25 100" stroke-dashoffset="-45" stroke-linecap="round"></circle>
-                                            <circle cx="18" cy="18" r="16" fill="none" stroke="#8B5CF6" stroke-width="3" stroke-dasharray="20 100" stroke-dashoffset="-70" stroke-linecap="round"></circle>
-                                            <circle cx="18" cy="18" r="16" fill="none" stroke="#F59E0B" stroke-width="3" stroke-dasharray="10 100" stroke-dashoffset="-90" stroke-linecap="round"></circle>
-                                        </svg>
-                                    </div>
-                                    <div class="space-y-2 text-sm">
-                                        <div class="flex items-center space-x-2"><div class="w-3 h-3 bg-primary-500 rounded"></div><span class="text-gray-600">US Stocks (45%)</span></div>
-                                        <div class="flex items-center space-x-2"><div class="w-3 h-3 bg-accent-500 rounded"></div><span class="text-gray-600">Int'l Stocks (25%)</span></div>
-                                        <div class="flex items-center space-x-2"><div class="w-3 h-3 bg-purple-500 rounded"></div><span class="text-gray-600">Bonds (20%)</span></div>
-                                        <div class="flex items-center space-x-2"><div class="w-3 h-3 bg-yellow-500 rounded"></div><span class="text-gray-600">Alternatives (10%)</span></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="bg-gray-50 rounded-xl p-6">
-                                <h4 class="font-semibold text-gray-800 mb-4">Recent Activity</h4>
-                                <div class="space-y-3">
-                                    <div class="flex items-center justify-between">
-                                        <div class="flex items-center space-x-3">
-                                            <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
-                                                <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-                                            </div>
-                                            <div>
-                                                <p class="text-sm font-medium text-gray-800">Dividend Received</p>
-                                                <p class="text-xs text-gray-500">AAPL - Jan 15</p>
-                                            </div>
-                                        </div>
-                                        <span class="text-sm font-medium text-green-600">+$842</span>
-                                    </div>
-                                    <div class="flex items-center justify-between">
-                                        <div class="flex items-center space-x-3">
-                                            <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
-                                                <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path></svg>
-                                            </div>
-                                            <div>
-                                                <p class="text-sm font-medium text-gray-800">Rebalance Complete</p>
-                                                <p class="text-xs text-gray-500">Portfolio adjusted - Jan 12</p>
-                                            </div>
-                                        </div>
-                                        <span class="text-xs text-gray-500">Automated</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Testimonials Section -->
-            <div class="mt-24">
-                <h2 class="text-3xl font-bold text-white text-center mb-4">Trusted by Leading Advisors</h2>
-                <p class="text-primary-200 text-center mb-12 max-w-2xl mx-auto">See why advisors are switching from legacy platforms to WealthNexus.</p>
-
-                <div class="grid md:grid-cols-3 gap-6">
+            <section id="pricing" class="container mx-auto px-6 pb-20">
+                <h2 class="text-2xl md:text-3xl font-bold text-white text-center mb-3">Transparent Pricing</h2>
+                <p class="text-primary-200 text-center mb-10 max-w-xl mx-auto text-sm">
+                    Simple per-seat pricing plus a small AUM fee. No hidden costs, no long-term contracts required.
+                </p>
+                <div class="grid md:grid-cols-3 gap-5 max-w-5xl mx-auto">
+                    <!-- Starter -->
                     <div class="bg-white rounded-xl p-6 shadow-lg">
-                        <div class="flex items-center space-x-1 mb-4">
-                            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <h3 class="font-semibold text-gray-800 mb-1">Starter</h3>
+                        <p class="text-xs text-gray-500 mb-4">For growing RIAs under $500M</p>
+                        <p class="text-3xl font-bold text-gray-900 mb-1">$499<span class="text-base font-normal text-gray-500">/mo</span></p>
+                        <p class="text-xs text-gray-500 mb-5">+ 0.5 bps on AUM annually</p>
+                        <ul class="space-y-2 text-sm text-gray-600 mb-6">
+                            <li class="flex items-center"><svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Up to 5 users</li>
+                            <li class="flex items-center"><svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Core reporting</li>
+                            <li class="flex items-center"><svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Email support</li>
+                        </ul>
+                        <button onclick="enterDemo()" class="w-full bg-primary-500 hover:bg-primary-600 text-white py-2 rounded-lg text-sm font-semibold transition-colors">Start Free Trial</button>
+                    </div>
+                    <!-- Growth -->
+                    <div class="bg-white rounded-xl p-6 shadow-lg ring-2 ring-accent-500 relative">
+                        <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-accent-500 text-white text-xs font-semibold px-3 py-1 rounded-full">Most Popular</span>
+                        <h3 class="font-semibold text-gray-800 mb-1">Growth</h3>
+                        <p class="text-xs text-gray-500 mb-4">For established firms $500M–$2B</p>
+                        <p class="text-3xl font-bold text-gray-900 mb-1">$999<span class="text-base font-normal text-gray-500">/mo</span></p>
+                        <p class="text-xs text-gray-500 mb-5">+ 0.4 bps on AUM annually</p>
+                        <ul class="space-y-2 text-sm text-gray-600 mb-6">
+                            <li class="flex items-center"><svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Up to 15 users</li>
+                            <li class="flex items-center"><svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>NexusAI Assistant</li>
+                            <li class="flex items-center"><svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Priority support</li>
+                        </ul>
+                        <button onclick="enterDemo()" class="w-full bg-accent-500 hover:bg-accent-600 text-white py-2 rounded-lg text-sm font-semibold transition-colors">Start Free Trial</button>
+                    </div>
+                    <!-- Enterprise -->
+                    <div class="bg-white rounded-xl p-6 shadow-lg">
+                        <h3 class="font-semibold text-gray-800 mb-1">Enterprise</h3>
+                        <p class="text-xs text-gray-500 mb-4">For large firms and MFOs $2B+</p>
+                        <p class="text-3xl font-bold text-gray-900 mb-1">Custom</p>
+                        <p class="text-xs text-gray-500 mb-5">Volume discounts available</p>
+                        <ul class="space-y-2 text-sm text-gray-600 mb-6">
+                            <li class="flex items-center"><svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Unlimited users</li>
+                            <li class="flex items-center"><svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Custom integrations</li>
+                            <li class="flex items-center"><svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Dedicated CSM</li>
+                        </ul>
+                        <button onclick="enterDemo()" class="w-full bg-primary-500 hover:bg-primary-600 text-white py-2 rounded-lg text-sm font-semibold transition-colors">Contact Sales</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ROI Calculator -->
+            <section id="calculator" class="container mx-auto px-6 pb-20">
+                <h2 class="text-2xl md:text-3xl font-bold text-white text-center mb-3">Calculate Your Savings</h2>
+                <p class="text-primary-200 text-center mb-10 max-w-xl mx-auto text-sm">
+                    See estimated annual costs based on your AUM. Results use industry-average pricing benchmarks.
+                </p>
+                <div class="bg-white rounded-2xl p-6 md:p-8 max-w-3xl mx-auto shadow-xl">
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-medium mb-3 text-sm">Your Assets Under Management</label>
+                        <input type="range" id="aum-slider" min="100" max="2000" value="500"
+                               class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-accent-500"
+                               aria-label="AUM slider">
+                        <div class="flex justify-between text-xs text-gray-500 mt-2">
+                            <span>$100M</span><span>$500M</span><span>$1B</span><span>$2B</span>
                         </div>
-                        <p class="text-gray-600 mb-4">"We switched from Addepar and cut our costs by 75%. The implementation took 5 days instead of the 3 months Addepar quoted us. The mobile app alone was worth the switch."</p>
+                        <p class="text-center mt-4">
+                            <span class="text-3xl font-bold text-primary-600">$<span id="aum-display">500</span>M</span>
+                        </p>
+                    </div>
+                    <div class="grid md:grid-cols-3 gap-4 mb-6">
+                        <div class="bg-red-50 rounded-lg p-4 text-center">
+                            <p class="text-xs text-red-600 font-medium mb-1">Legacy Platform (est.)</p>
+                            <p class="text-2xl font-bold text-red-600">$<span id="legacy-cost">150,000</span></p>
+                            <p class="text-xs text-red-500 mt-1">~3 bps/year</p>
+                        </div>
+                        <div class="bg-green-50 rounded-lg p-4 text-center">
+                            <p class="text-xs text-green-600 font-medium mb-1">WealthNexus</p>
+                            <p class="text-2xl font-bold text-green-600">$<span id="nexus-cost">37,000</span></p>
+                            <p class="text-xs text-green-500 mt-1">~0.7 bps/year</p>
+                        </div>
+                        <div class="bg-accent-50 rounded-lg p-4 text-center border-2 border-accent-500">
+                            <p class="text-xs text-accent-600 font-medium mb-1">Annual Savings</p>
+                            <p class="text-2xl font-bold text-accent-600">$<span id="savings">113,000</span></p>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 rounded-lg p-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-sm text-gray-600">5-Year Total Savings</span>
+                            <span class="text-xl font-bold text-accent-600">$<span id="five-year">565,000</span></span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-3">
+                            <div id="savings-bar" class="bg-gradient-to-r from-accent-500 to-green-500 h-3 rounded-full transition-all" style="width: 75%"></div>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-2 text-center">
+                            Estimated <span id="savings-pct">75</span>% savings vs. legacy platforms
+                        </p>
+                    </div>
+                    <p class="text-xs text-gray-400 mt-4 text-center">
+                        *Estimates based on published industry pricing. Actual costs vary. Contact us for a personalized quote.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Testimonials -->
+            <section class="container mx-auto px-6 pb-20">
+                <h2 class="text-2xl md:text-3xl font-bold text-white text-center mb-10">Trusted by Leading Advisors</h2>
+                <div class="grid md:grid-cols-3 gap-5 max-w-5xl mx-auto">
+                    <div class="bg-white rounded-xl p-5 shadow-lg">
+                        <div class="flex mb-3">
+                            <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4">"We cut our platform costs by 70% and went live in 6 days. The implementation team was incredibly responsive."</p>
                         <div class="flex items-center space-x-3">
-                            <div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center">
-                                <span class="text-primary-600 font-semibold">MK</span>
+                            <div class="w-9 h-9 bg-primary-100 rounded-full flex items-center justify-center">
+                                <span class="text-primary-600 font-semibold text-sm">MC</span>
                             </div>
                             <div>
-                                <p class="font-semibold text-gray-800">Michael Kaplan</p>
-                                <p class="text-sm text-gray-500">CEO, Kaplan Wealth Advisors</p>
-                                <p class="text-xs text-gray-400">$850M AUM</p>
+                                <p class="font-medium text-gray-800 text-sm">Michael Chen</p>
+                                <p class="text-xs text-gray-500">CEO, Meridian Wealth • $650M AUM</p>
                             </div>
                         </div>
                     </div>
-
-                    <div class="bg-white rounded-xl p-6 shadow-lg">
-                        <div class="flex items-center space-x-1 mb-4">
-                            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                    <div class="bg-white rounded-xl p-5 shadow-lg">
+                        <div class="flex mb-3">
+                            <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
                         </div>
-                        <p class="text-gray-600 mb-4">"The AI assistant is a game-changer. I can ask complex questions about my portfolios and get instant answers. My clients love the portal - it's so much better than what we had before."</p>
+                        <p class="text-gray-600 text-sm mb-4">"The mobile app is excellent—I can review portfolios and approve trades from anywhere. Support responds in hours, not days."</p>
                         <div class="flex items-center space-x-3">
-                            <div class="w-10 h-10 bg-accent-100 rounded-full flex items-center justify-center">
-                                <span class="text-accent-600 font-semibold">SL</span>
+                            <div class="w-9 h-9 bg-accent-100 rounded-full flex items-center justify-center">
+                                <span class="text-accent-600 font-semibold text-sm">SL</span>
                             </div>
                             <div>
-                                <p class="font-semibold text-gray-800">Sarah Lin</p>
-                                <p class="text-sm text-gray-500">Principal, Lin Family Office</p>
-                                <p class="text-xs text-gray-400">$420M AUM</p>
+                                <p class="font-medium text-gray-800 text-sm">Sarah Lin</p>
+                                <p class="text-xs text-gray-500">Principal, Lin Family Office • $420M AUM</p>
                             </div>
                         </div>
                     </div>
-
-                    <div class="bg-white rounded-xl p-6 shadow-lg">
-                        <div class="flex items-center space-x-1 mb-4">
-                            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                    <div class="bg-white rounded-xl p-5 shadow-lg">
+                        <div class="flex mb-3">
+                            <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
                         </div>
-                        <p class="text-gray-600 mb-4">"Finally, a platform that handles our alternative investments properly. The automatic document parsing for capital calls saved us 20+ hours per month. Support actually responds within hours, not weeks."</p>
+                        <p class="text-gray-600 text-sm mb-4">"Alternative investments finally work correctly. Auto-parsing of capital call documents saves our team 20+ hours monthly."</p>
                         <div class="flex items-center space-x-3">
-                            <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center">
-                                <span class="text-purple-600 font-semibold">JR</span>
+                            <div class="w-9 h-9 bg-purple-100 rounded-full flex items-center justify-center">
+                                <span class="text-purple-600 font-semibold text-sm">JR</span>
                             </div>
                             <div>
-                                <p class="font-semibold text-gray-800">James Rodriguez</p>
-                                <p class="text-sm text-gray-500">Managing Director, Apex MFO</p>
-                                <p class="text-xs text-gray-400">$1.2B AUM</p>
+                                <p class="font-medium text-gray-800 text-sm">James Rodriguez</p>
+                                <p class="text-xs text-gray-500">MD, Apex MFO • $1.2B AUM</p>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
 
-            <!-- Onboarding Timeline Section -->
-            <div class="mt-24">
-                <h2 class="text-3xl font-bold text-white text-center mb-4">Go Live in 7 Days</h2>
-                <p class="text-primary-200 text-center mb-12 max-w-2xl mx-auto">Our proven onboarding process gets you up and running fast. No more 3-month implementations.</p>
-
+            <!-- Onboarding Timeline -->
+            <section class="container mx-auto px-6 pb-20">
+                <h2 class="text-2xl md:text-3xl font-bold text-white text-center mb-3">Go Live in ~7 Days</h2>
+                <p class="text-primary-200 text-center mb-10 max-w-xl mx-auto text-sm">
+                    Our streamlined implementation process. Timeline varies based on data complexity.
+                </p>
                 <div class="max-w-4xl mx-auto">
-                    <div class="relative">
-                        <!-- Timeline Line -->
-                        <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-white/20"></div>
-
-                        <!-- Day 1 -->
-                        <div class="relative flex items-center mb-8">
-                            <div class="w-1/2 pr-8 text-right">
-                                <div class="bg-white/10 backdrop-blur-lg rounded-xl p-4">
-                                    <h4 class="text-white font-semibold">Kickoff & Setup</h4>
-                                    <p class="text-primary-200 text-sm">Account creation, user provisioning, initial configuration</p>
-                                </div>
-                            </div>
-                            <div class="absolute left-1/2 transform -translate-x-1/2 w-10 h-10 bg-accent-500 rounded-full flex items-center justify-center text-white font-bold z-10">1</div>
-                            <div class="w-1/2 pl-8">
-                                <span class="text-accent-400 font-semibold">Day 1</span>
-                            </div>
+                    <div class="flex flex-col md:flex-row md:justify-between gap-4">
+                        <div class="flex-1 bg-white/10 backdrop-blur rounded-xl p-4 text-center">
+                            <div class="w-10 h-10 bg-accent-500 rounded-full flex items-center justify-center text-white font-bold mx-auto mb-2">1</div>
+                            <p class="text-accent-400 text-xs font-medium mb-1">Day 1</p>
+                            <p class="text-white font-medium text-sm">Kickoff</p>
+                            <p class="text-primary-200 text-xs mt-1">Account setup & config</p>
                         </div>
-
-                        <!-- Day 2-3 -->
-                        <div class="relative flex items-center mb-8">
-                            <div class="w-1/2 pr-8 text-right">
-                                <span class="text-accent-400 font-semibold">Day 2-3</span>
-                            </div>
-                            <div class="absolute left-1/2 transform -translate-x-1/2 w-10 h-10 bg-accent-500 rounded-full flex items-center justify-center text-white font-bold z-10">2</div>
-                            <div class="w-1/2 pl-8">
-                                <div class="bg-white/10 backdrop-blur-lg rounded-xl p-4">
-                                    <h4 class="text-white font-semibold">Data Migration</h4>
-                                    <p class="text-primary-200 text-sm">Custodian connections, historical data import, security mapping</p>
-                                </div>
-                            </div>
+                        <div class="flex-1 bg-white/10 backdrop-blur rounded-xl p-4 text-center">
+                            <div class="w-10 h-10 bg-accent-500 rounded-full flex items-center justify-center text-white font-bold mx-auto mb-2">2</div>
+                            <p class="text-accent-400 text-xs font-medium mb-1">Day 2-3</p>
+                            <p class="text-white font-medium text-sm">Data Migration</p>
+                            <p class="text-primary-200 text-xs mt-1">Custodian connections</p>
                         </div>
-
-                        <!-- Day 4-5 -->
-                        <div class="relative flex items-center mb-8">
-                            <div class="w-1/2 pr-8 text-right">
-                                <div class="bg-white/10 backdrop-blur-lg rounded-xl p-4">
-                                    <h4 class="text-white font-semibold">Configuration</h4>
-                                    <p class="text-primary-200 text-sm">Dashboards, reports, client portal branding, workflows</p>
-                                </div>
-                            </div>
-                            <div class="absolute left-1/2 transform -translate-x-1/2 w-10 h-10 bg-accent-500 rounded-full flex items-center justify-center text-white font-bold z-10">3</div>
-                            <div class="w-1/2 pl-8">
-                                <span class="text-accent-400 font-semibold">Day 4-5</span>
-                            </div>
+                        <div class="flex-1 bg-white/10 backdrop-blur rounded-xl p-4 text-center">
+                            <div class="w-10 h-10 bg-accent-500 rounded-full flex items-center justify-center text-white font-bold mx-auto mb-2">3</div>
+                            <p class="text-accent-400 text-xs font-medium mb-1">Day 4-5</p>
+                            <p class="text-white font-medium text-sm">Configuration</p>
+                            <p class="text-primary-200 text-xs mt-1">Reports & branding</p>
                         </div>
-
-                        <!-- Day 6 -->
-                        <div class="relative flex items-center mb-8">
-                            <div class="w-1/2 pr-8 text-right">
-                                <span class="text-accent-400 font-semibold">Day 6</span>
-                            </div>
-                            <div class="absolute left-1/2 transform -translate-x-1/2 w-10 h-10 bg-accent-500 rounded-full flex items-center justify-center text-white font-bold z-10">4</div>
-                            <div class="w-1/2 pl-8">
-                                <div class="bg-white/10 backdrop-blur-lg rounded-xl p-4">
-                                    <h4 class="text-white font-semibold">Training</h4>
-                                    <p class="text-primary-200 text-sm">Team training, best practices, Q&A sessions</p>
-                                </div>
-                            </div>
+                        <div class="flex-1 bg-white/10 backdrop-blur rounded-xl p-4 text-center">
+                            <div class="w-10 h-10 bg-accent-500 rounded-full flex items-center justify-center text-white font-bold mx-auto mb-2">4</div>
+                            <p class="text-accent-400 text-xs font-medium mb-1">Day 6</p>
+                            <p class="text-white font-medium text-sm">Training</p>
+                            <p class="text-primary-200 text-xs mt-1">Team onboarding</p>
                         </div>
-
-                        <!-- Day 7 -->
-                        <div class="relative flex items-center">
-                            <div class="w-1/2 pr-8 text-right">
-                                <div class="bg-accent-500 rounded-xl p-4">
-                                    <h4 class="text-white font-semibold">🚀 Go Live!</h4>
-                                    <p class="text-white/80 text-sm">Production cutover, success validation, ongoing support</p>
-                                </div>
-                            </div>
-                            <div class="absolute left-1/2 transform -translate-x-1/2 w-10 h-10 bg-white rounded-full flex items-center justify-center text-accent-500 font-bold z-10">✓</div>
-                            <div class="w-1/2 pl-8">
-                                <span class="text-white font-semibold">Day 7</span>
-                            </div>
+                        <div class="flex-1 bg-accent-500 rounded-xl p-4 text-center">
+                            <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-accent-600 font-bold mx-auto mb-2">✓</div>
+                            <p class="text-white/80 text-xs font-medium mb-1">Day 7</p>
+                            <p class="text-white font-medium text-sm">Go Live!</p>
+                            <p class="text-white/70 text-xs mt-1">Production launch</p>
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
 
-            <!-- CTA Section -->
-            <div class="mt-24 text-center">
-                <h2 class="text-3xl font-bold text-white mb-4">Ready to Transform Your Practice?</h2>
-                <p class="text-primary-200 mb-8 max-w-xl mx-auto">Join hundreds of advisors who've made the switch. Start your free trial today.</p>
-                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                    <button onclick="openDemo()" class="bg-accent-500 hover:bg-accent-600 text-white px-8 py-3 rounded-lg font-semibold text-lg transition-colors">
-                        Start Free 14-Day Trial
+            <!-- Final CTA -->
+            <section class="container mx-auto px-6 pb-16 text-center">
+                <h2 class="text-2xl md:text-3xl font-bold text-white mb-3">Ready to Get Started?</h2>
+                <p class="text-primary-200 mb-6 max-w-md mx-auto text-sm">
+                    Join hundreds of advisors who've modernized their practice with WealthNexus.
+                </p>
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+                    <button onclick="enterDemo()" class="bg-accent-500 hover:bg-accent-600 text-white px-6 py-3 rounded-lg font-semibold transition-colors">
+                        Request Demo
                     </button>
-                    <button onclick="openDemo()" class="text-white hover:text-accent-300 font-semibold">
-                        Schedule a Demo →
+                    <button onclick="enterDemo()" class="text-white hover:text-accent-300 font-medium">
+                        Start Free Trial →
                     </button>
                 </div>
-            </div>
+            </section>
         </main>
 
         <!-- Footer -->
-        <footer class="container mx-auto px-6 py-8 mt-20 border-t border-primary-400/30">
-            <div class="flex flex-col md:flex-row items-center justify-between text-primary-200">
-                <div class="text-sm">
-                    © 2026 WealthNexus. All rights reserved.
-                </div>
-                <div class="flex space-x-6 mt-4 md:mt-0">
-                    <a href="#" class="hover:text-white transition-colors">Privacy</a>
-                    <a href="#" class="hover:text-white transition-colors">Terms</a>
-                    <a href="#" class="hover:text-white transition-colors">Security</a>
-                    <a href="#" class="hover:text-white transition-colors">Contact</a>
+        <footer class="border-t border-primary-400/30">
+            <div class="container mx-auto px-6 py-6">
+                <div class="flex flex-col md:flex-row items-center justify-between text-primary-200 text-sm">
+                    <p>© 2026 WealthNexus. All rights reserved.</p>
+                    <div class="flex space-x-6 mt-3 md:mt-0">
+                        <a href="#" class="hover:text-white transition-colors">Privacy</a>
+                        <a href="#" class="hover:text-white transition-colors">Terms</a>
+                        <a href="#" class="hover:text-white transition-colors">Security</a>
+                        <a href="#" class="hover:text-white transition-colors">Contact</a>
+                    </div>
                 </div>
             </div>
         </footer>
     </div>
 
-    <!-- Demo Modal - Full Dashboard -->
-    <div id="demo-modal" class="modal fixed inset-0 bg-gray-900 z-50 overflow-hidden">
-        <div class="flex h-screen w-full">
-            <!-- Sidebar -->
-            <div class="w-64 bg-primary-700 text-white flex flex-col">
-                <div class="p-4 flex items-center space-x-2 border-b border-primary-600">
+    <!-- ========== DEMO VIEW ========== -->
+    <div id="demo-view" class="h-screen w-full">
+        <!-- Mobile sidebar overlay -->
+        <div class="sidebar-overlay fixed inset-0 bg-black/50 z-40 md:hidden" onclick="toggleSidebar()"></div>
+
+        <!-- Sidebar -->
+        <aside class="demo-sidebar w-60 bg-primary-700 text-white flex flex-col h-full md:relative">
+            <div class="p-4 flex items-center justify-between border-b border-primary-600">
+                <div class="flex items-center space-x-2">
                     <div class="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
                         <span class="text-primary-500 font-bold">W</span>
                     </div>
                     <span class="font-bold">WealthNexus</span>
                 </div>
-
-                <nav class="flex-1 p-4 space-y-1">
-                    <button onclick="showTab('dashboard')" class="nav-item w-full flex items-center space-x-3 px-3 py-2 rounded-lg bg-primary-600 text-white">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
-                        <span>Dashboard</span>
-                    </button>
-                    <button onclick="showTab('clients')" class="nav-item w-full flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-primary-600 text-primary-200 hover:text-white transition-colors">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-                        <span>Clients</span>
-                    </button>
-                    <button onclick="showTab('portfolios')" class="nav-item w-full flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-primary-600 text-primary-200 hover:text-white transition-colors">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
-                        <span>Portfolios</span>
-                    </button>
-                    <button onclick="showTab('trading')" class="nav-item w-full flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-primary-600 text-primary-200 hover:text-white transition-colors">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path></svg>
-                        <span>Trading</span>
-                    </button>
-                    <button onclick="showTab('reports')" class="nav-item w-full flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-primary-600 text-primary-200 hover:text-white transition-colors">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                        <span>Reports</span>
-                    </button>
-                    <button onclick="showTab('ai')" class="nav-item w-full flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-primary-600 text-primary-200 hover:text-white transition-colors">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
-                        <span>NexusAI</span>
-                    </button>
-                </nav>
-
-                <div class="p-4 border-t border-primary-600">
-                    <div class="flex items-center space-x-3">
-                        <div class="w-8 h-8 bg-accent-500 rounded-full flex items-center justify-center text-sm font-semibold">JD</div>
-                        <div class="flex-1">
-                            <p class="text-sm font-medium">Jane Doe</p>
-                            <p class="text-xs text-primary-300">Advisor</p>
-                        </div>
+                <button class="md:hidden p-1 hover:bg-primary-600 rounded" onclick="toggleSidebar()" aria-label="Close menu">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
+            <nav class="flex-1 p-3 space-y-1" role="navigation" aria-label="Main navigation">
+                <button onclick="showTab('dashboard')" data-tab="dashboard" class="nav-btn active w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                    <span>Dashboard</span>
+                </button>
+                <button onclick="showTab('clients')" data-tab="clients" class="nav-btn w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                    <span>Clients</span>
+                </button>
+                <button onclick="showTab('portfolios')" data-tab="portfolios" class="nav-btn w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                    <span>Portfolios</span>
+                </button>
+                <button onclick="showTab('trading')" data-tab="trading" class="nav-btn w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
+                    <span>Trading</span>
+                </button>
+                <button onclick="showTab('reports')" data-tab="reports" class="nav-btn w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                    <span>Reports</span>
+                </button>
+                <button onclick="showTab('ai')" data-tab="ai" class="nav-btn w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                    <span>NexusAI</span>
+                </button>
+            </nav>
+            <div class="p-3 border-t border-primary-600">
+                <div class="flex items-center space-x-3 px-2">
+                    <div class="w-8 h-8 bg-accent-500 rounded-full flex items-center justify-center text-xs font-semibold">JD</div>
+                    <div class="flex-1 min-w-0">
+                        <p class="text-sm font-medium truncate">Jane Doe</p>
+                        <p class="text-xs text-primary-300">Advisor</p>
                     </div>
                 </div>
             </div>
+        </aside>
 
-            <!-- Main Content -->
-            <div class="flex-1 flex flex-col bg-gray-100 overflow-hidden">
-                <!-- Top Bar -->
-                <header class="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
+        <!-- Main content area -->
+        <div class="flex-1 flex flex-col bg-gray-100 overflow-hidden">
+            <!-- Top bar -->
+            <header class="bg-white border-b border-gray-200 px-4 md:px-6 py-3 flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <button class="md:hidden p-2 -ml-2 text-gray-500 hover:text-gray-700 rounded-lg" onclick="toggleSidebar()" aria-label="Open menu">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                    </button>
                     <div>
-                        <h1 id="page-title" class="text-xl font-semibold text-gray-800">Dashboard</h1>
-                        <p class="text-sm text-gray-500">Welcome back, Jane</p>
+                        <h1 id="page-title" class="text-lg font-semibold text-gray-800">Dashboard</h1>
+                        <p class="text-xs text-gray-500">Welcome back, Jane</p>
                     </div>
-                    <div class="flex items-center space-x-4">
-                        <button class="p-2 text-gray-500 hover:text-gray-700">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
-                        </button>
-                        <button onclick="closeDemo()" class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium transition-colors">
-                            Exit Demo
-                        </button>
-                    </div>
-                </header>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <button class="p-2 text-gray-500 hover:text-gray-700 rounded-lg" aria-label="Notifications">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+                    </button>
+                    <button onclick="exitDemo()" class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors">
+                        Exit Demo
+                    </button>
+                </div>
+            </header>
 
-                <!-- Content Area -->
-                <main class="flex-1 overflow-auto p-6">
-                    <!-- Dashboard Tab -->
-                    <div id="tab-dashboard" class="tab-content active">
-                        <!-- Metric Cards -->
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
-                            <div class="bg-white rounded-xl p-6 shadow-sm">
-                                <p class="text-sm text-gray-500 mb-1">Total AUM</p>
-                                <p class="text-2xl font-bold text-gray-900">$847.2M</p>
-                                <p class="text-sm text-green-600 mt-2">↑ 2.4% this month</p>
-                            </div>
-                            <div class="bg-white rounded-xl p-6 shadow-sm">
-                                <p class="text-sm text-gray-500 mb-1">Total Clients</p>
-                                <p class="text-2xl font-bold text-gray-900">342</p>
-                                <p class="text-sm text-green-600 mt-2">↑ 8 new this month</p>
-                            </div>
-                            <div class="bg-white rounded-xl p-6 shadow-sm">
-                                <p class="text-sm text-gray-500 mb-1">YTD Performance</p>
-                                <p class="text-2xl font-bold text-green-600">+12.8%</p>
-                                <p class="text-sm text-gray-500 mt-2">vs S&P 500: +10.2%</p>
-                            </div>
-                            <div class="bg-white rounded-xl p-6 shadow-sm">
-                                <p class="text-sm text-gray-500 mb-1">Monthly Revenue</p>
-                                <p class="text-2xl font-bold text-gray-900">$127.4K</p>
-                                <p class="text-sm text-green-600 mt-2">↑ 5.1% vs last month</p>
+            <!-- Content -->
+            <main class="flex-1 overflow-auto p-4 md:p-6">
+                <!-- Dashboard Panel -->
+                <div id="panel-dashboard" class="tab-panel active fade-in">
+                    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                        <div class="bg-white rounded-xl p-4 shadow-sm">
+                            <p class="text-xs text-gray-500 mb-1">Total AUM</p>
+                            <p class="text-xl font-bold text-gray-900">$847.2M</p>
+                            <p class="text-xs text-green-600 mt-1">↑ 2.4% this month</p>
+                        </div>
+                        <div class="bg-white rounded-xl p-4 shadow-sm">
+                            <p class="text-xs text-gray-500 mb-1">Total Clients</p>
+                            <p class="text-xl font-bold text-gray-900">342</p>
+                            <p class="text-xs text-green-600 mt-1">↑ 8 new this month</p>
+                        </div>
+                        <div class="bg-white rounded-xl p-4 shadow-sm">
+                            <p class="text-xs text-gray-500 mb-1">YTD Performance</p>
+                            <p class="text-xl font-bold text-green-600">+12.8%</p>
+                            <p class="text-xs text-gray-500 mt-1">vs S&P: +10.2%</p>
+                        </div>
+                        <div class="bg-white rounded-xl p-4 shadow-sm">
+                            <p class="text-xs text-gray-500 mb-1">Monthly Revenue</p>
+                            <p class="text-xl font-bold text-gray-900">$127.4K</p>
+                            <p class="text-xs text-green-600 mt-1">↑ 5.1% vs last month</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-6">
+                        <div class="lg:col-span-2 bg-white rounded-xl p-4 shadow-sm">
+                            <h3 class="font-semibold text-gray-800 text-sm mb-4">Portfolio Performance (YTD)</h3>
+                            <div class="h-48 flex items-end justify-between gap-1 px-2">
+                                <div class="flex flex-col items-center flex-1"><div class="w-full bg-accent-500 rounded-t" style="height:48%"></div><span class="text-[10px] text-gray-500 mt-1">Jan</span></div>
+                                <div class="flex flex-col items-center flex-1"><div class="w-full bg-accent-500 rounded-t" style="height:56%"></div><span class="text-[10px] text-gray-500 mt-1">Feb</span></div>
+                                <div class="flex flex-col items-center flex-1"><div class="w-full bg-accent-500 rounded-t" style="height:40%"></div><span class="text-[10px] text-gray-500 mt-1">Mar</span></div>
+                                <div class="flex flex-col items-center flex-1"><div class="w-full bg-accent-500 rounded-t" style="height:64%"></div><span class="text-[10px] text-gray-500 mt-1">Apr</span></div>
+                                <div class="flex flex-col items-center flex-1"><div class="w-full bg-accent-500 rounded-t" style="height:72%"></div><span class="text-[10px] text-gray-500 mt-1">May</span></div>
+                                <div class="flex flex-col items-center flex-1"><div class="w-full bg-accent-500 rounded-t" style="height:60%"></div><span class="text-[10px] text-gray-500 mt-1">Jun</span></div>
+                                <div class="flex flex-col items-center flex-1"><div class="w-full bg-accent-500 rounded-t" style="height:68%"></div><span class="text-[10px] text-gray-500 mt-1">Jul</span></div>
+                                <div class="flex flex-col items-center flex-1"><div class="w-full bg-accent-500 rounded-t" style="height:76%"></div><span class="text-[10px] text-gray-500 mt-1">Aug</span></div>
+                                <div class="flex flex-col items-center flex-1"><div class="w-full bg-accent-500 rounded-t" style="height:66%"></div><span class="text-[10px] text-gray-500 mt-1">Sep</span></div>
+                                <div class="flex flex-col items-center flex-1"><div class="w-full bg-accent-500 rounded-t" style="height:80%"></div><span class="text-[10px] text-gray-500 mt-1">Oct</span></div>
+                                <div class="flex flex-col items-center flex-1"><div class="w-full bg-accent-500 rounded-t" style="height:84%"></div><span class="text-[10px] text-gray-500 mt-1">Nov</span></div>
+                                <div class="flex flex-col items-center flex-1"><div class="w-full bg-primary-500 rounded-t" style="height:88%"></div><span class="text-[10px] text-gray-500 mt-1">Dec</span></div>
                             </div>
                         </div>
-
-                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                            <!-- Performance Chart -->
-                            <div class="lg:col-span-2 bg-white rounded-xl p-6 shadow-sm">
-                                <h3 class="font-semibold text-gray-800 mb-4">Portfolio Performance</h3>
-                                <div class="h-64 flex items-end justify-between space-x-2 px-4">
-                                    <div class="flex flex-col items-center">
-                                        <div class="w-8 bg-accent-500 rounded-t" style="height: 120px"></div>
-                                        <span class="text-xs text-gray-500 mt-2">Jan</span>
-                                    </div>
-                                    <div class="flex flex-col items-center">
-                                        <div class="w-8 bg-accent-500 rounded-t" style="height: 140px"></div>
-                                        <span class="text-xs text-gray-500 mt-2">Feb</span>
-                                    </div>
-                                    <div class="flex flex-col items-center">
-                                        <div class="w-8 bg-accent-500 rounded-t" style="height: 100px"></div>
-                                        <span class="text-xs text-gray-500 mt-2">Mar</span>
-                                    </div>
-                                    <div class="flex flex-col items-center">
-                                        <div class="w-8 bg-accent-500 rounded-t" style="height: 160px"></div>
-                                        <span class="text-xs text-gray-500 mt-2">Apr</span>
-                                    </div>
-                                    <div class="flex flex-col items-center">
-                                        <div class="w-8 bg-accent-500 rounded-t" style="height: 180px"></div>
-                                        <span class="text-xs text-gray-500 mt-2">May</span>
-                                    </div>
-                                    <div class="flex flex-col items-center">
-                                        <div class="w-8 bg-accent-500 rounded-t" style="height: 150px"></div>
-                                        <span class="text-xs text-gray-500 mt-2">Jun</span>
-                                    </div>
-                                    <div class="flex flex-col items-center">
-                                        <div class="w-8 bg-accent-500 rounded-t" style="height: 170px"></div>
-                                        <span class="text-xs text-gray-500 mt-2">Jul</span>
-                                    </div>
-                                    <div class="flex flex-col items-center">
-                                        <div class="w-8 bg-accent-500 rounded-t" style="height: 190px"></div>
-                                        <span class="text-xs text-gray-500 mt-2">Aug</span>
-                                    </div>
-                                    <div class="flex flex-col items-center">
-                                        <div class="w-8 bg-accent-500 rounded-t" style="height: 165px"></div>
-                                        <span class="text-xs text-gray-500 mt-2">Sep</span>
-                                    </div>
-                                    <div class="flex flex-col items-center">
-                                        <div class="w-8 bg-accent-500 rounded-t" style="height: 200px"></div>
-                                        <span class="text-xs text-gray-500 mt-2">Oct</span>
-                                    </div>
-                                    <div class="flex flex-col items-center">
-                                        <div class="w-8 bg-accent-500 rounded-t" style="height: 210px"></div>
-                                        <span class="text-xs text-gray-500 mt-2">Nov</span>
-                                    </div>
-                                    <div class="flex flex-col items-center">
-                                        <div class="w-8 bg-primary-500 rounded-t" style="height: 220px"></div>
-                                        <span class="text-xs text-gray-500 mt-2">Dec</span>
-                                    </div>
-                                </div>
+                        <div class="bg-white rounded-xl p-4 shadow-sm">
+                            <h3 class="font-semibold text-gray-800 text-sm mb-4">Asset Allocation</h3>
+                            <div class="space-y-3">
+                                <div><div class="flex justify-between text-xs mb-1"><span class="text-gray-600">US Equities</span><span class="font-medium">45%</span></div><div class="w-full bg-gray-200 rounded-full h-2"><div class="bg-primary-500 h-2 rounded-full" style="width:45%"></div></div></div>
+                                <div><div class="flex justify-between text-xs mb-1"><span class="text-gray-600">Int'l Equities</span><span class="font-medium">20%</span></div><div class="w-full bg-gray-200 rounded-full h-2"><div class="bg-accent-500 h-2 rounded-full" style="width:20%"></div></div></div>
+                                <div><div class="flex justify-between text-xs mb-1"><span class="text-gray-600">Fixed Income</span><span class="font-medium">20%</span></div><div class="w-full bg-gray-200 rounded-full h-2"><div class="bg-blue-500 h-2 rounded-full" style="width:20%"></div></div></div>
+                                <div><div class="flex justify-between text-xs mb-1"><span class="text-gray-600">Alternatives</span><span class="font-medium">10%</span></div><div class="w-full bg-gray-200 rounded-full h-2"><div class="bg-purple-500 h-2 rounded-full" style="width:10%"></div></div></div>
+                                <div><div class="flex justify-between text-xs mb-1"><span class="text-gray-600">Cash</span><span class="font-medium">5%</span></div><div class="w-full bg-gray-200 rounded-full h-2"><div class="bg-gray-400 h-2 rounded-full" style="width:5%"></div></div></div>
                             </div>
-
-                            <!-- Asset Allocation -->
-                            <div class="bg-white rounded-xl p-6 shadow-sm">
-                                <h3 class="font-semibold text-gray-800 mb-4">Asset Allocation</h3>
-                                <div class="space-y-4">
-                                    <div>
-                                        <div class="flex justify-between text-sm mb-1">
-                                            <span class="text-gray-600">US Equities</span>
-                                            <span class="font-medium">45%</span>
-                                        </div>
-                                        <div class="w-full bg-gray-200 rounded-full h-2">
-                                            <div class="bg-primary-500 h-2 rounded-full" style="width: 45%"></div>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="flex justify-between text-sm mb-1">
-                                            <span class="text-gray-600">Int'l Equities</span>
-                                            <span class="font-medium">20%</span>
-                                        </div>
-                                        <div class="w-full bg-gray-200 rounded-full h-2">
-                                            <div class="bg-accent-500 h-2 rounded-full" style="width: 20%"></div>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="flex justify-between text-sm mb-1">
-                                            <span class="text-gray-600">Fixed Income</span>
-                                            <span class="font-medium">20%</span>
-                                        </div>
-                                        <div class="w-full bg-gray-200 rounded-full h-2">
-                                            <div class="bg-blue-500 h-2 rounded-full" style="width: 20%"></div>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="flex justify-between text-sm mb-1">
-                                            <span class="text-gray-600">Alternatives</span>
-                                            <span class="font-medium">10%</span>
-                                        </div>
-                                        <div class="w-full bg-gray-200 rounded-full h-2">
-                                            <div class="bg-purple-500 h-2 rounded-full" style="width: 10%"></div>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="flex justify-between text-sm mb-1">
-                                            <span class="text-gray-600">Cash</span>
-                                            <span class="font-medium">5%</span>
-                                        </div>
-                                        <div class="w-full bg-gray-200 rounded-full h-2">
-                                            <div class="bg-gray-400 h-2 rounded-full" style="width: 5%"></div>
-                                        </div>
-                                    </div>
+                            <p class="text-[10px] text-gray-400 mt-3 text-center">Total: 100%</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                        <div class="bg-white rounded-xl p-4 shadow-sm">
+                            <h3 class="font-semibold text-gray-800 text-sm mb-3">Recent Activity</h3>
+                            <div class="space-y-3">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0"><svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg></div>
+                                    <div class="flex-1 min-w-0"><p class="text-sm font-medium text-gray-800 truncate">New client onboarded</p><p class="text-xs text-gray-500">Smith Family Trust - $4.2M</p></div>
+                                    <span class="text-xs text-gray-400 flex-shrink-0">2h ago</span>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0"><svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg></div>
+                                    <div class="flex-1 min-w-0"><p class="text-sm font-medium text-gray-800 truncate">Trade executed</p><p class="text-xs text-gray-500">Buy 500 AAPL @ $178.42</p></div>
+                                    <span class="text-xs text-gray-400 flex-shrink-0">4h ago</span>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Recent Activity & Alerts -->
-                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
-                            <div class="bg-white rounded-xl p-6 shadow-sm">
-                                <h3 class="font-semibold text-gray-800 mb-4">Recent Activity</h3>
-                                <div class="space-y-4">
-                                    <div class="flex items-center space-x-3">
-                                        <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
-                                            <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
-                                        </div>
-                                        <div class="flex-1">
-                                            <p class="text-sm font-medium text-gray-800">New client onboarded</p>
-                                            <p class="text-xs text-gray-500">Smith Family Trust - $4.2M</p>
-                                        </div>
-                                        <span class="text-xs text-gray-400">2h ago</span>
-                                    </div>
-                                    <div class="flex items-center space-x-3">
-                                        <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
-                                            <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path></svg>
-                                        </div>
-                                        <div class="flex-1">
-                                            <p class="text-sm font-medium text-gray-800">Trade executed</p>
-                                            <p class="text-xs text-gray-500">Buy 500 AAPL @ $178.42</p>
-                                        </div>
-                                        <span class="text-xs text-gray-400">4h ago</span>
-                                    </div>
-                                    <div class="flex items-center space-x-3">
-                                        <div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
-                                            <svg class="w-4 h-4 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                                        </div>
-                                        <div class="flex-1">
-                                            <p class="text-sm font-medium text-gray-800">Report generated</p>
-                                            <p class="text-xs text-gray-500">Q4 Performance Report</p>
-                                        </div>
-                                        <span class="text-xs text-gray-400">Yesterday</span>
-                                    </div>
+                        <div class="bg-white rounded-xl p-4 shadow-sm">
+                            <h3 class="font-semibold text-gray-800 text-sm mb-3">Alerts</h3>
+                            <div class="space-y-2">
+                                <div class="flex items-center space-x-3 p-2 bg-yellow-50 rounded-lg">
+                                    <svg class="w-4 h-4 text-yellow-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                                    <div class="flex-1 min-w-0"><p class="text-xs font-medium text-gray-800">3 portfolios need rebalancing</p></div>
+                                    <button class="text-xs text-yellow-700 font-medium hover:underline" onclick="showToast('Opening rebalancing view...')">Review</button>
                                 </div>
-                            </div>
-
-                            <div class="bg-white rounded-xl p-6 shadow-sm">
-                                <h3 class="font-semibold text-gray-800 mb-4">Alerts & Actions</h3>
-                                <div class="space-y-3">
-                                    <div class="flex items-center space-x-3 p-3 bg-yellow-50 rounded-lg">
-                                        <svg class="w-5 h-5 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
-                                        <div class="flex-1">
-                                            <p class="text-sm font-medium text-gray-800">3 portfolios need rebalancing</p>
-                                            <p class="text-xs text-gray-500">Drift exceeds 5% threshold</p>
-                                        </div>
-                                        <button class="text-xs text-yellow-700 font-medium hover:underline">Review</button>
-                                    </div>
-                                    <div class="flex items-center space-x-3 p-3 bg-blue-50 rounded-lg">
-                                        <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                                        <div class="flex-1">
-                                            <p class="text-sm font-medium text-gray-800">Capital call due</p>
-                                            <p class="text-xs text-gray-500">Sequoia Fund XIV - $125K</p>
-                                        </div>
-                                        <button class="text-xs text-blue-700 font-medium hover:underline">View</button>
-                                    </div>
-                                    <div class="flex items-center space-x-3 p-3 bg-green-50 rounded-lg">
-                                        <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                        <div class="flex-1">
-                                            <p class="text-sm font-medium text-gray-800">Billing completed</p>
-                                            <p class="text-xs text-gray-500">Q4 fees collected: $127.4K</p>
-                                        </div>
-                                        <button class="text-xs text-green-700 font-medium hover:underline">Details</button>
-                                    </div>
+                                <div class="flex items-center space-x-3 p-2 bg-blue-50 rounded-lg">
+                                    <svg class="w-4 h-4 text-blue-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                                    <div class="flex-1 min-w-0"><p class="text-xs font-medium text-gray-800">Capital call due - Sequoia XIV</p></div>
+                                    <button class="text-xs text-blue-700 font-medium hover:underline" onclick="showToast('Opening capital call details...')">View</button>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <!-- Clients Tab -->
-                    <div id="tab-clients" class="tab-content">
-                        <div class="bg-white rounded-xl shadow-sm">
-                            <div class="p-6 border-b border-gray-200 flex items-center justify-between">
-                                <div>
-                                    <h3 class="font-semibold text-gray-800">Client Directory</h3>
-                                    <p class="text-sm text-gray-500">342 total clients</p>
-                                </div>
-                                <button class="bg-primary-500 hover:bg-primary-600 text-white px-4 py-2 rounded-lg text-sm font-medium">+ Add Client</button>
-                            </div>
-                            <table class="w-full">
+                <!-- Clients Panel -->
+                <div id="panel-clients" class="tab-panel fade-in">
+                    <div class="bg-white rounded-xl shadow-sm">
+                        <div class="p-4 border-b border-gray-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                            <div><h3 class="font-semibold text-gray-800">Client Directory</h3><p class="text-xs text-gray-500">342 total clients</p></div>
+                            <button class="bg-primary-500 hover:bg-primary-600 text-white px-4 py-2 rounded-lg text-sm font-medium" onclick="showToast('Add client form would open here')">+ Add Client</button>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="w-full min-w-[600px]">
                                 <thead class="bg-gray-50">
                                     <tr>
-                                        <th class="text-left p-4 text-xs font-medium text-gray-500 uppercase">Client</th>
-                                        <th class="text-left p-4 text-xs font-medium text-gray-500 uppercase">Type</th>
-                                        <th class="text-right p-4 text-xs font-medium text-gray-500 uppercase">AUM</th>
-                                        <th class="text-right p-4 text-xs font-medium text-gray-500 uppercase">YTD Return</th>
-                                        <th class="text-center p-4 text-xs font-medium text-gray-500 uppercase">Status</th>
+                                        <th class="text-left p-3 text-xs font-medium text-gray-500 uppercase">Client</th>
+                                        <th class="text-left p-3 text-xs font-medium text-gray-500 uppercase">Type</th>
+                                        <th class="text-right p-3 text-xs font-medium text-gray-500 uppercase">AUM</th>
+                                        <th class="text-right p-3 text-xs font-medium text-gray-500 uppercase">YTD</th>
+                                        <th class="text-center p-3 text-xs font-medium text-gray-500 uppercase">Status</th>
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-gray-100">
-                                    <tr class="hover:bg-gray-50 cursor-pointer">
-                                        <td class="p-4"><div class="flex items-center space-x-3"><div class="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center text-primary-600 font-medium text-sm">JW</div><div><p class="font-medium text-gray-800">Johnson Family Trust</p><p class="text-xs text-gray-500">3 accounts</p></div></div></td>
-                                        <td class="p-4 text-sm text-gray-600">Trust</td>
-                                        <td class="p-4 text-sm text-gray-800 text-right font-medium">$24.8M</td>
-                                        <td class="p-4 text-sm text-green-600 text-right font-medium">+14.2%</td>
-                                        <td class="p-4 text-center"><span class="px-2 py-1 text-xs font-medium bg-green-100 text-green-700 rounded-full">Active</span></td>
+                                    <tr class="hover:bg-gray-50 cursor-pointer" onclick="showToast('Opening Johnson Family Trust...')">
+                                        <td class="p-3"><div class="flex items-center space-x-3"><div class="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center text-primary-600 font-medium text-xs">JF</div><div><p class="font-medium text-gray-800 text-sm">Johnson Family Trust</p><p class="text-xs text-gray-500">3 accounts</p></div></div></td>
+                                        <td class="p-3 text-sm text-gray-600">Trust</td>
+                                        <td class="p-3 text-sm text-gray-800 text-right font-medium">$24.8M</td>
+                                        <td class="p-3 text-sm text-green-600 text-right font-medium">+14.2%</td>
+                                        <td class="p-3 text-center"><span class="px-2 py-1 text-xs font-medium bg-green-100 text-green-700 rounded-full">Active</span></td>
                                     </tr>
-                                    <tr class="hover:bg-gray-50 cursor-pointer">
-                                        <td class="p-4"><div class="flex items-center space-x-3"><div class="w-8 h-8 bg-accent-100 rounded-full flex items-center justify-center text-accent-600 font-medium text-sm">SM</div><div><p class="font-medium text-gray-800">Smith & Miller LLC</p><p class="text-xs text-gray-500">5 accounts</p></div></div></td>
-                                        <td class="p-4 text-sm text-gray-600">LLC</td>
-                                        <td class="p-4 text-sm text-gray-800 text-right font-medium">$18.5M</td>
-                                        <td class="p-4 text-sm text-green-600 text-right font-medium">+11.8%</td>
-                                        <td class="p-4 text-center"><span class="px-2 py-1 text-xs font-medium bg-green-100 text-green-700 rounded-full">Active</span></td>
+                                    <tr class="hover:bg-gray-50 cursor-pointer" onclick="showToast('Opening Smith & Miller LLC...')">
+                                        <td class="p-3"><div class="flex items-center space-x-3"><div class="w-8 h-8 bg-accent-100 rounded-full flex items-center justify-center text-accent-600 font-medium text-xs">SM</div><div><p class="font-medium text-gray-800 text-sm">Smith & Miller LLC</p><p class="text-xs text-gray-500">5 accounts</p></div></div></td>
+                                        <td class="p-3 text-sm text-gray-600">LLC</td>
+                                        <td class="p-3 text-sm text-gray-800 text-right font-medium">$18.5M</td>
+                                        <td class="p-3 text-sm text-green-600 text-right font-medium">+11.8%</td>
+                                        <td class="p-3 text-center"><span class="px-2 py-1 text-xs font-medium bg-green-100 text-green-700 rounded-full">Active</span></td>
                                     </tr>
-                                    <tr class="hover:bg-gray-50 cursor-pointer">
-                                        <td class="p-4"><div class="flex items-center space-x-3"><div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center text-purple-600 font-medium text-sm">RK</div><div><p class="font-medium text-gray-800">Robert & Karen Williams</p><p class="text-xs text-gray-500">2 accounts</p></div></div></td>
-                                        <td class="p-4 text-sm text-gray-600">Individual</td>
-                                        <td class="p-4 text-sm text-gray-800 text-right font-medium">$8.2M</td>
-                                        <td class="p-4 text-sm text-green-600 text-right font-medium">+9.4%</td>
-                                        <td class="p-4 text-center"><span class="px-2 py-1 text-xs font-medium bg-green-100 text-green-700 rounded-full">Active</span></td>
-                                    </tr>
-                                    <tr class="hover:bg-gray-50 cursor-pointer">
-                                        <td class="p-4"><div class="flex items-center space-x-3"><div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-medium text-sm">CF</div><div><p class="font-medium text-gray-800">Chen Family Foundation</p><p class="text-xs text-gray-500">1 account</p></div></div></td>
-                                        <td class="p-4 text-sm text-gray-600">Foundation</td>
-                                        <td class="p-4 text-sm text-gray-800 text-right font-medium">$12.1M</td>
-                                        <td class="p-4 text-sm text-green-600 text-right font-medium">+10.7%</td>
-                                        <td class="p-4 text-center"><span class="px-2 py-1 text-xs font-medium bg-green-100 text-green-700 rounded-full">Active</span></td>
+                                    <tr class="hover:bg-gray-50 cursor-pointer" onclick="showToast('Opening Williams account...')">
+                                        <td class="p-3"><div class="flex items-center space-x-3"><div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center text-purple-600 font-medium text-xs">RW</div><div><p class="font-medium text-gray-800 text-sm">Robert & Karen Williams</p><p class="text-xs text-gray-500">2 accounts</p></div></div></td>
+                                        <td class="p-3 text-sm text-gray-600">Individual</td>
+                                        <td class="p-3 text-sm text-gray-800 text-right font-medium">$8.2M</td>
+                                        <td class="p-3 text-sm text-green-600 text-right font-medium">+9.4%</td>
+                                        <td class="p-3 text-center"><span class="px-2 py-1 text-xs font-medium bg-green-100 text-green-700 rounded-full">Active</span></td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
+                </div>
 
-                    <!-- Portfolios Tab -->
-                    <div id="tab-portfolios" class="tab-content">
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            <div class="bg-white rounded-xl p-6 shadow-sm cursor-pointer hover:shadow-md transition-shadow">
-                                <div class="flex items-center justify-between mb-4">
-                                    <h3 class="font-semibold text-gray-800">Growth Portfolio</h3>
-                                    <span class="px-2 py-1 text-xs font-medium bg-primary-100 text-primary-700 rounded">Model</span>
-                                </div>
-                                <p class="text-2xl font-bold text-gray-900 mb-1">$245.8M</p>
-                                <p class="text-sm text-green-600 mb-4">↑ 15.2% YTD</p>
-                                <div class="flex justify-between text-sm">
-                                    <span class="text-gray-500">42 accounts</span>
-                                    <span class="text-gray-500">80/20 allocation</span>
-                                </div>
-                            </div>
-                            <div class="bg-white rounded-xl p-6 shadow-sm cursor-pointer hover:shadow-md transition-shadow">
-                                <div class="flex items-center justify-between mb-4">
-                                    <h3 class="font-semibold text-gray-800">Balanced Portfolio</h3>
-                                    <span class="px-2 py-1 text-xs font-medium bg-primary-100 text-primary-700 rounded">Model</span>
-                                </div>
-                                <p class="text-2xl font-bold text-gray-900 mb-1">$312.4M</p>
-                                <p class="text-sm text-green-600 mb-4">↑ 11.8% YTD</p>
-                                <div class="flex justify-between text-sm">
-                                    <span class="text-gray-500">78 accounts</span>
-                                    <span class="text-gray-500">60/40 allocation</span>
-                                </div>
-                            </div>
-                            <div class="bg-white rounded-xl p-6 shadow-sm cursor-pointer hover:shadow-md transition-shadow">
-                                <div class="flex items-center justify-between mb-4">
-                                    <h3 class="font-semibold text-gray-800">Income Portfolio</h3>
-                                    <span class="px-2 py-1 text-xs font-medium bg-primary-100 text-primary-700 rounded">Model</span>
-                                </div>
-                                <p class="text-2xl font-bold text-gray-900 mb-1">$189.2M</p>
-                                <p class="text-sm text-green-600 mb-4">↑ 7.4% YTD</p>
-                                <div class="flex justify-between text-sm">
-                                    <span class="text-gray-500">56 accounts</span>
-                                    <span class="text-gray-500">30/70 allocation</span>
-                                </div>
-                            </div>
+                <!-- Portfolios Panel -->
+                <div id="panel-portfolios" class="tab-panel fade-in">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="bg-white rounded-xl p-5 shadow-sm cursor-pointer hover:shadow-md transition-shadow" onclick="showToast('Opening Growth Portfolio...')">
+                            <div class="flex items-center justify-between mb-3"><h3 class="font-semibold text-gray-800">Growth Portfolio</h3><span class="px-2 py-1 text-xs font-medium bg-primary-100 text-primary-700 rounded">Model</span></div>
+                            <p class="text-2xl font-bold text-gray-900 mb-1">$245.8M</p>
+                            <p class="text-sm text-green-600 mb-3">↑ 15.2% YTD</p>
+                            <div class="flex justify-between text-xs text-gray-500"><span>42 accounts</span><span>80/20 allocation</span></div>
+                        </div>
+                        <div class="bg-white rounded-xl p-5 shadow-sm cursor-pointer hover:shadow-md transition-shadow" onclick="showToast('Opening Balanced Portfolio...')">
+                            <div class="flex items-center justify-between mb-3"><h3 class="font-semibold text-gray-800">Balanced Portfolio</h3><span class="px-2 py-1 text-xs font-medium bg-primary-100 text-primary-700 rounded">Model</span></div>
+                            <p class="text-2xl font-bold text-gray-900 mb-1">$312.4M</p>
+                            <p class="text-sm text-green-600 mb-3">↑ 11.8% YTD</p>
+                            <div class="flex justify-between text-xs text-gray-500"><span>78 accounts</span><span>60/40 allocation</span></div>
+                        </div>
+                        <div class="bg-white rounded-xl p-5 shadow-sm cursor-pointer hover:shadow-md transition-shadow" onclick="showToast('Opening Income Portfolio...')">
+                            <div class="flex items-center justify-between mb-3"><h3 class="font-semibold text-gray-800">Income Portfolio</h3><span class="px-2 py-1 text-xs font-medium bg-primary-100 text-primary-700 rounded">Model</span></div>
+                            <p class="text-2xl font-bold text-gray-900 mb-1">$189.2M</p>
+                            <p class="text-sm text-green-600 mb-3">↑ 7.4% YTD</p>
+                            <div class="flex justify-between text-xs text-gray-500"><span>56 accounts</span><span>30/70 allocation</span></div>
                         </div>
                     </div>
+                </div>
 
-                    <!-- Trading Tab -->
-                    <div id="tab-trading" class="tab-content">
-                        <div class="bg-white rounded-xl shadow-sm p-6">
-                            <h3 class="font-semibold text-gray-800 mb-4">Trade Blotter</h3>
-                            <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6">
-                                <div class="flex items-center space-x-2">
-                                    <svg class="w-5 h-5 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
-                                    <span class="text-sm text-yellow-800 font-medium">3 portfolios need rebalancing - 12 trades pending approval</span>
-                                </div>
-                            </div>
-                            <table class="w-full">
+                <!-- Trading Panel -->
+                <div id="panel-trading" class="tab-panel fade-in">
+                    <div class="bg-white rounded-xl shadow-sm p-4">
+                        <h3 class="font-semibold text-gray-800 mb-3">Trade Blotter</h3>
+                        <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-3 mb-4 flex items-center space-x-2">
+                            <svg class="w-4 h-4 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                            <span class="text-sm text-yellow-800">12 trades pending approval</span>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="w-full min-w-[500px]">
                                 <thead class="bg-gray-50">
                                     <tr>
                                         <th class="text-left p-3 text-xs font-medium text-gray-500 uppercase">Account</th>
                                         <th class="text-left p-3 text-xs font-medium text-gray-500 uppercase">Action</th>
                                         <th class="text-left p-3 text-xs font-medium text-gray-500 uppercase">Security</th>
                                         <th class="text-right p-3 text-xs font-medium text-gray-500 uppercase">Qty</th>
-                                        <th class="text-right p-3 text-xs font-medium text-gray-500 uppercase">Est. Value</th>
+                                        <th class="text-right p-3 text-xs font-medium text-gray-500 uppercase">Value</th>
                                         <th class="text-center p-3 text-xs font-medium text-gray-500 uppercase">Status</th>
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-gray-100">
-                                    <tr>
+                                    <tr class="hover:bg-gray-50">
                                         <td class="p-3 text-sm text-gray-800">Johnson Trust</td>
                                         <td class="p-3"><span class="text-xs font-medium px-2 py-1 bg-green-100 text-green-700 rounded">BUY</span></td>
                                         <td class="p-3 text-sm text-gray-800">VTI</td>
@@ -1142,7 +696,7 @@
                                         <td class="p-3 text-sm text-gray-800 text-right">$62,500</td>
                                         <td class="p-3 text-center"><span class="text-xs font-medium px-2 py-1 bg-yellow-100 text-yellow-700 rounded">Pending</span></td>
                                     </tr>
-                                    <tr>
+                                    <tr class="hover:bg-gray-50">
                                         <td class="p-3 text-sm text-gray-800">Smith LLC</td>
                                         <td class="p-3"><span class="text-xs font-medium px-2 py-1 bg-red-100 text-red-700 rounded">SELL</span></td>
                                         <td class="p-3 text-sm text-gray-800">BND</td>
@@ -1154,175 +708,154 @@
                             </table>
                         </div>
                     </div>
+                </div>
 
-                    <!-- Reports Tab -->
-                    <div id="tab-reports" class="tab-content">
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            <div class="bg-white rounded-xl p-6 shadow-sm cursor-pointer hover:shadow-md transition-shadow">
-                                <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
-                                    <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
-                                </div>
-                                <h3 class="font-semibold text-gray-800 mb-2">Performance Report</h3>
-                                <p class="text-sm text-gray-500">Time-weighted and money-weighted returns with benchmark comparison</p>
+                <!-- Reports Panel -->
+                <div id="panel-reports" class="tab-panel fade-in">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="bg-white rounded-xl p-5 shadow-sm cursor-pointer hover:shadow-md transition-shadow" onclick="showToast('Generating Performance Report...')">
+                            <div class="w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center mb-3"><svg class="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg></div>
+                            <h3 class="font-semibold text-gray-800 text-sm mb-1">Performance Report</h3>
+                            <p class="text-xs text-gray-500">TWR/MWR with benchmarks</p>
+                        </div>
+                        <div class="bg-white rounded-xl p-5 shadow-sm cursor-pointer hover:shadow-md transition-shadow" onclick="showToast('Generating Allocation Report...')">
+                            <div class="w-10 h-10 bg-accent-100 rounded-lg flex items-center justify-center mb-3"><svg class="w-5 h-5 text-accent-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"/></svg></div>
+                            <h3 class="font-semibold text-gray-800 text-sm mb-1">Asset Allocation</h3>
+                            <p class="text-xs text-gray-500">Current vs target drift</p>
+                        </div>
+                        <div class="bg-white rounded-xl p-5 shadow-sm cursor-pointer hover:shadow-md transition-shadow" onclick="showToast('Generating Billing Report...')">
+                            <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center mb-3"><svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+                            <h3 class="font-semibold text-gray-800 text-sm mb-1">Fee Billing</h3>
+                            <p class="text-xs text-gray-500">Client invoices & details</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Panel -->
+                <div id="panel-ai" class="tab-panel fade-in">
+                    <div class="max-w-2xl mx-auto">
+                        <div class="bg-white rounded-xl shadow-sm p-4">
+                            <div class="flex items-center space-x-3 mb-4 pb-4 border-b border-gray-100">
+                                <div class="w-9 h-9 bg-gradient-to-br from-accent-500 to-primary-500 rounded-lg flex items-center justify-center"><svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg></div>
+                                <div><h3 class="font-semibold text-gray-800 text-sm">NexusAI Assistant</h3><p class="text-xs text-gray-500">Ask anything about your portfolios</p></div>
                             </div>
-                            <div class="bg-white rounded-xl p-6 shadow-sm cursor-pointer hover:shadow-md transition-shadow">
-                                <div class="w-12 h-12 bg-accent-100 rounded-lg flex items-center justify-center mb-4">
-                                    <svg class="w-6 h-6 text-accent-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path></svg>
-                                </div>
-                                <h3 class="font-semibold text-gray-800 mb-2">Asset Allocation</h3>
-                                <p class="text-sm text-gray-500">Current allocation vs target with drift analysis</p>
+                            <div class="space-y-3 mb-4 max-h-64 overflow-y-auto">
+                                <div class="flex justify-end"><div class="bg-primary-500 text-white rounded-2xl rounded-tr-sm px-3 py-2 max-w-xs"><p class="text-sm">What's my total tech exposure?</p></div></div>
+                                <div class="flex justify-start"><div class="bg-gray-100 text-gray-800 rounded-2xl rounded-tl-sm px-3 py-2 max-w-xs"><p class="text-sm mb-1">Your tech exposure is <strong>$127.4M (15.0%)</strong>.</p><p class="text-xs text-gray-600">Top: AAPL $42.1M, MSFT $38.2M, NVDA $21.5M</p></div></div>
+                                <div class="flex justify-end"><div class="bg-primary-500 text-white rounded-2xl rounded-tr-sm px-3 py-2 max-w-xs"><p class="text-sm">Which clients have concentration risk?</p></div></div>
+                                <div class="flex justify-start"><div class="bg-gray-100 text-gray-800 rounded-2xl rounded-tl-sm px-3 py-2 max-w-xs"><p class="text-sm mb-1"><strong>3 clients</strong> exceed 25% single-stock:</p><ul class="text-xs text-gray-600 space-y-0.5"><li>• Johnson: 34% AAPL</li><li>• Smith: 28% TSLA</li><li>• Chen: 26% AMZN</li></ul></div></div>
                             </div>
-                            <div class="bg-white rounded-xl p-6 shadow-sm cursor-pointer hover:shadow-md transition-shadow">
-                                <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
-                                    <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                </div>
-                                <h3 class="font-semibold text-gray-800 mb-2">Fee Billing Report</h3>
-                                <p class="text-sm text-gray-500">Detailed fee calculations with client invoices</p>
+                            <div class="flex flex-wrap gap-2 mb-3">
+                                <button class="text-xs bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1.5 rounded-full transition-colors" onclick="showToast('Analyzing portfolio drift...')">Portfolio drift analysis</button>
+                                <button class="text-xs bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1.5 rounded-full transition-colors" onclick="showToast('Finding rebalancing opportunities...')">Rebalancing opportunities</button>
+                                <button class="text-xs bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1.5 rounded-full transition-colors" onclick="showToast('Generating tax loss harvest suggestions...')">Tax loss harvesting</button>
+                            </div>
+                            <div class="flex space-x-2">
+                                <input type="text" placeholder="Ask NexusAI anything..." class="flex-1 border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent" aria-label="Message input">
+                                <button class="bg-primary-500 hover:bg-primary-600 text-white px-3 py-2 rounded-lg transition-colors" aria-label="Send message"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg></button>
                             </div>
                         </div>
                     </div>
-
-                    <!-- AI Tab -->
-                    <div id="tab-ai" class="tab-content">
-                        <div class="max-w-3xl mx-auto">
-                            <div class="bg-white rounded-xl shadow-sm p-6">
-                                <div class="flex items-center space-x-3 mb-6">
-                                    <div class="w-10 h-10 bg-gradient-to-br from-accent-500 to-primary-500 rounded-lg flex items-center justify-center">
-                                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
-                                    </div>
-                                    <div>
-                                        <h3 class="font-semibold text-gray-800">NexusAI Assistant</h3>
-                                        <p class="text-sm text-gray-500">Ask anything about your portfolios</p>
-                                    </div>
-                                </div>
-
-                                <div class="space-y-4 mb-6">
-                                    <div class="flex justify-end">
-                                        <div class="bg-primary-500 text-white rounded-2xl rounded-tr-sm px-4 py-2 max-w-md">
-                                            <p class="text-sm">What's my total exposure to technology stocks?</p>
-                                        </div>
-                                    </div>
-                                    <div class="flex justify-start">
-                                        <div class="bg-gray-100 text-gray-800 rounded-2xl rounded-tl-sm px-4 py-3 max-w-md">
-                                            <p class="text-sm mb-2">Your total technology exposure across all portfolios is <strong>$127.4M (15.0% of AUM)</strong>.</p>
-                                            <p class="text-sm text-gray-600">Top holdings: AAPL ($42.1M), MSFT ($38.2M), NVDA ($21.5M), GOOGL ($15.8M)</p>
-                                        </div>
-                                    </div>
-                                    <div class="flex justify-end">
-                                        <div class="bg-primary-500 text-white rounded-2xl rounded-tr-sm px-4 py-2 max-w-md">
-                                            <p class="text-sm">Which clients have the highest concentration risk?</p>
-                                        </div>
-                                    </div>
-                                    <div class="flex justify-start">
-                                        <div class="bg-gray-100 text-gray-800 rounded-2xl rounded-tl-sm px-4 py-3 max-w-md">
-                                            <p class="text-sm mb-2">I found <strong>3 clients</strong> with single-stock concentration above 25%:</p>
-                                            <ul class="text-sm text-gray-600 space-y-1">
-                                                <li>• Johnson Trust: 34% in AAPL ($8.4M)</li>
-                                                <li>• Smith LLC: 28% in TSLA ($5.2M)</li>
-                                                <li>• Chen Foundation: 26% in AMZN ($3.1M)</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="flex space-x-2">
-                                    <input type="text" placeholder="Ask NexusAI anything..." class="flex-1 border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent">
-                                    <button class="bg-primary-500 hover:bg-primary-600 text-white px-4 py-2 rounded-lg">
-                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </main>
-            </div>
+                </div>
+            </main>
         </div>
     </div>
 
+    <!-- Toast notification -->
+    <div id="toast" class="fixed bottom-4 right-4 bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg text-sm transform translate-y-20 opacity-0 transition-all z-50"></div>
+
     <script>
-        function openDemo() {
-            document.getElementById('demo-modal').classList.add('active');
-            document.getElementById('landing-page').style.display = 'none';
+        // View management
+        function enterDemo() {
+            document.body.classList.add('demo-mode');
+            showTab('dashboard');
         }
 
-        function closeDemo() {
-            document.getElementById('demo-modal').classList.remove('active');
-            document.getElementById('landing-page').style.display = 'block';
+        function exitDemo() {
+            document.body.classList.remove('demo-mode');
+            document.body.classList.remove('sidebar-open');
         }
 
+        // Sidebar toggle (mobile)
+        function toggleSidebar() {
+            document.body.classList.toggle('sidebar-open');
+        }
+
+        // Tab navigation
         function showTab(tabName) {
-            // Hide all tabs
-            document.querySelectorAll('.tab-content').forEach(tab => {
-                tab.classList.remove('active');
+            // Hide all panels
+            document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+            // Show selected
+            const panel = document.getElementById('panel-' + tabName);
+            if (panel) panel.classList.add('active');
+
+            // Update title
+            const titles = { dashboard: 'Dashboard', clients: 'Clients', portfolios: 'Portfolios', trading: 'Trading', reports: 'Reports', ai: 'NexusAI Assistant' };
+            document.getElementById('page-title').textContent = titles[tabName] || 'Dashboard';
+
+            // Update nav buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active', 'bg-primary-600', 'text-white');
+                btn.classList.add('text-primary-200', 'hover:bg-primary-600', 'hover:text-white');
             });
-
-            // Show selected tab
-            document.getElementById('tab-' + tabName).classList.add('active');
-
-            // Update page title
-            const titles = {
-                'dashboard': 'Dashboard',
-                'clients': 'Clients',
-                'portfolios': 'Portfolios',
-                'trading': 'Trading',
-                'reports': 'Reports',
-                'ai': 'NexusAI Assistant'
-            };
-            document.getElementById('page-title').textContent = titles[tabName];
-
-            // Update nav styling
-            document.querySelectorAll('.nav-item').forEach(item => {
-                item.classList.remove('bg-primary-600', 'text-white');
-                item.classList.add('text-primary-200');
-            });
-            event.currentTarget.classList.add('bg-primary-600', 'text-white');
-            event.currentTarget.classList.remove('text-primary-200');
-        }
-
-        // ROI Calculator functionality
-        function updateROICalculator() {
-            const slider = document.getElementById('aum-slider');
-            const aumValue = parseInt(slider.value); // Value in millions (100-2000)
-
-            // Update AUM display
-            document.getElementById('aum-display').textContent = aumValue.toLocaleString();
-
-            // Calculate costs based on AUM
-            // Addepar: ~2.4-3.0 bps decreasing with scale (industry research)
-            // Base rate of 3bps at $100M, decreasing to 2bps at $2B
-            const addeperBps = 3.0 - (aumValue - 100) * (1.0 / 1900);
-            const addeperCost = Math.round((aumValue * 1000000) * (addeperBps / 10000));
-
-            // WealthNexus pricing: $499/mo base + tiered pricing
-            // Much more affordable - roughly 0.4-0.5 bps equivalent
-            let wealthnexusCost;
-            if (aumValue <= 250) {
-                wealthnexusCost = 5988 + (aumValue * 60); // Starter tier
-            } else if (aumValue <= 750) {
-                wealthnexusCost = 11988 + (aumValue * 40); // Growth tier
-            } else {
-                wealthnexusCost = 23988 + (aumValue * 25); // Enterprise tier
+            const activeBtn = document.querySelector(`[data-tab="${tabName}"]`);
+            if (activeBtn) {
+                activeBtn.classList.add('active', 'bg-primary-600', 'text-white');
+                activeBtn.classList.remove('text-primary-200');
             }
 
-            const annualSavings = addeperCost - wealthnexusCost;
-            const fiveYearSavings = annualSavings * 5;
-            const savingsPercent = Math.round((annualSavings / addeperCost) * 100);
-
-            // Update DOM elements
-            document.getElementById('addepar-cost').textContent = addeperCost.toLocaleString();
-            document.getElementById('wealthnexus-cost').textContent = wealthnexusCost.toLocaleString();
-            document.getElementById('savings').textContent = annualSavings.toLocaleString();
-            document.getElementById('five-year-savings').textContent = fiveYearSavings.toLocaleString();
-            document.getElementById('savings-percent').textContent = savingsPercent;
-            document.getElementById('savings-bar').style.width = savingsPercent + '%';
+            // Close mobile sidebar
+            document.body.classList.remove('sidebar-open');
         }
 
-        // Initialize ROI calculator on page load
+        // Toast notification
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => toast.classList.add('translate-y-20', 'opacity-0'), 2000);
+        }
+
+        // ROI Calculator
+        function updateCalc() {
+            const aum = parseInt(document.getElementById('aum-slider').value);
+            document.getElementById('aum-display').textContent = aum.toLocaleString();
+
+            // Legacy: ~3bps scaling down
+            const legacyBps = 3.0 - (aum - 100) * (1.0 / 1900);
+            const legacy = Math.round(aum * 1000000 * legacyBps / 10000);
+
+            // WealthNexus: tiered
+            let nexus = aum <= 250 ? 5988 + aum * 60 : aum <= 750 ? 11988 + aum * 40 : 23988 + aum * 25;
+
+            const savings = Math.max(0, legacy - nexus);
+            const pct = legacy > 0 ? Math.round(savings / legacy * 100) : 0;
+
+            document.getElementById('legacy-cost').textContent = legacy.toLocaleString();
+            document.getElementById('nexus-cost').textContent = nexus.toLocaleString();
+            document.getElementById('savings').textContent = savings.toLocaleString();
+            document.getElementById('five-year').textContent = (savings * 5).toLocaleString();
+            document.getElementById('savings-pct').textContent = pct;
+            document.getElementById('savings-bar').style.width = pct + '%';
+        }
+
+        // Sticky header shadow
+        function handleScroll() {
+            const header = document.querySelector('.header-sticky');
+            if (header) header.classList.toggle('scrolled', window.scrollY > 10);
+        }
+
+        // Init
         document.addEventListener('DOMContentLoaded', function() {
             const slider = document.getElementById('aum-slider');
-            if (slider) {
-                slider.addEventListener('input', updateROICalculator);
-                updateROICalculator(); // Initialize with default value
+            if (slider) { slider.addEventListener('input', updateCalc); updateCalc(); }
+            window.addEventListener('scroll', handleScroll);
+
+            // Set initial nav button state
+            const dashBtn = document.querySelector('[data-tab="dashboard"]');
+            if (dashBtn) {
+                dashBtn.classList.add('bg-primary-600', 'text-white');
+                dashBtn.classList.remove('text-primary-200');
             }
         });
     </script>
