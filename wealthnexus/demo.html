@@ -34,10 +34,14 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
         body { font-family: 'Inter', system-ui, sans-serif; }
+        .modal { display: none; }
+        .modal.active { display: flex; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
     </style>
 </head>
 <body>
-    <div class="min-h-screen bg-gradient-to-br from-primary-500 to-primary-700">
+    <div id="landing-page" class="min-h-screen bg-gradient-to-br from-primary-500 to-primary-700">
         <!-- Navigation -->
         <nav class="container mx-auto px-6 py-4">
             <div class="flex items-center justify-between">
@@ -48,8 +52,8 @@
                     <span class="text-white text-xl font-bold">WealthNexus</span>
                 </div>
                 <div class="flex items-center space-x-4">
-                    <a href="#" class="text-white hover:text-accent-300 transition-colors">Sign In</a>
-                    <a href="#" class="bg-accent-500 hover:bg-accent-600 text-white px-4 py-2 rounded-lg transition-colors">Request Demo</a>
+                    <button onclick="openDemo()" class="text-white hover:text-accent-300 transition-colors">Sign In</button>
+                    <button onclick="openDemo()" class="bg-accent-500 hover:bg-accent-600 text-white px-4 py-2 rounded-lg transition-colors">Request Demo</button>
                 </div>
             </div>
         </nav>
@@ -66,12 +70,12 @@
                     Deploy in days, not months. Built for advisors who demand more.
                 </p>
                 <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                    <a href="#" class="bg-white text-primary-500 hover:bg-primary-50 px-8 py-3 rounded-lg font-semibold text-lg transition-colors w-full sm:w-auto">
+                    <button onclick="openDemo()" class="bg-white text-primary-500 hover:bg-primary-50 px-8 py-3 rounded-lg font-semibold text-lg transition-colors w-full sm:w-auto">
                         Start Free Trial
-                    </a>
-                    <a href="#" class="border-2 border-white text-white hover:bg-white/10 px-8 py-3 rounded-lg font-semibold text-lg transition-colors w-full sm:w-auto">
+                    </button>
+                    <button onclick="openDemo()" class="border-2 border-white text-white hover:bg-white/10 px-8 py-3 rounded-lg font-semibold text-lg transition-colors w-full sm:w-auto">
                         Watch Demo
-                    </a>
+                    </button>
                 </div>
             </div>
 
@@ -260,12 +264,12 @@
                 <h2 class="text-3xl font-bold text-white mb-4">Ready to Transform Your Practice?</h2>
                 <p class="text-primary-200 mb-8 max-w-xl mx-auto">Join hundreds of advisors who've made the switch. Start your free trial today.</p>
                 <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                    <a href="#" class="bg-accent-500 hover:bg-accent-600 text-white px-8 py-3 rounded-lg font-semibold text-lg transition-colors">
+                    <button onclick="openDemo()" class="bg-accent-500 hover:bg-accent-600 text-white px-8 py-3 rounded-lg font-semibold text-lg transition-colors">
                         Start Free 14-Day Trial
-                    </a>
-                    <a href="#" class="text-white hover:text-accent-300 font-semibold">
+                    </button>
+                    <button onclick="openDemo()" class="text-white hover:text-accent-300 font-semibold">
                         Schedule a Demo →
-                    </a>
+                    </button>
                 </div>
             </div>
         </main>
@@ -285,5 +289,544 @@
             </div>
         </footer>
     </div>
+
+    <!-- Demo Modal - Full Dashboard -->
+    <div id="demo-modal" class="modal fixed inset-0 bg-gray-900 z-50 overflow-hidden">
+        <div class="flex h-screen w-full">
+            <!-- Sidebar -->
+            <div class="w-64 bg-primary-700 text-white flex flex-col">
+                <div class="p-4 flex items-center space-x-2 border-b border-primary-600">
+                    <div class="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
+                        <span class="text-primary-500 font-bold">W</span>
+                    </div>
+                    <span class="font-bold">WealthNexus</span>
+                </div>
+
+                <nav class="flex-1 p-4 space-y-1">
+                    <button onclick="showTab('dashboard')" class="nav-item w-full flex items-center space-x-3 px-3 py-2 rounded-lg bg-primary-600 text-white">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                        <span>Dashboard</span>
+                    </button>
+                    <button onclick="showTab('clients')" class="nav-item w-full flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-primary-600 text-primary-200 hover:text-white transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                        <span>Clients</span>
+                    </button>
+                    <button onclick="showTab('portfolios')" class="nav-item w-full flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-primary-600 text-primary-200 hover:text-white transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                        <span>Portfolios</span>
+                    </button>
+                    <button onclick="showTab('trading')" class="nav-item w-full flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-primary-600 text-primary-200 hover:text-white transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path></svg>
+                        <span>Trading</span>
+                    </button>
+                    <button onclick="showTab('reports')" class="nav-item w-full flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-primary-600 text-primary-200 hover:text-white transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                        <span>Reports</span>
+                    </button>
+                    <button onclick="showTab('ai')" class="nav-item w-full flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-primary-600 text-primary-200 hover:text-white transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+                        <span>NexusAI</span>
+                    </button>
+                </nav>
+
+                <div class="p-4 border-t border-primary-600">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 bg-accent-500 rounded-full flex items-center justify-center text-sm font-semibold">JD</div>
+                        <div class="flex-1">
+                            <p class="text-sm font-medium">Jane Doe</p>
+                            <p class="text-xs text-primary-300">Advisor</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="flex-1 flex flex-col bg-gray-100 overflow-hidden">
+                <!-- Top Bar -->
+                <header class="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
+                    <div>
+                        <h1 id="page-title" class="text-xl font-semibold text-gray-800">Dashboard</h1>
+                        <p class="text-sm text-gray-500">Welcome back, Jane</p>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <button class="p-2 text-gray-500 hover:text-gray-700">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
+                        </button>
+                        <button onclick="closeDemo()" class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+                            Exit Demo
+                        </button>
+                    </div>
+                </header>
+
+                <!-- Content Area -->
+                <main class="flex-1 overflow-auto p-6">
+                    <!-- Dashboard Tab -->
+                    <div id="tab-dashboard" class="tab-content active">
+                        <!-- Metric Cards -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+                            <div class="bg-white rounded-xl p-6 shadow-sm">
+                                <p class="text-sm text-gray-500 mb-1">Total AUM</p>
+                                <p class="text-2xl font-bold text-gray-900">$847.2M</p>
+                                <p class="text-sm text-green-600 mt-2">↑ 2.4% this month</p>
+                            </div>
+                            <div class="bg-white rounded-xl p-6 shadow-sm">
+                                <p class="text-sm text-gray-500 mb-1">Total Clients</p>
+                                <p class="text-2xl font-bold text-gray-900">342</p>
+                                <p class="text-sm text-green-600 mt-2">↑ 8 new this month</p>
+                            </div>
+                            <div class="bg-white rounded-xl p-6 shadow-sm">
+                                <p class="text-sm text-gray-500 mb-1">YTD Performance</p>
+                                <p class="text-2xl font-bold text-green-600">+12.8%</p>
+                                <p class="text-sm text-gray-500 mt-2">vs S&P 500: +10.2%</p>
+                            </div>
+                            <div class="bg-white rounded-xl p-6 shadow-sm">
+                                <p class="text-sm text-gray-500 mb-1">Monthly Revenue</p>
+                                <p class="text-2xl font-bold text-gray-900">$127.4K</p>
+                                <p class="text-sm text-green-600 mt-2">↑ 5.1% vs last month</p>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                            <!-- Performance Chart -->
+                            <div class="lg:col-span-2 bg-white rounded-xl p-6 shadow-sm">
+                                <h3 class="font-semibold text-gray-800 mb-4">Portfolio Performance</h3>
+                                <div class="h-64 flex items-end justify-between space-x-2 px-4">
+                                    <div class="flex flex-col items-center">
+                                        <div class="w-8 bg-accent-500 rounded-t" style="height: 120px"></div>
+                                        <span class="text-xs text-gray-500 mt-2">Jan</span>
+                                    </div>
+                                    <div class="flex flex-col items-center">
+                                        <div class="w-8 bg-accent-500 rounded-t" style="height: 140px"></div>
+                                        <span class="text-xs text-gray-500 mt-2">Feb</span>
+                                    </div>
+                                    <div class="flex flex-col items-center">
+                                        <div class="w-8 bg-accent-500 rounded-t" style="height: 100px"></div>
+                                        <span class="text-xs text-gray-500 mt-2">Mar</span>
+                                    </div>
+                                    <div class="flex flex-col items-center">
+                                        <div class="w-8 bg-accent-500 rounded-t" style="height: 160px"></div>
+                                        <span class="text-xs text-gray-500 mt-2">Apr</span>
+                                    </div>
+                                    <div class="flex flex-col items-center">
+                                        <div class="w-8 bg-accent-500 rounded-t" style="height: 180px"></div>
+                                        <span class="text-xs text-gray-500 mt-2">May</span>
+                                    </div>
+                                    <div class="flex flex-col items-center">
+                                        <div class="w-8 bg-accent-500 rounded-t" style="height: 150px"></div>
+                                        <span class="text-xs text-gray-500 mt-2">Jun</span>
+                                    </div>
+                                    <div class="flex flex-col items-center">
+                                        <div class="w-8 bg-accent-500 rounded-t" style="height: 170px"></div>
+                                        <span class="text-xs text-gray-500 mt-2">Jul</span>
+                                    </div>
+                                    <div class="flex flex-col items-center">
+                                        <div class="w-8 bg-accent-500 rounded-t" style="height: 190px"></div>
+                                        <span class="text-xs text-gray-500 mt-2">Aug</span>
+                                    </div>
+                                    <div class="flex flex-col items-center">
+                                        <div class="w-8 bg-accent-500 rounded-t" style="height: 165px"></div>
+                                        <span class="text-xs text-gray-500 mt-2">Sep</span>
+                                    </div>
+                                    <div class="flex flex-col items-center">
+                                        <div class="w-8 bg-accent-500 rounded-t" style="height: 200px"></div>
+                                        <span class="text-xs text-gray-500 mt-2">Oct</span>
+                                    </div>
+                                    <div class="flex flex-col items-center">
+                                        <div class="w-8 bg-accent-500 rounded-t" style="height: 210px"></div>
+                                        <span class="text-xs text-gray-500 mt-2">Nov</span>
+                                    </div>
+                                    <div class="flex flex-col items-center">
+                                        <div class="w-8 bg-primary-500 rounded-t" style="height: 220px"></div>
+                                        <span class="text-xs text-gray-500 mt-2">Dec</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Asset Allocation -->
+                            <div class="bg-white rounded-xl p-6 shadow-sm">
+                                <h3 class="font-semibold text-gray-800 mb-4">Asset Allocation</h3>
+                                <div class="space-y-4">
+                                    <div>
+                                        <div class="flex justify-between text-sm mb-1">
+                                            <span class="text-gray-600">US Equities</span>
+                                            <span class="font-medium">45%</span>
+                                        </div>
+                                        <div class="w-full bg-gray-200 rounded-full h-2">
+                                            <div class="bg-primary-500 h-2 rounded-full" style="width: 45%"></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="flex justify-between text-sm mb-1">
+                                            <span class="text-gray-600">Int'l Equities</span>
+                                            <span class="font-medium">20%</span>
+                                        </div>
+                                        <div class="w-full bg-gray-200 rounded-full h-2">
+                                            <div class="bg-accent-500 h-2 rounded-full" style="width: 20%"></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="flex justify-between text-sm mb-1">
+                                            <span class="text-gray-600">Fixed Income</span>
+                                            <span class="font-medium">20%</span>
+                                        </div>
+                                        <div class="w-full bg-gray-200 rounded-full h-2">
+                                            <div class="bg-blue-500 h-2 rounded-full" style="width: 20%"></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="flex justify-between text-sm mb-1">
+                                            <span class="text-gray-600">Alternatives</span>
+                                            <span class="font-medium">10%</span>
+                                        </div>
+                                        <div class="w-full bg-gray-200 rounded-full h-2">
+                                            <div class="bg-purple-500 h-2 rounded-full" style="width: 10%"></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="flex justify-between text-sm mb-1">
+                                            <span class="text-gray-600">Cash</span>
+                                            <span class="font-medium">5%</span>
+                                        </div>
+                                        <div class="w-full bg-gray-200 rounded-full h-2">
+                                            <div class="bg-gray-400 h-2 rounded-full" style="width: 5%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Recent Activity & Alerts -->
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+                            <div class="bg-white rounded-xl p-6 shadow-sm">
+                                <h3 class="font-semibold text-gray-800 mb-4">Recent Activity</h3>
+                                <div class="space-y-4">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                                            <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                                        </div>
+                                        <div class="flex-1">
+                                            <p class="text-sm font-medium text-gray-800">New client onboarded</p>
+                                            <p class="text-xs text-gray-500">Smith Family Trust - $4.2M</p>
+                                        </div>
+                                        <span class="text-xs text-gray-400">2h ago</span>
+                                    </div>
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                                            <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path></svg>
+                                        </div>
+                                        <div class="flex-1">
+                                            <p class="text-sm font-medium text-gray-800">Trade executed</p>
+                                            <p class="text-xs text-gray-500">Buy 500 AAPL @ $178.42</p>
+                                        </div>
+                                        <span class="text-xs text-gray-400">4h ago</span>
+                                    </div>
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
+                                            <svg class="w-4 h-4 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                                        </div>
+                                        <div class="flex-1">
+                                            <p class="text-sm font-medium text-gray-800">Report generated</p>
+                                            <p class="text-xs text-gray-500">Q4 Performance Report</p>
+                                        </div>
+                                        <span class="text-xs text-gray-400">Yesterday</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bg-white rounded-xl p-6 shadow-sm">
+                                <h3 class="font-semibold text-gray-800 mb-4">Alerts & Actions</h3>
+                                <div class="space-y-3">
+                                    <div class="flex items-center space-x-3 p-3 bg-yellow-50 rounded-lg">
+                                        <svg class="w-5 h-5 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                                        <div class="flex-1">
+                                            <p class="text-sm font-medium text-gray-800">3 portfolios need rebalancing</p>
+                                            <p class="text-xs text-gray-500">Drift exceeds 5% threshold</p>
+                                        </div>
+                                        <button class="text-xs text-yellow-700 font-medium hover:underline">Review</button>
+                                    </div>
+                                    <div class="flex items-center space-x-3 p-3 bg-blue-50 rounded-lg">
+                                        <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                                        <div class="flex-1">
+                                            <p class="text-sm font-medium text-gray-800">Capital call due</p>
+                                            <p class="text-xs text-gray-500">Sequoia Fund XIV - $125K</p>
+                                        </div>
+                                        <button class="text-xs text-blue-700 font-medium hover:underline">View</button>
+                                    </div>
+                                    <div class="flex items-center space-x-3 p-3 bg-green-50 rounded-lg">
+                                        <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                        <div class="flex-1">
+                                            <p class="text-sm font-medium text-gray-800">Billing completed</p>
+                                            <p class="text-xs text-gray-500">Q4 fees collected: $127.4K</p>
+                                        </div>
+                                        <button class="text-xs text-green-700 font-medium hover:underline">Details</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Clients Tab -->
+                    <div id="tab-clients" class="tab-content">
+                        <div class="bg-white rounded-xl shadow-sm">
+                            <div class="p-6 border-b border-gray-200 flex items-center justify-between">
+                                <div>
+                                    <h3 class="font-semibold text-gray-800">Client Directory</h3>
+                                    <p class="text-sm text-gray-500">342 total clients</p>
+                                </div>
+                                <button class="bg-primary-500 hover:bg-primary-600 text-white px-4 py-2 rounded-lg text-sm font-medium">+ Add Client</button>
+                            </div>
+                            <table class="w-full">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th class="text-left p-4 text-xs font-medium text-gray-500 uppercase">Client</th>
+                                        <th class="text-left p-4 text-xs font-medium text-gray-500 uppercase">Type</th>
+                                        <th class="text-right p-4 text-xs font-medium text-gray-500 uppercase">AUM</th>
+                                        <th class="text-right p-4 text-xs font-medium text-gray-500 uppercase">YTD Return</th>
+                                        <th class="text-center p-4 text-xs font-medium text-gray-500 uppercase">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-100">
+                                    <tr class="hover:bg-gray-50 cursor-pointer">
+                                        <td class="p-4"><div class="flex items-center space-x-3"><div class="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center text-primary-600 font-medium text-sm">JW</div><div><p class="font-medium text-gray-800">Johnson Family Trust</p><p class="text-xs text-gray-500">3 accounts</p></div></div></td>
+                                        <td class="p-4 text-sm text-gray-600">Trust</td>
+                                        <td class="p-4 text-sm text-gray-800 text-right font-medium">$24.8M</td>
+                                        <td class="p-4 text-sm text-green-600 text-right font-medium">+14.2%</td>
+                                        <td class="p-4 text-center"><span class="px-2 py-1 text-xs font-medium bg-green-100 text-green-700 rounded-full">Active</span></td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50 cursor-pointer">
+                                        <td class="p-4"><div class="flex items-center space-x-3"><div class="w-8 h-8 bg-accent-100 rounded-full flex items-center justify-center text-accent-600 font-medium text-sm">SM</div><div><p class="font-medium text-gray-800">Smith & Miller LLC</p><p class="text-xs text-gray-500">5 accounts</p></div></div></td>
+                                        <td class="p-4 text-sm text-gray-600">LLC</td>
+                                        <td class="p-4 text-sm text-gray-800 text-right font-medium">$18.5M</td>
+                                        <td class="p-4 text-sm text-green-600 text-right font-medium">+11.8%</td>
+                                        <td class="p-4 text-center"><span class="px-2 py-1 text-xs font-medium bg-green-100 text-green-700 rounded-full">Active</span></td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50 cursor-pointer">
+                                        <td class="p-4"><div class="flex items-center space-x-3"><div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center text-purple-600 font-medium text-sm">RK</div><div><p class="font-medium text-gray-800">Robert & Karen Williams</p><p class="text-xs text-gray-500">2 accounts</p></div></div></td>
+                                        <td class="p-4 text-sm text-gray-600">Individual</td>
+                                        <td class="p-4 text-sm text-gray-800 text-right font-medium">$8.2M</td>
+                                        <td class="p-4 text-sm text-green-600 text-right font-medium">+9.4%</td>
+                                        <td class="p-4 text-center"><span class="px-2 py-1 text-xs font-medium bg-green-100 text-green-700 rounded-full">Active</span></td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50 cursor-pointer">
+                                        <td class="p-4"><div class="flex items-center space-x-3"><div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-medium text-sm">CF</div><div><p class="font-medium text-gray-800">Chen Family Foundation</p><p class="text-xs text-gray-500">1 account</p></div></div></td>
+                                        <td class="p-4 text-sm text-gray-600">Foundation</td>
+                                        <td class="p-4 text-sm text-gray-800 text-right font-medium">$12.1M</td>
+                                        <td class="p-4 text-sm text-green-600 text-right font-medium">+10.7%</td>
+                                        <td class="p-4 text-center"><span class="px-2 py-1 text-xs font-medium bg-green-100 text-green-700 rounded-full">Active</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Portfolios Tab -->
+                    <div id="tab-portfolios" class="tab-content">
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            <div class="bg-white rounded-xl p-6 shadow-sm cursor-pointer hover:shadow-md transition-shadow">
+                                <div class="flex items-center justify-between mb-4">
+                                    <h3 class="font-semibold text-gray-800">Growth Portfolio</h3>
+                                    <span class="px-2 py-1 text-xs font-medium bg-primary-100 text-primary-700 rounded">Model</span>
+                                </div>
+                                <p class="text-2xl font-bold text-gray-900 mb-1">$245.8M</p>
+                                <p class="text-sm text-green-600 mb-4">↑ 15.2% YTD</p>
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-gray-500">42 accounts</span>
+                                    <span class="text-gray-500">80/20 allocation</span>
+                                </div>
+                            </div>
+                            <div class="bg-white rounded-xl p-6 shadow-sm cursor-pointer hover:shadow-md transition-shadow">
+                                <div class="flex items-center justify-between mb-4">
+                                    <h3 class="font-semibold text-gray-800">Balanced Portfolio</h3>
+                                    <span class="px-2 py-1 text-xs font-medium bg-primary-100 text-primary-700 rounded">Model</span>
+                                </div>
+                                <p class="text-2xl font-bold text-gray-900 mb-1">$312.4M</p>
+                                <p class="text-sm text-green-600 mb-4">↑ 11.8% YTD</p>
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-gray-500">78 accounts</span>
+                                    <span class="text-gray-500">60/40 allocation</span>
+                                </div>
+                            </div>
+                            <div class="bg-white rounded-xl p-6 shadow-sm cursor-pointer hover:shadow-md transition-shadow">
+                                <div class="flex items-center justify-between mb-4">
+                                    <h3 class="font-semibold text-gray-800">Income Portfolio</h3>
+                                    <span class="px-2 py-1 text-xs font-medium bg-primary-100 text-primary-700 rounded">Model</span>
+                                </div>
+                                <p class="text-2xl font-bold text-gray-900 mb-1">$189.2M</p>
+                                <p class="text-sm text-green-600 mb-4">↑ 7.4% YTD</p>
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-gray-500">56 accounts</span>
+                                    <span class="text-gray-500">30/70 allocation</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Trading Tab -->
+                    <div id="tab-trading" class="tab-content">
+                        <div class="bg-white rounded-xl shadow-sm p-6">
+                            <h3 class="font-semibold text-gray-800 mb-4">Trade Blotter</h3>
+                            <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6">
+                                <div class="flex items-center space-x-2">
+                                    <svg class="w-5 h-5 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                                    <span class="text-sm text-yellow-800 font-medium">3 portfolios need rebalancing - 12 trades pending approval</span>
+                                </div>
+                            </div>
+                            <table class="w-full">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th class="text-left p-3 text-xs font-medium text-gray-500 uppercase">Account</th>
+                                        <th class="text-left p-3 text-xs font-medium text-gray-500 uppercase">Action</th>
+                                        <th class="text-left p-3 text-xs font-medium text-gray-500 uppercase">Security</th>
+                                        <th class="text-right p-3 text-xs font-medium text-gray-500 uppercase">Qty</th>
+                                        <th class="text-right p-3 text-xs font-medium text-gray-500 uppercase">Est. Value</th>
+                                        <th class="text-center p-3 text-xs font-medium text-gray-500 uppercase">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-100">
+                                    <tr>
+                                        <td class="p-3 text-sm text-gray-800">Johnson Trust</td>
+                                        <td class="p-3"><span class="text-xs font-medium px-2 py-1 bg-green-100 text-green-700 rounded">BUY</span></td>
+                                        <td class="p-3 text-sm text-gray-800">VTI</td>
+                                        <td class="p-3 text-sm text-gray-800 text-right">250</td>
+                                        <td class="p-3 text-sm text-gray-800 text-right">$62,500</td>
+                                        <td class="p-3 text-center"><span class="text-xs font-medium px-2 py-1 bg-yellow-100 text-yellow-700 rounded">Pending</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-3 text-sm text-gray-800">Smith LLC</td>
+                                        <td class="p-3"><span class="text-xs font-medium px-2 py-1 bg-red-100 text-red-700 rounded">SELL</span></td>
+                                        <td class="p-3 text-sm text-gray-800">BND</td>
+                                        <td class="p-3 text-sm text-gray-800 text-right">500</td>
+                                        <td class="p-3 text-sm text-gray-800 text-right">$35,000</td>
+                                        <td class="p-3 text-center"><span class="text-xs font-medium px-2 py-1 bg-yellow-100 text-yellow-700 rounded">Pending</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Reports Tab -->
+                    <div id="tab-reports" class="tab-content">
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            <div class="bg-white rounded-xl p-6 shadow-sm cursor-pointer hover:shadow-md transition-shadow">
+                                <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
+                                    <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                                </div>
+                                <h3 class="font-semibold text-gray-800 mb-2">Performance Report</h3>
+                                <p class="text-sm text-gray-500">Time-weighted and money-weighted returns with benchmark comparison</p>
+                            </div>
+                            <div class="bg-white rounded-xl p-6 shadow-sm cursor-pointer hover:shadow-md transition-shadow">
+                                <div class="w-12 h-12 bg-accent-100 rounded-lg flex items-center justify-center mb-4">
+                                    <svg class="w-6 h-6 text-accent-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path></svg>
+                                </div>
+                                <h3 class="font-semibold text-gray-800 mb-2">Asset Allocation</h3>
+                                <p class="text-sm text-gray-500">Current allocation vs target with drift analysis</p>
+                            </div>
+                            <div class="bg-white rounded-xl p-6 shadow-sm cursor-pointer hover:shadow-md transition-shadow">
+                                <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+                                    <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                </div>
+                                <h3 class="font-semibold text-gray-800 mb-2">Fee Billing Report</h3>
+                                <p class="text-sm text-gray-500">Detailed fee calculations with client invoices</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AI Tab -->
+                    <div id="tab-ai" class="tab-content">
+                        <div class="max-w-3xl mx-auto">
+                            <div class="bg-white rounded-xl shadow-sm p-6">
+                                <div class="flex items-center space-x-3 mb-6">
+                                    <div class="w-10 h-10 bg-gradient-to-br from-accent-500 to-primary-500 rounded-lg flex items-center justify-center">
+                                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-gray-800">NexusAI Assistant</h3>
+                                        <p class="text-sm text-gray-500">Ask anything about your portfolios</p>
+                                    </div>
+                                </div>
+
+                                <div class="space-y-4 mb-6">
+                                    <div class="flex justify-end">
+                                        <div class="bg-primary-500 text-white rounded-2xl rounded-tr-sm px-4 py-2 max-w-md">
+                                            <p class="text-sm">What's my total exposure to technology stocks?</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-start">
+                                        <div class="bg-gray-100 text-gray-800 rounded-2xl rounded-tl-sm px-4 py-3 max-w-md">
+                                            <p class="text-sm mb-2">Your total technology exposure across all portfolios is <strong>$127.4M (15.0% of AUM)</strong>.</p>
+                                            <p class="text-sm text-gray-600">Top holdings: AAPL ($42.1M), MSFT ($38.2M), NVDA ($21.5M), GOOGL ($15.8M)</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-end">
+                                        <div class="bg-primary-500 text-white rounded-2xl rounded-tr-sm px-4 py-2 max-w-md">
+                                            <p class="text-sm">Which clients have the highest concentration risk?</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-start">
+                                        <div class="bg-gray-100 text-gray-800 rounded-2xl rounded-tl-sm px-4 py-3 max-w-md">
+                                            <p class="text-sm mb-2">I found <strong>3 clients</strong> with single-stock concentration above 25%:</p>
+                                            <ul class="text-sm text-gray-600 space-y-1">
+                                                <li>• Johnson Trust: 34% in AAPL ($8.4M)</li>
+                                                <li>• Smith LLC: 28% in TSLA ($5.2M)</li>
+                                                <li>• Chen Foundation: 26% in AMZN ($3.1M)</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="flex space-x-2">
+                                    <input type="text" placeholder="Ask NexusAI anything..." class="flex-1 border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                    <button class="bg-primary-500 hover:bg-primary-600 text-white px-4 py-2 rounded-lg">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openDemo() {
+            document.getElementById('demo-modal').classList.add('active');
+            document.getElementById('landing-page').style.display = 'none';
+        }
+
+        function closeDemo() {
+            document.getElementById('demo-modal').classList.remove('active');
+            document.getElementById('landing-page').style.display = 'block';
+        }
+
+        function showTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Show selected tab
+            document.getElementById('tab-' + tabName).classList.add('active');
+
+            // Update page title
+            const titles = {
+                'dashboard': 'Dashboard',
+                'clients': 'Clients',
+                'portfolios': 'Portfolios',
+                'trading': 'Trading',
+                'reports': 'Reports',
+                'ai': 'NexusAI Assistant'
+            };
+            document.getElementById('page-title').textContent = titles[tabName];
+
+            // Update nav styling
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('bg-primary-600', 'text-white');
+                item.classList.add('text-primary-200');
+            });
+            event.currentTarget.classList.add('bg-primary-600', 'text-white');
+            event.currentTarget.classList.remove('text-primary-200');
+        }
+    </script>
 </body>
 </html>
