@@ -237,6 +237,13 @@ wedding-planner-templates/
 │   └── budget-planner-complete.html    # All 12 pages
 ├── timeline-planner/
 │   └── timeline-planner-complete.html  # All 14 pages
+├── google-sheets-template/
+│   ├── GOOGLE_SHEETS_SETUP.md          # Complete setup guide
+│   ├── budget-template.csv             # Import directly
+│   ├── guests-template.csv             # Import directly
+│   ├── checklist-template.csv          # Import directly
+│   ├── vendors-template.csv            # Import directly
+│   └── timeline-template.csv           # Import directly
 └── README.md                  # This file
 ```
 
