@@ -1,0 +1,2507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WealthNexus - Modern Wealth Management Platform</title>
+    <style>
+        /* ===== DESIGN SYSTEM TOKENS ===== */
+        :root {
+            /* Colors */
+            --color-primary: #2563eb;
+            --color-primary-dark: #1d4ed8;
+            --color-primary-light: #3b82f6;
+            --color-success: #10b981;
+            --color-warning: #f59e0b;
+            --color-danger: #ef4444;
+
+            /* Neutrals */
+            --color-white: #ffffff;
+            --color-gray-50: #f9fafb;
+            --color-gray-100: #f3f4f6;
+            --color-gray-200: #e5e7eb;
+            --color-gray-300: #d1d5db;
+            --color-gray-400: #9ca3af;
+            --color-gray-500: #6b7280;
+            --color-gray-600: #4b5563;
+            --color-gray-700: #374151;
+            --color-gray-800: #1f2937;
+            --color-gray-900: #111827;
+
+            /* Typography */
+            --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-mono: 'SF Mono', Monaco, Consolas, monospace;
+
+            --text-xs: 0.75rem;
+            --text-sm: 0.875rem;
+            --text-base: 1rem;
+            --text-lg: 1.125rem;
+            --text-xl: 1.25rem;
+            --text-2xl: 1.5rem;
+            --text-3xl: 1.875rem;
+            --text-4xl: 2.25rem;
+            --text-5xl: 3rem;
+
+            /* Spacing */
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-5: 1.25rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --space-10: 2.5rem;
+            --space-12: 3rem;
+            --space-16: 4rem;
+            --space-20: 5rem;
+
+            /* Border Radius */
+            --radius-sm: 0.25rem;
+            --radius-md: 0.375rem;
+            --radius-lg: 0.5rem;
+            --radius-xl: 0.75rem;
+            --radius-2xl: 1rem;
+            --radius-full: 9999px;
+
+            /* Shadows */
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+
+            /* Transitions */
+            --transition-fast: 150ms ease;
+            --transition-normal: 200ms ease;
+            --transition-slow: 300ms ease;
+        }
+
+        /* ===== RESET & BASE ===== */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            font-size: var(--text-base);
+            line-height: 1.6;
+            color: var(--color-gray-800);
+            background: var(--color-white);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        img, svg {
+            display: block;
+            max-width: 100%;
+        }
+
+        button {
+            font-family: inherit;
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* Focus styles for accessibility */
+        :focus-visible {
+            outline: 2px solid var(--color-primary);
+            outline-offset: 2px;
+        }
+
+        /* ===== UTILITY CLASSES ===== */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--space-6);
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-2);
+            padding: var(--space-3) var(--space-6);
+            font-size: var(--text-sm);
+            font-weight: 600;
+            border-radius: var(--radius-lg);
+            transition: all var(--transition-fast);
+            white-space: nowrap;
+        }
+
+        .btn:focus-visible {
+            outline: 2px solid var(--color-primary);
+            outline-offset: 2px;
+        }
+
+        .btn-primary {
+            background: var(--color-primary);
+            color: var(--color-white);
+        }
+
+        .btn-primary:hover {
+            background: var(--color-primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: var(--color-white);
+            color: var(--color-primary);
+            border: 2px solid var(--color-primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--color-gray-50);
+        }
+
+        .btn-ghost {
+            color: var(--color-gray-600);
+        }
+
+        .btn-ghost:hover {
+            color: var(--color-gray-900);
+            background: var(--color-gray-100);
+        }
+
+        .btn-lg {
+            padding: var(--space-4) var(--space-8);
+            font-size: var(--text-base);
+        }
+
+        .btn-sm {
+            padding: var(--space-2) var(--space-4);
+            font-size: var(--text-xs);
+        }
+
+        /* ===== CARDS ===== */
+        .card {
+            background: var(--color-white);
+            border-radius: var(--radius-xl);
+            border: 1px solid var(--color-gray-200);
+            padding: var(--space-6);
+        }
+
+        .card-elevated {
+            box-shadow: var(--shadow-md);
+            border: none;
+        }
+
+        /* ===== MARKETING HEADER ===== */
+        .marketing-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--color-gray-100);
+            transition: box-shadow var(--transition-normal);
+        }
+
+        .marketing-header.scrolled {
+            box-shadow: var(--shadow-md);
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            font-size: var(--text-xl);
+            font-weight: 700;
+            color: var(--color-gray-900);
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: var(--text-lg);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            padding: var(--space-20) 0 var(--space-16);
+            background: linear-gradient(180deg, var(--color-gray-50) 0%, var(--color-white) 100%);
+        }
+
+        .hero-content {
+            max-width: 720px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            padding: var(--space-2) var(--space-4);
+            background: var(--color-primary);
+            color: var(--color-white);
+            font-size: var(--text-xs);
+            font-weight: 600;
+            border-radius: var(--radius-full);
+            margin-bottom: var(--space-6);
+        }
+
+        .hero h1 {
+            font-size: var(--text-5xl);
+            font-weight: 800;
+            line-height: 1.1;
+            color: var(--color-gray-900);
+            margin-bottom: var(--space-6);
+        }
+
+        .hero-subtitle {
+            font-size: var(--text-xl);
+            color: var(--color-gray-600);
+            margin-bottom: var(--space-8);
+            max-width: 560px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: var(--space-4);
+            justify-content: center;
+            margin-bottom: var(--space-8);
+        }
+
+        .trust-line {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-6);
+            color: var(--color-gray-500);
+            font-size: var(--text-sm);
+        }
+
+        .trust-line span {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+        }
+
+        @media (max-width: 640px) {
+            .hero h1 {
+                font-size: var(--text-3xl);
+            }
+
+            .hero-actions {
+                flex-direction: column;
+            }
+
+            .trust-line {
+                flex-direction: column;
+                gap: var(--space-2);
+            }
+        }
+
+        /* ===== STATS SECTION ===== */
+        .stats {
+            padding: var(--space-12) 0;
+            background: var(--color-gray-900);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-8);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: var(--text-3xl);
+            font-weight: 700;
+            color: var(--color-white);
+            margin-bottom: var(--space-1);
+        }
+
+        .stat-label {
+            font-size: var(--text-sm);
+            color: var(--color-gray-400);
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: var(--space-6);
+            }
+        }
+
+        /* ===== FEATURES SECTION ===== */
+        .features {
+            padding: var(--space-20) 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--space-12);
+        }
+
+        .section-header h2 {
+            font-size: var(--text-3xl);
+            font-weight: 700;
+            color: var(--color-gray-900);
+            margin-bottom: var(--space-4);
+        }
+
+        .section-header p {
+            font-size: var(--text-lg);
+            color: var(--color-gray-600);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-8);
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: var(--space-8);
+        }
+
+        .feature-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+            border-radius: var(--radius-xl);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto var(--space-5);
+            font-size: var(--text-2xl);
+        }
+
+        .feature-card h3 {
+            font-size: var(--text-xl);
+            font-weight: 600;
+            color: var(--color-gray-900);
+            margin-bottom: var(--space-3);
+        }
+
+        .feature-card p {
+            font-size: var(--text-base);
+            color: var(--color-gray-600);
+        }
+
+        @media (max-width: 768px) {
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ===== PRICING SECTION ===== */
+        .pricing {
+            padding: var(--space-20) 0;
+            background: var(--color-gray-50);
+        }
+
+        .pricing-note {
+            text-align: center;
+            margin-bottom: var(--space-8);
+            padding: var(--space-4) var(--space-6);
+            background: var(--color-white);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--color-gray-200);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .pricing-note p {
+            font-size: var(--text-sm);
+            color: var(--color-gray-600);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-6);
+        }
+
+        .pricing-card {
+            background: var(--color-white);
+            border-radius: var(--radius-xl);
+            padding: var(--space-8);
+            border: 2px solid var(--color-gray-200);
+            transition: all var(--transition-normal);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pricing-card:hover {
+            border-color: var(--color-primary);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .pricing-card.featured {
+            border-color: var(--color-primary);
+            position: relative;
+        }
+
+        .pricing-card.featured::before {
+            content: 'Most Popular';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--color-primary);
+            color: white;
+            font-size: var(--text-xs);
+            font-weight: 600;
+            padding: var(--space-1) var(--space-4);
+            border-radius: var(--radius-full);
+        }
+
+        .pricing-tier {
+            font-size: var(--text-sm);
+            font-weight: 600;
+            color: var(--color-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: var(--space-2);
+        }
+
+        .pricing-for {
+            font-size: var(--text-sm);
+            color: var(--color-gray-500);
+            margin-bottom: var(--space-4);
+        }
+
+        .pricing-price {
+            font-size: var(--text-3xl);
+            font-weight: 700;
+            color: var(--color-gray-900);
+            margin-bottom: var(--space-1);
+        }
+
+        .pricing-price span {
+            font-size: var(--text-base);
+            font-weight: 400;
+            color: var(--color-gray-500);
+        }
+
+        .pricing-bps {
+            font-size: var(--text-sm);
+            color: var(--color-gray-500);
+            margin-bottom: var(--space-6);
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: var(--space-8);
+            flex-grow: 1;
+        }
+
+        .pricing-features li {
+            font-size: var(--text-sm);
+            color: var(--color-gray-600);
+            padding: var(--space-2) 0;
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-2);
+        }
+
+        .pricing-features li::before {
+            content: '✓';
+            color: var(--color-success);
+            font-weight: 600;
+        }
+
+        @media (max-width: 1024px) {
+            .pricing-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ===== ROI CALCULATOR ===== */
+        .calculator {
+            padding: var(--space-20) 0;
+        }
+
+        .calculator-card {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: var(--space-10);
+        }
+
+        .calculator-header {
+            text-align: center;
+            margin-bottom: var(--space-8);
+        }
+
+        .calculator-header h3 {
+            font-size: var(--text-2xl);
+            font-weight: 700;
+            color: var(--color-gray-900);
+            margin-bottom: var(--space-2);
+        }
+
+        .calculator-header p {
+            color: var(--color-gray-600);
+        }
+
+        .slider-container {
+            margin-bottom: var(--space-8);
+        }
+
+        .slider-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-4);
+        }
+
+        .slider-label span {
+            font-size: var(--text-sm);
+            color: var(--color-gray-600);
+        }
+
+        .aum-display {
+            font-size: var(--text-2xl);
+            font-weight: 700;
+            color: var(--color-primary);
+        }
+
+        .slider {
+            width: 100%;
+            height: 8px;
+            border-radius: var(--radius-full);
+            background: var(--color-gray-200);
+            appearance: none;
+            cursor: pointer;
+        }
+
+        .slider::-webkit-slider-thumb {
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--color-primary);
+            cursor: pointer;
+            box-shadow: var(--shadow-md);
+        }
+
+        .cost-comparison {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-6);
+            margin-bottom: var(--space-6);
+        }
+
+        .cost-item {
+            text-align: center;
+            padding: var(--space-6);
+            background: var(--color-gray-50);
+            border-radius: var(--radius-lg);
+        }
+
+        .cost-item.highlight {
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+        }
+
+        .cost-label {
+            font-size: var(--text-sm);
+            color: var(--color-gray-600);
+            margin-bottom: var(--space-2);
+        }
+
+        .cost-value {
+            font-size: var(--text-2xl);
+            font-weight: 700;
+            color: var(--color-gray-900);
+        }
+
+        .cost-item.highlight .cost-value {
+            color: var(--color-primary);
+        }
+
+        .savings-highlight {
+            background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+        }
+
+        .savings-highlight .cost-value {
+            color: var(--color-success);
+        }
+
+        .calculator-assumptions {
+            font-size: var(--text-xs);
+            color: var(--color-gray-500);
+            text-align: center;
+            margin-top: var(--space-4);
+        }
+
+        @media (max-width: 640px) {
+            .cost-comparison {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ===== COMPARISON TABLE ===== */
+        .comparison {
+            padding: var(--space-20) 0;
+            background: var(--color-gray-50);
+        }
+
+        .comparison-table {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--color-white);
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+        }
+
+        .comparison-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: var(--space-4) var(--space-6);
+            text-align: left;
+            border-bottom: 1px solid var(--color-gray-100);
+        }
+
+        .comparison-table th {
+            background: var(--color-gray-50);
+            font-size: var(--text-sm);
+            font-weight: 600;
+            color: var(--color-gray-700);
+        }
+
+        .comparison-table td {
+            font-size: var(--text-sm);
+            color: var(--color-gray-600);
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .comparison-table .winner {
+            color: var(--color-success);
+            font-weight: 600;
+        }
+
+        .comparison-disclaimer {
+            text-align: center;
+            font-size: var(--text-xs);
+            color: var(--color-gray-500);
+            margin-top: var(--space-4);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ===== TESTIMONIALS ===== */
+        .testimonials {
+            padding: var(--space-20) 0;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-8);
+        }
+
+        .testimonial-card {
+            padding: var(--space-8);
+        }
+
+        .testimonial-quote {
+            font-size: var(--text-base);
+            color: var(--color-gray-700);
+            line-height: 1.7;
+            margin-bottom: var(--space-6);
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+        }
+
+        .testimonial-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--color-gray-200);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: var(--color-gray-600);
+        }
+
+        .testimonial-info h4 {
+            font-size: var(--text-sm);
+            font-weight: 600;
+            color: var(--color-gray-900);
+        }
+
+        .testimonial-info p {
+            font-size: var(--text-xs);
+            color: var(--color-gray-500);
+        }
+
+        @media (max-width: 768px) {
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ===== ONBOARDING TIMELINE ===== */
+        .onboarding {
+            padding: var(--space-20) 0;
+            background: var(--color-gray-50);
+        }
+
+        .timeline {
+            display: flex;
+            justify-content: space-between;
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 24px;
+            left: 60px;
+            right: 60px;
+            height: 2px;
+            background: var(--color-gray-300);
+        }
+
+        .timeline-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .timeline-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--color-primary);
+            color: var(--color-white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin-bottom: var(--space-4);
+        }
+
+        .timeline-day {
+            font-size: var(--text-sm);
+            font-weight: 600;
+            color: var(--color-primary);
+            margin-bottom: var(--space-1);
+        }
+
+        .timeline-title {
+            font-size: var(--text-sm);
+            font-weight: 600;
+            color: var(--color-gray-900);
+            margin-bottom: var(--space-1);
+        }
+
+        .timeline-desc {
+            font-size: var(--text-xs);
+            color: var(--color-gray-500);
+            max-width: 120px;
+        }
+
+        @media (max-width: 768px) {
+            .timeline {
+                flex-direction: column;
+                gap: var(--space-8);
+            }
+
+            .timeline::before {
+                top: 0;
+                bottom: 0;
+                left: 24px;
+                right: auto;
+                width: 2px;
+                height: auto;
+            }
+
+            .timeline-step {
+                flex-direction: row;
+                text-align: left;
+                gap: var(--space-4);
+            }
+
+            .timeline-icon {
+                margin-bottom: 0;
+                flex-shrink: 0;
+            }
+        }
+
+        /* ===== MOBILE PREVIEW ===== */
+        .mobile-preview {
+            padding: var(--space-20) 0;
+        }
+
+        .mobile-preview-content {
+            display: flex;
+            align-items: center;
+            gap: var(--space-16);
+        }
+
+        .mobile-text {
+            flex: 1;
+        }
+
+        .mobile-text h2 {
+            font-size: var(--text-3xl);
+            font-weight: 700;
+            color: var(--color-gray-900);
+            margin-bottom: var(--space-4);
+        }
+
+        .mobile-text p {
+            font-size: var(--text-lg);
+            color: var(--color-gray-600);
+            margin-bottom: var(--space-6);
+        }
+
+        .mobile-features {
+            list-style: none;
+        }
+
+        .mobile-features li {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+            padding: var(--space-2) 0;
+            color: var(--color-gray-700);
+        }
+
+        .mobile-features li::before {
+            content: '✓';
+            color: var(--color-success);
+            font-weight: 600;
+        }
+
+        .phone-mockup {
+            width: 280px;
+            height: 560px;
+            background: var(--color-gray-900);
+            border-radius: 40px;
+            padding: 12px;
+            box-shadow: var(--shadow-xl);
+            flex-shrink: 0;
+        }
+
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: var(--color-white);
+            border-radius: 32px;
+            overflow: hidden;
+        }
+
+        .phone-header {
+            background: var(--color-primary);
+            padding: var(--space-4);
+            color: white;
+        }
+
+        .phone-header h4 {
+            font-size: var(--text-sm);
+            font-weight: 600;
+        }
+
+        .phone-content {
+            padding: var(--space-4);
+        }
+
+        .phone-stat {
+            text-align: center;
+            padding: var(--space-4);
+            background: var(--color-gray-50);
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--space-3);
+        }
+
+        .phone-stat-value {
+            font-size: var(--text-xl);
+            font-weight: 700;
+            color: var(--color-gray-900);
+        }
+
+        .phone-stat-label {
+            font-size: var(--text-xs);
+            color: var(--color-gray-500);
+        }
+
+        .phone-nav {
+            display: flex;
+            justify-content: space-around;
+            padding: var(--space-3);
+            background: var(--color-gray-50);
+            position: absolute;
+            bottom: 12px;
+            left: 12px;
+            right: 12px;
+            border-radius: 0 0 32px 32px;
+        }
+
+        .phone-nav-item {
+            font-size: var(--text-xs);
+            color: var(--color-gray-500);
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-preview-content {
+                flex-direction: column-reverse;
+            }
+
+            .phone-mockup {
+                width: 240px;
+                height: 480px;
+            }
+        }
+
+        /* ===== CTA SECTION ===== */
+        .cta {
+            padding: var(--space-20) 0;
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: var(--text-3xl);
+            font-weight: 700;
+            margin-bottom: var(--space-4);
+        }
+
+        .cta p {
+            font-size: var(--text-lg);
+            opacity: 0.9;
+            margin-bottom: var(--space-8);
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta .btn-primary {
+            background: white;
+            color: var(--color-primary);
+        }
+
+        .cta .btn-primary:hover {
+            background: var(--color-gray-100);
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            padding: var(--space-16) 0;
+            background: var(--color-gray-900);
+            color: var(--color-gray-400);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: var(--space-12);
+        }
+
+        .footer-brand {
+            max-width: 280px;
+        }
+
+        .footer-brand .logo {
+            margin-bottom: var(--space-4);
+        }
+
+        .footer-brand .logo-icon {
+            background: var(--color-primary);
+        }
+
+        .footer-brand p {
+            font-size: var(--text-sm);
+            line-height: 1.6;
+        }
+
+        .footer-links h4 {
+            font-size: var(--text-sm);
+            font-weight: 600;
+            color: var(--color-white);
+            margin-bottom: var(--space-4);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: var(--space-2);
+        }
+
+        .footer-links a {
+            font-size: var(--text-sm);
+            color: var(--color-gray-400);
+            transition: color var(--transition-fast);
+        }
+
+        .footer-links a:hover {
+            color: var(--color-white);
+        }
+
+        .footer-bottom {
+            margin-top: var(--space-12);
+            padding-top: var(--space-8);
+            border-top: 1px solid var(--color-gray-800);
+            text-align: center;
+            font-size: var(--text-sm);
+        }
+
+        @media (max-width: 768px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: var(--space-8);
+            }
+
+            .footer-brand {
+                grid-column: span 2;
+            }
+        }
+
+        /* ===== DEMO APP STYLES ===== */
+        .demo-app {
+            display: none;
+            min-height: 100vh;
+            background: var(--color-gray-100);
+        }
+
+        .demo-app.active {
+            display: block;
+        }
+
+        .marketing-view {
+            display: block;
+        }
+
+        .marketing-view.hidden {
+            display: none;
+        }
+
+        /* App Shell */
+        .app-shell {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .app-sidebar {
+            width: 240px;
+            background: var(--color-gray-900);
+            color: var(--color-white);
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+        }
+
+        .sidebar-header {
+            padding: var(--space-5);
+            border-bottom: 1px solid var(--color-gray-800);
+        }
+
+        .sidebar-logo {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            font-size: var(--text-lg);
+            font-weight: 700;
+        }
+
+        .sidebar-logo .logo-icon {
+            width: 28px;
+            height: 28px;
+            font-size: var(--text-sm);
+        }
+
+        .sidebar-nav {
+            flex: 1;
+            padding: var(--space-4);
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+            padding: var(--space-3) var(--space-4);
+            border-radius: var(--radius-lg);
+            color: var(--color-gray-400);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            transition: all var(--transition-fast);
+            cursor: pointer;
+            width: 100%;
+            text-align: left;
+        }
+
+        .nav-item:hover {
+            background: var(--color-gray-800);
+            color: var(--color-white);
+        }
+
+        .nav-item.active {
+            background: var(--color-primary);
+            color: var(--color-white);
+        }
+
+        .nav-icon {
+            width: 20px;
+            text-align: center;
+        }
+
+        /* App Main */
+        .app-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* App Topbar */
+        .app-topbar {
+            height: 64px;
+            background: var(--color-white);
+            border-bottom: 1px solid var(--color-gray-200);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 var(--space-6);
+        }
+
+        .topbar-search {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            padding: var(--space-2) var(--space-4);
+            background: var(--color-gray-100);
+            border-radius: var(--radius-lg);
+            width: 320px;
+        }
+
+        .topbar-search input {
+            border: none;
+            background: none;
+            outline: none;
+            font-size: var(--text-sm);
+            width: 100%;
+        }
+
+        .topbar-actions {
+            display: flex;
+            align-items: center;
+            gap: var(--space-4);
+        }
+
+        .topbar-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-gray-600);
+            transition: background var(--transition-fast);
+        }
+
+        .topbar-icon:hover {
+            background: var(--color-gray-100);
+        }
+
+        .exit-demo-btn {
+            background: var(--color-gray-100);
+            color: var(--color-gray-700);
+            padding: var(--space-2) var(--space-4);
+            border-radius: var(--radius-lg);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            transition: all var(--transition-fast);
+        }
+
+        .exit-demo-btn:hover {
+            background: var(--color-gray-200);
+        }
+
+        /* App Content */
+        .app-content {
+            flex: 1;
+            padding: var(--space-6);
+            overflow-y: auto;
+        }
+
+        .content-panel {
+            display: none;
+        }
+
+        .content-panel.active {
+            display: block;
+            animation: fadeIn 0.2s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Dashboard Panel */
+        .dashboard-header {
+            margin-bottom: var(--space-6);
+        }
+
+        .dashboard-header h1 {
+            font-size: var(--text-2xl);
+            font-weight: 700;
+            color: var(--color-gray-900);
+            margin-bottom: var(--space-1);
+        }
+
+        .dashboard-header p {
+            color: var(--color-gray-500);
+            font-size: var(--text-sm);
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-6);
+            margin-bottom: var(--space-8);
+        }
+
+        .metric-card {
+            background: var(--color-white);
+            border-radius: var(--radius-xl);
+            padding: var(--space-6);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .metric-label {
+            font-size: var(--text-sm);
+            color: var(--color-gray-500);
+            margin-bottom: var(--space-2);
+        }
+
+        .metric-value {
+            font-size: var(--text-2xl);
+            font-weight: 700;
+            color: var(--color-gray-900);
+            margin-bottom: var(--space-1);
+        }
+
+        .metric-change {
+            font-size: var(--text-sm);
+            font-weight: 500;
+        }
+
+        .metric-change.positive {
+            color: var(--color-success);
+        }
+
+        .metric-change.negative {
+            color: var(--color-danger);
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: var(--space-6);
+        }
+
+        .dashboard-card {
+            background: var(--color-white);
+            border-radius: var(--radius-xl);
+            padding: var(--space-6);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .dashboard-card h3 {
+            font-size: var(--text-lg);
+            font-weight: 600;
+            color: var(--color-gray-900);
+            margin-bottom: var(--space-4);
+        }
+
+        /* Simple chart representation */
+        .chart-placeholder {
+            height: 200px;
+            background: linear-gradient(180deg, #dbeafe 0%, #bfdbfe 100%);
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: flex-end;
+            padding: var(--space-4);
+            gap: var(--space-2);
+        }
+
+        .chart-bar {
+            flex: 1;
+            background: var(--color-primary);
+            border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+            min-height: 20px;
+        }
+
+        /* Allocation display */
+        .allocation-list {
+            list-style: none;
+        }
+
+        .allocation-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-3) 0;
+            border-bottom: 1px solid var(--color-gray-100);
+        }
+
+        .allocation-item:last-child {
+            border-bottom: none;
+        }
+
+        .allocation-name {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+        }
+
+        .allocation-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .allocation-value {
+            font-weight: 600;
+            color: var(--color-gray-900);
+        }
+
+        /* Tables */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: var(--space-3) var(--space-4);
+            text-align: left;
+            border-bottom: 1px solid var(--color-gray-100);
+        }
+
+        .data-table th {
+            font-size: var(--text-xs);
+            font-weight: 600;
+            color: var(--color-gray-500);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            background: var(--color-gray-50);
+        }
+
+        .data-table td {
+            font-size: var(--text-sm);
+            color: var(--color-gray-700);
+        }
+
+        .data-table tr:hover td {
+            background: var(--color-gray-50);
+        }
+
+        /* NexusAI Panel */
+        .ai-panel {
+            display: flex;
+            flex-direction: column;
+            height: calc(100vh - 140px);
+        }
+
+        .ai-header {
+            margin-bottom: var(--space-6);
+        }
+
+        .ai-header h1 {
+            font-size: var(--text-2xl);
+            font-weight: 700;
+            color: var(--color-gray-900);
+            margin-bottom: var(--space-1);
+        }
+
+        .ai-header p {
+            color: var(--color-gray-500);
+            font-size: var(--text-sm);
+        }
+
+        .ai-prompts {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-2);
+            margin-bottom: var(--space-6);
+        }
+
+        .ai-prompt-chip {
+            padding: var(--space-2) var(--space-4);
+            background: var(--color-gray-100);
+            border-radius: var(--radius-full);
+            font-size: var(--text-sm);
+            color: var(--color-gray-700);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .ai-prompt-chip:hover {
+            background: var(--color-primary);
+            color: var(--color-white);
+        }
+
+        .ai-chat {
+            flex: 1;
+            background: var(--color-white);
+            border-radius: var(--radius-xl);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .ai-messages {
+            flex: 1;
+            padding: var(--space-6);
+            overflow-y: auto;
+        }
+
+        .ai-message {
+            margin-bottom: var(--space-4);
+        }
+
+        .ai-message.user {
+            text-align: right;
+        }
+
+        .ai-message-content {
+            display: inline-block;
+            max-width: 80%;
+            padding: var(--space-3) var(--space-4);
+            border-radius: var(--radius-lg);
+            font-size: var(--text-sm);
+        }
+
+        .ai-message.user .ai-message-content {
+            background: var(--color-primary);
+            color: var(--color-white);
+        }
+
+        .ai-message.assistant .ai-message-content {
+            background: var(--color-gray-100);
+            color: var(--color-gray-800);
+            text-align: left;
+        }
+
+        .ai-input {
+            display: flex;
+            gap: var(--space-3);
+            padding: var(--space-4);
+            border-top: 1px solid var(--color-gray-200);
+        }
+
+        .ai-input input {
+            flex: 1;
+            padding: var(--space-3) var(--space-4);
+            border: 1px solid var(--color-gray-300);
+            border-radius: var(--radius-lg);
+            font-size: var(--text-sm);
+            outline: none;
+        }
+
+        .ai-input input:focus {
+            border-color: var(--color-primary);
+        }
+
+        .ai-input button {
+            padding: var(--space-3) var(--space-6);
+            background: var(--color-primary);
+            color: var(--color-white);
+            border-radius: var(--radius-lg);
+            font-weight: 500;
+            font-size: var(--text-sm);
+        }
+
+        .ai-input button:hover {
+            background: var(--color-primary-dark);
+        }
+
+        /* Responsive Demo App */
+        @media (max-width: 1024px) {
+            .metrics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .app-sidebar {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Marketing View -->
+    <div class="marketing-view" id="marketingView">
+        <!-- Header -->
+        <header class="marketing-header" id="header">
+            <div class="container">
+                <div class="header-inner">
+                    <a href="#" class="logo">
+                        <div class="logo-icon">W</div>
+                        WealthNexus
+                    </a>
+                    <div class="header-actions">
+                        <button class="btn btn-ghost" onclick="enterDemo()">Sign In</button>
+                        <button class="btn btn-primary" onclick="enterDemo()">Request Demo</button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Hero -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-badge">Now Available • Enterprise Ready</div>
+                    <h1>Modern Wealth Management for Growing RIAs</h1>
+                    <p class="hero-subtitle">
+                        Portfolio analytics, client reporting, and AI-powered insights.
+                        Deploy in days, not months.
+                    </p>
+                    <div class="hero-actions">
+                        <button class="btn btn-primary btn-lg" onclick="enterDemo()">Request Demo</button>
+                        <button class="btn btn-secondary btn-lg" onclick="enterDemo()">Watch Demo</button>
+                    </div>
+                    <div class="trust-line">
+                        <span>350+ custodian integrations</span>
+                        <span>99.9% uptime SLA</span>
+                        <span>~7 day deployment</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats -->
+        <section class="stats">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-value">350+</div>
+                        <div class="stat-label">Custodian Integrations</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">99.9%</div>
+                        <div class="stat-label">Uptime SLA</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">~7 days</div>
+                        <div class="stat-label">Average Deployment</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">24/7</div>
+                        <div class="stat-label">Support Available</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section class="features">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Everything You Need to Scale</h2>
+                    <p>Purpose-built for RIAs managing $100M-$2B in assets</p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card card">
+                        <div class="feature-icon">⚡</div>
+                        <h3>Rapid Deployment</h3>
+                        <p>Go live in approximately 7 days with guided onboarding. No lengthy implementation projects or dedicated IT staff required.</p>
+                    </div>
+                    <div class="feature-card card">
+                        <div class="feature-icon">🤖</div>
+                        <h3>NexusAI Assistant</h3>
+                        <p>AI-powered insights for portfolio analysis, risk assessment, and client communication. Ask questions in plain English.</p>
+                    </div>
+                    <div class="feature-card card">
+                        <div class="feature-icon">💰</div>
+                        <h3>Transparent Pricing</h3>
+                        <p>Clear, predictable pricing with no hidden fees. Know exactly what you'll pay before you sign.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing -->
+        <section class="pricing">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Simple, Transparent Pricing</h2>
+                    <p>Choose the plan that fits your firm's needs</p>
+                </div>
+                <div class="pricing-note">
+                    <p><strong>How pricing works:</strong> Monthly platform fee plus basis points (bps) on assets under management. 1 bp = 0.01% annually. All plans include unlimited users, training, and support.</p>
+                </div>
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <div class="pricing-tier">Starter</div>
+                        <div class="pricing-for">For emerging RIAs under $100M AUM</div>
+                        <div class="pricing-price">$499<span>/mo</span></div>
+                        <div class="pricing-bps">+ 2.5 bps on AUM</div>
+                        <ul class="pricing-features">
+                            <li>Core portfolio management</li>
+                            <li>Client portal</li>
+                            <li>Basic reporting</li>
+                            <li>Email support</li>
+                        </ul>
+                        <button class="btn btn-secondary" onclick="enterDemo()">Start Free Trial</button>
+                    </div>
+                    <div class="pricing-card featured">
+                        <div class="pricing-tier">Growth</div>
+                        <div class="pricing-for">For RIAs with $100M-$500M AUM</div>
+                        <div class="pricing-price">$999<span>/mo</span></div>
+                        <div class="pricing-bps">+ 2.0 bps on AUM</div>
+                        <ul class="pricing-features">
+                            <li>Everything in Starter</li>
+                            <li>Advanced analytics</li>
+                            <li>NexusAI assistant</li>
+                            <li>Priority support</li>
+                        </ul>
+                        <button class="btn btn-primary" onclick="enterDemo()">Start Free Trial</button>
+                    </div>
+                    <div class="pricing-card">
+                        <div class="pricing-tier">Professional</div>
+                        <div class="pricing-for">For RIAs with $500M-$2B AUM</div>
+                        <div class="pricing-price">$2,499<span>/mo</span></div>
+                        <div class="pricing-bps">+ 1.5 bps on AUM</div>
+                        <ul class="pricing-features">
+                            <li>Everything in Growth</li>
+                            <li>Custom integrations</li>
+                            <li>Dedicated success manager</li>
+                            <li>SLA guarantee</li>
+                        </ul>
+                        <button class="btn btn-secondary" onclick="enterDemo()">Contact Sales</button>
+                    </div>
+                    <div class="pricing-card">
+                        <div class="pricing-tier">Enterprise</div>
+                        <div class="pricing-for">For firms with $2B+ AUM</div>
+                        <div class="pricing-price">Custom</div>
+                        <div class="pricing-bps">Volume discounts available</div>
+                        <ul class="pricing-features">
+                            <li>Everything in Professional</li>
+                            <li>White-label options</li>
+                            <li>On-premise deployment</li>
+                            <li>Dedicated support team</li>
+                        </ul>
+                        <button class="btn btn-secondary" onclick="enterDemo()">Contact Sales</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ROI Calculator -->
+        <section class="calculator">
+            <div class="container">
+                <div class="calculator-card card card-elevated">
+                    <div class="calculator-header">
+                        <h3>Calculate Your Potential Savings</h3>
+                        <p>See how WealthNexus compares to legacy platforms</p>
+                    </div>
+                    <div class="slider-container">
+                        <div class="slider-label">
+                            <span>Your Assets Under Management</span>
+                            <span class="aum-display" id="aumDisplay">$500,000,000</span>
+                        </div>
+                        <input type="range" class="slider" id="aumSlider" min="100" max="2000" value="500" oninput="updateCalculator()">
+                    </div>
+                    <div class="cost-comparison">
+                        <div class="cost-item">
+                            <div class="cost-label">Estimated Legacy Platform Cost</div>
+                            <div class="cost-value" id="legacyCost">$120,000/yr</div>
+                        </div>
+                        <div class="cost-item highlight">
+                            <div class="cost-label">WealthNexus Cost</div>
+                            <div class="cost-value" id="nexusCost">$22,000/yr</div>
+                        </div>
+                        <div class="cost-item savings-highlight">
+                            <div class="cost-label">Annual Savings</div>
+                            <div class="cost-value" id="savingsAmount">$98,000/yr</div>
+                        </div>
+                    </div>
+                    <p class="calculator-assumptions">
+                        *Estimates based on published pricing and industry averages. Legacy platform assumes $65K base + 11 bps. WealthNexus uses Growth tier pricing ($999/mo + 2.0 bps). Actual costs may vary.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comparison -->
+        <section class="comparison">
+            <div class="container">
+                <div class="section-header">
+                    <h2>How We Compare</h2>
+                    <p>Feature comparison based on publicly available information</p>
+                </div>
+                <div class="comparison-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th>Legacy Platforms</th>
+                                <th>WealthNexus</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Implementation Time</td>
+                                <td>30-90+ days typical</td>
+                                <td class="winner">~7 days average</td>
+                            </tr>
+                            <tr>
+                                <td>Minimum Contract</td>
+                                <td>Often $50K+/year</td>
+                                <td class="winner">$499/month</td>
+                            </tr>
+                            <tr>
+                                <td>Pricing Transparency</td>
+                                <td>Quote-based</td>
+                                <td class="winner">Published pricing</td>
+                            </tr>
+                            <tr>
+                                <td>AI Assistant</td>
+                                <td>Limited/Add-on</td>
+                                <td class="winner">Included (Growth+)</td>
+                            </tr>
+                            <tr>
+                                <td>Mobile Experience</td>
+                                <td>Varies widely</td>
+                                <td class="winner">Native apps</td>
+                            </tr>
+                            <tr>
+                                <td>Target Market</td>
+                                <td>Enterprise focus</td>
+                                <td class="winner">RIAs $100M-$2B</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="comparison-disclaimer">
+                    Information based on publicly available data and may not reflect current offerings. We encourage you to evaluate all options for your specific needs.
+                </p>
+            </div>
+        </section>
+
+        <!-- Mobile Preview -->
+        <section class="mobile-preview">
+            <div class="container">
+                <div class="mobile-preview-content">
+                    <div class="mobile-text">
+                        <h2>Manage Wealth On the Go</h2>
+                        <p>Native iOS and Android apps designed for advisors who need access anywhere.</p>
+                        <ul class="mobile-features">
+                            <li>Real-time portfolio monitoring</li>
+                            <li>Client communication tools</li>
+                            <li>Secure document access</li>
+                            <li>Push notifications for alerts</li>
+                            <li>Biometric authentication</li>
+                        </ul>
+                    </div>
+                    <div class="phone-mockup">
+                        <div class="phone-screen">
+                            <div class="phone-header">
+                                <h4>WealthNexus</h4>
+                            </div>
+                            <div class="phone-content">
+                                <div class="phone-stat">
+                                    <div class="phone-stat-value">$847.2M</div>
+                                    <div class="phone-stat-label">Total AUM</div>
+                                </div>
+                                <div class="phone-stat">
+                                    <div class="phone-stat-value" style="color: #10b981;">+12.8%</div>
+                                    <div class="phone-stat-label">YTD Performance</div>
+                                </div>
+                                <div class="phone-stat">
+                                    <div class="phone-stat-value">342</div>
+                                    <div class="phone-stat-label">Active Clients</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="testimonials">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Trusted by Growing RIAs</h2>
+                    <p>Hear from advisors who made the switch</p>
+                </div>
+                <div class="testimonials-grid">
+                    <div class="testimonial-card card">
+                        <p class="testimonial-quote">"We were up and running in 5 days. The implementation team was incredibly responsive, and our staff picked up the system quickly."</p>
+                        <div class="testimonial-author">
+                            <div class="testimonial-avatar">JW</div>
+                            <div class="testimonial-info">
+                                <h4>James Wilson</h4>
+                                <p>Managing Partner • $280M AUM</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card card">
+                        <p class="testimonial-quote">"The NexusAI assistant has transformed how we prepare for client meetings. What used to take hours now takes minutes."</p>
+                        <div class="testimonial-author">
+                            <div class="testimonial-avatar">SM</div>
+                            <div class="testimonial-info">
+                                <h4>Sarah Mitchell</h4>
+                                <p>Chief Investment Officer • $520M AUM</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card card">
+                        <p class="testimonial-quote">"Finally, a platform that fits our firm's size. We're not paying enterprise prices for features we don't need."</p>
+                        <div class="testimonial-author">
+                            <div class="testimonial-avatar">RC</div>
+                            <div class="testimonial-info">
+                                <h4>Robert Chen</h4>
+                                <p>Founder & CEO • $180M AUM</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Onboarding Timeline -->
+        <section class="onboarding">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Go Live in ~7 Days</h2>
+                    <p>Our streamlined onboarding process</p>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-step">
+                        <div class="timeline-icon">1</div>
+                        <div class="timeline-day">Day 1-2</div>
+                        <div class="timeline-title">Discovery</div>
+                        <div class="timeline-desc">Kickoff call and requirements gathering</div>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="timeline-icon">2</div>
+                        <div class="timeline-day">Day 2-3</div>
+                        <div class="timeline-title">Data Setup</div>
+                        <div class="timeline-desc">Connect custodians and import data</div>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="timeline-icon">3</div>
+                        <div class="timeline-day">Day 4-5</div>
+                        <div class="timeline-title">Configuration</div>
+                        <div class="timeline-desc">Customize reports and workflows</div>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="timeline-icon">4</div>
+                        <div class="timeline-day">Day 6-7</div>
+                        <div class="timeline-title">Training</div>
+                        <div class="timeline-desc">Team training and go-live</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="cta">
+            <div class="container">
+                <h2>Ready to Modernize Your Practice?</h2>
+                <p>Join growing RIAs who are saving time and money with WealthNexus.</p>
+                <button class="btn btn-primary btn-lg" onclick="enterDemo()">Request Demo</button>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-grid">
+                    <div class="footer-brand">
+                        <div class="logo">
+                            <div class="logo-icon">W</div>
+                            WealthNexus
+                        </div>
+                        <p>Modern wealth management platform built for growing RIAs. Powerful features, transparent pricing, rapid deployment.</p>
+                    </div>
+                    <div class="footer-links">
+                        <h4>Product</h4>
+                        <ul>
+                            <li><a href="#">Features</a></li>
+                            <li><a href="#">Pricing</a></li>
+                            <li><a href="#">Integrations</a></li>
+                            <li><a href="#">Security</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-links">
+                        <h4>Company</h4>
+                        <ul>
+                            <li><a href="#">About</a></li>
+                            <li><a href="#">Careers</a></li>
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-links">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="#">Documentation</a></li>
+                            <li><a href="#">API Reference</a></li>
+                            <li><a href="#">Status</a></li>
+                            <li><a href="#">Support</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2024 WealthNexus. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Demo App View -->
+    <div class="demo-app" id="demoApp">
+        <div class="app-shell">
+            <!-- Sidebar -->
+            <aside class="app-sidebar">
+                <div class="sidebar-header">
+                    <div class="sidebar-logo">
+                        <div class="logo-icon">W</div>
+                        WealthNexus
+                    </div>
+                </div>
+                <nav class="sidebar-nav">
+                    <button class="nav-item active" data-panel="dashboard" aria-label="Dashboard">
+                        <span class="nav-icon">📊</span>
+                        Dashboard
+                    </button>
+                    <button class="nav-item" data-panel="clients" aria-label="Clients">
+                        <span class="nav-icon">👥</span>
+                        Clients
+                    </button>
+                    <button class="nav-item" data-panel="portfolios" aria-label="Portfolios">
+                        <span class="nav-icon">📁</span>
+                        Portfolios
+                    </button>
+                    <button class="nav-item" data-panel="trading" aria-label="Trading">
+                        <span class="nav-icon">💹</span>
+                        Trading
+                    </button>
+                    <button class="nav-item" data-panel="reports" aria-label="Reports">
+                        <span class="nav-icon">📄</span>
+                        Reports
+                    </button>
+                    <button class="nav-item" data-panel="ai" aria-label="NexusAI">
+                        <span class="nav-icon">🤖</span>
+                        NexusAI
+                    </button>
+                </nav>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="app-main">
+                <!-- Topbar -->
+                <header class="app-topbar">
+                    <div class="topbar-search">
+                        <span>🔍</span>
+                        <input type="text" placeholder="Search clients, portfolios..." aria-label="Search">
+                    </div>
+                    <div class="topbar-actions">
+                        <button class="topbar-icon" aria-label="Notifications">🔔</button>
+                        <button class="topbar-icon" aria-label="Profile">👤</button>
+                        <button class="exit-demo-btn" onclick="exitDemo()">Exit Demo</button>
+                    </div>
+                </header>
+
+                <!-- Content Panels -->
+                <div class="app-content">
+                    <!-- Dashboard Panel -->
+                    <div class="content-panel active" id="panel-dashboard">
+                        <div class="dashboard-header">
+                            <h1>Dashboard</h1>
+                            <p>Welcome back. Here's your firm overview for today.</p>
+                        </div>
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-label">Total AUM</div>
+                                <div class="metric-value">$847.2M</div>
+                                <div class="metric-change positive">+2.4% from last month</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-label">Active Clients</div>
+                                <div class="metric-value">342</div>
+                                <div class="metric-change positive">+8 new this month</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-label">YTD Performance</div>
+                                <div class="metric-value">+12.8%</div>
+                                <div class="metric-change positive">+3.2% vs benchmark</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-label">Revenue (MTD)</div>
+                                <div class="metric-value">$127,450</div>
+                                <div class="metric-change positive">+5.1% from last month</div>
+                            </div>
+                        </div>
+                        <div class="dashboard-grid">
+                            <div class="dashboard-card">
+                                <h3>Portfolio Performance</h3>
+                                <div class="chart-placeholder">
+                                    <div class="chart-bar" style="height: 60%;"></div>
+                                    <div class="chart-bar" style="height: 75%;"></div>
+                                    <div class="chart-bar" style="height: 45%;"></div>
+                                    <div class="chart-bar" style="height: 80%;"></div>
+                                    <div class="chart-bar" style="height: 65%;"></div>
+                                    <div class="chart-bar" style="height: 90%;"></div>
+                                    <div class="chart-bar" style="height: 85%;"></div>
+                                    <div class="chart-bar" style="height: 70%;"></div>
+                                    <div class="chart-bar" style="height: 95%;"></div>
+                                    <div class="chart-bar" style="height: 88%;"></div>
+                                    <div class="chart-bar" style="height: 82%;"></div>
+                                    <div class="chart-bar" style="height: 100%;"></div>
+                                </div>
+                            </div>
+                            <div class="dashboard-card">
+                                <h3>Asset Allocation</h3>
+                                <ul class="allocation-list">
+                                    <li class="allocation-item">
+                                        <span class="allocation-name">
+                                            <span class="allocation-dot" style="background: #2563eb;"></span>
+                                            US Equities
+                                        </span>
+                                        <span class="allocation-value">42%</span>
+                                    </li>
+                                    <li class="allocation-item">
+                                        <span class="allocation-name">
+                                            <span class="allocation-dot" style="background: #10b981;"></span>
+                                            Fixed Income
+                                        </span>
+                                        <span class="allocation-value">28%</span>
+                                    </li>
+                                    <li class="allocation-item">
+                                        <span class="allocation-name">
+                                            <span class="allocation-dot" style="background: #f59e0b;"></span>
+                                            International
+                                        </span>
+                                        <span class="allocation-value">18%</span>
+                                    </li>
+                                    <li class="allocation-item">
+                                        <span class="allocation-name">
+                                            <span class="allocation-dot" style="background: #8b5cf6;"></span>
+                                            Alternatives
+                                        </span>
+                                        <span class="allocation-value">8%</span>
+                                    </li>
+                                    <li class="allocation-item">
+                                        <span class="allocation-name">
+                                            <span class="allocation-dot" style="background: #6b7280;"></span>
+                                            Cash
+                                        </span>
+                                        <span class="allocation-value">4%</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Clients Panel -->
+                    <div class="content-panel" id="panel-clients">
+                        <div class="dashboard-header">
+                            <h1>Clients</h1>
+                            <p>Manage your client relationships and portfolios.</p>
+                        </div>
+                        <div class="dashboard-card">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Client Name</th>
+                                        <th>AUM</th>
+                                        <th>YTD Return</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Johnson Family Trust</td>
+                                        <td>$24.5M</td>
+                                        <td style="color: #10b981;">+14.2%</td>
+                                        <td>Active</td>
+                                        <td><button class="btn btn-sm btn-ghost">View</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Smith Retirement Account</td>
+                                        <td>$8.2M</td>
+                                        <td style="color: #10b981;">+11.8%</td>
+                                        <td>Active</td>
+                                        <td><button class="btn btn-sm btn-ghost">View</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Williams Foundation</td>
+                                        <td>$45.0M</td>
+                                        <td style="color: #10b981;">+9.5%</td>
+                                        <td>Active</td>
+                                        <td><button class="btn btn-sm btn-ghost">View</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Chen Holdings LLC</td>
+                                        <td>$18.7M</td>
+                                        <td style="color: #10b981;">+16.3%</td>
+                                        <td>Active</td>
+                                        <td><button class="btn btn-sm btn-ghost">View</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Garcia Family Office</td>
+                                        <td>$52.3M</td>
+                                        <td style="color: #10b981;">+12.1%</td>
+                                        <td>Active</td>
+                                        <td><button class="btn btn-sm btn-ghost">View</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Portfolios Panel -->
+                    <div class="content-panel" id="panel-portfolios">
+                        <div class="dashboard-header">
+                            <h1>Portfolios</h1>
+                            <p>View and manage model portfolios.</p>
+                        </div>
+                        <div class="dashboard-card">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Portfolio Name</th>
+                                        <th>Strategy</th>
+                                        <th>Total Value</th>
+                                        <th>YTD Return</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Growth Equity Model</td>
+                                        <td>Aggressive Growth</td>
+                                        <td>$312.5M</td>
+                                        <td style="color: #10b981;">+18.4%</td>
+                                        <td><button class="btn btn-sm btn-ghost">View</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Balanced Income Model</td>
+                                        <td>Moderate</td>
+                                        <td>$285.2M</td>
+                                        <td style="color: #10b981;">+10.2%</td>
+                                        <td><button class="btn btn-sm btn-ghost">View</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Conservative Income Model</td>
+                                        <td>Conservative</td>
+                                        <td>$189.5M</td>
+                                        <td style="color: #10b981;">+6.8%</td>
+                                        <td><button class="btn btn-sm btn-ghost">View</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tax-Efficient Growth</td>
+                                        <td>Tax-Managed</td>
+                                        <td>$60.0M</td>
+                                        <td style="color: #10b981;">+15.1%</td>
+                                        <td><button class="btn btn-sm btn-ghost">View</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Trading Panel -->
+                    <div class="content-panel" id="panel-trading">
+                        <div class="dashboard-header">
+                            <h1>Trading</h1>
+                            <p>Review pending orders and trade history.</p>
+                        </div>
+                        <div class="dashboard-card">
+                            <h3>Pending Orders</h3>
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Symbol</th>
+                                        <th>Type</th>
+                                        <th>Quantity</th>
+                                        <th>Price</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>AAPL</td>
+                                        <td>Buy</td>
+                                        <td>500</td>
+                                        <td>$185.50</td>
+                                        <td style="color: #f59e0b;">Pending</td>
+                                        <td><button class="btn btn-sm btn-ghost">Review</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>MSFT</td>
+                                        <td>Sell</td>
+                                        <td>250</td>
+                                        <td>$378.20</td>
+                                        <td style="color: #f59e0b;">Pending</td>
+                                        <td><button class="btn btn-sm btn-ghost">Review</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>VTI</td>
+                                        <td>Buy</td>
+                                        <td>1,000</td>
+                                        <td>$242.80</td>
+                                        <td style="color: #f59e0b;">Pending</td>
+                                        <td><button class="btn btn-sm btn-ghost">Review</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Reports Panel -->
+                    <div class="content-panel" id="panel-reports">
+                        <div class="dashboard-header">
+                            <h1>Reports</h1>
+                            <p>Generate and schedule client reports.</p>
+                        </div>
+                        <div class="dashboard-card">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Report Name</th>
+                                        <th>Type</th>
+                                        <th>Last Generated</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Q4 Performance Summary</td>
+                                        <td>Quarterly</td>
+                                        <td>Jan 5, 2024</td>
+                                        <td><button class="btn btn-sm btn-ghost">View</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Annual Tax Report</td>
+                                        <td>Annual</td>
+                                        <td>Jan 10, 2024</td>
+                                        <td><button class="btn btn-sm btn-ghost">View</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Risk Analysis</td>
+                                        <td>On-Demand</td>
+                                        <td>Jan 12, 2024</td>
+                                        <td><button class="btn btn-sm btn-ghost">View</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Fee Billing Summary</td>
+                                        <td>Monthly</td>
+                                        <td>Jan 1, 2024</td>
+                                        <td><button class="btn btn-sm btn-ghost">View</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- AI Panel -->
+                    <div class="content-panel" id="panel-ai">
+                        <div class="ai-panel">
+                            <div class="ai-header">
+                                <h1>NexusAI Assistant</h1>
+                                <p>Ask questions about your portfolios, clients, or market insights.</p>
+                            </div>
+                            <div class="ai-prompts">
+                                <button class="ai-prompt-chip">Summarize today's activity</button>
+                                <button class="ai-prompt-chip">Client meeting prep</button>
+                                <button class="ai-prompt-chip">Portfolio rebalancing</button>
+                                <button class="ai-prompt-chip">Risk analysis</button>
+                            </div>
+                            <div class="ai-chat">
+                                <div class="ai-messages">
+                                    <div class="ai-message user">
+                                        <div class="ai-message-content">What are the top performing clients this quarter?</div>
+                                    </div>
+                                    <div class="ai-message assistant">
+                                        <div class="ai-message-content">
+                                            Based on Q4 performance, your top 3 clients are:<br><br>
+                                            1. <strong>Chen Holdings LLC</strong> - +16.3% YTD ($18.7M AUM)<br>
+                                            2. <strong>Johnson Family Trust</strong> - +14.2% YTD ($24.5M AUM)<br>
+                                            3. <strong>Garcia Family Office</strong> - +12.1% YTD ($52.3M AUM)<br><br>
+                                            All three portfolios outperformed the S&P 500 benchmark by at least 2%.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ai-input">
+                                    <input type="text" placeholder="Ask NexusAI anything..." aria-label="Chat input">
+                                    <button aria-label="Send message">Send</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // State management
+        let isDemoMode = false;
+
+        // Enter demo mode
+        function enterDemo() {
+            isDemoMode = true;
+            document.getElementById('marketingView').classList.add('hidden');
+            document.getElementById('demoApp').classList.add('active');
+        }
+
+        // Exit demo mode
+        function exitDemo() {
+            isDemoMode = false;
+            document.getElementById('marketingView').classList.remove('hidden');
+            document.getElementById('demoApp').classList.remove('active');
+        }
+
+        // Navigation handling
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const panelId = this.dataset.panel;
+
+                // Update active nav item
+                document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+                this.classList.add('active');
+
+                // Update active panel
+                document.querySelectorAll('.content-panel').forEach(panel => panel.classList.remove('active'));
+                document.getElementById('panel-' + panelId).classList.add('active');
+            });
+        });
+
+        // ROI Calculator
+        function updateCalculator() {
+            const slider = document.getElementById('aumSlider');
+            const aumValue = parseInt(slider.value) * 1000000;
+
+            // Format AUM display
+            document.getElementById('aumDisplay').textContent = formatCurrency(aumValue);
+
+            // Calculate costs (assumptions in the disclaimer)
+            // Legacy: $65K base + 11 bps
+            const legacyCost = 65000 + (aumValue * 0.0011);
+
+            // WealthNexus: $999/mo + 2.0 bps (Growth tier)
+            const nexusCost = (999 * 12) + (aumValue * 0.0002);
+
+            const savings = legacyCost - nexusCost;
+
+            document.getElementById('legacyCost').textContent = formatCurrency(legacyCost) + '/yr';
+            document.getElementById('nexusCost').textContent = formatCurrency(nexusCost) + '/yr';
+            document.getElementById('savingsAmount').textContent = formatCurrency(savings) + '/yr';
+        }
+
+        function formatCurrency(value) {
+            if (value >= 1000000) {
+                return '$' + (value / 1000000).toFixed(0) + 'M';
+            } else if (value >= 1000) {
+                return '$' + Math.round(value).toLocaleString();
+            }
+            return '$' + Math.round(value);
+        }
+
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 10) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Initialize calculator
+        updateCalculator();
+    </script>
+</body>
+</html>
