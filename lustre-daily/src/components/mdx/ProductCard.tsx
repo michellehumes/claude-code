@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 import { affiliateLink } from "@/lib/affiliate";
 import { getProductByAsin } from "@/lib/products";
