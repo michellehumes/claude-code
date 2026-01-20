@@ -29,23 +29,40 @@ function processMarkdown(content: string): string {
   // Remove frontmatter
   html = html.replace(/^---[\s\S]*?---\n*/m, "");
 
-  // Process ProductCard components
+  // Process ProductCard components - extract all attributes
   html = html.replace(
-    /<ProductCard\s+asin="([^"]+)"(?:\s+name="([^"]*)")?(?:\s+brand="([^"]*)")?(?:\s+description="([^"]*)")?(?:\s+whyWeLikeIt="([^"]*)")?\s*\/>/g,
-    (_, asin, name, brand, description, whyWeLikeIt) => {
-      const tag = process.env.NEXT_PUBLIC_AMAZON_ASSOC_TAG || "shelzysbeauty-20";
+    /<ProductCard([^>]+)\/>/g,
+    (_, attrs) => {
+      // Extract attributes
+      const asin = attrs.match(/asin="([^"]+)"/)?.[1] || "";
+      const name = attrs.match(/name="([^"]+)"/)?.[1] || "Product";
+      const brand = attrs.match(/brand="([^"]+)"/)?.[1] || "";
+      const description = attrs.match(/description="([^"]+)"/)?.[1] || "";
+      const whyWeLikeIt = attrs.match(/whyWeLikeIt="([^"]+)"/)?.[1] || "";
+      const image = attrs.match(/image="([^"]+)"/)?.[1] || "";
+
+      const tag = "shelzysbeauty-20";
       const url = `https://www.amazon.com/dp/${asin}/?tag=${tag}`;
+
+      const imageHtml = image
+        ? `<img src="${image}" alt="${name}" class="h-28 w-28 object-contain p-2 rounded-lg bg-white" loading="lazy" />`
+        : `<div class="flex h-28 w-28 items-center justify-center rounded-lg bg-gradient-to-br from-pink-100 to-purple-100">
+            <svg class="h-12 w-12 text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+            </svg>
+          </div>`;
+
       return `
         <div class="my-6 rounded-lg border border-gray-200 bg-white p-4 shadow-sm transition-shadow hover:shadow-md dark:border-gray-700 dark:bg-gray-800">
           <div class="flex flex-col sm:flex-row sm:items-start sm:gap-4">
-            <div class="mb-4 flex h-24 w-24 flex-shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-pink-100 to-purple-100 sm:mb-0">
-              <svg class="h-12 w-12 text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
-              </svg>
-            </div>
+            <a href="${url}" target="_blank" rel="sponsored nofollow" class="mb-4 flex-shrink-0 sm:mb-0">
+              ${imageHtml}
+            </a>
             <div class="flex-grow">
               ${brand ? `<span class="text-xs font-medium uppercase tracking-wide text-pink-600 dark:text-pink-400">${brand}</span>` : ""}
-              <h4 class="mt-1 text-lg font-semibold text-gray-900 dark:text-white">${name || "Product"}</h4>
+              <h4 class="mt-1 text-lg font-semibold text-gray-900 dark:text-white">
+                <a href="${url}" target="_blank" rel="sponsored nofollow" class="hover:text-pink-600 dark:hover:text-pink-400 transition-colors">${name}</a>
+              </h4>
               ${description ? `<p class="mt-1 text-sm text-gray-600 dark:text-gray-300">${description}</p>` : ""}
               ${whyWeLikeIt ? `<p class="mt-2 text-sm italic text-gray-500 dark:text-gray-400"><strong class="text-gray-700 dark:text-gray-200">Why we like it:</strong> ${whyWeLikeIt}</p>` : ""}
             </div>
