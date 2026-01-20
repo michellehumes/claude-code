@@ -9,6 +9,7 @@ export interface Product {
   name: string;
   brand: string;
   category: "makeup" | "hair" | "skincare";
+  image?: string;
   shortDescription: string;
   whyWeLikeIt: string;
   tags: string[];
