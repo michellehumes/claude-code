@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Side Hustle Empire Tracker - Marketing Mockups</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&family=Roboto+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2E7D32;
+            --secondary: #1565C0;
+            --accent: #F57C00;
+            --success: #4CAF50;
+            --danger: #F44336;
+            --light: #FAFAFA;
+            --dark: #212121;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: #E0E0E0;
+            padding: 40px;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--dark);
+        }
+
+        .mockup-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: center;
+        }
+
+        /* ============================================
+           MOCKUP 1: HERO IMAGE
+           ============================================ */
+        .hero-mockup {
+            width: 900px;
+            height: 675px;
+            background: linear-gradient(135deg, #E8F5E9 0%, #FFFFFF 100%);
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-mockup::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(46,125,50,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--accent);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+
+        .hero-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 18px;
+            color: var(--dark);
+            text-align: center;
+            margin-bottom: 30px;
+            opacity: 0.8;
+        }
+
+        .dashboard-preview {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            padding: 20px;
+            margin: 0 auto 30px;
+            max-width: 700px;
+            transform: perspective(1000px) rotateX(5deg);
+        }
+
+        .dashboard-header {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .dashboard-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .dot-red { background: #FF5F56; }
+        .dot-yellow { background: #FFBD2E; }
+        .dot-green { background: #27CA40; }
+
+        .dashboard-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .kpi-card {
+            background: var(--light);
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .kpi-card.income { border-top: 4px solid var(--success); }
+        .kpi-card.expense { border-top: 4px solid var(--danger); }
+        .kpi-card.profit { border-top: 4px solid var(--primary); }
+        .kpi-card.goal { border-top: 4px solid var(--secondary); }
+
+        .kpi-label {
+            font-size: 10px;
+            color: #666;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .kpi-value {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .kpi-card.income .kpi-value { color: var(--success); }
+        .kpi-card.expense .kpi-value { color: var(--danger); }
+        .kpi-card.profit .kpi-value { color: var(--primary); }
+        .kpi-card.goal .kpi-value { color: var(--secondary); }
+
+        .mini-chart {
+            background: var(--light);
+            border-radius: 8px;
+            padding: 15px;
+            display: flex;
+            align-items: flex-end;
+            gap: 8px;
+            height: 80px;
+        }
+
+        .bar {
+            flex: 1;
+            background: var(--primary);
+            border-radius: 4px 4px 0 0;
+            opacity: 0.7;
+        }
+
+        .feature-list {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: var(--dark);
+        }
+
+        .feature-check {
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .trust-badge {
+            background: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        /* ============================================
+           MOCKUP 2: WHAT'S INCLUDED
+           ============================================ */
+        .included-mockup {
+            width: 900px;
+            height: 675px;
+            background: linear-gradient(180deg, var(--white) 0%, #E3F2FD 100%);
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            padding: 40px;
+        }
+
+        .included-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--secondary);
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .sheets-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .sheet-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+
+        .sheet-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .sheet-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .sheet-name {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: var(--dark);
+            font-size: 14px;
+        }
+
+        .bonuses {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .bonuses-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .bonus-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .bonus-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+        }
+
+        /* ============================================
+           MOCKUP 3: PLATFORMS
+           ============================================ */
+        .platforms-mockup {
+            width: 900px;
+            height: 675px;
+            background: linear-gradient(135deg, #212121 0%, #424242 100%);
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 40px;
+            color: white;
+        }
+
+        .platforms-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 32px;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .platforms-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .platform-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .platform-icon {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .platform-name {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+
+        .platforms-badge {
+            background: var(--accent);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 20px;
+            display: inline-block;
+            margin: 0 auto;
+            display: block;
+            width: fit-content;
+        }
+
+        /* ============================================
+           MOCKUP 4: HOW IT WORKS
+           ============================================ */
+        .how-mockup {
+            width: 900px;
+            height: 675px;
+            background: var(--white);
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            padding: 40px;
+        }
+
+        .how-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .steps {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+        }
+
+        .step {
+            text-align: center;
+            flex: 1;
+            padding: 0 20px;
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 32px;
+            font-weight: 800;
+            margin: 0 auto 20px;
+        }
+
+        .step-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+
+        .step-desc {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .step-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .setup-badge {
+            background: var(--success);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 18px;
+            display: block;
+            width: fit-content;
+            margin: 50px auto 0;
+        }
+
+        /* ============================================
+           MOCKUP 5: TESTIMONIALS
+           ============================================ */
+        .reviews-mockup {
+            width: 900px;
+            height: 675px;
+            background: linear-gradient(180deg, #E8F5E9 0%, var(--white) 100%);
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            padding: 40px;
+        }
+
+        .reviews-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .review-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .review-stars {
+            color: #FFC107;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .review-text {
+            font-size: 14px;
+            color: var(--dark);
+            line-height: 1.6;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        .review-author {
+            font-weight: 600;
+            color: #666;
+            font-size: 13px;
+        }
+
+        .guarantees {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        .guarantee {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .guarantee-icon {
+            color: var(--success);
+            font-size: 24px;
+        }
+
+        /* Print button */
+        .print-instructions {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #FFF3E0;
+            border-radius: 12px;
+        }
+
+        .print-instructions h2 {
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        .print-instructions p {
+            color: #666;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎨 Side Hustle Empire Tracker - Marketing Mockups</h1>
+
+    <div class="print-instructions">
+        <h2>📸 How to Use These Mockups</h2>
+        <p>Take screenshots of each mockup below (2700x2025px recommended) or use browser print to PDF. <br>
+        Then upload to Canva for final touches, add device mockups, and create your Etsy listing images!</p>
+    </div>
+
+    <div class="mockup-container">
+
+        <!-- MOCKUP 1: HERO -->
+        <div class="hero-mockup" id="mockup-hero">
+            <div class="hero-badge">🔥 2025-2026 EDITION</div>
+
+            <h2 class="hero-title">🚀 ULTIMATE SIDE HUSTLE<br>EMPIRE TRACKER</h2>
+            <p class="hero-subtitle">Track Multiple Income Streams • Prepare for Taxes • Crush Your Goals</p>
+
+            <div class="dashboard-preview">
+                <div class="dashboard-header">
+                    <div class="dashboard-dot dot-red"></div>
+                    <div class="dashboard-dot dot-yellow"></div>
+                    <div class="dashboard-dot dot-green"></div>
+                </div>
+                <div class="dashboard-content">
+                    <div class="kpi-card income">
+                        <div class="kpi-label">💰 Total Income</div>
+                        <div class="kpi-value">$12,450</div>
+                    </div>
+                    <div class="kpi-card expense">
+                        <div class="kpi-label">💸 Expenses</div>
+                        <div class="kpi-value">$2,340</div>
+                    </div>
+                    <div class="kpi-card profit">
+                        <div class="kpi-label">📈 Net Profit</div>
+                        <div class="kpi-value">$10,110</div>
+                    </div>
+                    <div class="kpi-card goal">
+                        <div class="kpi-label">🎯 Goal Progress</div>
+                        <div class="kpi-value">84.2%</div>
+                    </div>
+                </div>
+                <div class="mini-chart">
+                    <div class="bar" style="height: 40%"></div>
+                    <div class="bar" style="height: 55%"></div>
+                    <div class="bar" style="height: 45%"></div>
+                    <div class="bar" style="height: 70%"></div>
+                    <div class="bar" style="height: 65%"></div>
+                    <div class="bar" style="height: 80%"></div>
+                    <div class="bar" style="height: 90%"></div>
+                    <div class="bar" style="height: 75%"></div>
+                    <div class="bar" style="height: 85%"></div>
+                    <div class="bar" style="height: 60%"></div>
+                    <div class="bar" style="height: 95%"></div>
+                    <div class="bar" style="height: 100%"></div>
+                </div>
+            </div>
+
+            <div class="feature-list">
+                <div class="feature-item"><span class="feature-check">✓</span> Track 15+ Platforms</div>
+                <div class="feature-item"><span class="feature-check">✓</span> Tax-Ready Categories</div>
+                <div class="feature-item"><span class="feature-check">✓</span> Auto Calculations</div>
+            </div>
+
+            <div class="trust-badges">
+                <div class="trust-badge">📊 Google Sheets</div>
+                <div class="trust-badge">⚡ Instant Download</div>
+                <div class="trust-badge">🔄 Free Updates</div>
+            </div>
+        </div>
+
+        <!-- MOCKUP 2: WHAT'S INCLUDED -->
+        <div class="included-mockup" id="mockup-included">
+            <h2 class="included-title">📦 WHAT'S INCLUDED</h2>
+
+            <div class="sheets-grid">
+                <div class="sheet-card">
+                    <div class="sheet-icon">📊</div>
+                    <div class="sheet-name">Dashboard</div>
+                </div>
+                <div class="sheet-card">
+                    <div class="sheet-icon">💵</div>
+                    <div class="sheet-name">Income Tracker</div>
+                </div>
+                <div class="sheet-card">
+                    <div class="sheet-icon">💳</div>
+                    <div class="sheet-name">Expense Tracker</div>
+                </div>
+                <div class="sheet-card">
+                    <div class="sheet-icon">🧾</div>
+                    <div class="sheet-name">Tax Center</div>
+                </div>
+                <div class="sheet-card">
+                    <div class="sheet-icon">🎯</div>
+                    <div class="sheet-name">Goals Tracker</div>
+                </div>
+                <div class="sheet-card">
+                    <div class="sheet-icon">🚗</div>
+                    <div class="sheet-name">Mileage Log</div>
+                </div>
+                <div class="sheet-card">
+                    <div class="sheet-icon">📦</div>
+                    <div class="sheet-name">Inventory</div>
+                </div>
+                <div class="sheet-card">
+                    <div class="sheet-icon">⚙️</div>
+                    <div class="sheet-name">Settings</div>
+                </div>
+                <div class="sheet-card">
+                    <div class="sheet-icon">📋</div>
+                    <div class="sheet-name">Instructions</div>
+                </div>
+            </div>
+
+            <div class="bonuses">
+                <div class="bonuses-title">🎁 BONUS MATERIALS INCLUDED:</div>
+                <div class="bonus-list">
+                    <div class="bonus-item"><span class="feature-check">✓</span> Quick Start Guide (PDF)</div>
+                    <div class="bonus-item"><span class="feature-check">✓</span> Tax Deduction Cheat Sheet</div>
+                    <div class="bonus-item"><span class="feature-check">✓</span> Video Tutorial</div>
+                    <div class="bonus-item"><span class="feature-check">✓</span> Lifetime Updates</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MOCKUP 3: PLATFORMS -->
+        <div class="platforms-mockup" id="mockup-platforms">
+            <h2 class="platforms-title">WORKS WITH ALL YOUR PLATFORMS</h2>
+
+            <div class="platforms-grid">
+                <div class="platform-card">
+                    <div class="platform-icon">🛍️</div>
+                    <div class="platform-name">Etsy</div>
+                </div>
+                <div class="platform-card">
+                    <div class="platform-icon">📦</div>
+                    <div class="platform-name">eBay</div>
+                </div>
+                <div class="platform-card">
+                    <div class="platform-icon">👗</div>
+                    <div class="platform-name">Poshmark</div>
+                </div>
+                <div class="platform-card">
+                    <div class="platform-icon">🛒</div>
+                    <div class="platform-name">Depop</div>
+                </div>
+                <div class="platform-card">
+                    <div class="platform-icon">📦</div>
+                    <div class="platform-name">Amazon FBA</div>
+                </div>
+                <div class="platform-card">
+                    <div class="platform-icon">🏪</div>
+                    <div class="platform-name">Mercari</div>
+                </div>
+                <div class="platform-card">
+                    <div class="platform-icon">📘</div>
+                    <div class="platform-name">FB Market</div>
+                </div>
+                <div class="platform-card">
+                    <div class="platform-icon">💼</div>
+                    <div class="platform-name">Freelance</div>
+                </div>
+                <div class="platform-card">
+                    <div class="platform-icon">🚗</div>
+                    <div class="platform-name">Uber/Lyft</div>
+                </div>
+                <div class="platform-card">
+                    <div class="platform-icon">🍔</div>
+                    <div class="platform-name">DoorDash</div>
+                </div>
+                <div class="platform-card">
+                    <div class="platform-icon">📹</div>
+                    <div class="platform-name">YouTube</div>
+                </div>
+                <div class="platform-card">
+                    <div class="platform-icon">🎯</div>
+                    <div class="platform-name">Consulting</div>
+                </div>
+                <div class="platform-card">
+                    <div class="platform-icon">🏠</div>
+                    <div class="platform-name">Rentals</div>
+                </div>
+                <div class="platform-card">
+                    <div class="platform-icon">📈</div>
+                    <div class="platform-name">Dividends</div>
+                </div>
+                <div class="platform-card">
+                    <div class="platform-icon">💰</div>
+                    <div class="platform-name">+ More!</div>
+                </div>
+            </div>
+
+            <div class="platforms-badge">15+ PLATFORMS READY TO TRACK</div>
+        </div>
+
+        <!-- MOCKUP 4: HOW IT WORKS -->
+        <div class="how-mockup" id="mockup-how">
+            <h2 class="how-title">⚡ SETUP IN JUST 3 STEPS</h2>
+
+            <div class="steps">
+                <div class="step">
+                    <div class="step-icon">📥</div>
+                    <div class="step-number">1</div>
+                    <div class="step-title">Copy to Your Drive</div>
+                    <div class="step-desc">Click the link and make a copy to your Google Drive. It's that easy!</div>
+                </div>
+                <div class="step">
+                    <div class="step-icon">⚙️</div>
+                    <div class="step-number">2</div>
+                    <div class="step-title">Customize Settings</div>
+                    <div class="step-desc">Set your tax rate, income goals, and choose your platforms.</div>
+                </div>
+                <div class="step">
+                    <div class="step-icon">🚀</div>
+                    <div class="step-number">3</div>
+                    <div class="step-title">Start Tracking!</div>
+                    <div class="step-desc">Log income and expenses. Watch your empire grow!</div>
+                </div>
+            </div>
+
+            <div class="setup-badge">✅ READY IN 5 MINUTES • VIDEO TUTORIAL INCLUDED</div>
+        </div>
+
+        <!-- MOCKUP 5: TESTIMONIALS -->
+        <div class="reviews-mockup" id="mockup-reviews">
+            <h2 class="reviews-title">💬 WHY SIDE HUSTLERS LOVE THIS TRACKER</h2>
+
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                    <div class="review-text">"Finally have my finances organized! Tax season was a breeze this year. Worth every penny!"</div>
+                    <div class="review-author">— Sarah K., Etsy Seller</div>
+                </div>
+                <div class="review-card">
+                    <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                    <div class="review-text">"I run 3 side hustles and this tracks everything perfectly. The dashboard is amazing!"</div>
+                    <div class="review-author">— Mike T., Multi-Platform Reseller</div>
+                </div>
+                <div class="review-card">
+                    <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                    <div class="review-text">"The mileage tracker alone saved me $400 in deductions I would have missed. Game changer!"</div>
+                    <div class="review-author">— Jessica R., Delivery Driver</div>
+                </div>
+            </div>
+
+            <div class="guarantees">
+                <div class="guarantee">
+                    <span class="guarantee-icon">✅</span>
+                    Instant Download
+                </div>
+                <div class="guarantee">
+                    <span class="guarantee-icon">✅</span>
+                    Lifetime Updates
+                </div>
+                <div class="guarantee">
+                    <span class="guarantee-icon">✅</span>
+                    Responsive Support
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Add any interactive features here
+        console.log('Mockups loaded! Take screenshots or use browser print for high-quality exports.');
+    </script>
+</body>
+</html>
