@@ -1,0 +1,1084 @@
+{
+  "products": [
+    {
+      "asin": "B0BEAUTY001",
+      "name": "Luminous Silk Foundation",
+      "brand": "Giorgio Armani",
+      "category": "makeup",
+      "shortDescription": "Lightweight, buildable coverage foundation with a natural, luminous finish.",
+      "whyWeLikeIt": "Blends seamlessly for a second-skin effect that photographs beautifully.",
+      "tags": ["foundation", "luxury", "medium-coverage", "luminous-finish"]
+    },
+    {
+      "asin": "B0BEAUTY002",
+      "name": "Double Wear Stay-in-Place Foundation",
+      "brand": "Estee Lauder",
+      "category": "makeup",
+      "shortDescription": "24-hour wear, full coverage foundation that's oil-free and waterproof.",
+      "whyWeLikeIt": "Truly lasts all day without oxidizing or transferring.",
+      "tags": ["foundation", "full-coverage", "long-wear", "oil-free"]
+    },
+    {
+      "asin": "B0BEAUTY003",
+      "name": "Born This Way Foundation",
+      "brand": "Too Faced",
+      "category": "makeup",
+      "shortDescription": "Undetectable medium-to-full coverage with a natural matte finish.",
+      "whyWeLikeIt": "Coconut water and alpine rose leave skin hydrated and fresh.",
+      "tags": ["foundation", "medium-coverage", "natural-finish", "hydrating"]
+    },
+    {
+      "asin": "B0BEAUTY004",
+      "name": "Soft Matte Complete Concealer",
+      "brand": "NARS",
+      "category": "makeup",
+      "shortDescription": "Creamy, full-coverage concealer that blurs imperfections instantly.",
+      "whyWeLikeIt": "A little goes a long way and it never creases under the eyes.",
+      "tags": ["concealer", "full-coverage", "matte", "crease-proof"]
+    },
+    {
+      "asin": "B0BEAUTY005",
+      "name": "Shape Tape Contour Concealer",
+      "brand": "Tarte",
+      "category": "makeup",
+      "shortDescription": "Full coverage, vegan concealer with tape-like effect for sculpting.",
+      "whyWeLikeIt": "The ultimate concealer for brightening and contouring in one step.",
+      "tags": ["concealer", "full-coverage", "contouring", "vegan"]
+    },
+    {
+      "asin": "B0BEAUTY006",
+      "name": "Airbrush Flawless Finish Powder",
+      "brand": "Charlotte Tilbury",
+      "category": "makeup",
+      "shortDescription": "Finely-milled setting powder that blurs and softens skin.",
+      "whyWeLikeIt": "Sets makeup without looking cakey or emphasizing texture.",
+      "tags": ["setting-powder", "luxury", "blurring", "matte"]
+    },
+    {
+      "asin": "B0BEAUTY007",
+      "name": "Soft & Gentle Highlighting Powder",
+      "brand": "MAC",
+      "category": "makeup",
+      "shortDescription": "Iconic champagne highlighter with golden pink undertones.",
+      "whyWeLikeIt": "The most universally flattering highlighter that works on all skin tones.",
+      "tags": ["highlighter", "glow", "champagne", "buildable"]
+    },
+    {
+      "asin": "B0BEAUTY008",
+      "name": "Hoola Bronzer",
+      "brand": "Benefit",
+      "category": "makeup",
+      "shortDescription": "Cult-favorite matte bronzer for natural-looking definition.",
+      "whyWeLikeIt": "No orange tones - just the perfect warm brown for sculpting.",
+      "tags": ["bronzer", "matte", "contouring", "cult-favorite"]
+    },
+    {
+      "asin": "B0BEAUTY009",
+      "name": "Cloud Paint",
+      "brand": "Glossier",
+      "category": "makeup",
+      "shortDescription": "Seamless, buildable gel-cream blush for a natural flush.",
+      "whyWeLikeIt": "So easy to apply with fingers for a naturally flushed look.",
+      "tags": ["blush", "cream-blush", "buildable", "natural-finish"]
+    },
+    {
+      "asin": "B0BEAUTY010",
+      "name": "Orgasm Blush",
+      "brand": "NARS",
+      "category": "makeup",
+      "shortDescription": "Peachy pink powder blush with subtle golden shimmer.",
+      "whyWeLikeIt": "The iconic shade that flatters virtually every skin tone.",
+      "tags": ["blush", "shimmer", "peachy-pink", "iconic"]
+    },
+    {
+      "asin": "B0BEAUTY011",
+      "name": "Modern Renaissance Palette",
+      "brand": "Anastasia Beverly Hills",
+      "category": "makeup",
+      "shortDescription": "14-shade eyeshadow palette with warm berry and neutral tones.",
+      "whyWeLikeIt": "Buttery formula blends like a dream for endless looks.",
+      "tags": ["eyeshadow", "palette", "berry-tones", "pigmented"]
+    },
+    {
+      "asin": "B0BEAUTY012",
+      "name": "Naked3 Palette",
+      "brand": "Urban Decay",
+      "category": "makeup",
+      "shortDescription": "12 rose-hued eyeshadows from soft pink to deep brown.",
+      "whyWeLikeIt": "Versatile rosy neutrals perfect for everyday to evening.",
+      "tags": ["eyeshadow", "palette", "rose-tones", "neutral"]
+    },
+    {
+      "asin": "B0BEAUTY013",
+      "name": "Better Than Sex Mascara",
+      "brand": "Too Faced",
+      "category": "makeup",
+      "shortDescription": "Volumizing mascara with hourglass-shaped brush for dramatic lashes.",
+      "whyWeLikeIt": "Instantly adds major volume and length without clumping.",
+      "tags": ["mascara", "volumizing", "lengthening", "dramatic"]
+    },
+    {
+      "asin": "B0BEAUTY014",
+      "name": "Lash Sensational Mascara",
+      "brand": "Maybelline",
+      "category": "makeup",
+      "shortDescription": "Fan-effect mascara that creates a full lash look.",
+      "whyWeLikeIt": "Drugstore hero that rivals high-end mascaras at a fraction of the price.",
+      "tags": ["mascara", "volumizing", "drugstore", "fan-effect"]
+    },
+    {
+      "asin": "B0BEAUTY015",
+      "name": "24HR Brow Setter",
+      "brand": "Benefit",
+      "category": "makeup",
+      "shortDescription": "Invisible brow gel that holds all day without flaking.",
+      "whyWeLikeIt": "Keeps even the wildest brows perfectly in place.",
+      "tags": ["brows", "brow-gel", "clear", "long-wear"]
+    },
+    {
+      "asin": "B0BEAUTY016",
+      "name": "Brow Wiz",
+      "brand": "Anastasia Beverly Hills",
+      "category": "makeup",
+      "shortDescription": "Ultra-fine mechanical brow pencil for precise strokes.",
+      "whyWeLikeIt": "Creates the most natural hair-like strokes for fuller brows.",
+      "tags": ["brows", "brow-pencil", "precise", "natural-finish"]
+    },
+    {
+      "asin": "B0BEAUTY017",
+      "name": "Lip Injection Maximum Plump",
+      "brand": "Too Faced",
+      "category": "makeup",
+      "shortDescription": "High-shine lip plumper with intense tingling sensation.",
+      "whyWeLikeIt": "Visibly plumps lips in minutes for a fuller pout.",
+      "tags": ["lip-plumper", "lip-gloss", "volumizing", "high-shine"]
+    },
+    {
+      "asin": "B0BEAUTY018",
+      "name": "Pillow Talk Lipstick",
+      "brand": "Charlotte Tilbury",
+      "category": "makeup",
+      "shortDescription": "Matte revolution lipstick in universally flattering nude pink.",
+      "whyWeLikeIt": "The perfect my-lips-but-better shade that suits everyone.",
+      "tags": ["lipstick", "matte", "nude-pink", "luxury"]
+    },
+    {
+      "asin": "B0BEAUTY019",
+      "name": "Ruby Woo Lipstick",
+      "brand": "MAC",
+      "category": "makeup",
+      "shortDescription": "Iconic retro matte red lipstick with blue undertones.",
+      "whyWeLikeIt": "The classic red that makes teeth look whiter and suits all skin tones.",
+      "tags": ["lipstick", "matte", "red", "iconic"]
+    },
+    {
+      "asin": "B0BEAUTY020",
+      "name": "Lip Liner in Pillow Talk",
+      "brand": "Charlotte Tilbury",
+      "category": "makeup",
+      "shortDescription": "Creamy lip liner that defines and prevents feathering.",
+      "whyWeLikeIt": "Pairs perfectly with any nude or pink lip for polished results.",
+      "tags": ["lip-liner", "nude", "long-wear", "anti-feather"]
+    },
+    {
+      "asin": "B0BEAUTY021",
+      "name": "Stay All Day Liquid Liner",
+      "brand": "Stila",
+      "category": "makeup",
+      "shortDescription": "Waterproof felt-tip liner for precise application.",
+      "whyWeLikeIt": "The easiest liner for creating the perfect wing every time.",
+      "tags": ["eyeliner", "liquid", "waterproof", "precise"]
+    },
+    {
+      "asin": "B0BEAUTY022",
+      "name": "Tattoo Liner",
+      "brand": "KVD Vegan Beauty",
+      "category": "makeup",
+      "shortDescription": "Award-winning felt tip liner that doesn't budge.",
+      "whyWeLikeIt": "Truly lasts through sweat, tears, and humidity.",
+      "tags": ["eyeliner", "liquid", "long-wear", "vegan"]
+    },
+    {
+      "asin": "B0BEAUTY023",
+      "name": "All Nighter Setting Spray",
+      "brand": "Urban Decay",
+      "category": "makeup",
+      "shortDescription": "Long-lasting makeup setting spray that extends wear.",
+      "whyWeLikeIt": "The gold standard for keeping makeup locked in all day and night.",
+      "tags": ["setting-spray", "long-wear", "oil-control", "hydrating"]
+    },
+    {
+      "asin": "B0BEAUTY024",
+      "name": "Makeup Fixing Spray",
+      "brand": "MAC",
+      "category": "makeup",
+      "shortDescription": "Lightweight mist that sets and refreshes makeup.",
+      "whyWeLikeIt": "Multi-use spray perfect for setting, refreshing, and adding dewiness.",
+      "tags": ["setting-spray", "hydrating", "dewy-finish", "multi-use"]
+    },
+    {
+      "asin": "B0BEAUTY025",
+      "name": "Photo Finish Foundation Primer",
+      "brand": "Smashbox",
+      "category": "makeup",
+      "shortDescription": "Silky primer that smooths pores and fine lines.",
+      "whyWeLikeIt": "Creates the perfect canvas for flawless foundation application.",
+      "tags": ["primer", "smoothing", "pore-minimizing", "silicone-based"]
+    },
+    {
+      "asin": "B0BEAUTY026",
+      "name": "Hangover Replenishing Primer",
+      "brand": "Too Faced",
+      "category": "makeup",
+      "shortDescription": "Hydrating coconut water primer for dewy skin prep.",
+      "whyWeLikeIt": "Gives tired, dehydrated skin an instant boost of radiance.",
+      "tags": ["primer", "hydrating", "coconut-water", "dewy"]
+    },
+    {
+      "asin": "B0BEAUTY027",
+      "name": "Translucent Loose Setting Powder",
+      "brand": "Laura Mercier",
+      "category": "makeup",
+      "shortDescription": "Finely-milled powder that sets makeup with a soft-focus finish.",
+      "whyWeLikeIt": "The holy grail setting powder that works on every skin tone.",
+      "tags": ["setting-powder", "translucent", "soft-focus", "luxury"]
+    },
+    {
+      "asin": "B0BEAUTY028",
+      "name": "Fit Me Loose Finishing Powder",
+      "brand": "Maybelline",
+      "category": "makeup",
+      "shortDescription": "Mineral-based loose powder that absorbs oil and sets makeup.",
+      "whyWeLikeIt": "Incredible drugstore option that performs like high-end.",
+      "tags": ["setting-powder", "drugstore", "oil-control", "mineral"]
+    },
+    {
+      "asin": "B0BEAUTY029",
+      "name": "Diorshow Iconic Overcurl Mascara",
+      "brand": "Dior",
+      "category": "makeup",
+      "shortDescription": "Curling mascara with an innovative curved brush design.",
+      "whyWeLikeIt": "Curls and holds even the straightest lashes all day.",
+      "tags": ["mascara", "curling", "luxury", "buildable"]
+    },
+    {
+      "asin": "B0BEAUTY030",
+      "name": "Lash Paradise Mascara",
+      "brand": "L'Oreal Paris",
+      "category": "makeup",
+      "shortDescription": "Volumizing mascara with soft wavy brush for feathery lashes.",
+      "whyWeLikeIt": "Drugstore dupe for high-end mascaras with amazing results.",
+      "tags": ["mascara", "volumizing", "drugstore", "feathery"]
+    },
+    {
+      "asin": "B0BEAUTY031",
+      "name": "Cheek Pop Blush",
+      "brand": "Clinique",
+      "category": "makeup",
+      "shortDescription": "Buildable gerbera daisy-embossed powder blush.",
+      "whyWeLikeIt": "Gorgeous shades with a natural, healthy flush that lasts.",
+      "tags": ["blush", "buildable", "powder", "natural-finish"]
+    },
+    {
+      "asin": "B0BEAUTY032",
+      "name": "Soleil Tan de Chanel",
+      "brand": "Chanel",
+      "category": "makeup",
+      "shortDescription": "Cream-to-powder bronzer for natural sun-kissed glow.",
+      "whyWeLikeIt": "Melts into skin for the most natural bronzed look.",
+      "tags": ["bronzer", "cream", "luxury", "natural-finish"]
+    },
+    {
+      "asin": "B0BEAUTY033",
+      "name": "Killawatt Freestyle Highlighter",
+      "brand": "Fenty Beauty",
+      "category": "makeup",
+      "shortDescription": "Weightless longwear highlighter with buildable luminosity.",
+      "whyWeLikeIt": "Insanely pigmented and can be subtle or blinding.",
+      "tags": ["highlighter", "longwear", "pigmented", "inclusive"]
+    },
+    {
+      "asin": "B0BEAUTY034",
+      "name": "Pro Filt'r Soft Matte Foundation",
+      "brand": "Fenty Beauty",
+      "category": "makeup",
+      "shortDescription": "Climate-adaptive foundation with 50 shades for all skin tones.",
+      "whyWeLikeIt": "Finally, a foundation that truly has a shade for everyone.",
+      "tags": ["foundation", "matte", "inclusive", "oil-free"]
+    },
+    {
+      "asin": "B0BEAUTY035",
+      "name": "Bronzer Duo",
+      "brand": "Fenty Beauty",
+      "category": "makeup",
+      "shortDescription": "Magnetic refillable bronzer duo with matte and shimmer.",
+      "whyWeLikeIt": "Versatile duo for contouring and adding radiance.",
+      "tags": ["bronzer", "duo", "refillable", "versatile"]
+    },
+    {
+      "asin": "B0BEAUTY036",
+      "name": "Super Glow Highlighter",
+      "brand": "Milk Makeup",
+      "category": "makeup",
+      "shortDescription": "Buildable cream-gel highlighter stick for lit-from-within glow.",
+      "whyWeLikeIt": "Super easy to apply and blend for effortless glow.",
+      "tags": ["highlighter", "cream", "stick", "buildable"]
+    },
+    {
+      "asin": "B0BEAUTY037",
+      "name": "Boy Brow",
+      "brand": "Glossier",
+      "category": "makeup",
+      "shortDescription": "Fluffy, flexible brow grooming pomade.",
+      "whyWeLikeIt": "Creates the most natural, brushed-up brows effortlessly.",
+      "tags": ["brows", "pomade", "natural-finish", "buildable"]
+    },
+    {
+      "asin": "B0BEAUTY038",
+      "name": "Lip Gloss",
+      "brand": "Fenty Beauty",
+      "category": "makeup",
+      "shortDescription": "Universal lip luminizer with explosive shine.",
+      "whyWeLikeIt": "Non-sticky formula with gorgeous shimmer that suits everyone.",
+      "tags": ["lip-gloss", "shimmer", "non-sticky", "universal"]
+    },
+    {
+      "asin": "B0BEAUTY039",
+      "name": "Superstay Matte Ink Lipstick",
+      "brand": "Maybelline",
+      "category": "makeup",
+      "shortDescription": "16-hour wear liquid lipstick in vibrant matte shades.",
+      "whyWeLikeIt": "Truly doesn't budge through eating, drinking, and kissing.",
+      "tags": ["lipstick", "liquid", "matte", "long-wear"]
+    },
+    {
+      "asin": "B0BEAUTY040",
+      "name": "Flawless Filter",
+      "brand": "Charlotte Tilbury",
+      "category": "makeup",
+      "shortDescription": "Hollywood-inspired complexion booster for a lit-from-within glow.",
+      "whyWeLikeIt": "Works as primer, highlighter, or mixed with foundation for radiance.",
+      "tags": ["primer", "highlighter", "multi-use", "glowing"]
+    },
+    {
+      "asin": "B0HAIR001",
+      "name": "No. 3 Hair Perfector",
+      "brand": "Olaplex",
+      "category": "hair",
+      "shortDescription": "Weekly at-home treatment that repairs and strengthens bonds.",
+      "whyWeLikeIt": "Game-changing treatment that actually repairs damaged hair.",
+      "tags": ["treatment", "bond-repair", "weekly", "damage-repair"]
+    },
+    {
+      "asin": "B0HAIR002",
+      "name": "No. 4 Bond Maintenance Shampoo",
+      "brand": "Olaplex",
+      "category": "hair",
+      "shortDescription": "Reparative shampoo that rebuilds hair bonds while cleansing.",
+      "whyWeLikeIt": "Gently cleanses while continuously repairing hair structure.",
+      "tags": ["shampoo", "bond-repair", "gentle", "reparative"]
+    },
+    {
+      "asin": "B0HAIR003",
+      "name": "No. 5 Bond Maintenance Conditioner",
+      "brand": "Olaplex",
+      "category": "hair",
+      "shortDescription": "Restorative conditioner that hydrates and repairs.",
+      "whyWeLikeIt": "Leaves hair silky smooth without weighing it down.",
+      "tags": ["conditioner", "bond-repair", "hydrating", "lightweight"]
+    },
+    {
+      "asin": "B0HAIR004",
+      "name": "Moroccanoil Treatment",
+      "brand": "Moroccanoil",
+      "category": "hair",
+      "shortDescription": "Original argan oil-infused hair treatment for shine and manageability.",
+      "whyWeLikeIt": "The iconic oil that started the hair oil revolution.",
+      "tags": ["hair-oil", "argan-oil", "shine", "frizz-control"]
+    },
+    {
+      "asin": "B0HAIR005",
+      "name": "Dry Texturizing Spray",
+      "brand": "Oribe",
+      "category": "hair",
+      "shortDescription": "Invisible dry spray that adds texture and volume.",
+      "whyWeLikeIt": "Gives effortless, lived-in texture without residue.",
+      "tags": ["texturizing", "volume", "dry-spray", "luxury"]
+    },
+    {
+      "asin": "B0HAIR006",
+      "name": "Superstar Blow Dry Lotion",
+      "brand": "Oribe",
+      "category": "hair",
+      "shortDescription": "Heat protectant that adds volume and shine during blow-drying.",
+      "whyWeLikeIt": "Creates salon-quality blowouts at home with amazing volume.",
+      "tags": ["blow-dry", "heat-protectant", "volume", "shine"]
+    },
+    {
+      "asin": "B0HAIR007",
+      "name": "Elnett Satin Hairspray",
+      "brand": "L'Oreal Paris",
+      "category": "hair",
+      "shortDescription": "Iconic extra strong hold hairspray with micro-diffuser.",
+      "whyWeLikeIt": "The professional's choice for hold that brushes out beautifully.",
+      "tags": ["hairspray", "strong-hold", "brushable", "classic"]
+    },
+    {
+      "asin": "B0HAIR008",
+      "name": "Don't Blow It Fine Hair Styler",
+      "brand": "Bumble and bumble",
+      "category": "hair",
+      "shortDescription": "Air-dry cream that creates natural, polished style without heat.",
+      "whyWeLikeIt": "Perfect for embracing natural texture with frizz control.",
+      "tags": ["air-dry", "cream", "fine-hair", "no-heat"]
+    },
+    {
+      "asin": "B0HAIR009",
+      "name": "Perfect Hair Day Dry Shampoo",
+      "brand": "Living Proof",
+      "category": "hair",
+      "shortDescription": "Oil-absorbing dry shampoo that adds volume and texture.",
+      "whyWeLikeIt": "No white residue and actually cleans hair between washes.",
+      "tags": ["dry-shampoo", "volume", "oil-absorbing", "no-residue"]
+    },
+    {
+      "asin": "B0HAIR010",
+      "name": "Scalp Revival Stimulating Therapy Massager",
+      "brand": "Briogeo",
+      "category": "hair",
+      "shortDescription": "Silicone scalp massager that stimulates and exfoliates.",
+      "whyWeLikeIt": "Makes scalp care feel like a spa treatment at home.",
+      "tags": ["scalp-care", "massager", "exfoliating", "stimulating"]
+    },
+    {
+      "asin": "B0HAIR011",
+      "name": "Scalp Revival Charcoal Scrub",
+      "brand": "Briogeo",
+      "category": "hair",
+      "shortDescription": "Micro-exfoliating scalp treatment with charcoal and peppermint.",
+      "whyWeLikeIt": "Deeply cleanses scalp for healthier hair growth.",
+      "tags": ["scalp-care", "scrub", "detox", "charcoal"]
+    },
+    {
+      "asin": "B0HAIR012",
+      "name": "Dream Coat Anti-Humidity Spray",
+      "brand": "Color Wow",
+      "category": "hair",
+      "shortDescription": "Heat-activated anti-frizz spray for sleek, humidity-proof hair.",
+      "whyWeLikeIt": "Actually works in high humidity for frizz-free hair.",
+      "tags": ["anti-frizz", "heat-activated", "humidity-proof", "smoothing"]
+    },
+    {
+      "asin": "B0HAIR013",
+      "name": "Hydrate Shampoo",
+      "brand": "Pureology",
+      "category": "hair",
+      "shortDescription": "Color-safe moisturizing shampoo for dry, color-treated hair.",
+      "whyWeLikeIt": "Intense hydration without stripping color or weighing down hair.",
+      "tags": ["shampoo", "hydrating", "color-safe", "sulfate-free"]
+    },
+    {
+      "asin": "B0HAIR014",
+      "name": "Hydrate Conditioner",
+      "brand": "Pureology",
+      "category": "hair",
+      "shortDescription": "Rich moisturizing conditioner for color-treated hair.",
+      "whyWeLikeIt": "Leaves color-treated hair incredibly soft and manageable.",
+      "tags": ["conditioner", "hydrating", "color-safe", "sulfate-free"]
+    },
+    {
+      "asin": "B0HAIR015",
+      "name": "Miracle Leave-In Product",
+      "brand": "It's a 10",
+      "category": "hair",
+      "shortDescription": "10-in-1 leave-in treatment that does everything.",
+      "whyWeLikeIt": "Detangles, protects, smooths, and adds shine in one product.",
+      "tags": ["leave-in", "multi-benefit", "detangling", "heat-protectant"]
+    },
+    {
+      "asin": "B0HAIR016",
+      "name": "Restore Repair Cream",
+      "brand": "Living Proof",
+      "category": "hair",
+      "shortDescription": "Daily leave-in that helps reverse damage over time.",
+      "whyWeLikeIt": "Lightweight cream that strengthens and softens damaged hair.",
+      "tags": ["leave-in", "repair", "lightweight", "daily"]
+    },
+    {
+      "asin": "B0HAIR017",
+      "name": "Superfood Protein Treatment",
+      "brand": "K18",
+      "category": "hair",
+      "shortDescription": "4-minute leave-in molecular repair treatment for all hair types.",
+      "whyWeLikeIt": "Revolutionary peptide technology that actually repairs hair damage.",
+      "tags": ["treatment", "molecular-repair", "leave-in", "professional"]
+    },
+    {
+      "asin": "B0HAIR018",
+      "name": "Silk Serum",
+      "brand": "Biosilk",
+      "category": "hair",
+      "shortDescription": "Silk-infused finishing serum for shine and frizz control.",
+      "whyWeLikeIt": "Instantly adds mirror-like shine without greasiness.",
+      "tags": ["serum", "shine", "silk", "frizz-control"]
+    },
+    {
+      "asin": "B0HAIR019",
+      "name": "Air Dry Cream",
+      "brand": "Ouai",
+      "category": "hair",
+      "shortDescription": "Lightweight cream for effortless, frizz-free air-dried styles.",
+      "whyWeLikeIt": "Perfect for embracing natural texture with a polished finish.",
+      "tags": ["air-dry", "cream", "lightweight", "frizz-control"]
+    },
+    {
+      "asin": "B0HAIR020",
+      "name": "Wave Spray",
+      "brand": "Ouai",
+      "category": "hair",
+      "shortDescription": "Texturizing spray for effortless, beachy waves.",
+      "whyWeLikeIt": "Creates lived-in waves without crunchy texture.",
+      "tags": ["wave-spray", "texturizing", "beachy", "salt-free"]
+    },
+    {
+      "asin": "B0HAIR021",
+      "name": "Mane Tamer",
+      "brand": "Amika",
+      "category": "hair",
+      "shortDescription": "Smoothing leave-in cream for frizz control and manageability.",
+      "whyWeLikeIt": "Tames thick, unruly hair without heaviness.",
+      "tags": ["leave-in", "smoothing", "frizz-control", "thick-hair"]
+    },
+    {
+      "asin": "B0HAIR022",
+      "name": "Perk Up Dry Shampoo",
+      "brand": "Amika",
+      "category": "hair",
+      "shortDescription": "Talc-free dry shampoo with rice starch to absorb oil.",
+      "whyWeLikeIt": "Fresh scent and no white cast on any hair color.",
+      "tags": ["dry-shampoo", "talc-free", "rice-starch", "volume"]
+    },
+    {
+      "asin": "B0HAIR023",
+      "name": "Dyson Airwrap Multi-Styler",
+      "brand": "Dyson",
+      "category": "hair",
+      "shortDescription": "Revolutionary styling tool that curls and waves with air.",
+      "whyWeLikeIt": "Creates salon-quality styles with less heat damage.",
+      "tags": ["styling-tool", "curling", "less-damage", "luxury"]
+    },
+    {
+      "asin": "B0HAIR024",
+      "name": "Supersonic Hair Dryer",
+      "brand": "Dyson",
+      "category": "hair",
+      "shortDescription": "Fast-drying, intelligent hair dryer with heat control.",
+      "whyWeLikeIt": "Cuts drying time in half while protecting hair from extreme heat.",
+      "tags": ["hair-dryer", "fast-drying", "intelligent", "luxury"]
+    },
+    {
+      "asin": "B0HAIR025",
+      "name": "Original Ceramic Flat Iron",
+      "brand": "GHD",
+      "category": "hair",
+      "shortDescription": "Professional ceramic straightener with optimal styling temperature.",
+      "whyWeLikeIt": "The perfect temperature for styling without damage.",
+      "tags": ["flat-iron", "ceramic", "professional", "versatile"]
+    },
+    {
+      "asin": "B0HAIR026",
+      "name": "Soft Curl Iron",
+      "brand": "GHD",
+      "category": "hair",
+      "shortDescription": "1.25-inch curling wand for loose, natural-looking waves.",
+      "whyWeLikeIt": "Creates the most beautiful, bouncy curls that last.",
+      "tags": ["curling-iron", "waves", "professional", "soft-curls"]
+    },
+    {
+      "asin": "B0HAIR027",
+      "name": "Purple Shampoo",
+      "brand": "Fanola",
+      "category": "hair",
+      "shortDescription": "Ultra-violet shampoo that neutralizes yellow and brassy tones.",
+      "whyWeLikeIt": "The strongest purple shampoo for maintaining cool blonde.",
+      "tags": ["shampoo", "purple", "toning", "blonde-hair"]
+    },
+    {
+      "asin": "B0HAIR028",
+      "name": "Blonde Angel Wash",
+      "brand": "Kevin Murphy",
+      "category": "hair",
+      "shortDescription": "Color-enhancing wash for blonde hair with lavender tones.",
+      "whyWeLikeIt": "Gently tones while hydrating blonde and gray hair.",
+      "tags": ["shampoo", "toning", "blonde-hair", "hydrating"]
+    },
+    {
+      "asin": "B0HAIR029",
+      "name": "Curl Cream",
+      "brand": "DevaCurl",
+      "category": "hair",
+      "shortDescription": "Defining cream that enhances curl pattern and controls frizz.",
+      "whyWeLikeIt": "Defines curls without crunch or weighing them down.",
+      "tags": ["curl-cream", "defining", "frizz-control", "curly-hair"]
+    },
+    {
+      "asin": "B0HAIR030",
+      "name": "Flaxseed Gel",
+      "brand": "Mielle",
+      "category": "hair",
+      "shortDescription": "Strong hold gel with flaxseed for defined curls and coils.",
+      "whyWeLikeIt": "Natural ingredients with amazing hold for textured hair.",
+      "tags": ["gel", "curly-hair", "natural", "strong-hold"]
+    },
+    {
+      "asin": "B0HAIR031",
+      "name": "Hair Perfume",
+      "brand": "Byredo",
+      "category": "hair",
+      "shortDescription": "Luxurious alcohol-free hair perfume that adds shine.",
+      "whyWeLikeIt": "Makes hair smell incredible while conditioning.",
+      "tags": ["hair-perfume", "fragrance", "luxury", "conditioning"]
+    },
+    {
+      "asin": "B0HAIR032",
+      "name": "Detox Dry Shampoo",
+      "brand": "Drybar",
+      "category": "hair",
+      "shortDescription": "Refreshing dry shampoo with golden root extract.",
+      "whyWeLikeIt": "Absorbs oil and adds volume with a fresh, clean scent.",
+      "tags": ["dry-shampoo", "detox", "volume", "refreshing"]
+    },
+    {
+      "asin": "B0HAIR033",
+      "name": "Hot Toddy Heat Protectant",
+      "brand": "Drybar",
+      "category": "hair",
+      "shortDescription": "Heat protectant mist for all heat styling up to 450 degrees.",
+      "whyWeLikeIt": "Lightweight protection that doesn't weigh down fine hair.",
+      "tags": ["heat-protectant", "mist", "lightweight", "all-hair-types"]
+    },
+    {
+      "asin": "B0HAIR034",
+      "name": "Deep Repair Mask",
+      "brand": "Kerastase",
+      "category": "hair",
+      "shortDescription": "Intensive repairing treatment for damaged hair.",
+      "whyWeLikeIt": "Salon-quality repair that transforms damaged hair.",
+      "tags": ["hair-mask", "repair", "intensive", "luxury"]
+    },
+    {
+      "asin": "B0HAIR035",
+      "name": "Silk Pillowcase",
+      "brand": "Slip",
+      "category": "hair",
+      "shortDescription": "Pure silk pillowcase that prevents hair breakage and frizz.",
+      "whyWeLikeIt": "Waking up with smoother, less tangled hair is life-changing.",
+      "tags": ["accessories", "silk", "anti-frizz", "overnight"]
+    },
+    {
+      "asin": "B0HAIR036",
+      "name": "Scrunchies Set",
+      "brand": "Slip",
+      "category": "hair",
+      "shortDescription": "Pure silk scrunchies that won't crease or damage hair.",
+      "whyWeLikeIt": "Gentle hold without the hair dent of regular elastics.",
+      "tags": ["accessories", "silk", "gentle", "no-crease"]
+    },
+    {
+      "asin": "B0HAIR037",
+      "name": "Wet Brush Original Detangler",
+      "brand": "Wet Brush",
+      "category": "hair",
+      "shortDescription": "Pain-free detangling brush with flexible IntelliFlex bristles.",
+      "whyWeLikeIt": "Glides through wet or dry tangles without pulling.",
+      "tags": ["brush", "detangling", "flexible", "pain-free"]
+    },
+    {
+      "asin": "B0HAIR038",
+      "name": "Wide Tooth Comb",
+      "brand": "Pattern",
+      "category": "hair",
+      "shortDescription": "Seamless wide-tooth comb designed for textured hair.",
+      "whyWeLikeIt": "No snags or breakage when detangling curly and coily hair.",
+      "tags": ["comb", "wide-tooth", "textured-hair", "seamless"]
+    },
+    {
+      "asin": "B0HAIR039",
+      "name": "Rosemary Hair Growth Oil",
+      "brand": "Mielle",
+      "category": "hair",
+      "shortDescription": "Strengthening oil with rosemary and mint for hair growth.",
+      "whyWeLikeIt": "Stimulates scalp and promotes thicker, healthier hair.",
+      "tags": ["hair-oil", "growth", "rosemary", "scalp-care"]
+    },
+    {
+      "asin": "B0HAIR040",
+      "name": "High Porosity Deep Conditioner",
+      "brand": "As I Am",
+      "category": "hair",
+      "shortDescription": "Rich treatment for high-porosity natural hair.",
+      "whyWeLikeIt": "Penetrates deeply to restore moisture balance to porous hair.",
+      "tags": ["deep-conditioner", "high-porosity", "natural-hair", "moisturizing"]
+    },
+    {
+      "asin": "B0SKIN001",
+      "name": "C E Ferulic Serum",
+      "brand": "SkinCeuticals",
+      "category": "skincare",
+      "shortDescription": "Daytime vitamin C serum with 15% L-ascorbic acid.",
+      "whyWeLikeIt": "The gold standard vitamin C that visibly transforms skin.",
+      "tags": ["serum", "vitamin-c", "antioxidant", "brightening"]
+    },
+    {
+      "asin": "B0SKIN002",
+      "name": "Advanced Night Repair Serum",
+      "brand": "Estee Lauder",
+      "category": "skincare",
+      "shortDescription": "Multi-action night serum that repairs and restores skin.",
+      "whyWeLikeIt": "Iconic formula that reduces fine lines and boosts radiance.",
+      "tags": ["serum", "night", "anti-aging", "repairing"]
+    },
+    {
+      "asin": "B0SKIN003",
+      "name": "Hydrating Facial Cleanser",
+      "brand": "CeraVe",
+      "category": "skincare",
+      "shortDescription": "Gentle cleanser with ceramides and hyaluronic acid.",
+      "whyWeLikeIt": "Dermatologist-recommended cleanser that never strips skin.",
+      "tags": ["cleanser", "hydrating", "gentle", "ceramides"]
+    },
+    {
+      "asin": "B0SKIN004",
+      "name": "Moisturizing Cream",
+      "brand": "CeraVe",
+      "category": "skincare",
+      "shortDescription": "Rich moisturizer that restores the skin barrier.",
+      "whyWeLikeIt": "Affordable workhorse that dermatologists recommend.",
+      "tags": ["moisturizer", "ceramides", "barrier-repair", "drugstore"]
+    },
+    {
+      "asin": "B0SKIN005",
+      "name": "Retinol 0.5 Refining Night Cream",
+      "brand": "Paula's Choice",
+      "category": "skincare",
+      "shortDescription": "Targeted retinol treatment for visible aging concerns.",
+      "whyWeLikeIt": "Effective retinol in a gentle, well-formulated base.",
+      "tags": ["retinol", "anti-aging", "night-cream", "smoothing"]
+    },
+    {
+      "asin": "B0SKIN006",
+      "name": "2% BHA Liquid Exfoliant",
+      "brand": "Paula's Choice",
+      "category": "skincare",
+      "shortDescription": "Leave-on exfoliant that unclogs pores and smooths skin.",
+      "whyWeLikeIt": "The cult-favorite BHA that transformed many people's skin.",
+      "tags": ["exfoliant", "bha", "salicylic-acid", "pore-clearing"]
+    },
+    {
+      "asin": "B0SKIN007",
+      "name": "Drunk Elephant C-Firma Fresh Day Serum",
+      "brand": "Drunk Elephant",
+      "category": "skincare",
+      "shortDescription": "Potent vitamin C day serum with pumpkin ferment extract.",
+      "whyWeLikeIt": "Innovative powder-to-serum format ensures fresh, active vitamin C.",
+      "tags": ["serum", "vitamin-c", "antioxidant", "brightening"]
+    },
+    {
+      "asin": "B0SKIN008",
+      "name": "Protini Polypeptide Cream",
+      "brand": "Drunk Elephant",
+      "category": "skincare",
+      "shortDescription": "Protein-rich moisturizer for firmer, plumper skin.",
+      "whyWeLikeIt": "Signal peptides visibly improve skin texture and firmness.",
+      "tags": ["moisturizer", "peptides", "anti-aging", "firming"]
+    },
+    {
+      "asin": "B0SKIN009",
+      "name": "Hydro Boost Water Gel",
+      "brand": "Neutrogena",
+      "category": "skincare",
+      "shortDescription": "Oil-free hyaluronic acid gel moisturizer for all skin types.",
+      "whyWeLikeIt": "Lightweight hydration that works under makeup beautifully.",
+      "tags": ["moisturizer", "gel", "hyaluronic-acid", "drugstore"]
+    },
+    {
+      "asin": "B0SKIN010",
+      "name": "Ultra Facial Cream",
+      "brand": "Kiehl's",
+      "category": "skincare",
+      "shortDescription": "24-hour hydrating cream with squalane and glacial glycoprotein.",
+      "whyWeLikeIt": "Lightweight enough for any climate with lasting hydration.",
+      "tags": ["moisturizer", "hydrating", "all-skin-types", "lightweight"]
+    },
+    {
+      "asin": "B0SKIN011",
+      "name": "Luna Sleeping Night Oil",
+      "brand": "Sunday Riley",
+      "category": "skincare",
+      "shortDescription": "Trans-retinol night oil that improves signs of aging.",
+      "whyWeLikeIt": "Retinol in an oil base for powerful yet gentle results.",
+      "tags": ["face-oil", "retinol", "night", "anti-aging"]
+    },
+    {
+      "asin": "B0SKIN012",
+      "name": "Good Genes All-In-One Lactic Acid Treatment",
+      "brand": "Sunday Riley",
+      "category": "skincare",
+      "shortDescription": "Lactic acid treatment for instant radiance and clarity.",
+      "whyWeLikeIt": "Visible results from first use - skin looks instantly brighter.",
+      "tags": ["treatment", "lactic-acid", "exfoliating", "brightening"]
+    },
+    {
+      "asin": "B0SKIN013",
+      "name": "Vitamin C Serum",
+      "brand": "Timeless",
+      "category": "skincare",
+      "shortDescription": "20% Vitamin C + E Ferulic Acid serum at an accessible price.",
+      "whyWeLikeIt": "SkinCeuticals dupe at a fraction of the price.",
+      "tags": ["serum", "vitamin-c", "antioxidant", "affordable"]
+    },
+    {
+      "asin": "B0SKIN014",
+      "name": "Niacinamide 10% + Zinc 1%",
+      "brand": "The Ordinary",
+      "category": "skincare",
+      "shortDescription": "Oil-control serum that reduces pore appearance and blemishes.",
+      "whyWeLikeIt": "Incredible value for a highly effective pore-minimizing formula.",
+      "tags": ["serum", "niacinamide", "oil-control", "affordable"]
+    },
+    {
+      "asin": "B0SKIN015",
+      "name": "Hyaluronic Acid 2% + B5",
+      "brand": "The Ordinary",
+      "category": "skincare",
+      "shortDescription": "Multi-depth hydration serum with hyaluronic acid.",
+      "whyWeLikeIt": "Effective hydration at an unbeatable price point.",
+      "tags": ["serum", "hyaluronic-acid", "hydrating", "affordable"]
+    },
+    {
+      "asin": "B0SKIN016",
+      "name": "Retinol 0.2% in Squalane",
+      "brand": "The Ordinary",
+      "category": "skincare",
+      "shortDescription": "Beginner-friendly retinol solution in moisturizing squalane.",
+      "whyWeLikeIt": "Gentle introduction to retinol without irritation.",
+      "tags": ["serum", "retinol", "beginner", "affordable"]
+    },
+    {
+      "asin": "B0SKIN017",
+      "name": "Unseen Sunscreen SPF 40",
+      "brand": "Supergoop",
+      "category": "skincare",
+      "shortDescription": "Invisible, weightless, scentless daily sunscreen.",
+      "whyWeLikeIt": "Finally, a sunscreen that works perfectly under makeup.",
+      "tags": ["sunscreen", "invisible", "daily", "primer"]
+    },
+    {
+      "asin": "B0SKIN018",
+      "name": "Glowscreen SPF 40",
+      "brand": "Supergoop",
+      "category": "skincare",
+      "shortDescription": "Hydrating sunscreen primer that adds instant glow.",
+      "whyWeLikeIt": "Gives skin a gorgeous lit-from-within glow while protecting.",
+      "tags": ["sunscreen", "glowing", "primer", "hydrating"]
+    },
+    {
+      "asin": "B0SKIN019",
+      "name": "EltaMD UV Clear Broad-Spectrum SPF 46",
+      "brand": "EltaMD",
+      "category": "skincare",
+      "shortDescription": "Dermatologist-recommended sunscreen for acne-prone skin.",
+      "whyWeLikeIt": "The holy grail sunscreen for sensitive, breakout-prone skin.",
+      "tags": ["sunscreen", "acne-prone", "dermatologist", "zinc"]
+    },
+    {
+      "asin": "B0SKIN020",
+      "name": "Mineral Sunscreen SPF 30",
+      "brand": "La Roche-Posay",
+      "category": "skincare",
+      "shortDescription": "Lightweight mineral sunscreen with antioxidant protection.",
+      "whyWeLikeIt": "Gentle mineral protection without white cast on most skin tones.",
+      "tags": ["sunscreen", "mineral", "sensitive-skin", "lightweight"]
+    },
+    {
+      "asin": "B0SKIN021",
+      "name": "Adapalene Gel 0.1%",
+      "brand": "Differin",
+      "category": "skincare",
+      "shortDescription": "OTC retinoid treatment for acne-prone skin.",
+      "whyWeLikeIt": "Prescription-strength acne treatment now available over the counter.",
+      "tags": ["treatment", "retinoid", "acne", "drugstore"]
+    },
+    {
+      "asin": "B0SKIN022",
+      "name": "Mighty Patch Original",
+      "brand": "Hero Cosmetics",
+      "category": "skincare",
+      "shortDescription": "Hydrocolloid acne patches that flatten pimples overnight.",
+      "whyWeLikeIt": "Visibly reduces pimples while you sleep - like magic.",
+      "tags": ["acne-patches", "spot-treatment", "hydrocolloid", "overnight"]
+    },
+    {
+      "asin": "B0SKIN023",
+      "name": "Effaclar Duo+ Moisturizer",
+      "brand": "La Roche-Posay",
+      "category": "skincare",
+      "shortDescription": "Anti-acne moisturizer with niacinamide and salicylic acid.",
+      "whyWeLikeIt": "Treats and prevents breakouts while hydrating skin.",
+      "tags": ["moisturizer", "acne", "niacinamide", "oil-free"]
+    },
+    {
+      "asin": "B0SKIN024",
+      "name": "Cicaplast Baume B5",
+      "brand": "La Roche-Posay",
+      "category": "skincare",
+      "shortDescription": "Multi-purpose balm for irritated, damaged skin.",
+      "whyWeLikeIt": "Heals everything from chapped lips to post-procedure skin.",
+      "tags": ["balm", "healing", "barrier-repair", "multi-purpose"]
+    },
+    {
+      "asin": "B0SKIN025",
+      "name": "First Aid Beauty Ultra Repair Cream",
+      "brand": "First Aid Beauty",
+      "category": "skincare",
+      "shortDescription": "Intense hydration cream for dry, distressed skin.",
+      "whyWeLikeIt": "Soothes and moisturizes extremely dry skin instantly.",
+      "tags": ["moisturizer", "dry-skin", "sensitive", "soothing"]
+    },
+    {
+      "asin": "B0SKIN026",
+      "name": "Creme de la Mer",
+      "brand": "La Mer",
+      "category": "skincare",
+      "shortDescription": "Legendary moisturizing cream with Miracle Broth.",
+      "whyWeLikeIt": "Luxurious texture and visible results for aging concerns.",
+      "tags": ["moisturizer", "luxury", "anti-aging", "hydrating"]
+    },
+    {
+      "asin": "B0SKIN027",
+      "name": "Black Tea Age-Delay Eye Concentrate",
+      "brand": "Fresh",
+      "category": "skincare",
+      "shortDescription": "Smoothing eye cream with black tea complex.",
+      "whyWeLikeIt": "Addresses multiple eye area concerns in one formula.",
+      "tags": ["eye-cream", "anti-aging", "smoothing", "hydrating"]
+    },
+    {
+      "asin": "B0SKIN028",
+      "name": "Kiehl's Creamy Eye Treatment with Avocado",
+      "brand": "Kiehl's",
+      "category": "skincare",
+      "shortDescription": "Rich eye cream that deeply hydrates the delicate eye area.",
+      "whyWeLikeIt": "Simple but effective hydration for dry under-eyes.",
+      "tags": ["eye-cream", "hydrating", "avocado", "gentle"]
+    },
+    {
+      "asin": "B0SKIN029",
+      "name": "Youth To The People Superfood Cleanser",
+      "brand": "Youth To The People",
+      "category": "skincare",
+      "shortDescription": "Antioxidant-rich green juice gel cleanser.",
+      "whyWeLikeIt": "Removes makeup and SPF thoroughly while leaving skin soft.",
+      "tags": ["cleanser", "gel", "superfood", "antioxidant"]
+    },
+    {
+      "asin": "B0SKIN030",
+      "name": "Squalane Cleanser",
+      "brand": "The Ordinary",
+      "category": "skincare",
+      "shortDescription": "Gentle makeup-melting cleanser with squalane.",
+      "whyWeLikeIt": "Dissolves even waterproof makeup without stripping.",
+      "tags": ["cleanser", "oil-based", "gentle", "affordable"]
+    },
+    {
+      "asin": "B0SKIN031",
+      "name": "Cleansing Balm",
+      "brand": "Elemis",
+      "category": "skincare",
+      "shortDescription": "Award-winning balm that melts away makeup and impurities.",
+      "whyWeLikeIt": "Transformative texture and aromatherapy experience.",
+      "tags": ["cleanser", "balm", "luxury", "aromatherapy"]
+    },
+    {
+      "asin": "B0SKIN032",
+      "name": "Take The Day Off Cleansing Balm",
+      "brand": "Clinique",
+      "category": "skincare",
+      "shortDescription": "Silky balm that removes long-wearing makeup instantly.",
+      "whyWeLikeIt": "Dissolves everything, even waterproof mascara, gently.",
+      "tags": ["cleanser", "balm", "makeup-removing", "gentle"]
+    },
+    {
+      "asin": "B0SKIN033",
+      "name": "Watermelon Glow Niacinamide Dew Drops",
+      "brand": "Glow Recipe",
+      "category": "skincare",
+      "shortDescription": "Highlighting serum with niacinamide for natural glow.",
+      "whyWeLikeIt": "Gives the most gorgeous dewy glow under or over makeup.",
+      "tags": ["serum", "niacinamide", "glowing", "highlighting"]
+    },
+    {
+      "asin": "B0SKIN034",
+      "name": "Watermelon Glow Sleeping Mask",
+      "brand": "Glow Recipe",
+      "category": "skincare",
+      "shortDescription": "Bouncy overnight mask with watermelon and AHAs.",
+      "whyWeLikeIt": "Wake up with visibly smoother, more radiant skin.",
+      "tags": ["sleeping-mask", "aha", "hydrating", "brightening"]
+    },
+    {
+      "asin": "B0SKIN035",
+      "name": "Laneige Water Sleeping Mask",
+      "brand": "Laneige",
+      "category": "skincare",
+      "shortDescription": "Intensive hydrating overnight mask with SLEEP-TOX technology.",
+      "whyWeLikeIt": "K-beauty cult favorite that delivers serious overnight hydration.",
+      "tags": ["sleeping-mask", "hydrating", "k-beauty", "overnight"]
+    },
+    {
+      "asin": "B0SKIN036",
+      "name": "Lip Sleeping Mask",
+      "brand": "Laneige",
+      "category": "skincare",
+      "shortDescription": "Intensely moisturizing overnight lip treatment.",
+      "whyWeLikeIt": "Wake up with the softest, smoothest lips ever.",
+      "tags": ["lip-care", "overnight", "hydrating", "k-beauty"]
+    },
+    {
+      "asin": "B0SKIN037",
+      "name": "Tatcha Dewy Skin Cream",
+      "brand": "Tatcha",
+      "category": "skincare",
+      "shortDescription": "Rich cream that delivers dewy, plump skin.",
+      "whyWeLikeIt": "Gives dry skin the most beautiful, healthy-looking glow.",
+      "tags": ["moisturizer", "dewy", "hydrating", "j-beauty"]
+    },
+    {
+      "asin": "B0SKIN038",
+      "name": "The Water Cream",
+      "brand": "Tatcha",
+      "category": "skincare",
+      "shortDescription": "Oil-free hydration that releases a burst of skin-improving nutrients.",
+      "whyWeLikeIt": "Lightweight but effective hydration for oily skin types.",
+      "tags": ["moisturizer", "oil-free", "lightweight", "j-beauty"]
+    },
+    {
+      "asin": "B0SKIN039",
+      "name": "COSRX Snail Mucin 96% Power Repairing Essence",
+      "brand": "COSRX",
+      "category": "skincare",
+      "shortDescription": "Snail secretion filtrate essence for deep hydration and repair.",
+      "whyWeLikeIt": "K-beauty essential that transforms dehydrated, dull skin.",
+      "tags": ["essence", "snail-mucin", "hydrating", "k-beauty"]
+    },
+    {
+      "asin": "B0SKIN040",
+      "name": "COSRX Pimple Patches",
+      "brand": "COSRX",
+      "category": "skincare",
+      "shortDescription": "Hydrocolloid patches that absorb pimple gunk overnight.",
+      "whyWeLikeIt": "The original K-beauty pimple patch that actually works.",
+      "tags": ["acne-patches", "hydrocolloid", "k-beauty", "spot-treatment"]
+    }
+  ]
+}
