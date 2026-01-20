@@ -1,0 +1,20 @@
+# LustreDaily Robots.txt
+# https://lustredaily.com
+
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://lustredaily.com/sitemap.xml
+
+# Disallow admin/API routes (if any)
+Disallow: /api/
+Disallow: /_next/
+
+# Allow search engine image crawlers
+User-agent: Googlebot-Image
+Allow: /images/
+
+User-agent: Bingbot
+Allow: /

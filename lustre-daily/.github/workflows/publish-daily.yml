@@ -1,0 +1,112 @@
+# Daily Publishing Workflow
+# Generates and publishes 3 new posts daily (2 monetized, 1 non-monetized)
+#
+# Schedule: 06:10 AM America/New_York (11:10 UTC)
+# Note: America/New_York is UTC-5 (EST) or UTC-4 (EDT)
+#       11:10 UTC = 06:10 EST or 07:10 EDT
+
+name: Daily Content Publishing
+
+on:
+  # Run daily at 11:10 UTC (06:10 America/New_York EST)
+  schedule:
+    - cron: "10 11 * * *"
+
+  # Allow manual trigger for testing
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Dry run (skip commit/push)"
+        required: false
+        default: "false"
+        type: boolean
+
+env:
+  NODE_VERSION: "20"
+  AMAZON_ASSOC_TAG: ${{ secrets.AMAZON_ASSOC_TAG || 'shelzysbeauty-20' }}
+
+jobs:
+  publish-daily:
+    name: Generate and Publish Daily Posts
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+          cache-dependency-path: lustre-daily/package-lock.json
+
+      - name: Install dependencies
+        working-directory: lustre-daily
+        run: npm ci
+
+      - name: Generate daily posts
+        working-directory: lustre-daily
+        run: npm run generate:daily
+        env:
+          AMAZON_ASSOC_TAG: ${{ env.AMAZON_ASSOC_TAG }}
+          LLM_PROVIDER: ${{ secrets.LLM_PROVIDER }}
+          LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
+
+      - name: Validate affiliate compliance
+        working-directory: lustre-daily
+        run: npm run validate:affiliate daily
+
+      - name: Build site (verify no errors)
+        working-directory: lustre-daily
+        run: npm run build
+
+      - name: Commit and push (if not dry run)
+        if: ${{ github.event.inputs.dry_run != 'true' }}
+        working-directory: lustre-daily
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Stage changes
+          git add content/posts/
+          git add content/queues/
+          git add public/sitemap.xml || true
+          git add public/feed.xml || true
+          git add public/atom.xml || true
+          git add public/feed.json || true
+
+          # Check if there are changes
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+
+          # Get today's date for commit message
+          TODAY=$(date +%Y-%m-%d)
+
+          # Commit
+          git commit -m "Add daily posts for ${TODAY} (2 monetized, 1 trend)"
+
+          # Push
+          git push origin ${{ github.ref_name }}
+
+      - name: Summary
+        run: |
+          echo "## Daily Publishing Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Date:** $(date +%Y-%m-%d)" >> $GITHUB_STEP_SUMMARY
+          echo "**Status:** Success" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Posts Generated" >> $GITHUB_STEP_SUMMARY
+          echo "- 2 monetized posts (with affiliate links)" >> $GITHUB_STEP_SUMMARY
+          echo "- 1 non-monetized post (trend/news)" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Validations Passed" >> $GITHUB_STEP_SUMMARY
+          echo "- Affiliate compliance check" >> $GITHUB_STEP_SUMMARY
+          echo "- Build verification" >> $GITHUB_STEP_SUMMARY

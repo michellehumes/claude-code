@@ -1,0 +1,481 @@
+{
+  "description": "Queue of topics for monetized posts (with affiliate links). Each topic has a suggested category and product focus areas.",
+  "topics": [
+    {
+      "id": "m001",
+      "title": "Best Drugstore Foundations for Every Skin Type",
+      "category": "makeup",
+      "type": "roundup",
+      "productTags": [
+        "foundation",
+        "drugstore"
+      ],
+      "used": true
+    },
+    {
+      "id": "m002",
+      "title": "The Ultimate Guide to Finding Your Perfect Red Lipstick",
+      "category": "makeup",
+      "type": "guide",
+      "productTags": [
+        "lipstick",
+        "red"
+      ],
+      "used": true
+    },
+    {
+      "id": "m003",
+      "title": "5-Minute Everyday Makeup Routine Products",
+      "category": "makeup",
+      "type": "routine",
+      "productTags": [
+        "foundation",
+        "mascara",
+        "blush",
+        "lip-gloss"
+      ],
+      "used": true
+    },
+    {
+      "id": "m004",
+      "title": "Best Concealers for Dark Circles That Actually Work",
+      "category": "makeup",
+      "type": "roundup",
+      "productTags": [
+        "concealer",
+        "full-coverage"
+      ],
+      "used": true
+    },
+    {
+      "id": "m005",
+      "title": "Setting Powders vs Setting Sprays: Which Is Right for You?",
+      "category": "makeup",
+      "type": "comparison",
+      "productTags": [
+        "setting-powder",
+        "setting-spray"
+      ],
+      "used": true
+    },
+    {
+      "id": "m006",
+      "title": "Editor-Tested: The Best Eyeshadow Palettes of the Year",
+      "category": "makeup",
+      "type": "roundup",
+      "productTags": [
+        "eyeshadow",
+        "palette"
+      ],
+      "used": true
+    },
+    {
+      "id": "m007",
+      "title": "How to Get the Perfect Natural Makeup Look",
+      "category": "makeup",
+      "type": "tutorial",
+      "productTags": [
+        "foundation",
+        "blush",
+        "mascara",
+        "natural-finish"
+      ],
+      "used": true
+    },
+    {
+      "id": "m008",
+      "title": "Best Mascaras for Short Lashes",
+      "category": "makeup",
+      "type": "roundup",
+      "productTags": [
+        "mascara",
+        "lengthening"
+      ],
+      "used": true
+    },
+    {
+      "id": "m009",
+      "title": "Bronzer vs Contour: Products for Sun-Kissed vs Sculpted Looks",
+      "category": "makeup",
+      "type": "comparison",
+      "productTags": [
+        "bronzer",
+        "contouring"
+      ],
+      "used": true
+    },
+    {
+      "id": "m010",
+      "title": "The Best Primers for Long-Lasting Makeup",
+      "category": "makeup",
+      "type": "roundup",
+      "productTags": [
+        "primer",
+        "long-wear"
+      ],
+      "used": true
+    },
+    {
+      "id": "m011",
+      "title": "Best Frizz-Fighting Hair Products for Humid Weather",
+      "category": "hair",
+      "type": "roundup",
+      "productTags": [
+        "anti-frizz",
+        "humidity-proof",
+        "frizz-control"
+      ],
+      "used": true
+    },
+    {
+      "id": "m012",
+      "title": "How to Repair Damaged Hair: Products That Actually Work",
+      "category": "hair",
+      "type": "guide",
+      "productTags": [
+        "treatment",
+        "bond-repair",
+        "repair"
+      ],
+      "used": true
+    },
+    {
+      "id": "m013",
+      "title": "Best Dry Shampoos Ranked by Hair Type",
+      "category": "hair",
+      "type": "roundup",
+      "productTags": [
+        "dry-shampoo",
+        "volume"
+      ],
+      "used": true
+    },
+    {
+      "id": "m014",
+      "title": "The Complete Hair Care Routine for Color-Treated Hair",
+      "category": "hair",
+      "type": "routine",
+      "productTags": [
+        "shampoo",
+        "conditioner",
+        "color-safe"
+      ],
+      "used": true
+    },
+    {
+      "id": "m015",
+      "title": "Best Heat Protectants to Save Your Hair",
+      "category": "hair",
+      "type": "roundup",
+      "productTags": [
+        "heat-protectant",
+        "styling-tool"
+      ],
+      "used": true
+    },
+    {
+      "id": "m016",
+      "title": "How to Get Salon-Quality Blowouts at Home",
+      "category": "hair",
+      "type": "tutorial",
+      "productTags": [
+        "blow-dry",
+        "heat-protectant",
+        "volume",
+        "shine"
+      ],
+      "used": true
+    },
+    {
+      "id": "m017",
+      "title": "Best Products for Curly Hair by Curl Type",
+      "category": "hair",
+      "type": "guide",
+      "productTags": [
+        "curl-cream",
+        "curly-hair",
+        "defining"
+      ],
+      "used": true
+    },
+    {
+      "id": "m018",
+      "title": "Scalp Care 101: Products for a Healthy Scalp",
+      "category": "hair",
+      "type": "guide",
+      "productTags": [
+        "scalp-care",
+        "scrub",
+        "hair-oil"
+      ],
+      "used": true
+    },
+    {
+      "id": "m019",
+      "title": "Best Purple Shampoos for Blonde and Silver Hair",
+      "category": "hair",
+      "type": "roundup",
+      "productTags": [
+        "shampoo",
+        "purple",
+        "toning",
+        "blonde-hair"
+      ],
+      "used": true
+    },
+    {
+      "id": "m020",
+      "title": "Air-Dry Products for Effortlessly Good Hair",
+      "category": "hair",
+      "type": "roundup",
+      "productTags": [
+        "air-dry",
+        "no-heat",
+        "cream"
+      ],
+      "used": true
+    },
+    {
+      "id": "m021",
+      "title": "Best Vitamin C Serums at Every Price Point",
+      "category": "skincare",
+      "type": "roundup",
+      "productTags": [
+        "serum",
+        "vitamin-c",
+        "brightening"
+      ],
+      "used": true
+    },
+    {
+      "id": "m022",
+      "title": "The Complete Beginner's Guide to Retinol",
+      "category": "skincare",
+      "type": "guide",
+      "productTags": [
+        "retinol",
+        "retinoid",
+        "anti-aging"
+      ],
+      "used": true
+    },
+    {
+      "id": "m023",
+      "title": "Best Sunscreens That Don't Leave a White Cast",
+      "category": "skincare",
+      "type": "roundup",
+      "productTags": [
+        "sunscreen",
+        "invisible",
+        "lightweight"
+      ],
+      "used": true
+    },
+    {
+      "id": "m024",
+      "title": "How to Build a Skincare Routine for Acne-Prone Skin",
+      "category": "skincare",
+      "type": "routine",
+      "productTags": [
+        "cleanser",
+        "bha",
+        "acne",
+        "moisturizer"
+      ],
+      "used": true
+    },
+    {
+      "id": "m025",
+      "title": "Best Moisturizers for Dry Skin in Winter",
+      "category": "skincare",
+      "type": "roundup",
+      "productTags": [
+        "moisturizer",
+        "hydrating",
+        "ceramides"
+      ],
+      "used": true
+    },
+    {
+      "id": "m026",
+      "title": "K-Beauty Skincare Products Worth the Hype",
+      "category": "skincare",
+      "type": "roundup",
+      "productTags": [
+        "k-beauty",
+        "essence",
+        "sleeping-mask"
+      ],
+      "used": true
+    },
+    {
+      "id": "m027",
+      "title": "Best Eye Creams for Dark Circles and Fine Lines",
+      "category": "skincare",
+      "type": "roundup",
+      "productTags": [
+        "eye-cream",
+        "anti-aging",
+        "hydrating"
+      ],
+      "used": true
+    },
+    {
+      "id": "m028",
+      "title": "The Best Cleansers for Double Cleansing",
+      "category": "skincare",
+      "type": "guide",
+      "productTags": [
+        "cleanser",
+        "balm",
+        "oil-based",
+        "gel"
+      ],
+      "used": true
+    },
+    {
+      "id": "m029",
+      "title": "Best Pimple Patches for Overnight Results",
+      "category": "skincare",
+      "type": "roundup",
+      "productTags": [
+        "acne-patches",
+        "spot-treatment",
+        "hydrocolloid"
+      ],
+      "used": true
+    },
+    {
+      "id": "m030",
+      "title": "Niacinamide: The Ingredient Your Skin Needs",
+      "category": "skincare",
+      "type": "guide",
+      "productTags": [
+        "niacinamide",
+        "serum",
+        "pore-clearing"
+      ],
+      "used": true
+    },
+    {
+      "id": "m031",
+      "title": "Best Brow Products for Full, Natural Brows",
+      "category": "makeup",
+      "type": "roundup",
+      "productTags": [
+        "brows",
+        "brow-pencil",
+        "brow-gel"
+      ],
+      "used": false
+    },
+    {
+      "id": "m032",
+      "title": "Splurge vs Save: Luxury vs Drugstore Makeup Dupes",
+      "category": "makeup",
+      "type": "comparison",
+      "productTags": [
+        "luxury",
+        "drugstore"
+      ],
+      "used": false
+    },
+    {
+      "id": "m033",
+      "title": "Best Lip Products That Last Through Meals",
+      "category": "makeup",
+      "type": "roundup",
+      "productTags": [
+        "lipstick",
+        "long-wear",
+        "matte"
+      ],
+      "used": false
+    },
+    {
+      "id": "m034",
+      "title": "Best Highlighters for That Glass Skin Glow",
+      "category": "makeup",
+      "type": "roundup",
+      "productTags": [
+        "highlighter",
+        "glow",
+        "cream"
+      ],
+      "used": false
+    },
+    {
+      "id": "m035",
+      "title": "How to Build the Perfect Hair Tool Collection",
+      "category": "hair",
+      "type": "guide",
+      "productTags": [
+        "styling-tool",
+        "hair-dryer",
+        "flat-iron",
+        "curling-iron"
+      ],
+      "used": false
+    },
+    {
+      "id": "m036",
+      "title": "Best Leave-In Conditioners for Every Hair Type",
+      "category": "hair",
+      "type": "roundup",
+      "productTags": [
+        "leave-in",
+        "detangling",
+        "hydrating"
+      ],
+      "used": false
+    },
+    {
+      "id": "m037",
+      "title": "Best Hair Oils for Shine Without the Grease",
+      "category": "hair",
+      "type": "roundup",
+      "productTags": [
+        "hair-oil",
+        "shine",
+        "lightweight"
+      ],
+      "used": false
+    },
+    {
+      "id": "m038",
+      "title": "Best Chemical Exfoliants for Glowing Skin",
+      "category": "skincare",
+      "type": "guide",
+      "productTags": [
+        "exfoliant",
+        "aha",
+        "bha",
+        "lactic-acid"
+      ],
+      "used": false
+    },
+    {
+      "id": "m039",
+      "title": "Best Overnight Masks for Hydration While You Sleep",
+      "category": "skincare",
+      "type": "roundup",
+      "productTags": [
+        "sleeping-mask",
+        "hydrating",
+        "overnight"
+      ],
+      "used": false
+    },
+    {
+      "id": "m040",
+      "title": "The Best Drugstore Skincare Under $20",
+      "category": "skincare",
+      "type": "roundup",
+      "productTags": [
+        "drugstore",
+        "affordable"
+      ],
+      "used": false
+    }
+  ]
+}

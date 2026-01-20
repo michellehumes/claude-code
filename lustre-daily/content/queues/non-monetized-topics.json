@@ -1,0 +1,215 @@
+{
+  "description": "Queue of topics for non-monetized posts (no affiliate links). These are trend pieces, news, techniques, and educational content.",
+  "topics": [
+    {
+      "id": "nm001",
+      "title": "The Clean Girl Aesthetic: Explained",
+      "category": "trends",
+      "type": "trend-analysis",
+      "used": true
+    },
+    {
+      "id": "nm002",
+      "title": "Why Glass Skin Is Still the Ultimate Skincare Goal",
+      "category": "trends",
+      "type": "trend-analysis",
+      "used": true
+    },
+    {
+      "id": "nm003",
+      "title": "The History of Red Lipstick Through the Decades",
+      "category": "trends",
+      "type": "deep-dive",
+      "used": true
+    },
+    {
+      "id": "nm004",
+      "title": "Understanding Your Skin Type: The Complete Guide",
+      "category": "skincare",
+      "type": "educational",
+      "used": true
+    },
+    {
+      "id": "nm005",
+      "title": "The Science Behind Hyaluronic Acid",
+      "category": "skincare",
+      "type": "ingredient-deep-dive",
+      "used": true
+    },
+    {
+      "id": "nm006",
+      "title": "Strawberry Blonde: The Hair Color Trend Taking Over",
+      "category": "trends",
+      "type": "trend-analysis",
+      "used": true
+    },
+    {
+      "id": "nm007",
+      "title": "Viral TikTok Makeup Techniques: Do They Actually Work?",
+      "category": "trends",
+      "type": "trend-analysis",
+      "used": true
+    },
+    {
+      "id": "nm008",
+      "title": "The Met Gala Beauty Looks We Can't Stop Thinking About",
+      "category": "trends",
+      "type": "event-coverage",
+      "used": true
+    },
+    {
+      "id": "nm009",
+      "title": "Why Minimalist Skincare Is Making a Comeback",
+      "category": "trends",
+      "type": "trend-analysis",
+      "used": true
+    },
+    {
+      "id": "nm010",
+      "title": "Understanding Hair Porosity and Why It Matters",
+      "category": "hair",
+      "type": "educational",
+      "used": true
+    },
+    {
+      "id": "nm011",
+      "title": "The Rise of Skincare Influencers: How Social Media Changed Beauty",
+      "category": "trends",
+      "type": "deep-dive",
+      "used": true
+    },
+    {
+      "id": "nm012",
+      "title": "Award Season Beauty: The Best Red Carpet Looks",
+      "category": "trends",
+      "type": "event-coverage",
+      "used": true
+    },
+    {
+      "id": "nm013",
+      "title": "What Dermatologists Actually Think About TikTok Skincare Trends",
+      "category": "skincare",
+      "type": "expert-insight",
+      "used": true
+    },
+    {
+      "id": "nm014",
+      "title": "The Soft Glam Makeup Trend: A Complete Breakdown",
+      "category": "trends",
+      "type": "trend-analysis",
+      "used": true
+    },
+    {
+      "id": "nm015",
+      "title": "How Your Hormones Affect Your Skin",
+      "category": "skincare",
+      "type": "educational",
+      "used": true
+    },
+    {
+      "id": "nm016",
+      "title": "Money Pieces and Face Framing: Hair Highlights Explained",
+      "category": "trends",
+      "type": "trend-analysis",
+      "used": true
+    },
+    {
+      "id": "nm017",
+      "title": "The Korean Beauty Industry: Innovation and Influence",
+      "category": "trends",
+      "type": "deep-dive",
+      "used": true
+    },
+    {
+      "id": "nm018",
+      "title": "Why Slugging Became a Skincare Phenomenon",
+      "category": "trends",
+      "type": "trend-analysis",
+      "used": true
+    },
+    {
+      "id": "nm019",
+      "title": "Understanding Ingredient Lists: How to Read Skincare Labels",
+      "category": "skincare",
+      "type": "educational",
+      "used": true
+    },
+    {
+      "id": "nm020",
+      "title": "The Comeback of 90s Makeup Trends",
+      "category": "trends",
+      "type": "trend-analysis",
+      "used": true
+    },
+    {
+      "id": "nm021",
+      "title": "Blush Placement Techniques and How They Change Your Face",
+      "category": "makeup",
+      "type": "educational",
+      "used": false
+    },
+    {
+      "id": "nm022",
+      "title": "The Science of Hair Growth: What Actually Works",
+      "category": "hair",
+      "type": "educational",
+      "used": false
+    },
+    {
+      "id": "nm023",
+      "title": "Color Theory for Makeup: Understanding Undertones",
+      "category": "makeup",
+      "type": "educational",
+      "used": false
+    },
+    {
+      "id": "nm024",
+      "title": "Runway Beauty Trends You Can Actually Wear",
+      "category": "trends",
+      "type": "trend-analysis",
+      "used": false
+    },
+    {
+      "id": "nm025",
+      "title": "The Evolution of Eyebrow Trends",
+      "category": "trends",
+      "type": "deep-dive",
+      "used": false
+    },
+    {
+      "id": "nm026",
+      "title": "How Climate Affects Your Skin and Hair Care Needs",
+      "category": "skincare",
+      "type": "educational",
+      "used": false
+    },
+    {
+      "id": "nm027",
+      "title": "Natural Hair Movement: A Cultural Shift in Beauty Standards",
+      "category": "trends",
+      "type": "deep-dive",
+      "used": false
+    },
+    {
+      "id": "nm028",
+      "title": "What Happens to Your Skin in Your 30s (And How to Adapt)",
+      "category": "skincare",
+      "type": "educational",
+      "used": false
+    },
+    {
+      "id": "nm029",
+      "title": "Latte Makeup: The Warm-Toned Trend Everyone Loves",
+      "category": "trends",
+      "type": "trend-analysis",
+      "used": false
+    },
+    {
+      "id": "nm030",
+      "title": "Sustainable Beauty: The Future of the Industry",
+      "category": "trends",
+      "type": "deep-dive",
+      "used": false
+    }
+  ]
+}
