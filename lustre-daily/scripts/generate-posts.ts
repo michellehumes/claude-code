@@ -22,6 +22,7 @@ interface Product {
   name: string;
   brand: string;
   category: string;
+  image?: string;
   shortDescription: string;
   whyWeLikeIt: string;
   tags: string[];
@@ -150,7 +151,7 @@ function generateMonetizedPost(topic: Topic, products: Product[], date: string):
   const productCards = selectedProducts
     .map(
       (p) =>
-        `<ProductCard asin="${p.asin}" name="${p.name}" brand="${p.brand}" description="${p.shortDescription}" whyWeLikeIt="${p.whyWeLikeIt}" />`
+        `<ProductCard asin="${p.asin}" name="${p.name}" brand="${p.brand}" description="${p.shortDescription}" whyWeLikeIt="${p.whyWeLikeIt}"${p.image ? ` image="${p.image}"` : ""} />`
     )
     .join("\n\n");
 
