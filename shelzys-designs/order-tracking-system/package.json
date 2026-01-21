@@ -1,0 +1,38 @@
+{
+  "name": "shelzys-designs-order-tracker",
+  "version": "1.0.0",
+  "description": "Order tracking system for Shelzy's Designs - integrates Etsy and Amazon Seller Central",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "sync": "node scripts/sync-orders.js",
+    "track": "node scripts/track-shipments.js",
+    "dashboard": "node src/dashboard.js",
+    "setup": "node scripts/setup-database.js",
+    "test": "node --test src/**/*.test.js"
+  },
+  "keywords": [
+    "etsy",
+    "amazon",
+    "order-tracking",
+    "ecommerce",
+    "shipping"
+  ],
+  "author": "Shelzy's Designs",
+  "license": "MIT",
+  "dependencies": {
+    "better-sqlite3": "^9.4.3",
+    "dotenv": "^16.4.1",
+    "node-fetch": "^3.3.2",
+    "crypto-js": "^4.2.0",
+    "cron": "^3.1.6",
+    "nodemailer": "^6.9.8",
+    "commander": "^12.0.0",
+    "chalk": "^5.3.0",
+    "cli-table3": "^0.6.3"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
