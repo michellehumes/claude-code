@@ -1,0 +1,19 @@
+{
+  "name": "quick-money-automation",
+  "version": "1.0.0",
+  "description": "Automation toolkit to earn $100 in 2 hours via freelancing",
+  "main": "job-monitor.js",
+  "scripts": {
+    "start": "node job-monitor.js",
+    "monitor": "node job-monitor.js"
+  },
+  "keywords": [
+    "freelance",
+    "upwork",
+    "fiverr",
+    "automation",
+    "quick-money"
+  ],
+  "author": "",
+  "license": "MIT"
+}
