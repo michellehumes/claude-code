@@ -9,6 +9,7 @@
     "track": "node scripts/track-shipments.js",
     "dashboard": "node src/dashboard.js",
     "setup": "node scripts/setup-database.js",
+    "etsy-setup": "node scripts/etsy-oauth-setup.js",
     "test": "node --test src/**/*.test.js"
   },
   "keywords": [
