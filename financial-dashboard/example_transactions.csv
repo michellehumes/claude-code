@@ -1,0 +1,21 @@
+Date,Merchant,Category,Account,Original Statement,Notes,Amount,Tags,Owner
+2026-01-20,Starbucks,Coffee & Cafes,Chase Sapphire (...1234),STARBUCKS STORE #12345,Morning coffee,-5.75,,Personal
+2026-01-20,Whole Foods,Groceries,Chase Sapphire (...1234),WHOLE FOODS MKT #00123,Weekly groceries,-127.43,,Shared
+2026-01-20,Spotify,Subscriptions,Venture (...5678),SPOTIFY USA,Monthly subscription,-11.99,,Shared
+2026-01-19,Shell Gas Station,Gas & Fuel,Freedom Unlimited (...9012),SHELL OIL #12345678,Tank refill,-52.00,,Personal
+2026-01-19,Amazon,Shopping,Target Circle Card (...3456),AMAZON.COM ORDER #123,Home supplies,-89.99,,Shared
+2026-01-19,Netflix,Subscriptions,Venture (...5678),NETFLIX.COM,Monthly subscription,-15.99,,Shared
+2026-01-18,Chipotle,Restaurants & Bars,Chase Sapphire (...1234),CHIPOTLE #2345,Lunch,-12.50,,Personal
+2026-01-18,Target,Shopping,Target Circle Card (...3456),TARGET 1234,Household items,-67.32,,Shared
+2026-01-17,Paycheck,Income,Checking (...7890),DIRECT DEPOSIT - ACME CORP,Bi-weekly paycheck,2500.00,,Personal
+2026-01-17,Uber,Taxi & Ride Shares,Amex Gold Card (...4321),UBER *TRIP,Ride to office,-18.75,,Personal
+2026-01-16,CVS Pharmacy,Pharmacy,Freedom Unlimited (...9012),CVS/PHARMACY #12345,Prescriptions,-45.00,,Personal
+2026-01-16,Apple,Subscriptions,Venture (...5678),APPLE.COM/BILL,iCloud storage,-2.99,,Personal
+2026-01-15,Costco,Groceries,Chase Sapphire (...1234),COSTCO WHSE #123,Bulk shopping,-234.56,,Shared
+2026-01-15,Verizon,Phone,Checking (...7890),VERIZON WIRELESS,Monthly phone bill,-85.00,,Shared
+2026-01-14,HomeDepot,Home Improvement,Freedom Unlimited (...9012),THE HOME DEPOT #1234,DIY supplies,-156.78,,Shared
+2026-01-14,Panera Bread,Restaurants & Bars,Chase Sapphire (...1234),PANERA BREAD #12345,Lunch meeting,-23.45,,Personal
+2026-01-13,LA Fitness,Fitness,Checking (...7890),LA FITNESS CLUB,Monthly membership,-39.99,,Personal
+2026-01-13,Trader Joes,Groceries,Chase Sapphire (...1234),TRADER JOE'S #123,Groceries,-78.90,,Shared
+2026-01-12,BP Gas,Gas & Fuel,Freedom Unlimited (...9012),BP#123456,Gas,-48.00,,Personal
+2026-01-12,Doordash,Delivery & Takeout,Amex Gold Card (...4321),DOORDASH*RESTAURANT,Dinner delivery,-42.50,,Personal
