@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Finance Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Personal Finance Tracker</h1>
+            <p class="subtitle">Track, analyze, and manage your spending</p>
+        </header>
+
+        <section class="upload-section">
+            <div class="upload-box">
+                <h3>Load Transaction Data</h3>
+                <input type="file" id="csvFile" accept=".csv" />
+                <label for="csvFile" class="upload-btn">Upload CSV File</label>
+                <button id="loadSample" class="secondary-btn">Load Sample Data</button>
+            </div>
+        </section>
+
+        <section class="summary-section" id="summarySection" style="display: none;">
+            <h2>Financial Summary</h2>
+            <div class="summary-cards">
+                <div class="card income">
+                    <h4>Total Income</h4>
+                    <p id="totalIncome">$0.00</p>
+                </div>
+                <div class="card expenses">
+                    <h4>Total Expenses</h4>
+                    <p id="totalExpenses">$0.00</p>
+                </div>
+                <div class="card net">
+                    <h4>Net Cash Flow</h4>
+                    <p id="netCashFlow">$0.00</p>
+                </div>
+                <div class="card transactions">
+                    <h4>Total Transactions</h4>
+                    <p id="totalTransactions">0</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="charts-section" id="chartsSection" style="display: none;">
+            <h2>Spending Analysis</h2>
+            <div class="charts-grid">
+                <div class="chart-container">
+                    <h3>Spending by Category</h3>
+                    <canvas id="categoryChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h3>Spending Over Time</h3>
+                    <canvas id="timelineChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section class="category-breakdown" id="categoryBreakdown" style="display: none;">
+            <h2>Category Breakdown</h2>
+            <div id="categoryTable"></div>
+        </section>
+
+        <section class="account-summary" id="accountSummary" style="display: none;">
+            <h2>Account Summary</h2>
+            <div id="accountTable"></div>
+        </section>
+
+        <section class="transactions-section" id="transactionsSection" style="display: none;">
+            <h2>Transactions</h2>
+            <div class="filters">
+                <div class="filter-group">
+                    <label for="dateFrom">From:</label>
+                    <input type="date" id="dateFrom" />
+                </div>
+                <div class="filter-group">
+                    <label for="dateTo">To:</label>
+                    <input type="date" id="dateTo" />
+                </div>
+                <div class="filter-group">
+                    <label for="categoryFilter">Category:</label>
+                    <select id="categoryFilter">
+                        <option value="">All Categories</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="accountFilter">Account:</label>
+                    <select id="accountFilter">
+                        <option value="">All Accounts</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="searchFilter">Search:</label>
+                    <input type="text" id="searchFilter" placeholder="Search merchant..." />
+                </div>
+                <button id="clearFilters" class="secondary-btn">Clear Filters</button>
+            </div>
+            <div class="table-container">
+                <table id="transactionsTable">
+                    <thead>
+                        <tr>
+                            <th data-sort="date">Date</th>
+                            <th data-sort="merchant">Merchant</th>
+                            <th data-sort="category">Category</th>
+                            <th data-sort="account">Account</th>
+                            <th data-sort="amount">Amount</th>
+                            <th data-sort="owner">Owner</th>
+                        </tr>
+                    </thead>
+                    <tbody id="transactionsBody">
+                    </tbody>
+                </table>
+            </div>
+            <div class="pagination">
+                <button id="prevPage" class="secondary-btn">Previous</button>
+                <span id="pageInfo">Page 1 of 1</span>
+                <button id="nextPage" class="secondary-btn">Next</button>
+            </div>
+        </section>
+
+        <footer>
+            <p>Finance Tracker - Built for personal finance management</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
