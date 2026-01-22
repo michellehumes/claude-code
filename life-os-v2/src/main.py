@@ -28,6 +28,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from src.spreadsheet_builder import SpreadsheetBuilder, OfflineSpreadsheetBuilder
 from src.data_processors.transactions import TransactionProcessor
 from src.data_processors.oura import OuraDataProcessor
+from src.tabs_simplified import SimplifiedTabBuilder, SIMPLIFIED_TABS
 
 
 def main():

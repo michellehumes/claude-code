@@ -459,11 +459,29 @@ class SpreadsheetBuilder:
 class OfflineSpreadsheetBuilder:
     """Build spreadsheet data without Google API (for testing/export)"""
 
-    def __init__(self):
+    def __init__(self, simplified=True):
         self.tabs_data = {}
+        self.simplified = simplified
 
     def build_all_tabs(self, transaction_data=None, oura_data=None) -> Dict[str, Any]:
         """Build all tab configurations"""
+
+        if self.simplified:
+            # Use simplified 8-tab version
+            from src.tabs_simplified import SimplifiedTabBuilder
+            print("Building simplified 8-tab system (offline mode)...")
+
+            builder = SimplifiedTabBuilder(None, None)
+            results = builder.build_all_tabs(transaction_data, oura_data)
+
+            for tab_key, tab_config in results.items():
+                if isinstance(tab_config, dict) and 'tab_name' in tab_config:
+                    self.tabs_data[tab_config['tab_name']] = tab_config
+
+            print(f"✓ Built {len(self.tabs_data)} tab configurations")
+            return self.tabs_data
+
+        # Full 54-tab version
         from src.tabs.financial import FinancialTabBuilder
         from src.tabs.job_search import JobSearchTabBuilder
         from src.tabs.goals import GoalsTabBuilder
@@ -473,7 +491,7 @@ class OfflineSpreadsheetBuilder:
         from src.tabs.executive import ExecutiveTabBuilder
         from src.tabs.oura import OuraTabBuilder
 
-        print("Building tab configurations (offline mode)...")
+        print("Building full 54-tab system (offline mode)...")
 
         # Build each group
         builders = [
