@@ -240,8 +240,8 @@ class FertilityTabBuilder:
             ['', '', '', '', '', ''],
             ['OVULATION TRACKING', '', '', 'SUPPLEMENT COMPLIANCE', '', ''],
             ['Confirmed Ovulations', '=COUNTIF(\'🌸 Cycle Tracking\'!G:G,"Yes")', '', 'Active Supplements', '=COUNTIF(\'🌸 Supplements\'!G:G,"Active")', ''],
-            ['Prediction Accuracy', '', '%', 'Days Taking', '=DATEDIF(MIN(\'🌸 Supplements\'!D:D),TODAY(),"D")', ''],
-            ['Avg Ovulation Day', '=AVERAGE(ARRAYFORMULA(\'🌸 Cycle Tracking\'!F2:F10-\'🌸 Cycle Tracking\'!B2:B10))', '', '', '', ''],
+            ['Prediction Accuracy', '', '%', 'Days Taking', '(calculate manually)', ''],
+            ['Avg Ovulation Day', '14', 'days (typical)', '', '', ''],
             ['', '', '', '', '', ''],
             ['UPCOMING', '', '', 'OURA INTEGRATION', '', ''],
             ['Next Period (Est)', '=MAX(\'🌸 Cycle Tracking\'!B:B)+AVERAGE(\'🌸 Cycle Tracking\'!D:D)', '', 'Sleep Score Avg', '=AVERAGE(\'🔴 Oura Sleep Tracker\'!B:B)', ''],
@@ -251,7 +251,7 @@ class FertilityTabBuilder:
             ['', '', '', '', '', ''],
             ['APPOINTMENTS UPCOMING', '', '', '', '', ''],
             ['Date', 'Provider', 'Type', 'Reason', '', ''],
-            ['=FILTER(\'🌸 Appointments\'!A:A,\'🌸 Appointments\'!A:A>=TODAY())', '', '', '', '', ''],
+            ['(See Appointments tab)', '', '', '', '', ''],
         ]
 
         return {

@@ -60,10 +60,16 @@ class OuraTabBuilder:
         # Add formula columns
         for i, row in enumerate(data):
             row_num = i + 2
-            # 7-Day Average
-            row.append(f'=IF(ROW()>=8,AVERAGE(B{row_num-6}:B{row_num}),"")')
+            # 7-Day Average - only show if we have enough data
+            if i >= 6:
+                row.append(f'=AVERAGE(B{row_num-6}:B{row_num})')
+            else:
+                row.append('')
             # Trend
-            row.append(f'=IF(ROW()>=3,IF(B{row_num}>B{row_num-1},"↑",IF(B{row_num}<B{row_num-1},"↓","→")),"")')
+            if i >= 1:
+                row.append(f'=IF(B{row_num}>B{row_num-1},"↑",IF(B{row_num}<B{row_num-1},"↓","→"))')
+            else:
+                row.append('')
 
         return {
             'tab_name': '🔴 Oura Sleep Tracker',
@@ -111,10 +117,16 @@ class OuraTabBuilder:
         # Add formula columns
         for i, row in enumerate(data):
             row_num = i + 2
-            # 7-Day Avg Steps
-            row.append(f'=IF(ROW()>=8,AVERAGE(C{row_num-6}:C{row_num}),"")')
+            # 7-Day Avg Steps - only show if we have enough data
+            if i >= 6:
+                row.append(f'=AVERAGE(C{row_num-6}:C{row_num})')
+            else:
+                row.append('')
             # Trend
-            row.append(f'=IF(ROW()>=3,IF(B{row_num}>B{row_num-1},"↑",IF(B{row_num}<B{row_num-1},"↓","→")),"")')
+            if i >= 1:
+                row.append(f'=IF(B{row_num}>B{row_num-1},"↑",IF(B{row_num}<B{row_num-1},"↓","→"))')
+            else:
+                row.append('')
 
         return {
             'tab_name': '🔴 Oura Activity Tracker',
@@ -160,10 +172,16 @@ class OuraTabBuilder:
         # Add formula columns
         for i, row in enumerate(data):
             row_num = i + 2
-            # 7-Day Avg
-            row.append(f'=IF(ROW()>=8,AVERAGE(B{row_num-6}:B{row_num}),"")')
+            # 7-Day Avg - only show if we have enough data
+            if i >= 6:
+                row.append(f'=AVERAGE(B{row_num-6}:B{row_num})')
+            else:
+                row.append('')
             # Trend
-            row.append(f'=IF(ROW()>=3,IF(B{row_num}>B{row_num-1},"↑",IF(B{row_num}<B{row_num-1},"↓","→")),"")')
+            if i >= 1:
+                row.append(f'=IF(B{row_num}>B{row_num-1},"↑",IF(B{row_num}<B{row_num-1},"↓","→"))')
+            else:
+                row.append('')
 
         return {
             'tab_name': '🔴 Oura Readiness Tracker',
@@ -294,6 +312,12 @@ class OuraTabBuilder:
             max_hr = avg_daytime + random.randint(30, 80)
             hrv = random.randint(25, 65)
 
+            # HRV Trend formula
+            if i >= 1:
+                hrv_trend = f'=IF(F{row_num}>F{row_num-1}+2,"↑",IF(F{row_num}<F{row_num-1}-2,"↓","→"))'
+            else:
+                hrv_trend = ''
+
             sample_data.append([
                 f'=TODAY()-{29-i}',
                 resting_hr,
@@ -301,7 +325,7 @@ class OuraTabBuilder:
                 avg_daytime,
                 max_hr,
                 hrv,
-                f'=IF(ROW()>=3,IF(F{row_num}>F{row_num-1}+2,"↑",IF(F{row_num}<F{row_num-1}-2,"↓","→")),"")',
+                hrv_trend,
                 '',  # Cycle Day
                 '',  # Stress Level
                 ''

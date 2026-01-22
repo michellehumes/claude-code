@@ -195,7 +195,7 @@ class GoalsTabBuilder:
             ['', '', '', '', '', ''],
             ['SHARED GOALS', '', '', 'GOALS DUE THIS QUARTER', '', ''],
             ['Total Goals', '=COUNTA(\'🎯 Shared Goals\'!A:A)-1', '', 'Goal', 'Due Date', 'Status'],
-            ['On Track', '=COUNTIF(\'🎯 Shared Goals\'!H:H,"On Track")', '', '=FILTER(\'🎯 Michelle\'\'s Goals\'!B:B,\'🎯 Michelle\'\'s Goals\'!D:D<=EOMONTH(TODAY(),2))', '', ''],
+            ['On Track', '=COUNTIF(\'🎯 Shared Goals\'!H:H,"On Track")', '', '(See Goals tabs for details)', '', ''],
             ['At Risk', '=COUNTIF(\'🎯 Shared Goals\'!H:H,"At Risk")', '', '', '', ''],
             ['Completed', '=COUNTIF(\'🎯 Shared Goals\'!H:H,"Completed")', '', '', '', ''],
             ['Avg Progress', '=AVERAGE(\'🎯 Shared Goals\'!G:G)', '', '', '', ''],
