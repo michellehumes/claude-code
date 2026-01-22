@@ -1,18 +1,24 @@
 {
   "name": "quick-money-automation",
-  "version": "1.0.0",
-  "description": "Automation toolkit to earn $100 in 2 hours via freelancing",
+  "version": "2.0.0",
+  "description": "Creative automation toolkit to earn $100 in 2 hours - freelancing, digital products, viral content & more",
   "main": "job-monitor.js",
   "scripts": {
     "start": "node job-monitor.js",
-    "monitor": "node job-monitor.js"
+    "monitor": "node job-monitor.js",
+    "product": "node digital-product-launcher.js",
+    "viral": "node viral-content-generator.js",
+    "landing": "node landing-page-generator.js"
   },
   "keywords": [
     "freelance",
     "upwork",
     "fiverr",
     "automation",
-    "quick-money"
+    "quick-money",
+    "digital-products",
+    "viral-content",
+    "side-hustle"
   ],
   "author": "",
   "license": "MIT"
