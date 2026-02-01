@@ -81,6 +81,12 @@ section h2 {
     color: var(--text-secondary);
 }
 
+.upload-hint {
+    margin-bottom: 20px;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
 #csvFile {
     display: none;
 }
@@ -183,29 +189,31 @@ section h2 {
 }
 
 /* Category Breakdown Table */
-#categoryTable, #accountTable {
+#categoryTable, #accountTable, #ownerTable, #monthlyTable {
     overflow-x: auto;
 }
 
-#categoryTable table, #accountTable table {
+#categoryTable table, #accountTable table, #ownerTable table, #monthlyTable table {
     width: 100%;
     border-collapse: collapse;
 }
 
 #categoryTable th, #categoryTable td,
-#accountTable th, #accountTable td {
+#accountTable th, #accountTable td,
+#ownerTable th, #ownerTable td,
+#monthlyTable th, #monthlyTable td {
     padding: 12px 15px;
     text-align: left;
     border-bottom: 1px solid var(--border-color);
 }
 
-#categoryTable th, #accountTable th {
+#categoryTable th, #accountTable th, #ownerTable th, #monthlyTable th {
     background: var(--bg-color);
     font-weight: 600;
     color: var(--text-secondary);
 }
 
-#categoryTable tr:hover, #accountTable tr:hover {
+#categoryTable tr:hover, #accountTable tr:hover, #ownerTable tr:hover, #monthlyTable tr:hover {
     background: var(--bg-color);
 }
 

@@ -22,7 +22,7 @@ class FinanceTracker {
         document.getElementById('nextPage').addEventListener('click', () => this.changePage(1));
 
         // Filter listeners
-        ['dateFrom', 'dateTo', 'categoryFilter', 'accountFilter', 'searchFilter'].forEach(id => {
+        ['dateFrom', 'dateTo', 'categoryFilter', 'accountFilter', 'ownerFilter', 'searchFilter'].forEach(id => {
             document.getElementById(id).addEventListener('change', () => this.applyFilters());
             document.getElementById(id).addEventListener('input', () => this.applyFilters());
         });
@@ -118,7 +118,15 @@ class FinanceTracker {
     }
 
     showSections() {
-        ['summarySection', 'chartsSection', 'categoryBreakdown', 'accountSummary', 'transactionsSection'].forEach(id => {
+        [
+            'summarySection',
+            'chartsSection',
+            'ownerSummary',
+            'monthlyOverview',
+            'categoryBreakdown',
+            'accountSummary',
+            'transactionsSection'
+        ].forEach(id => {
             document.getElementById(id).style.display = 'block';
         });
     }
@@ -126,6 +134,7 @@ class FinanceTracker {
     populateFilters() {
         const categories = [...new Set(this.transactions.map(t => t.Category).filter(Boolean))].sort();
         const accounts = [...new Set(this.transactions.map(t => t.Account).filter(Boolean))].sort();
+        const owners = [...new Set(this.transactions.map(t => this.getOwnerName(t)).filter(Boolean))].sort();
 
         const categorySelect = document.getElementById('categoryFilter');
         categorySelect.innerHTML = '<option value="">All Categories</option>';
@@ -137,6 +146,12 @@ class FinanceTracker {
         accountSelect.innerHTML = '<option value="">All Accounts</option>';
         accounts.forEach(acc => {
             accountSelect.innerHTML += `<option value="${acc}">${acc}</option>`;
+        });
+
+        const ownerSelect = document.getElementById('ownerFilter');
+        ownerSelect.innerHTML = '<option value="">All Owners</option>';
+        owners.forEach(owner => {
+            ownerSelect.innerHTML += `<option value="${owner}">${owner}</option>`;
         });
 
         // Set date range
@@ -152,6 +167,7 @@ class FinanceTracker {
         const dateTo = document.getElementById('dateTo').value;
         const category = document.getElementById('categoryFilter').value;
         const account = document.getElementById('accountFilter').value;
+        const owner = document.getElementById('ownerFilter').value;
         const search = document.getElementById('searchFilter').value.toLowerCase();
 
         this.filteredTransactions = this.transactions.filter(t => {
@@ -159,6 +175,7 @@ class FinanceTracker {
             if (dateTo && t.Date > dateTo) return false;
             if (category && t.Category !== category) return false;
             if (account && t.Account !== account) return false;
+            if (owner && this.getOwnerName(t) !== owner) return false;
             if (search && !t.Merchant?.toLowerCase().includes(search)) return false;
             return true;
         });
@@ -170,6 +187,7 @@ class FinanceTracker {
     clearFilters() {
         document.getElementById('categoryFilter').value = '';
         document.getElementById('accountFilter').value = '';
+        document.getElementById('ownerFilter').value = '';
         document.getElementById('searchFilter').value = '';
 
         const dates = this.transactions.map(t => t.Date).filter(Boolean).sort();
@@ -186,6 +204,8 @@ class FinanceTracker {
     updateDashboard() {
         this.updateSummary();
         this.updateCharts();
+        this.updateOwnerSummary();
+        this.updateMonthlyOverview();
         this.updateCategoryBreakdown();
         this.updateAccountSummary();
         this.updateTransactionsTable();
@@ -499,7 +519,7 @@ class FinanceTracker {
                 <td>${t.Category || '-'}</td>
                 <td>${t.Account || '-'}</td>
                 <td class="${amountClass}">${this.formatCurrency(t.Amount)}</td>
-                <td>${t.Owner || '-'}</td>
+                <td>${this.getOwnerName(t)}</td>
             `;
             tbody.appendChild(row);
         });
@@ -549,6 +569,130 @@ class FinanceTracker {
             '#14b8a6', '#a855f7', '#eab308', '#64748b', '#10b981'
         ];
         return colors.slice(0, count);
+    }
+
+    getOwnerName(transaction) {
+        return transaction.Owner?.trim() || 'Unassigned';
+    }
+
+    updateOwnerSummary() {
+        const ownerData = {};
+
+        this.filteredTransactions.forEach(t => {
+            const owner = this.getOwnerName(t);
+            if (!ownerData[owner]) {
+                ownerData[owner] = { total: 0, income: 0, expenses: 0, count: 0 };
+            }
+            ownerData[owner].total += t.Amount;
+            ownerData[owner].count++;
+            if (t.Amount > 0) {
+                ownerData[owner].income += t.Amount;
+            } else {
+                ownerData[owner].expenses += Math.abs(t.Amount);
+            }
+        });
+
+        const sortedOwners = Object.entries(ownerData).sort((a, b) => b[1].count - a[1].count);
+
+        let html = `
+            <table>
+                <thead>
+                    <tr>
+                        <th>Owner</th>
+                        <th>Transactions</th>
+                        <th>Income</th>
+                        <th>Expenses</th>
+                        <th>Net</th>
+                    </tr>
+                </thead>
+                <tbody>
+        `;
+
+        sortedOwners.forEach(([owner, data]) => {
+            const netClass = data.total >= 0 ? 'amount-positive' : 'amount-negative';
+            html += `
+                <tr>
+                    <td><strong>${owner}</strong></td>
+                    <td>${data.count}</td>
+                    <td class="amount-positive">${this.formatCurrency(data.income)}</td>
+                    <td class="amount-negative">${this.formatCurrency(data.expenses)}</td>
+                    <td class="${netClass}">${this.formatCurrency(data.total)}</td>
+                </tr>
+            `;
+        });
+
+        html += '</tbody></table>';
+        document.getElementById('ownerTable').innerHTML = html;
+    }
+
+    updateMonthlyOverview() {
+        const monthlyData = {};
+
+        this.filteredTransactions.forEach(t => {
+            if (!t.Date) return;
+            const month = t.Date.substring(0, 7);
+            const owner = this.getOwnerName(t);
+
+            if (!monthlyData[month]) {
+                monthlyData[month] = {};
+            }
+            if (!monthlyData[month][owner]) {
+                monthlyData[month][owner] = { income: 0, expenses: 0 };
+            }
+
+            if (t.Amount > 0) {
+                monthlyData[month][owner].income += t.Amount;
+            } else {
+                monthlyData[month][owner].expenses += Math.abs(t.Amount);
+            }
+        });
+
+        const sortedMonths = Object.keys(monthlyData).sort();
+
+        let html = `
+            <table>
+                <thead>
+                    <tr>
+                        <th>Month</th>
+                        <th>Owner</th>
+                        <th>Income</th>
+                        <th>Expenses</th>
+                        <th>Net</th>
+                    </tr>
+                </thead>
+                <tbody>
+        `;
+
+        sortedMonths.forEach(month => {
+            const owners = Object.keys(monthlyData[month]).sort();
+            owners.forEach((owner, index) => {
+                const data = monthlyData[month][owner];
+                const net = data.income - data.expenses;
+                const netClass = net >= 0 ? 'amount-positive' : 'amount-negative';
+                const monthLabel = index === 0 ? this.formatMonthLabel(month) : '';
+
+                html += `
+                    <tr>
+                        <td>${monthLabel}</td>
+                        <td><strong>${owner}</strong></td>
+                        <td class="amount-positive">${this.formatCurrency(data.income)}</td>
+                        <td class="amount-negative">${this.formatCurrency(data.expenses)}</td>
+                        <td class="${netClass}">${this.formatCurrency(net)}</td>
+                    </tr>
+                `;
+            });
+        });
+
+        html += '</tbody></table>';
+        document.getElementById('monthlyTable').innerHTML = html;
+    }
+
+    formatMonthLabel(month) {
+        const [year, monthIndex] = month.split('-');
+        return new Date(year, monthIndex - 1).toLocaleDateString('en-US', {
+            month: 'short',
+            year: 'numeric'
+        });
     }
 
     getSampleData() {
