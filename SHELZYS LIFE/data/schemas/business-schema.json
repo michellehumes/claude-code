@@ -1,0 +1,222 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Shelzy's Designs Business Data Schema",
+  "description": "Data structures for business operations tracking",
+  "version": "1.0.0",
+
+  "products": {
+    "type": "array",
+    "description": "Product catalog",
+    "items": {
+      "type": "object",
+      "required": ["id", "sku", "name", "category", "price", "cost"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier (timestamp)"
+        },
+        "sku": {
+          "type": "string",
+          "description": "Stock keeping unit / product code"
+        },
+        "name": {
+          "type": "string",
+          "description": "Product name"
+        },
+        "category": {
+          "type": "string",
+          "enum": ["water-bottles", "templates", "other"],
+          "description": "Product category"
+        },
+        "price": {
+          "type": "number",
+          "description": "Selling price"
+        },
+        "cost": {
+          "type": "number",
+          "description": "Cost of goods (COGS per unit)"
+        },
+        "stock": {
+          "type": ["number", "null"],
+          "description": "Current inventory level"
+        },
+        "description": {
+          "type": ["string", "null"],
+          "description": "Product description"
+        },
+        "active": {
+          "type": ["boolean", "null"],
+          "description": "Whether product is currently active/listed"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When product was added"
+        }
+      }
+    }
+  },
+
+  "orders": {
+    "type": "array",
+    "description": "Customer order records",
+    "items": {
+      "type": "object",
+      "required": ["id", "orderNumber", "date", "productId", "productName", "quantity", "revenue", "cost", "platform"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier (timestamp)"
+        },
+        "orderNumber": {
+          "type": "string",
+          "description": "Order number from platform (e.g., ETY-12345)"
+        },
+        "date": {
+          "type": "string",
+          "format": "date",
+          "description": "Order date (YYYY-MM-DD)"
+        },
+        "productId": {
+          "type": "string",
+          "description": "Product ID reference"
+        },
+        "productName": {
+          "type": "string",
+          "description": "Product name (denormalized for quick access)"
+        },
+        "quantity": {
+          "type": "number",
+          "description": "Quantity ordered"
+        },
+        "revenue": {
+          "type": "number",
+          "description": "Total revenue from this order"
+        },
+        "cost": {
+          "type": "number",
+          "description": "Total COGS for this order"
+        },
+        "platform": {
+          "type": "string",
+          "enum": ["Etsy", "Amazon", "Direct", "Other"],
+          "description": "Sales platform"
+        },
+        "customerName": {
+          "type": ["string", "null"],
+          "description": "Customer name (optional)"
+        },
+        "shippingCost": {
+          "type": ["number", "null"],
+          "description": "Shipping cost"
+        },
+        "platformFee": {
+          "type": ["number", "null"],
+          "description": "Platform transaction fee"
+        },
+        "adSpend": {
+          "type": ["number", "null"],
+          "description": "Attributed ad spend for this order"
+        },
+        "notes": {
+          "type": ["string", "null"],
+          "description": "Order notes"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When order was logged"
+        }
+      }
+    }
+  },
+
+  "ideas": {
+    "type": "array",
+    "description": "Product ideas backlog",
+    "items": {
+      "type": "object",
+      "required": ["id", "title", "description"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier (timestamp)"
+        },
+        "title": {
+          "type": "string",
+          "description": "Idea title"
+        },
+        "description": {
+          "type": "string",
+          "description": "Detailed description"
+        },
+        "category": {
+          "type": ["string", "null"],
+          "description": "Product category if known"
+        },
+        "estimatedPrice": {
+          "type": ["number", "null"],
+          "description": "Estimated selling price"
+        },
+        "estimatedCost": {
+          "type": ["number", "null"],
+          "description": "Estimated COGS"
+        },
+        "priority": {
+          "type": ["string", "null"],
+          "enum": ["low", "medium", "high", null],
+          "description": "Development priority"
+        },
+        "status": {
+          "type": ["string", "null"],
+          "enum": ["idea", "researching", "developing", "ready", "launched", null],
+          "description": "Development status"
+        },
+        "notes": {
+          "type": ["string", "null"],
+          "description": "Additional notes, next steps, research"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When idea was added"
+        }
+      }
+    }
+  },
+
+  "metrics": {
+    "type": "object",
+    "description": "Calculated business metrics",
+    "properties": {
+      "mtdRevenue": {
+        "type": "number",
+        "description": "Month-to-date revenue"
+      },
+      "mtdCOGS": {
+        "type": "number",
+        "description": "Month-to-date cost of goods sold"
+      },
+      "mtdProfit": {
+        "type": "number",
+        "description": "Month-to-date profit (revenue - COGS)"
+      },
+      "mtdMargin": {
+        "type": "number",
+        "description": "Month-to-date profit margin percentage"
+      },
+      "totalOrders": {
+        "type": "number",
+        "description": "Total orders all-time"
+      },
+      "totalRevenue": {
+        "type": "number",
+        "description": "Total revenue all-time"
+      },
+      "averageOrderValue": {
+        "type": "number",
+        "description": "Average revenue per order"
+      }
+    }
+  }
+}
