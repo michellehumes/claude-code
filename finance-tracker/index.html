@@ -3,20 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal Finance Tracker</title>
+    <title>Family & Business Finance Dashboard</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>Personal Finance Tracker</h1>
-            <p class="subtitle">Track, analyze, and manage your spending</p>
+            <h1>Family & Business Finance Dashboard</h1>
+            <p class="subtitle">Upload your transactions to track you, your husband, and Shelzy's Designs by month.</p>
         </header>
 
         <section class="upload-section">
             <div class="upload-box">
                 <h3>Load Transaction Data</h3>
+                <p class="upload-hint">CSV columns: Date, Merchant, Category, Account, Amount, Owner (e.g., Me, Husband, Shelzy's Designs).</p>
                 <input type="file" id="csvFile" accept=".csv" />
                 <label for="csvFile" class="upload-btn">Upload CSV File</label>
                 <button id="loadSample" class="secondary-btn">Load Sample Data</button>
@@ -59,6 +60,16 @@
             </div>
         </section>
 
+        <section class="owner-summary" id="ownerSummary" style="display: none;">
+            <h2>Owner Summary</h2>
+            <div id="ownerTable"></div>
+        </section>
+
+        <section class="monthly-overview" id="monthlyOverview" style="display: none;">
+            <h2>Monthly Owner Cash Flow</h2>
+            <div id="monthlyTable"></div>
+        </section>
+
         <section class="category-breakdown" id="categoryBreakdown" style="display: none;">
             <h2>Category Breakdown</h2>
             <div id="categoryTable"></div>
@@ -90,6 +101,12 @@
                     <label for="accountFilter">Account:</label>
                     <select id="accountFilter">
                         <option value="">All Accounts</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="ownerFilter">Owner:</label>
+                    <select id="ownerFilter">
+                        <option value="">All Owners</option>
                     </select>
                 </div>
                 <div class="filter-group">
