@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Import CSV Transactions - SHELZY'S LIFE</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f9fafb;
+        }
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        h1 {
+            margin: 0 0 10px 0;
+            color: #111827;
+        }
+        .subtitle {
+            color: #6b7280;
+            margin-bottom: 30px;
+        }
+        .btn {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        .btn:hover {
+            background: #1e40af;
+        }
+        .btn-success {
+            background: #059669;
+        }
+        .btn-success:hover {
+            background: #047857;
+        }
+        .file-input {
+            display: none;
+        }
+        .file-label {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #6b7280;
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+        }
+        .file-label:hover {
+            background: #4b5563;
+        }
+        .status {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 6px;
+            display: none;
+        }
+        .status.success {
+            background: #d1fae5;
+            color: #065f46;
+            border: 1px solid #6ee7b7;
+            display: block;
+        }
+        .status.error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fecaca;
+            display: block;
+        }
+        .status.info {
+            background: #dbeafe;
+            color: #1e40af;
+            border: 1px solid #93c5fd;
+            display: block;
+        }
+        .preview {
+            background: #f3f4f6;
+            padding: 20px;
+            border-radius: 6px;
+            margin-top: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+            display: none;
+        }
+        .preview table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        .preview th {
+            background: #e5e7eb;
+            padding: 8px;
+            text-align: left;
+            font-weight: 600;
+        }
+        .preview td {
+            padding: 8px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .info-box {
+            background: #fef3c7;
+            border: 1px solid #fde68a;
+            padding: 15px;
+            border-radius: 6px;
+            color: #92400e;
+            margin-bottom: 20px;
+        }
+        .mapping {
+            background: #f9fafb;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 20px;
+            display: none;
+        }
+        .mapping-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .mapping label {
+            font-size: 14px;
+            font-weight: 500;
+            color: #374151;
+        }
+        .mapping select {
+            padding: 8px;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>📊 Import CSV Transactions</h1>
+        <p class="subtitle">Import transactions from Transactions_2026-01-27T23-45-21.csv or any CSV file</p>
+
+        <div class="info-box">
+            <strong>📁 Instructions:</strong><br>
+            1. Click "Choose CSV File" and select your Transactions_2026-01-27T23-45-21.csv file<br>
+            2. Review the data preview<br>
+            3. Map columns if needed<br>
+            4. Click "Import to SHELZY'S LIFE"
+        </div>
+
+        <input type="file" id="csvFile" class="file-input" accept=".csv" onchange="handleFileSelect(event)">
+        <label for="csvFile" class="file-label">📁 Choose CSV File</label>
+        <span id="fileName" style="margin-left: 15px; color: #6b7280;"></span>
+
+        <div id="mapping" class="mapping"></div>
+        <div id="preview" class="preview"></div>
+
+        <div id="status" class="status"></div>
+
+        <div id="actions" style="margin-top: 20px; display: none;">
+            <button class="btn btn-success" onclick="importTransactions()">✓ Import to SHELZY'S LIFE</button>
+            <button class="btn" onclick="window.location.href='index.html'">Open SHELZY'S LIFE</button>
+        </div>
+    </div>
+
+    <script>
+        let parsedData = [];
+        let columnMapping = {};
+
+        function handleFileSelect(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            document.getElementById('fileName').textContent = file.name;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const csv = e.target.result;
+                parseCSV(csv);
+            };
+            reader.readAsText(file);
+        }
+
+        function parseCSV(csv) {
+            const lines = csv.split('\n').filter(line => line.trim());
+            if (lines.length === 0) {
+                showStatus('error', 'CSV file is empty');
+                return;
+            }
+
+            // Parse header
+            const headers = lines[0].split(',').map(h => h.trim().replace(/"/g, ''));
+
+            // Parse rows
+            const rows = [];
+            for (let i = 1; i < lines.length; i++) {
+                const values = lines[i].split(',').map(v => v.trim().replace(/"/g, ''));
+                if (values.length === headers.length) {
+                    const row = {};
+                    headers.forEach((header, index) => {
+                        row[header] = values[index];
+                    });
+                    rows.push(row);
+                }
+            }
+
+            parsedData = rows;
+
+            // Auto-detect column mapping
+            autoMapColumns(headers);
+
+            // Show preview
+            showPreview(headers, rows);
+
+            // Show actions
+            document.getElementById('actions').style.display = 'block';
+
+            showStatus('info', `Found ${rows.length} transactions in CSV file. Review the preview and click Import when ready.`);
+        }
+
+        function autoMapColumns(headers) {
+            const mapping = {
+                date: null,
+                description: null,
+                amount: null,
+                category: null,
+                account: null,
+                owner: null,
+                notes: null
+            };
+
+            // Auto-detect common column names
+            headers.forEach((header, index) => {
+                const lower = header.toLowerCase();
+
+                if (lower.includes('date')) mapping.date = index;
+                else if (lower.includes('merchant') || lower.includes('description') || lower.includes('payee')) mapping.description = index;
+                else if (lower.includes('amount') || lower.includes('total') || lower.includes('price')) mapping.amount = index;
+                else if (lower.includes('category')) mapping.category = index;
+                else if (lower.includes('account')) mapping.account = index;
+                else if (lower.includes('owner')) mapping.owner = index;
+                else if (lower.includes('note') || lower.includes('memo')) mapping.notes = index;
+            });
+
+            columnMapping = mapping;
+
+            // Show mapping UI
+            showMappingUI(headers, mapping);
+        }
+
+        function showMappingUI(headers, mapping) {
+            const mappingDiv = document.getElementById('mapping');
+            mappingDiv.innerHTML = '<strong>Column Mapping:</strong><br><small>Verify CSV columns are mapped correctly</small><br><br>';
+
+            const fields = ['date', 'description', 'amount', 'category', 'account', 'owner', 'notes'];
+
+            fields.forEach(field => {
+                const row = document.createElement('div');
+                row.className = 'mapping-row';
+
+                row.innerHTML = `
+                    <label>${field.charAt(0).toUpperCase() + field.slice(1)}:</label>
+                    <select id="map-${field}">
+                        <option value="">-- Skip --</option>
+                        ${headers.map((h, i) => `<option value="${i}" ${mapping[field] === i ? 'selected' : ''}>${h}</option>`).join('')}
+                    </select>
+                `;
+
+                mappingDiv.appendChild(row);
+            });
+
+            mappingDiv.style.display = 'block';
+        }
+
+        function showPreview(headers, rows) {
+            const preview = document.getElementById('preview');
+
+            let html = '<strong>Preview (first 10 rows):</strong><br><br>';
+            html += '<table><thead><tr>';
+            headers.forEach(h => html += `<th>${h}</th>`);
+            html += '</tr></thead><tbody>';
+
+            rows.slice(0, 10).forEach(row => {
+                html += '<tr>';
+                headers.forEach(h => html += `<td>${row[h] || ''}</td>`);
+                html += '</tr>';
+            });
+
+            html += '</tbody></table>';
+            preview.innerHTML = html;
+            preview.style.display = 'block';
+        }
+
+        function importTransactions() {
+            try {
+                // Get current mapping
+                const fields = ['date', 'description', 'amount', 'category', 'account', 'owner', 'notes'];
+                const currentMapping = {};
+
+                fields.forEach(field => {
+                    const select = document.getElementById(`map-${field}`);
+                    currentMapping[field] = select.value !== '' ? parseInt(select.value) : null;
+                });
+
+                // Get CSV headers
+                const headers = Object.keys(parsedData[0]);
+
+                // Transform data
+                const transactions = parsedData.map((row, index) => {
+                    const values = Object.values(row);
+
+                    // Extract values based on mapping
+                    const date = currentMapping.date !== null ? values[currentMapping.date] : new Date().toISOString().split('T')[0];
+                    const description = currentMapping.description !== null ? values[currentMapping.description] : 'Imported Transaction';
+                    let amount = currentMapping.amount !== null ? parseFloat(values[currentMapping.amount].replace(/[^0-9.-]/g, '')) : 0;
+                    const category = currentMapping.category !== null ? values[currentMapping.category] : 'Uncategorized';
+                    const owner = currentMapping.owner !== null ? values[currentMapping.owner] : 'Michelle';
+                    const notes = currentMapping.notes !== null ? values[currentMapping.notes] : null;
+
+                    // Determine type based on amount
+                    const type = amount >= 0 ? 'income' : 'expense';
+                    amount = Math.abs(amount);
+
+                    return {
+                        id: `csv-import-${Date.now()}-${index}`,
+                        date: formatDate(date),
+                        description: description,
+                        amount: amount,
+                        type: type,
+                        category: category,
+                        owner: owner,
+                        entity: 'personal',
+                        notes: notes,
+                        createdAt: new Date().toISOString()
+                    };
+                });
+
+                // Get existing transactions
+                const existing = JSON.parse(localStorage.getItem('finance-transactions') || '[]');
+
+                // Merge
+                const merged = [...existing, ...transactions];
+
+                // Save
+                localStorage.setItem('finance-transactions', JSON.stringify(merged));
+
+                // Show success
+                showStatus('success', `
+                    <strong>✓ Import Successful!</strong><br>
+                    Imported ${transactions.length} transactions from CSV.<br>
+                    <br>
+                    <a href="index.html" style="color: #065f46; font-weight: bold;">→ Open SHELZY'S LIFE to view your data</a>
+                `);
+
+                document.getElementById('actions').style.display = 'none';
+
+            } catch (error) {
+                showStatus('error', `Import failed: ${error.message}`);
+                console.error(error);
+            }
+        }
+
+        function formatDate(dateStr) {
+            // Try to parse various date formats
+            try {
+                // If it's already YYYY-MM-DD, return it
+                if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
+                    return dateStr;
+                }
+
+                // Try parsing as Date
+                const date = new Date(dateStr);
+                if (!isNaN(date.getTime())) {
+                    return date.toISOString().split('T')[0];
+                }
+
+                // Default to today
+                return new Date().toISOString().split('T')[0];
+            } catch {
+                return new Date().toISOString().split('T')[0];
+            }
+        }
+
+        function showStatus(type, message) {
+            const status = document.getElementById('status');
+            status.className = `status ${type}`;
+            status.innerHTML = message;
+        }
+    </script>
+</body>
+</html>
