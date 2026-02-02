@@ -448,13 +448,13 @@
         <div class="header-content">
             <div class="logo">SHELZY'S LIFE</div>
             <nav class="nav">
-                <button class="nav-btn active" onclick="app.switchModule('dashboard')">Dashboard</button>
-                <button class="nav-btn" onclick="app.switchModule('health')">Health & Fertility</button>
-                <button class="nav-btn" onclick="app.switchModule('career')">Career</button>
-                <button class="nav-btn" onclick="app.switchModule('finance')">Finance</button>
-                <button class="nav-btn" onclick="app.switchModule('business')">Shelzy's Designs</button>
-                <button class="nav-btn" onclick="app.switchModule('tasks')">Tasks & Goals</button>
-                <button class="nav-btn" onclick="app.switchModule('settings')">Settings</button>
+                <button class="nav-btn active" onclick="app.switchModule('dashboard', event)">Dashboard</button>
+                <button class="nav-btn" onclick="app.switchModule('health', event)">Health & Fertility</button>
+                <button class="nav-btn" onclick="app.switchModule('career', event)">Career</button>
+                <button class="nav-btn" onclick="app.switchModule('finance', event)">Finance</button>
+                <button class="nav-btn" onclick="app.switchModule('business', event)">Shelzy's Designs</button>
+                <button class="nav-btn" onclick="app.switchModule('tasks', event)">Tasks & Goals</button>
+                <button class="nav-btn" onclick="app.switchModule('settings', event)">Settings</button>
             </nav>
         </div>
     </header>
@@ -1059,12 +1059,14 @@
                 tasks.init();
             },
 
-            switchModule(moduleName) {
+            switchModule(moduleName, event) {
                 document.querySelectorAll('.module').forEach(m => m.classList.remove('active'));
                 document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
 
                 document.getElementById(moduleName).classList.add('active');
-                event.target.classList.add('active');
+                if (event && event.target) {
+                    event.target.classList.add('active');
+                }
 
                 this.currentModule = moduleName;
 
