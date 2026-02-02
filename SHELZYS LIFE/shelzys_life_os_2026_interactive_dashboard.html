@@ -1,0 +1,1586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHELZY'S LIFE — Interactive Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --primary-light: #60a5fa;
+            --primary-dark: #1e40af;
+            --success: #059669;
+            --success-light: #10b981;
+            --warning: #d97706;
+            --danger: #dc2626;
+            --purple: #8b5cf6;
+            --pink: #ec4899;
+            --teal: #14b8a6;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-800: #1f2937;
+            --gray-900: #111827;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--gray-100);
+            color: var(--gray-900);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--purple), var(--primary));
+            color: white;
+            padding: 1.5rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 1.75rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        /* Navigation */
+        .nav {
+            background: white;
+            border-bottom: 2px solid var(--gray-200);
+            padding: 0 2rem;
+            position: sticky;
+            top: 69px;
+            z-index: 999;
+        }
+
+        .nav-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+        }
+
+        .nav-btn {
+            padding: 1rem 1.5rem;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--gray-600);
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .nav-btn:hover {
+            color: var(--gray-900);
+            background: var(--gray-50);
+        }
+
+        .nav-btn.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+            background: var(--gray-50);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Sections */
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        /* Cards */
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border: 1px solid var(--gray-200);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--gray-200);
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--gray-900);
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, var(--gray-50), white);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--primary);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .stat-card.health { border-left-color: var(--pink); }
+        .stat-card.career { border-left-color: var(--primary); }
+        .stat-card.finance { border-left-color: var(--success); }
+        .stat-card.business { border-left-color: var(--warning); }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .stat-card.health .stat-number { color: var(--pink); }
+        .stat-card.career .stat-number { color: var(--primary); }
+        .stat-card.finance .stat-number { color: var(--success); }
+        .stat-card.business .stat-number { color: var(--warning); }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--gray-600);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 0.5rem;
+        }
+
+        .stat-subtext {
+            font-size: 0.75rem;
+            color: var(--gray-600);
+            margin-top: 0.25rem;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #047857;
+        }
+
+        .btn-warning {
+            background: var(--warning);
+            color: white;
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: var(--gray-200);
+            color: var(--gray-700);
+        }
+
+        .btn-secondary:hover {
+            background: var(--gray-300);
+        }
+
+        .btn-sm {
+            padding: 0.375rem 0.75rem;
+            font-size: 0.75rem;
+        }
+
+        /* Upload Area */
+        .upload-area {
+            border: 2px dashed var(--gray-300);
+            border-radius: 12px;
+            padding: 3rem 2rem;
+            text-align: center;
+            background: var(--gray-50);
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .upload-area:hover {
+            border-color: var(--primary);
+            background: white;
+        }
+
+        .upload-area.dragover {
+            border-color: var(--primary);
+            background: var(--primary-light);
+            background: rgba(37, 99, 235, 0.1);
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .upload-text {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--gray-900);
+            margin-bottom: 0.5rem;
+        }
+
+        .upload-subtext {
+            font-size: 0.875rem;
+            color: var(--gray-600);
+        }
+
+        /* Forms */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--gray-700);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            width: 100%;
+            padding: 0.625rem 0.875rem;
+            border: 1px solid var(--gray-300);
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-family: inherit;
+            transition: border-color 0.2s;
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .form-textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        /* Chart Container */
+        .chart-container {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: var(--gray-50);
+            border-radius: 12px;
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 350px;
+        }
+
+        .chart-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--gray-900);
+            margin-bottom: 1rem;
+        }
+
+        /* Table */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .data-table th {
+            background: var(--gray-50);
+            font-weight: 600;
+            font-size: 0.875rem;
+            color: var(--gray-700);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .data-table tr:hover {
+            background: var(--gray-50);
+        }
+
+        /* Badge */
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.625rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .badge-success { background: var(--success-light); color: white; }
+        .badge-warning { background: var(--warning); color: white; }
+        .badge-danger { background: var(--danger); color: white; }
+        .badge-primary { background: var(--primary); color: white; }
+        .badge-secondary { background: var(--gray-300); color: var(--gray-700); }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--gray-200);
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray-600);
+            padding: 0;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+        }
+
+        .modal-close:hover {
+            background: var(--gray-100);
+            color: var(--gray-900);
+        }
+
+        /* Alert */
+        .alert {
+            padding: 1rem 1.25rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .alert-success {
+            background: rgba(5, 150, 105, 0.1);
+            border-left: 4px solid var(--success);
+            color: #065f46;
+        }
+
+        .alert-info {
+            background: rgba(37, 99, 235, 0.1);
+            border-left: 4px solid var(--primary);
+            color: #1e40af;
+        }
+
+        .alert-warning {
+            background: rgba(217, 119, 6, 0.1);
+            border-left: 4px solid var(--warning);
+            color: #92400e;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--gray-600);
+        }
+
+        .empty-state-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        .empty-state-text {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .empty-state-subtext {
+            font-size: 0.875rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .icon-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 6px;
+            color: var(--gray-600);
+            transition: all 0.2s;
+        }
+
+        .icon-btn:hover {
+            background: var(--gray-100);
+            color: var(--gray-900);
+        }
+
+        /* Hidden */
+        .hidden {
+            display: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            .card {
+                padding: 1.5rem;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <h1>💎 SHELZY'S LIFE DASHBOARD</h1>
+            <div class="header-actions">
+                <button class="btn btn-secondary" onclick="exportAllData()">📥 Export Data</button>
+                <button class="btn btn-primary" onclick="showImportModal()">📤 Import Data</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-content">
+            <button class="nav-btn active" onclick="showSection('overview')">🏠 Overview</button>
+            <button class="nav-btn" onclick="showSection('health')">💝 Health & Fertility</button>
+            <button class="nav-btn" onclick="showSection('career')">💼 Career</button>
+            <button class="nav-btn" onclick="showSection('finance')">💰 Finance</button>
+            <button class="nav-btn" onclick="showSection('business')">🎨 Business</button>
+            <button class="nav-btn" onclick="showSection('tasks')">✓ Tasks & Goals</button>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Overview Section -->
+        <div id="overview" class="section active">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Life Overview</h2>
+                    <span id="lastUpdated" style="font-size: 0.875rem; color: var(--gray-600);"></span>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card health">
+                        <div class="stat-number" id="healthCycles">0</div>
+                        <div class="stat-label">Cycle Records</div>
+                        <div class="stat-subtext">Health tracking entries</div>
+                    </div>
+                    <div class="stat-card career">
+                        <div class="stat-number" id="careerApps">0</div>
+                        <div class="stat-label">Job Applications</div>
+                        <div class="stat-subtext">Active pipeline</div>
+                    </div>
+                    <div class="stat-card finance">
+                        <div class="stat-number" id="financeBalance">$0</div>
+                        <div class="stat-label">Net Balance</div>
+                        <div class="stat-subtext">Month-to-date</div>
+                    </div>
+                    <div class="stat-card business">
+                        <div class="stat-number" id="businessRevenue">$0</div>
+                        <div class="stat-label">MTD Revenue</div>
+                        <div class="stat-subtext">Shelzy's Designs</div>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <h3 class="chart-title">Life Domains Summary</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="overviewChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Health Section -->
+        <div id="health" class="section">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">💝 Health & Fertility Tracking</h2>
+                    <div>
+                        <button class="btn btn-secondary btn-sm" onclick="showUploadModal('health')">📁 Upload CSV</button>
+                        <button class="btn btn-primary btn-sm" onclick="showAddModal('health')">+ Add Entry</button>
+                    </div>
+                </div>
+
+                <div class="alert alert-info">
+                    <span>📊</span>
+                    <div>
+                        <strong>Track your fertility journey</strong><br>
+                        Upload CSV files with cycle data or add entries manually. Track temperature, LH tests, symptoms, and cycle phases.
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <h3 class="chart-title">Cycle Phase Tracking</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="healthChart"></canvas>
+                    </div>
+                </div>
+
+                <div id="healthDataContainer">
+                    <h3 style="margin-bottom: 1rem;">Recent Entries</h3>
+                    <div id="healthTable"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Career Section -->
+        <div id="career" class="section">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">💼 Career & Job Search</h2>
+                    <div>
+                        <button class="btn btn-secondary btn-sm" onclick="showUploadModal('career')">📁 Upload CSV</button>
+                        <button class="btn btn-primary btn-sm" onclick="showAddModal('career')">+ Add Application</button>
+                    </div>
+                </div>
+
+                <div class="alert alert-info">
+                    <span>🎯</span>
+                    <div>
+                        <strong>Track your career pipeline</strong><br>
+                        Upload job applications or add them manually. Target: Senior Director roles at $230-240K+ compensation.
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <h3 class="chart-title">Application Pipeline Status</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="careerChart"></canvas>
+                    </div>
+                </div>
+
+                <div id="careerDataContainer">
+                    <h3 style="margin-bottom: 1rem;">Active Applications</h3>
+                    <div id="careerTable"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Finance Section -->
+        <div id="finance" class="section">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">💰 Financial Tracking</h2>
+                    <div>
+                        <button class="btn btn-secondary btn-sm" onclick="showUploadModal('finance')">📁 Upload CSV</button>
+                        <button class="btn btn-primary btn-sm" onclick="showAddModal('finance')">+ Add Transaction</button>
+                    </div>
+                </div>
+
+                <div class="alert alert-info">
+                    <span>💵</span>
+                    <div>
+                        <strong>Track income and expenses</strong><br>
+                        Upload bank transactions or add them manually. Categorize by owner (Michelle, Gray, Joint, Business).
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <h3 class="chart-title">Income vs Expenses</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="financeChart"></canvas>
+                    </div>
+                </div>
+
+                <div id="financeDataContainer">
+                    <h3 style="margin-bottom: 1rem;">Recent Transactions</h3>
+                    <div id="financeTable"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Business Section -->
+        <div id="business" class="section">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">🎨 Shelzy's Designs</h2>
+                    <div>
+                        <button class="btn btn-secondary btn-sm" onclick="showUploadModal('business')">📁 Upload CSV</button>
+                        <button class="btn btn-primary btn-sm" onclick="showAddModal('business')">+ Add Order</button>
+                    </div>
+                </div>
+
+                <div class="alert alert-info">
+                    <span>📦</span>
+                    <div>
+                        <strong>Track business operations</strong><br>
+                        Upload order data or add manually. Track revenue, COGS, profit, and margins across platforms.
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <h3 class="chart-title">Revenue, COGS & Profit</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="businessChart"></canvas>
+                    </div>
+                </div>
+
+                <div id="businessDataContainer">
+                    <h3 style="margin-bottom: 1rem;">Recent Orders</h3>
+                    <div id="businessTable"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tasks Section -->
+        <div id="tasks" class="section">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">✓ Tasks & Goals</h2>
+                    <div>
+                        <button class="btn btn-secondary btn-sm" onclick="showUploadModal('tasks')">📁 Upload CSV</button>
+                        <button class="btn btn-primary btn-sm" onclick="showAddModal('tasks')">+ Add Task</button>
+                    </div>
+                </div>
+
+                <div class="alert alert-info">
+                    <span>✓</span>
+                    <div>
+                        <strong>Manage tasks and goals</strong><br>
+                        Upload task lists or add manually. Track daily tasks, goals, and progress.
+                    </div>
+                </div>
+
+                <div id="tasksDataContainer">
+                    <h3 style="margin-bottom: 1rem;">Active Tasks</h3>
+                    <div id="tasksTable"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Upload Modal -->
+    <div id="uploadModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Upload Data</h3>
+                <button class="modal-close" onclick="closeModal('uploadModal')">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-icon">📁</div>
+                    <div class="upload-text">Drop CSV or JSON file here</div>
+                    <div class="upload-subtext">or click to browse</div>
+                    <input type="file" id="fileInput" accept=".csv,.json" style="display: none;" onchange="handleFileSelect(event)">
+                </div>
+                <div id="uploadStatus" style="margin-top: 1rem;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Entry Modal -->
+    <div id="addModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="addModalTitle">Add Entry</h3>
+                <button class="modal-close" onclick="closeModal('addModal')">×</button>
+            </div>
+            <div class="modal-body">
+                <form id="addForm" onsubmit="handleAddEntry(event)">
+                    <div id="formFields"></div>
+                    <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+                        <button type="submit" class="btn btn-primary" style="flex: 1;">Save</button>
+                        <button type="button" class="btn btn-secondary" onclick="closeModal('addModal')">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Import All Data Modal -->
+    <div id="importModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Import All Data</h3>
+                <button class="modal-close" onclick="closeModal('importModal')">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-warning">
+                    <span>⚠️</span>
+                    <div>
+                        <strong>This will replace all existing data</strong><br>
+                        Make sure you have a backup before importing.
+                    </div>
+                </div>
+                <div class="upload-area" id="importArea">
+                    <div class="upload-icon">📦</div>
+                    <div class="upload-text">Drop JSON backup file here</div>
+                    <div class="upload-subtext">or click to browse</div>
+                    <input type="file" id="importInput" accept=".json" style="display: none;" onchange="handleImport(event)">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data Storage
+        let appData = {
+            health: [],
+            career: [],
+            finance: [],
+            business: [],
+            tasks: []
+        };
+
+        // Charts
+        let charts = {};
+
+        // Initialize App
+        function initApp() {
+            loadDataFromStorage();
+            updateOverview();
+            renderAllCharts();
+            updateLastUpdatedTime();
+        }
+
+        // Load data from localStorage
+        function loadDataFromStorage() {
+            const stored = localStorage.getItem('shelzys_life_data');
+            if (stored) {
+                appData = JSON.parse(stored);
+            }
+        }
+
+        // Save data to localStorage
+        function saveDataToStorage() {
+            localStorage.setItem('shelzys_life_data', JSON.stringify(appData));
+            localStorage.setItem('shelzys_life_updated', new Date().toISOString());
+            updateLastUpdatedTime();
+        }
+
+        // Update last updated time
+        function updateLastUpdatedTime() {
+            const lastUpdated = localStorage.getItem('shelzys_life_updated');
+            if (lastUpdated) {
+                const date = new Date(lastUpdated);
+                document.getElementById('lastUpdated').textContent =
+                    `Last updated: ${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+            }
+        }
+
+        // Navigation
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+
+            // Update nav buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Render section-specific content
+            if (sectionId === 'overview') {
+                updateOverview();
+            } else {
+                renderSectionData(sectionId);
+            }
+        }
+
+        // Update Overview
+        function updateOverview() {
+            document.getElementById('healthCycles').textContent = appData.health.length;
+            document.getElementById('careerApps').textContent = appData.career.length;
+
+            const financeTotal = appData.finance.reduce((sum, t) => {
+                return sum + (t.type === 'income' ? parseFloat(t.amount || 0) : -parseFloat(t.amount || 0));
+            }, 0);
+            document.getElementById('financeBalance').textContent = '$' + financeTotal.toFixed(0);
+
+            const businessRevenue = appData.business.reduce((sum, o) => sum + parseFloat(o.revenue || 0), 0);
+            document.getElementById('businessRevenue').textContent = '$' + businessRevenue.toFixed(0);
+
+            renderOverviewChart();
+        }
+
+        // Render Overview Chart
+        function renderOverviewChart() {
+            const ctx = document.getElementById('overviewChart').getContext('2d');
+
+            if (charts.overview) {
+                charts.overview.destroy();
+            }
+
+            charts.overview = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['Health', 'Career', 'Finance', 'Business', 'Tasks'],
+                    datasets: [{
+                        label: 'Data Entries',
+                        data: [
+                            appData.health.length,
+                            appData.career.length,
+                            appData.finance.length,
+                            appData.business.length,
+                            appData.tasks.length
+                        ],
+                        backgroundColor: 'rgba(37, 99, 235, 0.2)',
+                        borderColor: '#2563eb',
+                        pointBackgroundColor: '#2563eb'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        // Render All Charts
+        function renderAllCharts() {
+            renderOverviewChart();
+            renderHealthChart();
+            renderCareerChart();
+            renderFinanceChart();
+            renderBusinessChart();
+        }
+
+        // Render Health Chart
+        function renderHealthChart() {
+            const ctx = document.getElementById('healthChart').getContext('2d');
+
+            if (charts.health) {
+                charts.health.destroy();
+            }
+
+            const phases = ['Menstrual', 'Follicular', 'Fertile', 'Luteal'];
+            const phaseCount = phases.map(phase =>
+                appData.health.filter(h => h.phase === phase).length
+            );
+
+            charts.health = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: phases,
+                    datasets: [{
+                        data: phaseCount,
+                        backgroundColor: ['#dc2626', '#8b5cf6', '#10b981', '#f59e0b']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+        }
+
+        // Render Career Chart
+        function renderCareerChart() {
+            const ctx = document.getElementById('careerChart').getContext('2d');
+
+            if (charts.career) {
+                charts.career.destroy();
+            }
+
+            const statuses = ['Applied', 'Screening', 'Interview', 'Offer', 'Rejected', 'Stalled'];
+            const statusCount = statuses.map(status =>
+                appData.career.filter(c => c.status === status).length
+            );
+
+            charts.career = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: statuses,
+                    datasets: [{
+                        label: 'Applications',
+                        data: statusCount,
+                        backgroundColor: ['#60a5fa', '#3b82f6', '#2563eb', '#059669', '#dc2626', '#9ca3af']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        // Render Finance Chart
+        function renderFinanceChart() {
+            const ctx = document.getElementById('financeChart').getContext('2d');
+
+            if (charts.finance) {
+                charts.finance.destroy();
+            }
+
+            const income = appData.finance.filter(t => t.type === 'income')
+                .reduce((sum, t) => sum + parseFloat(t.amount || 0), 0);
+            const expenses = appData.finance.filter(t => t.type === 'expense')
+                .reduce((sum, t) => sum + parseFloat(t.amount || 0), 0);
+
+            charts.finance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Income', 'Expenses', 'Net'],
+                    datasets: [{
+                        data: [income, expenses, income - expenses],
+                        backgroundColor: ['#10b981', '#dc2626', '#2563eb']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return '$' + value.toLocaleString();
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Render Business Chart
+        function renderBusinessChart() {
+            const ctx = document.getElementById('businessChart').getContext('2d');
+
+            if (charts.business) {
+                charts.business.destroy();
+            }
+
+            const revenue = appData.business.reduce((sum, o) => sum + parseFloat(o.revenue || 0), 0);
+            const cogs = appData.business.reduce((sum, o) => sum + parseFloat(o.cost || 0), 0);
+            const profit = revenue - cogs;
+
+            charts.business = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Revenue', 'COGS', 'Profit'],
+                    datasets: [{
+                        data: [revenue, cogs, profit],
+                        backgroundColor: ['#f59e0b', '#dc2626', '#059669']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return '$' + value.toLocaleString();
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Render Section Data
+        function renderSectionData(section) {
+            const container = document.getElementById(section + 'Table');
+            const data = appData[section];
+
+            if (!data || data.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">📭</div>
+                        <div class="empty-state-text">No data yet</div>
+                        <div class="empty-state-subtext">Upload a CSV file or add entries manually</div>
+                        <button class="btn btn-primary" onclick="showAddModal('${section}')">+ Add Entry</button>
+                    </div>
+                `;
+                return;
+            }
+
+            // Build table
+            const headers = Object.keys(data[0]);
+            let tableHTML = '<table class="data-table"><thead><tr>';
+            headers.forEach(h => {
+                tableHTML += `<th>${h}</th>`;
+            });
+            tableHTML += '<th>Actions</th></tr></thead><tbody>';
+
+            data.forEach((row, idx) => {
+                tableHTML += '<tr>';
+                headers.forEach(h => {
+                    let value = row[h];
+                    if (h === 'amount' || h === 'revenue' || h === 'cost') {
+                        value = '$' + parseFloat(value || 0).toFixed(2);
+                    }
+                    tableHTML += `<td>${value || '-'}</td>`;
+                });
+                tableHTML += `<td class="action-buttons">
+                    <button class="icon-btn" onclick="deleteEntry('${section}', ${idx})" title="Delete">🗑️</button>
+                </td></tr>`;
+            });
+
+            tableHTML += '</tbody></table>';
+            container.innerHTML = tableHTML;
+
+            // Update chart
+            if (section === 'health') renderHealthChart();
+            if (section === 'career') renderCareerChart();
+            if (section === 'finance') renderFinanceChart();
+            if (section === 'business') renderBusinessChart();
+        }
+
+        // Show Upload Modal
+        let currentUploadSection = null;
+        function showUploadModal(section) {
+            currentUploadSection = section;
+            document.getElementById('uploadModal').classList.add('active');
+            document.getElementById('uploadArea').onclick = () => {
+                document.getElementById('fileInput').click();
+            };
+        }
+
+        // Handle File Select
+        function handleFileSelect(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const content = e.target.result;
+                parseAndImportData(file.name, content);
+            };
+            reader.readAsText(file);
+        }
+
+        // Parse and Import Data
+        function parseAndImportData(filename, content) {
+            try {
+                let data;
+                if (filename.endsWith('.csv')) {
+                    const parsed = Papa.parse(content, { header: true, skipEmptyLines: true });
+                    data = parsed.data;
+                } else if (filename.endsWith('.json')) {
+                    data = JSON.parse(content);
+                    if (!Array.isArray(data)) {
+                        data = [data];
+                    }
+                }
+
+                if (!data || data.length === 0) {
+                    throw new Error('No data found in file');
+                }
+
+                appData[currentUploadSection] = [...appData[currentUploadSection], ...data];
+                saveDataToStorage();
+                renderSectionData(currentUploadSection);
+                updateOverview();
+
+                document.getElementById('uploadStatus').innerHTML = `
+                    <div class="alert alert-success">
+                        <span>✓</span>
+                        <div>Successfully imported ${data.length} entries!</div>
+                    </div>
+                `;
+
+                setTimeout(() => {
+                    closeModal('uploadModal');
+                    document.getElementById('uploadStatus').innerHTML = '';
+                }, 2000);
+
+            } catch (error) {
+                document.getElementById('uploadStatus').innerHTML = `
+                    <div class="alert alert-warning">
+                        <span>⚠️</span>
+                        <div>Error: ${error.message}</div>
+                    </div>
+                `;
+            }
+        }
+
+        // Show Add Modal
+        let currentAddSection = null;
+        function showAddModal(section) {
+            currentAddSection = section;
+            document.getElementById('addModalTitle').textContent = `Add ${section.charAt(0).toUpperCase() + section.slice(1)} Entry`;
+            document.getElementById('addModal').classList.add('active');
+
+            // Generate form fields based on section
+            const formFields = document.getElementById('formFields');
+            let fields = '';
+
+            if (section === 'health') {
+                fields = `
+                    <div class="form-group">
+                        <label class="form-label">Date</label>
+                        <input type="date" name="date" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Cycle Day</label>
+                        <input type="number" name="cycleDay" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Phase</label>
+                        <select name="phase" class="form-select" required>
+                            <option value="">Select phase</option>
+                            <option value="Menstrual">Menstrual</option>
+                            <option value="Follicular">Follicular</option>
+                            <option value="Fertile">Fertile</option>
+                            <option value="Luteal">Luteal</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Temperature (°F)</label>
+                        <input type="number" step="0.1" name="temperature" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">LH Test</label>
+                        <select name="lhTest" class="form-select">
+                            <option value="">Select result</option>
+                            <option value="negative">Negative</option>
+                            <option value="positive">Positive</option>
+                            <option value="peak">Peak</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Symptoms</label>
+                        <textarea name="symptoms" class="form-textarea"></textarea>
+                    </div>
+                `;
+            } else if (section === 'career') {
+                fields = `
+                    <div class="form-group">
+                        <label class="form-label">Company</label>
+                        <input type="text" name="company" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Role</label>
+                        <input type="text" name="role" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Status</label>
+                        <select name="status" class="form-select" required>
+                            <option value="">Select status</option>
+                            <option value="Applied">Applied</option>
+                            <option value="Screening">Screening</option>
+                            <option value="Interview">Interview</option>
+                            <option value="Offer">Offer</option>
+                            <option value="Rejected">Rejected</option>
+                            <option value="Stalled">Stalled</option>
+                        </select>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label">Salary Min ($K)</label>
+                            <input type="number" name="salaryMin" class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Salary Max ($K)</label>
+                            <input type="number" name="salaryMax" class="form-input">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Applied Date</label>
+                        <input type="date" name="appliedDate" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Recruiter</label>
+                        <input type="text" name="recruiter" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Notes</label>
+                        <textarea name="notes" class="form-textarea"></textarea>
+                    </div>
+                `;
+            } else if (section === 'finance') {
+                fields = `
+                    <div class="form-group">
+                        <label class="form-label">Date</label>
+                        <input type="date" name="date" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Type</label>
+                        <select name="type" class="form-select" required>
+                            <option value="">Select type</option>
+                            <option value="income">Income</option>
+                            <option value="expense">Expense</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Description</label>
+                        <input type="text" name="description" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Amount ($)</label>
+                        <input type="number" step="0.01" name="amount" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Category</label>
+                        <select name="category" class="form-select">
+                            <option value="">Select category</option>
+                            <option value="housing">Housing</option>
+                            <option value="groceries">Groceries</option>
+                            <option value="transportation">Transportation</option>
+                            <option value="healthcare">Healthcare</option>
+                            <option value="entertainment">Entertainment</option>
+                            <option value="business">Business</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Owner</label>
+                        <select name="owner" class="form-select" required>
+                            <option value="">Select owner</option>
+                            <option value="Michelle">Michelle</option>
+                            <option value="Gray">Gray</option>
+                            <option value="Joint">Joint</option>
+                            <option value="Business">Business</option>
+                        </select>
+                    </div>
+                `;
+            } else if (section === 'business') {
+                fields = `
+                    <div class="form-group">
+                        <label class="form-label">Date</label>
+                        <input type="date" name="date" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Order Number</label>
+                        <input type="text" name="orderNumber" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Product Name</label>
+                        <input type="text" name="productName" class="form-input" required>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label">Revenue ($)</label>
+                            <input type="number" step="0.01" name="revenue" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Cost ($)</label>
+                            <input type="number" step="0.01" name="cost" class="form-input" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Platform</label>
+                        <select name="platform" class="form-select" required>
+                            <option value="">Select platform</option>
+                            <option value="Etsy">Etsy</option>
+                            <option value="Amazon">Amazon</option>
+                            <option value="Direct">Direct</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Quantity</label>
+                        <input type="number" name="quantity" class="form-input" value="1">
+                    </div>
+                `;
+            } else if (section === 'tasks') {
+                fields = `
+                    <div class="form-group">
+                        <label class="form-label">Title</label>
+                        <input type="text" name="title" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Description</label>
+                        <textarea name="description" class="form-textarea"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Priority</label>
+                        <select name="priority" class="form-select" required>
+                            <option value="">Select priority</option>
+                            <option value="low">Low</option>
+                            <option value="medium">Medium</option>
+                            <option value="high">High</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Due Date</label>
+                        <input type="date" name="dueDate" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Status</label>
+                        <select name="status" class="form-select" required>
+                            <option value="pending">Pending</option>
+                            <option value="in-progress">In Progress</option>
+                            <option value="completed">Completed</option>
+                        </select>
+                    </div>
+                `;
+            }
+
+            formFields.innerHTML = fields;
+        }
+
+        // Handle Add Entry
+        function handleAddEntry(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const entry = {};
+
+            for (let [key, value] of formData.entries()) {
+                entry[key] = value;
+            }
+
+            appData[currentAddSection].push(entry);
+            saveDataToStorage();
+            renderSectionData(currentAddSection);
+            updateOverview();
+            closeModal('addModal');
+            event.target.reset();
+        }
+
+        // Delete Entry
+        function deleteEntry(section, index) {
+            if (confirm('Are you sure you want to delete this entry?')) {
+                appData[section].splice(index, 1);
+                saveDataToStorage();
+                renderSectionData(section);
+                updateOverview();
+            }
+        }
+
+        // Close Modal
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        // Export All Data
+        function exportAllData() {
+            const exportData = {
+                version: '1.0.0',
+                exportDate: new Date().toISOString(),
+                data: appData
+            };
+
+            const dataStr = JSON.stringify(exportData, null, 2);
+            const dataBlob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(dataBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `shelzys-life-backup-${new Date().toISOString().split('T')[0]}.json`;
+            link.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // Show Import Modal
+        function showImportModal() {
+            document.getElementById('importModal').classList.add('active');
+            document.getElementById('importArea').onclick = () => {
+                document.getElementById('importInput').click();
+            };
+        }
+
+        // Handle Import
+        function handleImport(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const imported = JSON.parse(e.target.result);
+                    if (imported.data) {
+                        appData = imported.data;
+                        saveDataToStorage();
+                        updateOverview();
+                        renderAllCharts();
+                        alert('Data imported successfully!');
+                        closeModal('importModal');
+                    } else {
+                        throw new Error('Invalid backup file format');
+                    }
+                } catch (error) {
+                    alert('Error importing data: ' + error.message);
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        // Drag and Drop
+        document.addEventListener('DOMContentLoaded', function() {
+            const uploadArea = document.getElementById('uploadArea');
+            const importArea = document.getElementById('importArea');
+
+            [uploadArea, importArea].forEach(area => {
+                if (!area) return;
+
+                area.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    area.classList.add('dragover');
+                });
+
+                area.addEventListener('dragleave', () => {
+                    area.classList.remove('dragover');
+                });
+
+                area.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    area.classList.remove('dragover');
+
+                    const files = e.dataTransfer.files;
+                    if (files.length > 0) {
+                        const input = area.querySelector('input[type="file"]');
+                        input.files = files;
+                        input.dispatchEvent(new Event('change'));
+                    }
+                });
+            });
+        });
+
+        // Initialize on page load
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>
