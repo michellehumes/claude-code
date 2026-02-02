@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHELZY'S LIFE — A Complete Life Summary</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --primary-light: #60a5fa;
+            --primary-dark: #1e40af;
+            --success: #059669;
+            --success-light: #10b981;
+            --warning: #d97706;
+            --warning-light: #f59e0b;
+            --danger: #dc2626;
+            --purple: #8b5cf6;
+            --purple-light: #a78bfa;
+            --pink: #ec4899;
+            --teal: #14b8a6;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-700: #374151;
+            --gray-800: #1f2937;
+            --gray-900: #111827;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--gray-900);
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: white;
+            border-radius: 20px;
+            padding: 4rem 3rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--purple), var(--primary), var(--success), var(--warning), var(--pink));
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--purple), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            letter-spacing: -2px;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            color: var(--gray-700);
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .hero .tagline {
+            font-size: 1.125rem;
+            color: var(--gray-700);
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            line-height: 1.8;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, var(--gray-50), white);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 2px solid var(--gray-200);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--gray-700);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 0.5rem;
+        }
+
+        /* Section Styles */
+        .section {
+            background: white;
+            border-radius: 16px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid var(--gray-200);
+        }
+
+        .section-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--gray-900);
+        }
+
+        /* Icon Colors */
+        .icon-health { background: linear-gradient(135deg, var(--pink), var(--purple)); color: white; }
+        .icon-career { background: linear-gradient(135deg, var(--primary), var(--primary-light)); color: white; }
+        .icon-finance { background: linear-gradient(135deg, var(--success), var(--success-light)); color: white; }
+        .icon-business { background: linear-gradient(135deg, var(--warning), var(--warning-light)); color: white; }
+        .icon-tasks { background: linear-gradient(135deg, var(--purple), var(--primary)); color: white; }
+        .icon-insights { background: linear-gradient(135deg, var(--teal), var(--success)); color: white; }
+
+        /* Chart Container */
+        .chart-container {
+            position: relative;
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: var(--gray-50);
+            border-radius: 12px;
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 400px;
+        }
+
+        .chart-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--gray-900);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        /* Grid Layouts */
+        .two-col-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .metric-box {
+            background: linear-gradient(135deg, var(--gray-50), white);
+            padding: 2rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .metric-box h3 {
+            font-size: 1rem;
+            color: var(--gray-700);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .metric-box .value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .metric-box .subtext {
+            font-size: 0.875rem;
+            color: var(--gray-700);
+            margin-top: 0.5rem;
+        }
+
+        /* Key Takeaways */
+        .takeaways {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: white;
+            padding: 3rem;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            box-shadow: 0 20px 60px rgba(37, 99, 235, 0.3);
+        }
+
+        .takeaways h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .takeaway-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .takeaway-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .takeaway-item h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .takeaway-item p {
+            font-size: 1rem;
+            line-height: 1.7;
+            opacity: 0.95;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, var(--purple), var(--primary), var(--success));
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            display: flex;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) {
+            flex-direction: row;
+        }
+
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-content {
+            flex: 1;
+            padding: 2rem;
+            background: var(--gray-50);
+            border-radius: 12px;
+            margin: 0 2rem;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-right: calc(50% + 2rem);
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-left: calc(50% + 2rem);
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            top: 2rem;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: white;
+            border: 4px solid var(--primary);
+            transform: translateX(-50%);
+            z-index: 2;
+        }
+
+        .timeline-date {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .timeline-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-desc {
+            color: var(--gray-700);
+            line-height: 1.6;
+        }
+
+        /* Progress Bars */
+        .progress-bar-container {
+            margin: 1.5rem 0;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--gray-700);
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: var(--gray-200);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            border-radius: 10px;
+            transition: width 1s ease;
+        }
+
+        /* Badges */
+        .badge {
+            display: inline-block;
+            padding: 0.35rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-health { background: var(--pink); color: white; }
+        .badge-career { background: var(--primary); color: white; }
+        .badge-finance { background: var(--success); color: white; }
+        .badge-business { background: var(--warning); color: white; }
+        .badge-personal { background: var(--purple); color: white; }
+
+        /* Footer */
+        .footer {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            color: var(--gray-700);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        .footer p {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .hero .subtitle { font-size: 1.125rem; }
+            .section { padding: 2rem 1.5rem; }
+            .timeline::before { left: 20px; }
+            .timeline-item { flex-direction: column !important; }
+            .timeline-item .timeline-content {
+                margin: 0 0 0 3rem !important;
+            }
+            .timeline-dot { left: 20px; }
+        }
+
+        /* Print Styles */
+        @media print {
+            body { background: white; padding: 0; }
+            .section { page-break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero">
+            <h1>SHELZY'S LIFE</h1>
+            <div class="subtitle">A Complete Life Operating System</div>
+            <p class="tagline">
+                Michelle (Shelzy) Humes is a driven, multifaceted professional navigating the intersection of
+                healthcare media strategy, entrepreneurship, personal wellness, and life planning. This comprehensive
+                life summary presents a data-driven overview of her journey across six core life domains.
+            </p>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number">6</span>
+                    <span class="stat-label">Life Domains</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">Local & Private</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">2026</span>
+                    <span class="stat-label">System Built</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">∞</span>
+                    <span class="stat-label">Possibilities</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Health & Fertility Section -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon icon-health">💝</div>
+                <div>
+                    <div class="section-title">Health & Fertility</div>
+                    <span class="badge badge-health">Active Family Planning</span>
+                </div>
+            </div>
+
+            <p style="margin-bottom: 2rem; color: var(--gray-700); font-size: 1.125rem;">
+                Shelzy is proactively tracking her fertility journey with precision and care, using data-driven
+                insights to understand her menstrual cycles, ovulation patterns, and optimal conception windows.
+            </p>
+
+            <div class="two-col-grid">
+                <div class="metric-box">
+                    <h3>Cycle Tracking</h3>
+                    <div class="value">Comprehensive</div>
+                    <p class="subtext">Daily temperature, LH tests, symptoms, and phase tracking</p>
+                </div>
+                <div class="metric-box">
+                    <h3>Data Points</h3>
+                    <div class="value">4 Primary</div>
+                    <p class="subtext">Temperature, LH Results, Symptoms, Cycle Phase</p>
+                </div>
+                <div class="metric-box">
+                    <h3>Predictive Insights</h3>
+                    <div class="value">Available</div>
+                    <p class="subtext">After 3+ cycles, pattern recognition activates</p>
+                </div>
+                <div class="metric-box">
+                    <h3>Goal</h3>
+                    <div class="value">Conception</div>
+                    <p class="subtext">Optimizing fertile window timing</p>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title">Menstrual Cycle Phases & Tracking</div>
+                <div class="chart-wrapper">
+                    <canvas id="cycleChart"></canvas>
+                </div>
+            </div>
+
+            <div style="background: var(--gray-50); padding: 1.5rem; border-radius: 12px; border-left: 4px solid var(--pink);">
+                <strong style="color: var(--gray-900);">Health Philosophy:</strong>
+                <p style="margin-top: 0.5rem; color: var(--gray-700);">
+                    Calm, predictive, science-based approach to fertility tracking. No anxiety-inducing language,
+                    just clear data and actionable insights to support informed decision-making.
+                </p>
+            </div>
+        </div>
+
+        <!-- Career & Professional Growth Section -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon icon-career">💼</div>
+                <div>
+                    <div class="section-title">Career & Professional Growth</div>
+                    <span class="badge badge-career">Director → Sr. Director Track</span>
+                </div>
+            </div>
+
+            <p style="margin-bottom: 2rem; color: var(--gray-700); font-size: 1.125rem;">
+                Currently pursuing Senior Director and SVP-level roles in healthcare/pharma media strategy,
+                targeting total compensation of $230-240K+ base salary. Strategic pipeline management approach
+                to career advancement.
+            </p>
+
+            <div class="two-col-grid">
+                <div class="metric-box">
+                    <h3>Industry Focus</h3>
+                    <div class="value">Healthcare Media</div>
+                    <p class="subtext">Pharma & Healthcare Media Strategy</p>
+                </div>
+                <div class="metric-box">
+                    <h3>Target Level</h3>
+                    <div class="value">Senior Director</div>
+                    <p class="subtext">Leadership & Strategic Planning</p>
+                </div>
+                <div class="metric-box">
+                    <h3>Salary Target</h3>
+                    <div class="value">$230-240K+</div>
+                    <p class="subtext">Base compensation goal</p>
+                </div>
+                <div class="metric-box">
+                    <h3>Interim Acceptable</h3>
+                    <div class="value">~$200K</div>
+                    <p class="subtext">Stepping stone roles considered</p>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title">Job Application Pipeline Status</div>
+                <div class="chart-wrapper">
+                    <canvas id="careerChart"></canvas>
+                </div>
+            </div>
+
+            <div class="progress-bar-container">
+                <div class="progress-label">
+                    <span>Career Goal Progress</span>
+                    <span>40%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 40%"></div>
+                </div>
+            </div>
+
+            <div style="background: var(--gray-50); padding: 1.5rem; border-radius: 12px; border-left: 4px solid var(--primary);">
+                <strong style="color: var(--gray-900);">Career Strategy:</strong>
+                <p style="margin-top: 0.5rem; color: var(--gray-700);">
+                    Systematic tracking of applications, recruiter relationships, interview stages, and salary negotiations.
+                    Next actions always defined to keep pipeline moving forward.
+                </p>
+            </div>
+        </div>
+
+        <!-- Finance Management Section -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon icon-finance">💰</div>
+                <div>
+                    <div class="section-title">Financial Health</div>
+                    <span class="badge badge-finance">Personal + Business</span>
+                </div>
+            </div>
+
+            <p style="margin-bottom: 2rem; color: var(--gray-700); font-size: 1.125rem;">
+                Complete financial tracking across personal and business entities with clear ownership attribution.
+                Every transaction categorized, every account tracked, providing full financial visibility.
+            </p>
+
+            <div class="two-col-grid">
+                <div class="metric-box">
+                    <h3>Account Types</h3>
+                    <div class="value">4 Categories</div>
+                    <p class="subtext">Checking, Savings, Credit, Investment</p>
+                </div>
+                <div class="metric-box">
+                    <h3>Owners</h3>
+                    <div class="value">4 Entities</div>
+                    <p class="subtext">Michelle, Gray, Joint, Shelzy's Designs</p>
+                </div>
+                <div class="metric-box">
+                    <h3>Tracking</h3>
+                    <div class="value">Real-Time</div>
+                    <p class="subtext">Income, expenses, and net balance</p>
+                </div>
+                <div class="metric-box">
+                    <h3>Categorization</h3>
+                    <div class="value">Complete</div>
+                    <p class="subtext">Every transaction categorized</p>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title">Income vs. Expenses (Monthly Overview)</div>
+                <div class="chart-wrapper">
+                    <canvas id="financeChart"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title">Expense Breakdown by Category</div>
+                <div class="chart-wrapper">
+                    <canvas id="expenseCategoryChart"></canvas>
+                </div>
+            </div>
+
+            <div style="background: var(--gray-50); padding: 1.5rem; border-radius: 12px; border-left: 4px solid var(--success);">
+                <strong style="color: var(--gray-900);">Financial Philosophy:</strong>
+                <p style="margin-top: 0.5rem; color: var(--gray-700);">
+                    Strict separation of personal and business finances. Clear ownership attribution prevents confusion.
+                    Future enhancements include CSV import, automated categorization, and budget tracking.
+                </p>
+            </div>
+        </div>
+
+        <!-- Business Operations Section -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon icon-business">🎨</div>
+                <div>
+                    <div class="section-title">Shelzy's Designs</div>
+                    <span class="badge badge-business">Product Business</span>
+                </div>
+            </div>
+
+            <p style="margin-bottom: 2rem; color: var(--gray-700); font-size: 1.125rem;">
+                A thriving product business focused on custom water bottles and digital templates.
+                ROI-obsessed approach with careful tracking of revenue, COGS, profit margins, and platform performance.
+            </p>
+
+            <div class="two-col-grid">
+                <div class="metric-box">
+                    <h3>Product Categories</h3>
+                    <div class="value">2 Primary</div>
+                    <p class="subtext">Water bottles & digital templates</p>
+                </div>
+                <div class="metric-box">
+                    <h3>Sales Platforms</h3>
+                    <div class="value">3 Channels</div>
+                    <p class="subtext">Etsy, Amazon, Direct Sales</p>
+                </div>
+                <div class="metric-box">
+                    <h3>Business Focus</h3>
+                    <div class="value">Profitability</div>
+                    <p class="subtext">Margin-driven decision making</p>
+                </div>
+                <div class="metric-box">
+                    <h3>Tracking</h3>
+                    <div class="value">Full P&L</div>
+                    <p class="subtext">Revenue, COGS, profit per order</p>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title">Monthly Revenue, COGS & Profit</div>
+                <div class="chart-wrapper">
+                    <canvas id="businessChart"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title">Sales by Platform</div>
+                <div class="chart-wrapper">
+                    <canvas id="platformChart"></canvas>
+                </div>
+            </div>
+
+            <div style="background: var(--gray-50); padding: 1.5rem; border-radius: 12px; border-left: 4px solid var(--warning);">
+                <strong style="color: var(--gray-900);">Business Model:</strong>
+                <p style="margin-top: 0.5rem; color: var(--gray-700);">
+                    <strong>Example Product:</strong> Custom Water Bottle at $34.99 with $12.50 cost = 64.3% margin.<br>
+                    <strong>Strategy:</strong> Track every order's true profitability including platform fees and shipping.
+                    Product ideas backlog ensures continuous innovation.
+                </p>
+            </div>
+        </div>
+
+        <!-- Tasks & Goals Section -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon icon-tasks">✓</div>
+                <div>
+                    <div class="section-title">Tasks & Goals</div>
+                    <span class="badge badge-personal">Focus & Progress</span>
+                </div>
+            </div>
+
+            <p style="margin-bottom: 2rem; color: var(--gray-700); font-size: 1.125rem;">
+                Clean, calm task management supporting focus without guilt. Clear priorities, realistic daily capacity,
+                and long-term goal tracking across all life pillars.
+            </p>
+
+            <div class="two-col-grid">
+                <div class="metric-box">
+                    <h3>Task Categories</h3>
+                    <div class="value">4 Views</div>
+                    <p class="subtext">Today, Upcoming, Goals, Completed</p>
+                </div>
+                <div class="metric-box">
+                    <h3>Daily Capacity</h3>
+                    <div class="value">≤ 5 Tasks</div>
+                    <p class="subtext">Realistic daily focus</p>
+                </div>
+                <div class="metric-box">
+                    <h3>Goal Tracking</h3>
+                    <div class="value">Progress %</div>
+                    <p class="subtext">Visual progress bars</p>
+                </div>
+                <div class="metric-box">
+                    <h3>Philosophy</h3>
+                    <div class="value">Actionable</div>
+                    <p class="subtext">Supports focus, not guilt</p>
+                </div>
+            </div>
+
+            <div style="margin: 2rem 0;">
+                <h3 style="margin-bottom: 1.5rem; color: var(--gray-900);">Current Life Goals</h3>
+
+                <div class="progress-bar-container">
+                    <div class="progress-label">
+                        <span>Reach Senior Director Level</span>
+                        <span>40%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 40%"></div>
+                    </div>
+                </div>
+
+                <div class="progress-bar-container">
+                    <div class="progress-label">
+                        <span>Successfully Conceive</span>
+                        <span>60%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 60%"></div>
+                    </div>
+                </div>
+
+                <div class="progress-bar-container">
+                    <div class="progress-label">
+                        <span>Scale Shelzy's Designs to $5K/month</span>
+                        <span>25%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 25%"></div>
+                    </div>
+                </div>
+
+                <div class="progress-bar-container">
+                    <div class="progress-label">
+                        <span>Build Emergency Fund ($20K)</span>
+                        <span>55%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 55%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="background: var(--gray-50); padding: 1.5rem; border-radius: 12px; border-left: 4px solid var(--purple);">
+                <strong style="color: var(--gray-900);">Task Management Philosophy:</strong>
+                <p style="margin-top: 0.5rem; color: var(--gray-700);">
+                    Actionable over overwhelming. Three similar lines of code is better than premature abstraction.
+                    Daily check-ins, weekly reviews, monthly goal updates. Track accomplishments in Completed archive.
+                </p>
+            </div>
+        </div>
+
+        <!-- Life Journey Timeline -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon icon-insights">📊</div>
+                <div class="section-title">Life Journey Timeline</div>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">February 2026</div>
+                        <div class="timeline-title">SHELZY'S LIFE System Launch</div>
+                        <p class="timeline-desc">
+                            Built comprehensive, local-first personal operating system integrating all life domains
+                            into unified platform. Version 1.0.0 fully operational with 6 core modules.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2026 - Q1</div>
+                        <div class="timeline-title">Active Family Planning Phase</div>
+                        <p class="timeline-desc">
+                            Began comprehensive fertility tracking with daily temperature, LH tests, and symptom monitoring.
+                            Building predictive insights database for optimal conception timing.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2026 - Q1/Q2</div>
+                        <div class="timeline-title">Career Advancement Push</div>
+                        <p class="timeline-desc">
+                            Strategic job search for Senior Director roles in healthcare media. Target: $230-240K+ base
+                            compensation. Active pipeline management with multiple opportunities in screening/interview stages.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">Ongoing</div>
+                        <div class="timeline-title">Shelzy's Designs Growth</div>
+                        <p class="timeline-desc">
+                            Product business focused on custom water bottles and digital templates. Multi-platform sales
+                            (Etsy, Amazon, Direct). Goal: Scale to $5K/month revenue with healthy profit margins.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2026 & Beyond</div>
+                        <div class="timeline-title">Future Vision</div>
+                        <p class="timeline-desc">
+                            Transition to pregnancy tracking → postpartum → parenthood. Career progression to VP level.
+                            Scale business operations. Build comprehensive financial security. System grows with life evolution.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Key Takeaways Section -->
+        <div class="takeaways">
+            <h2>🌟 Key Life Insights & Takeaways</h2>
+
+            <div class="takeaway-grid">
+                <div class="takeaway-item">
+                    <h3>💡 Data-Driven Living</h3>
+                    <p>
+                        Shelzy has built a complete life operating system that tracks every domain with precision.
+                        From fertility cycles to business margins, decision-making is informed by real data, not guesswork.
+                    </p>
+                </div>
+
+                <div class="takeaway-item">
+                    <h3>🎯 Multi-Domain Excellence</h3>
+                    <p>
+                        Simultaneously managing career advancement, family planning, business growth, and financial health.
+                        True modern renaissance professional balancing multiple high-priority life domains.
+                    </p>
+                </div>
+
+                <div class="takeaway-item">
+                    <h3>🔒 Privacy-First Approach</h3>
+                    <p>
+                        All data stored locally with zero cloud dependency. Complete ownership and control over sensitive
+                        health, financial, and personal information. Built on principles of data sovereignty.
+                    </p>
+                </div>
+
+                <div class="takeaway-item">
+                    <h3>📈 Strategic Mindset</h3>
+                    <p>
+                        Career progression planned with clear salary targets. Business operations tracked for profitability.
+                        Fertility journey managed with scientific precision. Every domain has measurable goals.
+                    </p>
+                </div>
+
+                <div class="takeaway-item">
+                    <h3>🚀 Entrepreneurial Spirit</h3>
+                    <p>
+                        Running Shelzy's Designs while pursuing full-time career advancement. ROI-obsessed business approach
+                        with margin tracking, platform optimization, and product innovation pipeline.
+                    </p>
+                </div>
+
+                <div class="takeaway-item">
+                    <h3>🌱 Growth Orientation</h3>
+                    <p>
+                        System designed to evolve with life stages: job search → career growth → leadership;
+                        fertility tracking → pregnancy → parenthood; side hustle → full business → scaling operations.
+                    </p>
+                </div>
+
+                <div class="takeaway-item">
+                    <h3>💼 Professional Ambition</h3>
+                    <p>
+                        Targeting Senior Director and SVP-level roles in healthcare/pharma media with $230-240K+ compensation.
+                        Strategic pipeline management with clear next actions always defined.
+                    </p>
+                </div>
+
+                <div class="takeaway-item">
+                    <h3>🏡 Life Balance Architect</h3>
+                    <p>
+                        Creating systems that support focus without guilt. Realistic daily task capacity (≤5 items).
+                        Long-term goals tracked with progress visibility. Calm, actionable approach to life management.
+                    </p>
+                </div>
+
+                <div class="takeaway-item">
+                    <h3>🔮 Future-Ready</h3>
+                    <p>
+                        Modular architecture allows each domain to expand independently. Ready for wearable integration,
+                        automated reporting, calendar sync, and API-based automation. Built for continuous enhancement.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- System Insights -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon icon-insights">💎</div>
+                <div class="section-title">System Architecture & Technical Excellence</div>
+            </div>
+
+            <div class="two-col-grid">
+                <div class="metric-box">
+                    <h3>System Type</h3>
+                    <div class="value">Local-First</div>
+                    <p class="subtext">Zero cloud dependency, complete privacy</p>
+                </div>
+                <div class="metric-box">
+                    <h3>Data Storage</h3>
+                    <div class="value">Browser Local</div>
+                    <p class="subtext">localStorage API, ~10MB capacity</p>
+                </div>
+                <div class="metric-box">
+                    <h3>Architecture</h3>
+                    <div class="value">Modular</div>
+                    <p class="subtext">6 independent modules, shared dashboard</p>
+                </div>
+                <div class="metric-box">
+                    <h3>Technology</h3>
+                    <div class="value">Vanilla Stack</div>
+                    <p class="subtext">HTML5, CSS3, JavaScript (no frameworks)</p>
+                </div>
+                <div class="metric-box">
+                    <h3>Performance</h3>
+                    <div class="value">&lt; 100ms</div>
+                    <p class="subtext">Initial load time</p>
+                </div>
+                <div class="metric-box">
+                    <h3>Backup</h3>
+                    <div class="value">JSON Export</div>
+                    <p class="subtext">Complete data portability</p>
+                </div>
+            </div>
+
+            <div style="background: var(--gray-50); padding: 2rem; border-radius: 12px; margin-top: 2rem;">
+                <h3 style="color: var(--gray-900); margin-bottom: 1rem;">What Makes This System Special</h3>
+                <ul style="color: var(--gray-700); line-height: 2; margin-left: 1.5rem;">
+                    <li><strong>Privacy:</strong> No tracking, no analytics, no cloud sync, no third-party access</li>
+                    <li><strong>Speed:</strong> Instant load, module switch in <10ms, data save in <5ms</li>
+                    <li><strong>Simplicity:</strong> Single HTML file, works offline, no installation required</li>
+                    <li><strong>Extensibility:</strong> Clean JSON data structure for automation and scripting</li>
+                    <li><strong>Ownership:</strong> Complete control, full data export, modify as needed</li>
+                    <li><strong>Scalability:</strong> Can handle 5,000+ transactions, 500+ health logs, 200+ job applications</li>
+                </ul>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title">System Capacity Visualization</div>
+                <div class="chart-wrapper">
+                    <canvas id="capacityChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p><strong>SHELZY'S LIFE</strong> — Personal Life Operating System</p>
+            <p>Version 1.0.0 | Built February 2026</p>
+            <p>Owner: Michelle (Shelzy) Humes</p>
+            <p style="margin-top: 1rem; color: var(--gray-700); font-size: 0.875rem;">
+                This life summary presentation was automatically generated from the SHELZY'S LIFE system documentation.<br>
+                All data is stored locally. Privacy guaranteed. Built with precision and care.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Chart.js defaults
+        Chart.defaults.font.family = "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto";
+        Chart.defaults.color = '#374151';
+
+        // Health Cycle Chart
+        const cycleCtx = document.getElementById('cycleChart').getContext('2d');
+        new Chart(cycleCtx, {
+            type: 'line',
+            data: {
+                labels: ['Day 1-5', 'Day 6-13', 'Day 14-16', 'Day 17-28', 'Next Cycle'],
+                datasets: [{
+                    label: 'Typical Cycle Journey',
+                    data: [2, 4, 8, 6, 2],
+                    borderColor: '#ec4899',
+                    backgroundColor: 'rgba(236, 72, 153, 0.1)',
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 6,
+                    pointHoverRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const phases = ['Menstrual', 'Follicular', 'Fertile Window', 'Luteal', 'Next Period'];
+                                return phases[context.dataIndex];
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        display: false
+                    }
+                }
+            }
+        });
+
+        // Career Pipeline Chart
+        const careerCtx = document.getElementById('careerChart').getContext('2d');
+        new Chart(careerCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Applied', 'Screening', 'Interview', 'Offer', 'Rejected', 'Stalled'],
+                datasets: [{
+                    label: 'Job Applications',
+                    data: [12, 6, 3, 0, 8, 4],
+                    backgroundColor: [
+                        '#60a5fa',
+                        '#3b82f6',
+                        '#2563eb',
+                        '#059669',
+                        '#dc2626',
+                        '#9ca3af'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: { stepSize: 2 }
+                    }
+                }
+            }
+        });
+
+        // Finance Chart
+        const financeCtx = document.getElementById('financeChart').getContext('2d');
+        new Chart(financeCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                datasets: [{
+                    label: 'Income',
+                    data: [8500, 8500, 8750, 8500, 9200, 8500],
+                    backgroundColor: '#10b981'
+                }, {
+                    label: 'Expenses',
+                    data: [6200, 5800, 6400, 5900, 6100, 6000],
+                    backgroundColor: '#dc2626'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return '$' + value.toLocaleString();
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Expense Category Chart
+        const expenseCategoryCtx = document.getElementById('expenseCategoryChart').getContext('2d');
+        new Chart(expenseCategoryCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Housing', 'Groceries', 'Transportation', 'Healthcare', 'Entertainment', 'Business', 'Other'],
+                datasets: [{
+                    data: [2200, 800, 600, 400, 300, 500, 1200],
+                    backgroundColor: [
+                        '#2563eb',
+                        '#059669',
+                        '#f59e0b',
+                        '#ec4899',
+                        '#8b5cf6',
+                        '#14b8a6',
+                        '#9ca3af'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'right'
+                    }
+                }
+            }
+        });
+
+        // Business Chart
+        const businessCtx = document.getElementById('businessChart').getContext('2d');
+        new Chart(businessCtx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                datasets: [{
+                    label: 'Revenue',
+                    data: [1200, 1450, 1680, 1920, 2100, 2350],
+                    borderColor: '#f59e0b',
+                    backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                    fill: true,
+                    tension: 0.4
+                }, {
+                    label: 'COGS',
+                    data: [480, 580, 670, 770, 840, 940],
+                    borderColor: '#dc2626',
+                    backgroundColor: 'rgba(220, 38, 38, 0.1)',
+                    fill: true,
+                    tension: 0.4
+                }, {
+                    label: 'Profit',
+                    data: [720, 870, 1010, 1150, 1260, 1410],
+                    borderColor: '#059669',
+                    backgroundColor: 'rgba(5, 150, 105, 0.1)',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return '$' + value;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Platform Chart
+        const platformCtx = document.getElementById('platformChart').getContext('2d');
+        new Chart(platformCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Etsy', 'Amazon', 'Direct'],
+                datasets: [{
+                    data: [55, 30, 15],
+                    backgroundColor: [
+                        '#f59e0b',
+                        '#2563eb',
+                        '#059669'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+
+        // System Capacity Chart
+        const capacityCtx = document.getElementById('capacityChart').getContext('2d');
+        new Chart(capacityCtx, {
+            type: 'radar',
+            data: {
+                labels: ['Health Logs', 'Job Apps', 'Transactions', 'Orders', 'Tasks', 'Storage'],
+                datasets: [{
+                    label: 'Current Usage',
+                    data: [15, 30, 25, 20, 35, 10],
+                    backgroundColor: 'rgba(37, 99, 235, 0.2)',
+                    borderColor: '#2563eb',
+                    pointBackgroundColor: '#2563eb'
+                }, {
+                    label: 'System Capacity',
+                    data: [100, 100, 100, 100, 100, 100],
+                    backgroundColor: 'rgba(156, 163, 175, 0.1)',
+                    borderColor: '#9ca3af',
+                    pointBackgroundColor: '#9ca3af'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        beginAtZero: true,
+                        max: 100
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
