@@ -1,0 +1,2617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHELZY'S LIFE — Personal Life OS</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --success: #059669;
+            --warning: #d97706;
+            --danger: #dc2626;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-400: #9ca3af;
+            --gray-500: #6b7280;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-800: #1f2937;
+            --gray-900: #111827;
+            --fertile: #10b981;
+            --luteal: #f59e0b;
+            --follicular: #8b5cf6;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--gray-50);
+            color: var(--gray-900);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: white;
+            border-bottom: 1px solid var(--gray-200);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            letter-spacing: -0.5px;
+        }
+
+        .nav {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            padding: 0.5rem 1rem;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--gray-600);
+            transition: all 0.2s;
+        }
+
+        .nav-btn:hover {
+            background: var(--gray-100);
+            color: var(--gray-900);
+        }
+
+        .nav-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .module {
+            display: none;
+        }
+
+        .module.active {
+            display: block;
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--gray-200);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--gray-900);
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+
+        .btn-secondary {
+            background: var(--gray-200);
+            color: var(--gray-700);
+        }
+
+        .btn-secondary:hover {
+            background: var(--gray-300);
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+        }
+
+        .btn-sm {
+            padding: 0.25rem 0.75rem;
+            font-size: 0.75rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--gray-700);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            width: 100%;
+            padding: 0.5rem 0.75rem;
+            border: 1px solid var(--gray-300);
+            border-radius: 6px;
+            font-size: 0.875rem;
+            font-family: inherit;
+            transition: border-color 0.2s;
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.875rem;
+        }
+
+        .table th {
+            text-align: left;
+            padding: 0.75rem;
+            background: var(--gray-50);
+            border-bottom: 2px solid var(--gray-200);
+            font-weight: 600;
+            color: var(--gray-700);
+        }
+
+        .table td {
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .table tbody tr:hover {
+            background: var(--gray-50);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .badge-follicular { background: #ede9fe; color: #6b21a8; }
+        .badge-fertile { background: #d1fae5; color: #065f46; }
+        .badge-luteal { background: #fef3c7; color: #92400e; }
+        .badge-implantation { background: #dbeafe; color: #1e40af; }
+        .badge-pregnant { background: #fce7f3; color: #9f1239; }
+
+        .badge-applied { background: var(--gray-100); color: var(--gray-700); }
+        .badge-screening { background: #dbeafe; color: #1e40af; }
+        .badge-interview { background: #fef3c7; color: #92400e; }
+        .badge-offer { background: #d1fae5; color: #065f46; }
+        .badge-rejected { background: #fee2e2; color: #991b1b; }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.25rem;
+            border-radius: 8px;
+            border: 1px solid var(--gray-200);
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--gray-500);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--gray-900);
+        }
+
+        .stat-subtitle {
+            font-size: 0.875rem;
+            color: var(--gray-600);
+            margin-top: 0.25rem;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-footer {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            margin-top: 1.5rem;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--gray-500);
+        }
+
+        .empty-state-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            border-bottom: 2px solid var(--gray-200);
+            margin-bottom: 1.5rem;
+        }
+
+        .tab {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--gray-600);
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+            transition: all 0.2s;
+        }
+
+        .tab:hover {
+            color: var(--gray-900);
+        }
+
+        .tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        .alert {
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+        }
+
+        .alert-info {
+            background: #dbeafe;
+            color: #1e40af;
+            border: 1px solid #93c5fd;
+        }
+
+        .alert-success {
+            background: #d1fae5;
+            color: #065f46;
+            border: 1px solid #6ee7b7;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: var(--gray-200);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .icon-btn {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0.25rem;
+            color: var(--gray-500);
+            font-size: 1rem;
+        }
+
+        .icon-btn:hover {
+            color: var(--gray-900);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .nav {
+                width: 100%;
+                justify-content: flex-start;
+            }
+
+            .stat-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">SHELZY'S LIFE</div>
+            <nav class="nav">
+                <button class="nav-btn active" onclick="app.switchModule('dashboard')">Dashboard</button>
+                <button class="nav-btn" onclick="app.switchModule('health')">Health & Fertility</button>
+                <button class="nav-btn" onclick="app.switchModule('career')">Career</button>
+                <button class="nav-btn" onclick="app.switchModule('finance')">Finance</button>
+                <button class="nav-btn" onclick="app.switchModule('business')">Shelzy's Designs</button>
+                <button class="nav-btn" onclick="app.switchModule('tasks')">Tasks & Goals</button>
+                <button class="nav-btn" onclick="app.switchModule('settings')">Settings</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- DASHBOARD MODULE -->
+        <div id="dashboard" class="module active">
+            <div class="stat-grid">
+                <div class="stat-card">
+                    <div class="stat-label">Current Phase</div>
+                    <div class="stat-value" id="dashboard-phase">—</div>
+                    <div class="stat-subtitle" id="dashboard-phase-detail">Loading...</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Active Job Applications</div>
+                    <div class="stat-value" id="dashboard-jobs">0</div>
+                    <div class="stat-subtitle" id="dashboard-jobs-detail">No active applications</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Business Revenue (MTD)</div>
+                    <div class="stat-value" id="dashboard-revenue">$0</div>
+                    <div class="stat-subtitle" id="dashboard-revenue-detail">Current month</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Active Tasks</div>
+                    <div class="stat-value" id="dashboard-tasks">0</div>
+                    <div class="stat-subtitle" id="dashboard-tasks-detail">No pending tasks</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Quick Actions</h2>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                    <button class="btn btn-primary" onclick="app.switchModule('health'); health.showAddCycleData()">
+                        + Log Cycle Data
+                    </button>
+                    <button class="btn btn-primary" onclick="app.switchModule('career'); career.showAddJob()">
+                        + Add Job Application
+                    </button>
+                    <button class="btn btn-primary" onclick="app.switchModule('finance'); finance.showAddTransaction()">
+                        + Add Transaction
+                    </button>
+                    <button class="btn btn-primary" onclick="app.switchModule('tasks'); tasks.showAddTask()">
+                        + Add Task
+                    </button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Recent Activity</h2>
+                </div>
+                <div id="dashboard-activity">
+                    <div class="empty-state">
+                        <div class="empty-state-icon">📊</div>
+                        <p>Activity log will appear here as you use the system</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- HEALTH & FERTILITY MODULE -->
+        <div id="health" class="module">
+            <div class="tabs">
+                <button class="tab active" onclick="health.switchTab('overview')">Overview</button>
+                <button class="tab" onclick="health.switchTab('log')">Daily Log</button>
+                <button class="tab" onclick="health.switchTab('cycles')">Cycle History</button>
+                <button class="tab" onclick="health.switchTab('insights')">Insights</button>
+            </div>
+
+            <div id="health-overview" class="health-tab">
+                <div class="stat-grid">
+                    <div class="stat-card">
+                        <div class="stat-label">Current Phase</div>
+                        <div class="stat-value" id="health-current-phase">—</div>
+                        <div class="stat-subtitle" id="health-phase-day">—</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Cycle Day</div>
+                        <div class="stat-value" id="health-cycle-day">—</div>
+                        <div class="stat-subtitle" id="health-cycle-length">—</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">DPO</div>
+                        <div class="stat-value" id="health-dpo">—</div>
+                        <div class="stat-subtitle">Days Past Ovulation</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Next Expected Period</div>
+                        <div class="stat-value" id="health-next-period">—</div>
+                        <div class="stat-subtitle" id="health-next-period-days">—</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Current Cycle Status</h3>
+                        <button class="btn btn-primary" onclick="health.showAddCycleData()">+ Log Data</button>
+                    </div>
+                    <div id="health-status-content">
+                        <div class="alert alert-info">
+                            Start tracking by logging your cycle data. The system will automatically calculate your fertile window, ovulation, and provide predictive insights.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="health-log" class="health-tab" style="display:none;">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Daily Cycle Log</h3>
+                        <button class="btn btn-primary" onclick="health.showAddCycleData()">+ Add Entry</button>
+                    </div>
+                    <table class="table" id="health-log-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Cycle Day</th>
+                                <th>Phase</th>
+                                <th>Temperature</th>
+                                <th>LH Test</th>
+                                <th>Symptoms</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="health-log-body">
+                            <tr>
+                                <td colspan="7" class="empty-state">No entries yet. Add your first cycle data above.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="health-cycles" class="health-tab" style="display:none;">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Cycle History</h3>
+                        <button class="btn btn-primary" onclick="health.showAddCycle()">+ New Cycle</button>
+                    </div>
+                    <table class="table" id="health-cycles-table">
+                        <thead>
+                            <tr>
+                                <th>Cycle #</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Length</th>
+                                <th>Ovulation Day</th>
+                                <th>Luteal Phase</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="health-cycles-body">
+                            <tr>
+                                <td colspan="7" class="empty-state">No cycles tracked yet. Add your first cycle to begin.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="health-insights" class="health-tab" style="display:none;">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Fertility Insights</h3>
+                    </div>
+                    <div id="health-insights-content">
+                        <div class="empty-state">
+                            <div class="empty-state-icon">📈</div>
+                            <p>Track at least 3 cycles to see insights and patterns</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CAREER MODULE -->
+        <div id="career" class="module">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Job Application Pipeline</h2>
+                    <button class="btn btn-primary" onclick="career.showAddJob()">+ Add Application</button>
+                </div>
+
+                <div class="stat-grid">
+                    <div class="stat-card">
+                        <div class="stat-label">Total Applications</div>
+                        <div class="stat-value" id="career-total">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">In Progress</div>
+                        <div class="stat-value" id="career-active">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Interviews</div>
+                        <div class="stat-value" id="career-interviews">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Offers</div>
+                        <div class="stat-value" id="career-offers">0</div>
+                    </div>
+                </div>
+
+                <table class="table" id="career-table">
+                    <thead>
+                        <tr>
+                            <th>Company</th>
+                            <th>Role</th>
+                            <th>Status</th>
+                            <th>Salary Range</th>
+                            <th>Applied Date</th>
+                            <th>Next Action</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="career-body">
+                        <tr>
+                            <td colspan="7" class="empty-state">No job applications yet. Add your first application above.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- FINANCE MODULE -->
+        <div id="finance" class="module">
+            <div class="tabs">
+                <button class="tab active" onclick="finance.switchTab('overview')">Overview</button>
+                <button class="tab" onclick="finance.switchTab('transactions')">Transactions</button>
+                <button class="tab" onclick="finance.switchTab('accounts')">Accounts</button>
+                <button class="tab" onclick="finance.switchTab('reports')">Reports</button>
+            </div>
+
+            <div id="finance-overview" class="finance-tab">
+                <div class="stat-grid">
+                    <div class="stat-card">
+                        <div class="stat-label">Total Balance</div>
+                        <div class="stat-value" id="finance-total-balance">$0</div>
+                        <div class="stat-subtitle">Across all accounts</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Income (MTD)</div>
+                        <div class="stat-value" id="finance-income-mtd">$0</div>
+                        <div class="stat-subtitle">Current month</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Expenses (MTD)</div>
+                        <div class="stat-value" id="finance-expenses-mtd">$0</div>
+                        <div class="stat-subtitle">Current month</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Net (MTD)</div>
+                        <div class="stat-value" id="finance-net-mtd">$0</div>
+                        <div class="stat-subtitle">Income - Expenses</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Quick Add</h3>
+                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                        <button class="btn btn-primary" onclick="finance.showAddTransaction('income')">+ Income</button>
+                        <button class="btn btn-primary" onclick="finance.showAddTransaction('expense')">+ Expense</button>
+                        <button class="btn btn-secondary" onclick="finance.showAddAccount()">+ Account</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="finance-transactions" class="finance-tab" style="display:none;">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Transactions</h3>
+                        <button class="btn btn-primary" onclick="finance.showAddTransaction()">+ Add Transaction</button>
+                    </div>
+                    <table class="table" id="finance-transactions-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Description</th>
+                                <th>Category</th>
+                                <th>Owner</th>
+                                <th>Type</th>
+                                <th>Amount</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="finance-transactions-body">
+                            <tr>
+                                <td colspan="7" class="empty-state">No transactions yet. Add your first transaction above.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="finance-accounts" class="finance-tab" style="display:none;">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Accounts</h3>
+                        <button class="btn btn-primary" onclick="finance.showAddAccount()">+ Add Account</button>
+                    </div>
+                    <table class="table" id="finance-accounts-table">
+                        <thead>
+                            <tr>
+                                <th>Account Name</th>
+                                <th>Type</th>
+                                <th>Owner</th>
+                                <th>Balance</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="finance-accounts-body">
+                            <tr>
+                                <td colspan="5" class="empty-state">No accounts yet. Add your first account above.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="finance-reports" class="finance-tab" style="display:none;">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Financial Reports</h3>
+                    </div>
+                    <div class="empty-state">
+                        <div class="empty-state-icon">📊</div>
+                        <p>Add transactions to generate reports</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BUSINESS MODULE -->
+        <div id="business" class="module">
+            <div class="tabs">
+                <button class="tab active" onclick="business.switchTab('dashboard')">Dashboard</button>
+                <button class="tab" onclick="business.switchTab('products')">Products</button>
+                <button class="tab" onclick="business.switchTab('orders')">Orders</button>
+                <button class="tab" onclick="business.switchTab('ideas')">Ideas</button>
+            </div>
+
+            <div id="business-dashboard" class="business-tab">
+                <div class="stat-grid">
+                    <div class="stat-card">
+                        <div class="stat-label">Revenue (MTD)</div>
+                        <div class="stat-value" id="business-revenue-mtd">$0</div>
+                        <div class="stat-subtitle">Current month</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">COGS (MTD)</div>
+                        <div class="stat-value" id="business-cogs-mtd">$0</div>
+                        <div class="stat-subtitle">Cost of goods sold</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Profit (MTD)</div>
+                        <div class="stat-value" id="business-profit-mtd">$0</div>
+                        <div class="stat-subtitle">Revenue - COGS</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Margin</div>
+                        <div class="stat-value" id="business-margin">0%</div>
+                        <div class="stat-subtitle">Profit margin</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Recent Orders</h3>
+                        <button class="btn btn-primary" onclick="business.showAddOrder()">+ Add Order</button>
+                    </div>
+                    <div id="business-recent-orders">
+                        <div class="empty-state">
+                            <p>No orders yet</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="business-products" class="business-tab" style="display:none;">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Products</h3>
+                        <button class="btn btn-primary" onclick="business.showAddProduct()">+ Add Product</button>
+                    </div>
+                    <table class="table" id="business-products-table">
+                        <thead>
+                            <tr>
+                                <th>SKU</th>
+                                <th>Name</th>
+                                <th>Category</th>
+                                <th>Price</th>
+                                <th>Cost</th>
+                                <th>Margin</th>
+                                <th>Stock</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="business-products-body">
+                            <tr>
+                                <td colspan="8" class="empty-state">No products yet. Add your first product above.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="business-orders" class="business-tab" style="display:none;">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Orders</h3>
+                        <button class="btn btn-primary" onclick="business.showAddOrder()">+ Add Order</button>
+                    </div>
+                    <table class="table" id="business-orders-table">
+                        <thead>
+                            <tr>
+                                <th>Order #</th>
+                                <th>Date</th>
+                                <th>Product</th>
+                                <th>Quantity</th>
+                                <th>Revenue</th>
+                                <th>Cost</th>
+                                <th>Profit</th>
+                                <th>Platform</th>
+                            </tr>
+                        </thead>
+                        <tbody id="business-orders-body">
+                            <tr>
+                                <td colspan="8" class="empty-state">No orders yet. Add your first order above.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="business-ideas" class="business-tab" style="display:none;">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Product Ideas</h3>
+                        <button class="btn btn-primary" onclick="business.showAddIdea()">+ Add Idea</button>
+                    </div>
+                    <div id="business-ideas-list">
+                        <div class="empty-state">
+                            <div class="empty-state-icon">💡</div>
+                            <p>No product ideas yet. Add your first idea above.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TASKS MODULE -->
+        <div id="tasks" class="module">
+            <div class="tabs">
+                <button class="tab active" onclick="tasks.switchTab('today')">Today</button>
+                <button class="tab" onclick="tasks.switchTab('upcoming')">Upcoming</button>
+                <button class="tab" onclick="tasks.switchTab('goals')">Goals</button>
+                <button class="tab" onclick="tasks.switchTab('completed')">Completed</button>
+            </div>
+
+            <div id="tasks-today" class="tasks-tab">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Today's Tasks</h3>
+                        <button class="btn btn-primary" onclick="tasks.showAddTask()">+ Add Task</button>
+                    </div>
+                    <div id="tasks-today-list">
+                        <div class="empty-state">
+                            <p>No tasks for today. Add a task to get started.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tasks-upcoming" class="tasks-tab" style="display:none;">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Upcoming Tasks</h3>
+                        <button class="btn btn-primary" onclick="tasks.showAddTask()">+ Add Task</button>
+                    </div>
+                    <div id="tasks-upcoming-list">
+                        <div class="empty-state">
+                            <p>No upcoming tasks</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tasks-goals" class="tasks-tab" style="display:none;">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Goals</h3>
+                        <button class="btn btn-primary" onclick="tasks.showAddGoal()">+ Add Goal</button>
+                    </div>
+                    <div id="tasks-goals-list">
+                        <div class="empty-state">
+                            <div class="empty-state-icon">🎯</div>
+                            <p>No goals set yet. Define your first goal above.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tasks-completed" class="tasks-tab" style="display:none;">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Completed Tasks</h3>
+                    </div>
+                    <div id="tasks-completed-list">
+                        <div class="empty-state">
+                            <p>No completed tasks yet</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SETTINGS MODULE -->
+        <div id="settings" class="module">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Profile</h2>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Name</label>
+                    <input type="text" class="form-input" value="Michelle (Shelzy)" readonly>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Date of Birth</label>
+                        <input type="date" class="form-input" value="1988-04-22" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Location</label>
+                        <input type="text" class="form-input" value="East Hampton, NY" readonly>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Data Management</h2>
+                </div>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <button class="btn btn-primary" onclick="app.exportData()">Export All Data</button>
+                    <button class="btn btn-secondary" onclick="app.importData()">Import Data</button>
+                    <button class="btn btn-secondary" onclick="app.clearAllData()">Clear All Data</button>
+                </div>
+                <div class="alert alert-info" style="margin-top: 1rem;">
+                    All data is stored locally in your browser. Export regularly to back up your data.
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">System Information</h2>
+                </div>
+                <table class="table">
+                    <tr>
+                        <td><strong>Version</strong></td>
+                        <td>1.0.0</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Build</strong></td>
+                        <td>Local-First Life OS</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Storage</strong></td>
+                        <td>Browser LocalStorage</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Last Updated</strong></td>
+                        <td id="settings-last-updated">—</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- MODALS -->
+    <div id="modal" class="modal">
+        <div class="modal-content" id="modal-content">
+            <!-- Dynamic modal content -->
+        </div>
+    </div>
+
+    <script>
+        // CORE APPLICATION
+        const app = {
+            currentModule: 'dashboard',
+
+            init() {
+                this.loadAllData();
+                this.updateDashboard();
+                health.init();
+                career.init();
+                finance.init();
+                business.init();
+                tasks.init();
+            },
+
+            switchModule(moduleName) {
+                document.querySelectorAll('.module').forEach(m => m.classList.remove('active'));
+                document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+
+                document.getElementById(moduleName).classList.add('active');
+                event.target.classList.add('active');
+
+                this.currentModule = moduleName;
+
+                // Refresh module data
+                if (moduleName === 'dashboard') this.updateDashboard();
+                else if (moduleName === 'health') health.refresh();
+                else if (moduleName === 'career') career.refresh();
+                else if (moduleName === 'finance') finance.refresh();
+                else if (moduleName === 'business') business.refresh();
+                else if (moduleName === 'tasks') tasks.refresh();
+            },
+
+            loadAllData() {
+                // Initialize default data structures if not exists
+                if (!localStorage.getItem('health-cycles')) {
+                    localStorage.setItem('health-cycles', JSON.stringify([]));
+                }
+                if (!localStorage.getItem('health-log')) {
+                    localStorage.setItem('health-log', JSON.stringify([]));
+                }
+                if (!localStorage.getItem('career-jobs')) {
+                    localStorage.setItem('career-jobs', JSON.stringify([]));
+                }
+                if (!localStorage.getItem('finance-accounts')) {
+                    localStorage.setItem('finance-accounts', JSON.stringify([]));
+                }
+                if (!localStorage.getItem('finance-transactions')) {
+                    localStorage.setItem('finance-transactions', JSON.stringify([]));
+                }
+                if (!localStorage.getItem('business-products')) {
+                    localStorage.setItem('business-products', JSON.stringify([]));
+                }
+                if (!localStorage.getItem('business-orders')) {
+                    localStorage.setItem('business-orders', JSON.stringify([]));
+                }
+                if (!localStorage.getItem('business-ideas')) {
+                    localStorage.setItem('business-ideas', JSON.stringify([]));
+                }
+                if (!localStorage.getItem('tasks-items')) {
+                    localStorage.setItem('tasks-items', JSON.stringify([]));
+                }
+                if (!localStorage.getItem('tasks-goals')) {
+                    localStorage.setItem('tasks-goals', JSON.stringify([]));
+                }
+            },
+
+            updateDashboard() {
+                // Update health status
+                const healthStatus = health.getCurrentStatus();
+                document.getElementById('dashboard-phase').textContent = healthStatus.phase || '—';
+                document.getElementById('dashboard-phase-detail').textContent = healthStatus.detail || 'No cycle data';
+
+                // Update job applications
+                const jobs = JSON.parse(localStorage.getItem('career-jobs') || '[]');
+                const activeJobs = jobs.filter(j => ['applied', 'screening', 'interview'].includes(j.status));
+                document.getElementById('dashboard-jobs').textContent = activeJobs.length;
+                document.getElementById('dashboard-jobs-detail').textContent =
+                    activeJobs.length > 0 ? `${activeJobs.length} in progress` : 'No active applications';
+
+                // Update business revenue
+                const orders = JSON.parse(localStorage.getItem('business-orders') || '[]');
+                const now = new Date();
+                const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
+                const mtdOrders = orders.filter(o => new Date(o.date) >= monthStart);
+                const revenue = mtdOrders.reduce((sum, o) => sum + (o.revenue || 0), 0);
+                document.getElementById('dashboard-revenue').textContent = '$' + revenue.toFixed(0);
+                document.getElementById('dashboard-revenue-detail').textContent = `${mtdOrders.length} orders MTD`;
+
+                // Update tasks
+                const taskItems = JSON.parse(localStorage.getItem('tasks-items') || '[]');
+                const activeTasks = taskItems.filter(t => !t.completed);
+                document.getElementById('dashboard-tasks').textContent = activeTasks.length;
+                document.getElementById('dashboard-tasks-detail').textContent =
+                    activeTasks.length > 0 ? `${activeTasks.length} pending` : 'No pending tasks';
+            },
+
+            showModal(content) {
+                document.getElementById('modal-content').innerHTML = content;
+                document.getElementById('modal').classList.add('active');
+            },
+
+            hideModal() {
+                document.getElementById('modal').classList.remove('active');
+            },
+
+            exportData() {
+                const data = {
+                    version: '1.0.0',
+                    exportDate: new Date().toISOString(),
+                    health: {
+                        cycles: JSON.parse(localStorage.getItem('health-cycles') || '[]'),
+                        log: JSON.parse(localStorage.getItem('health-log') || '[]')
+                    },
+                    career: {
+                        jobs: JSON.parse(localStorage.getItem('career-jobs') || '[]')
+                    },
+                    finance: {
+                        accounts: JSON.parse(localStorage.getItem('finance-accounts') || '[]'),
+                        transactions: JSON.parse(localStorage.getItem('finance-transactions') || '[]')
+                    },
+                    business: {
+                        products: JSON.parse(localStorage.getItem('business-products') || '[]'),
+                        orders: JSON.parse(localStorage.getItem('business-orders') || '[]'),
+                        ideas: JSON.parse(localStorage.getItem('business-ideas') || '[]')
+                    },
+                    tasks: {
+                        items: JSON.parse(localStorage.getItem('tasks-items') || '[]'),
+                        goals: JSON.parse(localStorage.getItem('tasks-goals') || '[]')
+                    }
+                };
+
+                const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `shelzys-life-backup-${new Date().toISOString().split('T')[0]}.json`;
+                a.click();
+                URL.revokeObjectURL(url);
+
+                alert('Data exported successfully!');
+            },
+
+            importData() {
+                const input = document.createElement('input');
+                input.type = 'file';
+                input.accept = '.json';
+                input.onchange = (e) => {
+                    const file = e.target.files[0];
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                        try {
+                            const data = JSON.parse(event.target.result);
+
+                            // Import all data
+                            if (data.health) {
+                                localStorage.setItem('health-cycles', JSON.stringify(data.health.cycles || []));
+                                localStorage.setItem('health-log', JSON.stringify(data.health.log || []));
+                            }
+                            if (data.career) {
+                                localStorage.setItem('career-jobs', JSON.stringify(data.career.jobs || []));
+                            }
+                            if (data.finance) {
+                                localStorage.setItem('finance-accounts', JSON.stringify(data.finance.accounts || []));
+                                localStorage.setItem('finance-transactions', JSON.stringify(data.finance.transactions || []));
+                            }
+                            if (data.business) {
+                                localStorage.setItem('business-products', JSON.stringify(data.business.products || []));
+                                localStorage.setItem('business-orders', JSON.stringify(data.business.orders || []));
+                                localStorage.setItem('business-ideas', JSON.stringify(data.business.ideas || []));
+                            }
+                            if (data.tasks) {
+                                localStorage.setItem('tasks-items', JSON.stringify(data.tasks.items || []));
+                                localStorage.setItem('tasks-goals', JSON.stringify(data.tasks.goals || []));
+                            }
+
+                            alert('Data imported successfully!');
+                            location.reload();
+                        } catch (err) {
+                            alert('Error importing data: ' + err.message);
+                        }
+                    };
+                    reader.readAsText(file);
+                };
+                input.click();
+            },
+
+            clearAllData() {
+                if (confirm('Are you sure you want to clear ALL data? This cannot be undone. Consider exporting first.')) {
+                    if (confirm('Really clear everything? This is permanent.')) {
+                        localStorage.clear();
+                        location.reload();
+                    }
+                }
+            }
+        };
+
+        // HEALTH & FERTILITY MODULE
+        const health = {
+            init() {
+                this.refresh();
+            },
+
+            switchTab(tabName) {
+                document.querySelectorAll('#health .tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.health-tab').forEach(t => t.style.display = 'none');
+
+                event.target.classList.add('active');
+                document.getElementById('health-' + tabName).style.display = 'block';
+            },
+
+            refresh() {
+                this.updateOverview();
+                this.updateLog();
+                this.updateCycles();
+                this.updateInsights();
+            },
+
+            getCurrentStatus() {
+                const cycles = JSON.parse(localStorage.getItem('health-cycles') || '[]');
+                const log = JSON.parse(localStorage.getItem('health-log') || '[]');
+
+                if (cycles.length === 0) {
+                    return { phase: '—', detail: 'No cycle data' };
+                }
+
+                const currentCycle = cycles[cycles.length - 1];
+                const today = new Date();
+                const cycleStart = new Date(currentCycle.startDate);
+                const cycleDay = Math.floor((today - cycleStart) / (1000 * 60 * 60 * 24)) + 1;
+
+                // Determine phase
+                let phase = 'Follicular';
+                let detail = `Day ${cycleDay}`;
+
+                if (currentCycle.ovulationDay) {
+                    const dpo = cycleDay - currentCycle.ovulationDay;
+                    if (dpo >= 0) {
+                        phase = 'Luteal';
+                        detail = `${dpo} DPO`;
+                        if (dpo >= 6 && dpo <= 12) {
+                            phase = 'Implantation Window';
+                        }
+                    } else if (cycleDay >= currentCycle.ovulationDay - 5 && cycleDay <= currentCycle.ovulationDay) {
+                        phase = 'Fertile Window';
+                    }
+                }
+
+                return { phase, detail, cycleDay, cycle: currentCycle };
+            },
+
+            updateOverview() {
+                const status = this.getCurrentStatus();
+
+                document.getElementById('health-current-phase').textContent = status.phase;
+                document.getElementById('health-phase-day').textContent = status.detail;
+
+                if (status.cycle) {
+                    document.getElementById('health-cycle-day').textContent = status.cycleDay;
+                    document.getElementById('health-cycle-length').textContent =
+                        `Avg: ${this.getAverageCycleLength()} days`;
+
+                    const dpo = status.cycle.ovulationDay ? status.cycleDay - status.cycle.ovulationDay : 0;
+                    document.getElementById('health-dpo').textContent = dpo >= 0 ? dpo : '—';
+
+                    const avgLength = this.getAverageCycleLength();
+                    const nextPeriod = new Date(status.cycle.startDate);
+                    nextPeriod.setDate(nextPeriod.getDate() + avgLength);
+                    const daysUntil = Math.floor((nextPeriod - new Date()) / (1000 * 60 * 60 * 24));
+
+                    document.getElementById('health-next-period').textContent = nextPeriod.toLocaleDateString();
+                    document.getElementById('health-next-period-days').textContent =
+                        daysUntil > 0 ? `In ${daysUntil} days` : 'Expected';
+                }
+            },
+
+            updateLog() {
+                const log = JSON.parse(localStorage.getItem('health-log') || '[]');
+                const tbody = document.getElementById('health-log-body');
+
+                if (log.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="7" class="empty-state">No entries yet. Add your first cycle data above.</td></tr>';
+                    return;
+                }
+
+                tbody.innerHTML = log.slice().reverse().map(entry => `
+                    <tr>
+                        <td>${new Date(entry.date).toLocaleDateString()}</td>
+                        <td>Day ${entry.cycleDay || '—'}</td>
+                        <td><span class="badge badge-${entry.phase?.toLowerCase() || 'follicular'}">${entry.phase || '—'}</span></td>
+                        <td>${entry.temperature ? entry.temperature + '°F' : '—'}</td>
+                        <td>${entry.lhTest || '—'}</td>
+                        <td>${entry.symptoms || '—'}</td>
+                        <td>
+                            <button class="btn btn-sm btn-danger" onclick="health.deleteLogEntry('${entry.id}')">Delete</button>
+                        </td>
+                    </tr>
+                `).join('');
+            },
+
+            updateCycles() {
+                const cycles = JSON.parse(localStorage.getItem('health-cycles') || '[]');
+                const tbody = document.getElementById('health-cycles-body');
+
+                if (cycles.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="7" class="empty-state">No cycles tracked yet. Add your first cycle to begin.</td></tr>';
+                    return;
+                }
+
+                tbody.innerHTML = cycles.slice().reverse().map((cycle, idx) => {
+                    const cycleNum = cycles.length - idx;
+                    const length = cycle.length || '—';
+                    const lutealLength = cycle.ovulationDay ? length - cycle.ovulationDay : '—';
+
+                    return `
+                        <tr>
+                            <td>#${cycleNum}</td>
+                            <td>${new Date(cycle.startDate).toLocaleDateString()}</td>
+                            <td>${cycle.endDate ? new Date(cycle.endDate).toLocaleDateString() : 'Current'}</td>
+                            <td>${length} days</td>
+                            <td>Day ${cycle.ovulationDay || '—'}</td>
+                            <td>${lutealLength} days</td>
+                            <td><span class="badge badge-${cycle.status || 'follicular'}">${cycle.status || 'Active'}</span></td>
+                        </tr>
+                    `;
+                }).join('');
+            },
+
+            updateInsights() {
+                const cycles = JSON.parse(localStorage.getItem('health-cycles') || '[]');
+                const content = document.getElementById('health-insights-content');
+
+                if (cycles.length < 3) {
+                    content.innerHTML = `
+                        <div class="empty-state">
+                            <div class="empty-state-icon">📈</div>
+                            <p>Track at least 3 cycles to see insights and patterns</p>
+                            <p style="margin-top: 0.5rem; color: var(--gray-500);">Currently tracking: ${cycles.length} cycle(s)</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                const avgLength = this.getAverageCycleLength();
+                const avgOvulation = this.getAverageOvulationDay();
+                const avgLuteal = this.getAverageLutealLength();
+
+                content.innerHTML = `
+                    <div class="stat-grid">
+                        <div class="stat-card">
+                            <div class="stat-label">Average Cycle Length</div>
+                            <div class="stat-value">${avgLength}</div>
+                            <div class="stat-subtitle">days</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Average Ovulation Day</div>
+                            <div class="stat-value">Day ${avgOvulation}</div>
+                            <div class="stat-subtitle">of cycle</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Average Luteal Phase</div>
+                            <div class="stat-value">${avgLuteal}</div>
+                            <div class="stat-subtitle">days</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Cycles Tracked</div>
+                            <div class="stat-value">${cycles.length}</div>
+                            <div class="stat-subtitle">total</div>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-info">
+                        <strong>Predictive Window:</strong> Based on your data, your fertile window typically occurs around days ${avgOvulation - 5} to ${avgOvulation}, with ovulation on day ${avgOvulation}.
+                    </div>
+                `;
+            },
+
+            getAverageCycleLength() {
+                const cycles = JSON.parse(localStorage.getItem('health-cycles') || '[]');
+                const completed = cycles.filter(c => c.length);
+                if (completed.length === 0) return 28;
+                return Math.round(completed.reduce((sum, c) => sum + c.length, 0) / completed.length);
+            },
+
+            getAverageOvulationDay() {
+                const cycles = JSON.parse(localStorage.getItem('health-cycles') || '[]');
+                const withOvulation = cycles.filter(c => c.ovulationDay);
+                if (withOvulation.length === 0) return 14;
+                return Math.round(withOvulation.reduce((sum, c) => sum + c.ovulationDay, 0) / withOvulation.length);
+            },
+
+            getAverageLutealLength() {
+                const cycles = JSON.parse(localStorage.getItem('health-cycles') || '[]');
+                const withLuteal = cycles.filter(c => c.ovulationDay && c.length);
+                if (withLuteal.length === 0) return 14;
+                return Math.round(withLuteal.reduce((sum, c) => sum + (c.length - c.ovulationDay), 0) / withLuteal.length);
+            },
+
+            showAddCycleData() {
+                const modal = `
+                    <div class="modal-header">Add Cycle Data</div>
+                    <form onsubmit="health.saveCycleData(event)">
+                        <div class="form-group">
+                            <label class="form-label">Date</label>
+                            <input type="date" class="form-input" name="date" value="${new Date().toISOString().split('T')[0]}" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Temperature (°F)</label>
+                                <input type="number" step="0.1" class="form-input" name="temperature" placeholder="98.6">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">LH Test Result</label>
+                                <select class="form-select" name="lhTest">
+                                    <option value="">Not tested</option>
+                                    <option value="negative">Negative</option>
+                                    <option value="positive">Positive</option>
+                                    <option value="peak">Peak</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Symptoms</label>
+                            <input type="text" class="form-input" name="symptoms" placeholder="e.g., cramping, headache, fatigue">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Notes</label>
+                            <textarea class="form-textarea" name="notes" placeholder="Any additional notes"></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" onclick="app.hideModal()">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </form>
+                `;
+                app.showModal(modal);
+            },
+
+            saveCycleData(event) {
+                event.preventDefault();
+                const form = event.target;
+                const data = {
+                    id: Date.now().toString(),
+                    date: form.date.value,
+                    temperature: form.temperature.value || null,
+                    lhTest: form.lhTest.value || null,
+                    symptoms: form.symptoms.value || null,
+                    notes: form.notes.value || null,
+                    phase: this.getCurrentStatus().phase,
+                    cycleDay: this.getCurrentStatus().cycleDay
+                };
+
+                const log = JSON.parse(localStorage.getItem('health-log') || '[]');
+                log.push(data);
+                localStorage.setItem('health-log', JSON.stringify(log));
+
+                app.hideModal();
+                this.refresh();
+                app.updateDashboard();
+            },
+
+            showAddCycle() {
+                const modal = `
+                    <div class="modal-header">Start New Cycle</div>
+                    <form onsubmit="health.saveNewCycle(event)">
+                        <div class="form-group">
+                            <label class="form-label">Period Start Date</label>
+                            <input type="date" class="form-input" name="startDate" value="${new Date().toISOString().split('T')[0]}" required>
+                        </div>
+                        <div class="alert alert-info">
+                            This will start a new cycle. The system will track ovulation and phases automatically as you log data.
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" onclick="app.hideModal()">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Start Cycle</button>
+                        </div>
+                    </form>
+                `;
+                app.showModal(modal);
+            },
+
+            saveNewCycle(event) {
+                event.preventDefault();
+                const form = event.target;
+
+                const cycles = JSON.parse(localStorage.getItem('health-cycles') || '[]');
+
+                // Close previous cycle if exists
+                if (cycles.length > 0) {
+                    const prevCycle = cycles[cycles.length - 1];
+                    if (!prevCycle.endDate) {
+                        const start = new Date(prevCycle.startDate);
+                        const end = new Date(form.startDate.value);
+                        prevCycle.endDate = form.startDate.value;
+                        prevCycle.length = Math.floor((end - start) / (1000 * 60 * 60 * 24));
+                    }
+                }
+
+                const newCycle = {
+                    id: Date.now().toString(),
+                    startDate: form.startDate.value,
+                    endDate: null,
+                    length: null,
+                    ovulationDay: null,
+                    status: 'active'
+                };
+
+                cycles.push(newCycle);
+                localStorage.setItem('health-cycles', JSON.stringify(cycles));
+
+                app.hideModal();
+                this.refresh();
+                app.updateDashboard();
+            },
+
+            deleteLogEntry(id) {
+                if (confirm('Delete this entry?')) {
+                    const log = JSON.parse(localStorage.getItem('health-log') || '[]');
+                    const updated = log.filter(entry => entry.id !== id);
+                    localStorage.setItem('health-log', JSON.stringify(updated));
+                    this.refresh();
+                }
+            }
+        };
+
+        // CAREER MODULE
+        const career = {
+            init() {
+                this.refresh();
+            },
+
+            refresh() {
+                const jobs = JSON.parse(localStorage.getItem('career-jobs') || '[]');
+                const tbody = document.getElementById('career-body');
+
+                // Update stats
+                document.getElementById('career-total').textContent = jobs.length;
+                document.getElementById('career-active').textContent =
+                    jobs.filter(j => ['applied', 'screening'].includes(j.status)).length;
+                document.getElementById('career-interviews').textContent =
+                    jobs.filter(j => j.status === 'interview').length;
+                document.getElementById('career-offers').textContent =
+                    jobs.filter(j => j.status === 'offer').length;
+
+                if (jobs.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="7" class="empty-state">No job applications yet. Add your first application above.</td></tr>';
+                    return;
+                }
+
+                tbody.innerHTML = jobs.slice().reverse().map(job => `
+                    <tr>
+                        <td><strong>${job.company}</strong></td>
+                        <td>${job.role}</td>
+                        <td><span class="badge badge-${job.status}">${job.status}</span></td>
+                        <td>${job.salaryMin ? '$' + job.salaryMin + 'K - $' + job.salaryMax + 'K' : '—'}</td>
+                        <td>${new Date(job.appliedDate).toLocaleDateString()}</td>
+                        <td>${job.nextAction || '—'}</td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="icon-btn" onclick="career.editJob('${job.id}')" title="Edit">✏️</button>
+                                <button class="icon-btn" onclick="career.deleteJob('${job.id}')" title="Delete">🗑️</button>
+                            </div>
+                        </td>
+                    </tr>
+                `).join('');
+            },
+
+            showAddJob() {
+                const modal = `
+                    <div class="modal-header">Add Job Application</div>
+                    <form onsubmit="career.saveJob(event)">
+                        <div class="form-group">
+                            <label class="form-label">Company</label>
+                            <input type="text" class="form-input" name="company" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Role/Title</label>
+                            <input type="text" class="form-input" name="role" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Status</label>
+                                <select class="form-select" name="status" required>
+                                    <option value="applied">Applied</option>
+                                    <option value="screening">Screening</option>
+                                    <option value="interview">Interview</option>
+                                    <option value="offer">Offer</option>
+                                    <option value="rejected">Rejected</option>
+                                    <option value="stalled">Stalled</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Applied Date</label>
+                                <input type="date" class="form-input" name="appliedDate" value="${new Date().toISOString().split('T')[0]}" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Salary Min ($K)</label>
+                                <input type="number" class="form-input" name="salaryMin" placeholder="200">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Salary Max ($K)</label>
+                                <input type="number" class="form-input" name="salaryMax" placeholder="240">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Recruiter/Contact</label>
+                            <input type="text" class="form-input" name="recruiter">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Next Action</label>
+                            <input type="text" class="form-input" name="nextAction" placeholder="e.g., Follow up on Friday">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Notes</label>
+                            <textarea class="form-textarea" name="notes"></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" onclick="app.hideModal()">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </form>
+                `;
+                app.showModal(modal);
+            },
+
+            saveJob(event) {
+                event.preventDefault();
+                const form = event.target;
+
+                const job = {
+                    id: Date.now().toString(),
+                    company: form.company.value,
+                    role: form.role.value,
+                    status: form.status.value,
+                    appliedDate: form.appliedDate.value,
+                    salaryMin: form.salaryMin.value || null,
+                    salaryMax: form.salaryMax.value || null,
+                    recruiter: form.recruiter.value || null,
+                    nextAction: form.nextAction.value || null,
+                    notes: form.notes.value || null,
+                    createdAt: new Date().toISOString()
+                };
+
+                const jobs = JSON.parse(localStorage.getItem('career-jobs') || '[]');
+                jobs.push(job);
+                localStorage.setItem('career-jobs', JSON.stringify(jobs));
+
+                app.hideModal();
+                this.refresh();
+                app.updateDashboard();
+            },
+
+            deleteJob(id) {
+                if (confirm('Delete this job application?')) {
+                    const jobs = JSON.parse(localStorage.getItem('career-jobs') || '[]');
+                    const updated = jobs.filter(job => job.id !== id);
+                    localStorage.setItem('career-jobs', JSON.stringify(updated));
+                    this.refresh();
+                    app.updateDashboard();
+                }
+            },
+
+            editJob(id) {
+                // TODO: Implement edit functionality
+                alert('Edit functionality coming soon');
+            }
+        };
+
+        // FINANCE MODULE
+        const finance = {
+            init() {
+                this.refresh();
+            },
+
+            switchTab(tabName) {
+                document.querySelectorAll('#finance .tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.finance-tab').forEach(t => t.style.display = 'none');
+
+                event.target.classList.add('active');
+                document.getElementById('finance-' + tabName).style.display = 'block';
+            },
+
+            refresh() {
+                this.updateOverview();
+                this.updateTransactions();
+                this.updateAccounts();
+            },
+
+            updateOverview() {
+                const accounts = JSON.parse(localStorage.getItem('finance-accounts') || '[]');
+                const transactions = JSON.parse(localStorage.getItem('finance-transactions') || '[]');
+
+                const totalBalance = accounts.reduce((sum, acc) => sum + (parseFloat(acc.balance) || 0), 0);
+                document.getElementById('finance-total-balance').textContent = '$' + totalBalance.toFixed(2);
+
+                const now = new Date();
+                const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
+                const mtdTransactions = transactions.filter(t => new Date(t.date) >= monthStart);
+
+                const income = mtdTransactions
+                    .filter(t => t.type === 'income')
+                    .reduce((sum, t) => sum + parseFloat(t.amount), 0);
+                const expenses = mtdTransactions
+                    .filter(t => t.type === 'expense')
+                    .reduce((sum, t) => sum + parseFloat(t.amount), 0);
+
+                document.getElementById('finance-income-mtd').textContent = '$' + income.toFixed(2);
+                document.getElementById('finance-expenses-mtd').textContent = '$' + expenses.toFixed(2);
+                document.getElementById('finance-net-mtd').textContent = '$' + (income - expenses).toFixed(2);
+            },
+
+            updateTransactions() {
+                const transactions = JSON.parse(localStorage.getItem('finance-transactions') || '[]');
+                const tbody = document.getElementById('finance-transactions-body');
+
+                if (transactions.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="7" class="empty-state">No transactions yet. Add your first transaction above.</td></tr>';
+                    return;
+                }
+
+                tbody.innerHTML = transactions.slice().reverse().map(txn => `
+                    <tr>
+                        <td>${new Date(txn.date).toLocaleDateString()}</td>
+                        <td>${txn.description}</td>
+                        <td>${txn.category}</td>
+                        <td>${txn.owner}</td>
+                        <td><span class="badge badge-${txn.type === 'income' ? 'fertile' : 'luteal'}">${txn.type}</span></td>
+                        <td>$${parseFloat(txn.amount).toFixed(2)}</td>
+                        <td>
+                            <button class="icon-btn" onclick="finance.deleteTransaction('${txn.id}')">🗑️</button>
+                        </td>
+                    </tr>
+                `).join('');
+            },
+
+            updateAccounts() {
+                const accounts = JSON.parse(localStorage.getItem('finance-accounts') || '[]');
+                const tbody = document.getElementById('finance-accounts-body');
+
+                if (accounts.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="5" class="empty-state">No accounts yet. Add your first account above.</td></tr>';
+                    return;
+                }
+
+                tbody.innerHTML = accounts.map(acc => `
+                    <tr>
+                        <td><strong>${acc.name}</strong></td>
+                        <td>${acc.type}</td>
+                        <td>${acc.owner}</td>
+                        <td>$${parseFloat(acc.balance).toFixed(2)}</td>
+                        <td>
+                            <button class="icon-btn" onclick="finance.deleteAccount('${acc.id}')">🗑️</button>
+                        </td>
+                    </tr>
+                `).join('');
+            },
+
+            showAddTransaction(type = null) {
+                const modal = `
+                    <div class="modal-header">Add Transaction</div>
+                    <form onsubmit="finance.saveTransaction(event)">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Date</label>
+                                <input type="date" class="form-input" name="date" value="${new Date().toISOString().split('T')[0]}" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Type</label>
+                                <select class="form-select" name="type" required>
+                                    <option value="income" ${type === 'income' ? 'selected' : ''}>Income</option>
+                                    <option value="expense" ${type === 'expense' ? 'selected' : ''}>Expense</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Description</label>
+                            <input type="text" class="form-input" name="description" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Amount</label>
+                                <input type="number" step="0.01" class="form-input" name="amount" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Category</label>
+                                <input type="text" class="form-input" name="category" placeholder="e.g., groceries, salary">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Owner</label>
+                                <select class="form-select" name="owner" required>
+                                    <option value="Michelle">Michelle</option>
+                                    <option value="Gray">Gray</option>
+                                    <option value="Joint">Joint</option>
+                                    <option value="Shelzys Designs">Shelzy's Designs</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Business/Personal</label>
+                                <select class="form-select" name="entity" required>
+                                    <option value="personal">Personal</option>
+                                    <option value="business">Business (Shelzy's Designs)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" onclick="app.hideModal()">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </form>
+                `;
+                app.showModal(modal);
+            },
+
+            saveTransaction(event) {
+                event.preventDefault();
+                const form = event.target;
+
+                const transaction = {
+                    id: Date.now().toString(),
+                    date: form.date.value,
+                    description: form.description.value,
+                    amount: form.amount.value,
+                    type: form.type.value,
+                    category: form.category.value,
+                    owner: form.owner.value,
+                    entity: form.entity.value,
+                    createdAt: new Date().toISOString()
+                };
+
+                const transactions = JSON.parse(localStorage.getItem('finance-transactions') || '[]');
+                transactions.push(transaction);
+                localStorage.setItem('finance-transactions', JSON.stringify(transactions));
+
+                app.hideModal();
+                this.refresh();
+                app.updateDashboard();
+            },
+
+            showAddAccount() {
+                const modal = `
+                    <div class="modal-header">Add Account</div>
+                    <form onsubmit="finance.saveAccount(event)">
+                        <div class="form-group">
+                            <label class="form-label">Account Name</label>
+                            <input type="text" class="form-input" name="name" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Type</label>
+                                <select class="form-select" name="type" required>
+                                    <option value="checking">Checking</option>
+                                    <option value="savings">Savings</option>
+                                    <option value="credit">Credit Card</option>
+                                    <option value="investment">Investment</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Owner</label>
+                                <select class="form-select" name="owner" required>
+                                    <option value="Michelle">Michelle</option>
+                                    <option value="Gray">Gray</option>
+                                    <option value="Joint">Joint</option>
+                                    <option value="Shelzys Designs">Shelzy's Designs</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Current Balance</label>
+                            <input type="number" step="0.01" class="form-input" name="balance" required>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" onclick="app.hideModal()">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </form>
+                `;
+                app.showModal(modal);
+            },
+
+            saveAccount(event) {
+                event.preventDefault();
+                const form = event.target;
+
+                const account = {
+                    id: Date.now().toString(),
+                    name: form.name.value,
+                    type: form.type.value,
+                    owner: form.owner.value,
+                    balance: form.balance.value,
+                    createdAt: new Date().toISOString()
+                };
+
+                const accounts = JSON.parse(localStorage.getItem('finance-accounts') || '[]');
+                accounts.push(account);
+                localStorage.setItem('finance-accounts', JSON.stringify(accounts));
+
+                app.hideModal();
+                this.refresh();
+            },
+
+            deleteTransaction(id) {
+                if (confirm('Delete this transaction?')) {
+                    const transactions = JSON.parse(localStorage.getItem('finance-transactions') || '[]');
+                    const updated = transactions.filter(t => t.id !== id);
+                    localStorage.setItem('finance-transactions', JSON.stringify(updated));
+                    this.refresh();
+                    app.updateDashboard();
+                }
+            },
+
+            deleteAccount(id) {
+                if (confirm('Delete this account?')) {
+                    const accounts = JSON.parse(localStorage.getItem('finance-accounts') || '[]');
+                    const updated = accounts.filter(a => a.id !== id);
+                    localStorage.setItem('finance-accounts', JSON.stringify(updated));
+                    this.refresh();
+                }
+            }
+        };
+
+        // BUSINESS MODULE
+        const business = {
+            init() {
+                this.refresh();
+            },
+
+            switchTab(tabName) {
+                document.querySelectorAll('#business .tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.business-tab').forEach(t => t.style.display = 'none');
+
+                event.target.classList.add('active');
+                document.getElementById('business-' + tabName).style.display = 'block';
+            },
+
+            refresh() {
+                this.updateDashboard();
+                this.updateProducts();
+                this.updateOrders();
+                this.updateIdeas();
+            },
+
+            updateDashboard() {
+                const orders = JSON.parse(localStorage.getItem('business-orders') || '[]');
+                const now = new Date();
+                const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
+                const mtdOrders = orders.filter(o => new Date(o.date) >= monthStart);
+
+                const revenue = mtdOrders.reduce((sum, o) => sum + (parseFloat(o.revenue) || 0), 0);
+                const cogs = mtdOrders.reduce((sum, o) => sum + (parseFloat(o.cost) || 0), 0);
+                const profit = revenue - cogs;
+                const margin = revenue > 0 ? (profit / revenue * 100).toFixed(1) : 0;
+
+                document.getElementById('business-revenue-mtd').textContent = '$' + revenue.toFixed(2);
+                document.getElementById('business-cogs-mtd').textContent = '$' + cogs.toFixed(2);
+                document.getElementById('business-profit-mtd').textContent = '$' + profit.toFixed(2);
+                document.getElementById('business-margin').textContent = margin + '%';
+
+                // Update dashboard revenue
+                document.getElementById('dashboard-revenue').textContent = '$' + revenue.toFixed(0);
+            },
+
+            updateProducts() {
+                const products = JSON.parse(localStorage.getItem('business-products') || '[]');
+                const tbody = document.getElementById('business-products-body');
+
+                if (products.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="8" class="empty-state">No products yet. Add your first product above.</td></tr>';
+                    return;
+                }
+
+                tbody.innerHTML = products.map(product => {
+                    const margin = product.price && product.cost ?
+                        ((product.price - product.cost) / product.price * 100).toFixed(1) + '%' : '—';
+
+                    return `
+                        <tr>
+                            <td>${product.sku}</td>
+                            <td><strong>${product.name}</strong></td>
+                            <td>${product.category}</td>
+                            <td>$${parseFloat(product.price).toFixed(2)}</td>
+                            <td>$${parseFloat(product.cost).toFixed(2)}</td>
+                            <td>${margin}</td>
+                            <td>${product.stock || 0}</td>
+                            <td>
+                                <button class="icon-btn" onclick="business.deleteProduct('${product.id}')">🗑️</button>
+                            </td>
+                        </tr>
+                    `;
+                }).join('');
+            },
+
+            updateOrders() {
+                const orders = JSON.parse(localStorage.getItem('business-orders') || '[]');
+                const tbody = document.getElementById('business-orders-body');
+
+                if (orders.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="8" class="empty-state">No orders yet. Add your first order above.</td></tr>';
+                    return;
+                }
+
+                tbody.innerHTML = orders.slice().reverse().map(order => {
+                    const profit = (parseFloat(order.revenue) || 0) - (parseFloat(order.cost) || 0);
+
+                    return `
+                        <tr>
+                            <td>${order.orderNumber}</td>
+                            <td>${new Date(order.date).toLocaleDateString()}</td>
+                            <td>${order.productName}</td>
+                            <td>${order.quantity}</td>
+                            <td>$${parseFloat(order.revenue).toFixed(2)}</td>
+                            <td>$${parseFloat(order.cost).toFixed(2)}</td>
+                            <td>$${profit.toFixed(2)}</td>
+                            <td>${order.platform}</td>
+                        </tr>
+                    `;
+                }).join('');
+            },
+
+            updateIdeas() {
+                const ideas = JSON.parse(localStorage.getItem('business-ideas') || '[]');
+                const container = document.getElementById('business-ideas-list');
+
+                if (ideas.length === 0) {
+                    container.innerHTML = `
+                        <div class="empty-state">
+                            <div class="empty-state-icon">💡</div>
+                            <p>No product ideas yet. Add your first idea above.</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                container.innerHTML = ideas.map(idea => `
+                    <div class="card" style="margin-bottom: 1rem;">
+                        <div class="card-header">
+                            <h4>${idea.title}</h4>
+                            <button class="btn btn-sm btn-danger" onclick="business.deleteIdea('${idea.id}')">Delete</button>
+                        </div>
+                        <p>${idea.description}</p>
+                        ${idea.notes ? `<p style="color: var(--gray-600); font-size: 0.875rem; margin-top: 0.5rem;">${idea.notes}</p>` : ''}
+                        <div style="margin-top: 0.5rem; font-size: 0.75rem; color: var(--gray-500);">
+                            Added ${new Date(idea.createdAt).toLocaleDateString()}
+                        </div>
+                    </div>
+                `).join('');
+            },
+
+            showAddProduct() {
+                const modal = `
+                    <div class="modal-header">Add Product</div>
+                    <form onsubmit="business.saveProduct(event)">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">SKU</label>
+                                <input type="text" class="form-input" name="sku" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Category</label>
+                                <select class="form-select" name="category" required>
+                                    <option value="water-bottles">Water Bottles</option>
+                                    <option value="templates">Digital Templates</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Product Name</label>
+                            <input type="text" class="form-input" name="name" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Price</label>
+                                <input type="number" step="0.01" class="form-input" name="price" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Cost</label>
+                                <input type="number" step="0.01" class="form-input" name="cost" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Stock</label>
+                                <input type="number" class="form-input" name="stock" value="0">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" onclick="app.hideModal()">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </form>
+                `;
+                app.showModal(modal);
+            },
+
+            saveProduct(event) {
+                event.preventDefault();
+                const form = event.target;
+
+                const product = {
+                    id: Date.now().toString(),
+                    sku: form.sku.value,
+                    name: form.name.value,
+                    category: form.category.value,
+                    price: form.price.value,
+                    cost: form.cost.value,
+                    stock: form.stock.value,
+                    createdAt: new Date().toISOString()
+                };
+
+                const products = JSON.parse(localStorage.getItem('business-products') || '[]');
+                products.push(product);
+                localStorage.setItem('business-products', JSON.stringify(products));
+
+                app.hideModal();
+                this.refresh();
+            },
+
+            showAddOrder() {
+                const products = JSON.parse(localStorage.getItem('business-products') || '[]');
+                const productOptions = products.length > 0
+                    ? products.map(p => `<option value="${p.id}" data-price="${p.price}" data-cost="${p.cost}">${p.name} (${p.sku})</option>`).join('')
+                    : '<option value="">No products available - add products first</option>';
+
+                const modal = `
+                    <div class="modal-header">Add Order</div>
+                    <form onsubmit="business.saveOrder(event)">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Order Number</label>
+                                <input type="text" class="form-input" name="orderNumber" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Date</label>
+                                <input type="date" class="form-input" name="date" value="${new Date().toISOString().split('T')[0]}" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Product</label>
+                            <select class="form-select" name="productId" id="order-product" onchange="business.updateOrderCalc()" required>
+                                <option value="">Select product</option>
+                                ${productOptions}
+                            </select>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Quantity</label>
+                                <input type="number" class="form-input" name="quantity" id="order-quantity" value="1" onchange="business.updateOrderCalc()" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Platform</label>
+                                <select class="form-select" name="platform" required>
+                                    <option value="Etsy">Etsy</option>
+                                    <option value="Amazon">Amazon</option>
+                                    <option value="Direct">Direct</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Revenue</label>
+                                <input type="number" step="0.01" class="form-input" name="revenue" id="order-revenue" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Cost</label>
+                                <input type="number" step="0.01" class="form-input" name="cost" id="order-cost" required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" onclick="app.hideModal()">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </form>
+                `;
+                app.showModal(modal);
+            },
+
+            updateOrderCalc() {
+                const productSelect = document.getElementById('order-product');
+                const selectedOption = productSelect.options[productSelect.selectedIndex];
+                const quantity = parseInt(document.getElementById('order-quantity').value) || 1;
+
+                if (selectedOption && selectedOption.value) {
+                    const price = parseFloat(selectedOption.dataset.price) || 0;
+                    const cost = parseFloat(selectedOption.dataset.cost) || 0;
+
+                    document.getElementById('order-revenue').value = (price * quantity).toFixed(2);
+                    document.getElementById('order-cost').value = (cost * quantity).toFixed(2);
+                }
+            },
+
+            saveOrder(event) {
+                event.preventDefault();
+                const form = event.target;
+                const products = JSON.parse(localStorage.getItem('business-products') || '[]');
+                const product = products.find(p => p.id === form.productId.value);
+
+                const order = {
+                    id: Date.now().toString(),
+                    orderNumber: form.orderNumber.value,
+                    date: form.date.value,
+                    productId: form.productId.value,
+                    productName: product ? product.name : 'Unknown',
+                    quantity: form.quantity.value,
+                    revenue: form.revenue.value,
+                    cost: form.cost.value,
+                    platform: form.platform.value,
+                    createdAt: new Date().toISOString()
+                };
+
+                const orders = JSON.parse(localStorage.getItem('business-orders') || '[]');
+                orders.push(order);
+                localStorage.setItem('business-orders', JSON.stringify(orders));
+
+                app.hideModal();
+                this.refresh();
+                app.updateDashboard();
+            },
+
+            showAddIdea() {
+                const modal = `
+                    <div class="modal-header">Add Product Idea</div>
+                    <form onsubmit="business.saveIdea(event)">
+                        <div class="form-group">
+                            <label class="form-label">Title</label>
+                            <input type="text" class="form-input" name="title" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Description</label>
+                            <textarea class="form-textarea" name="description" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Notes / Next Steps</label>
+                            <textarea class="form-textarea" name="notes"></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" onclick="app.hideModal()">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </form>
+                `;
+                app.showModal(modal);
+            },
+
+            saveIdea(event) {
+                event.preventDefault();
+                const form = event.target;
+
+                const idea = {
+                    id: Date.now().toString(),
+                    title: form.title.value,
+                    description: form.description.value,
+                    notes: form.notes.value || null,
+                    createdAt: new Date().toISOString()
+                };
+
+                const ideas = JSON.parse(localStorage.getItem('business-ideas') || '[]');
+                ideas.push(idea);
+                localStorage.setItem('business-ideas', JSON.stringify(ideas));
+
+                app.hideModal();
+                this.refresh();
+            },
+
+            deleteProduct(id) {
+                if (confirm('Delete this product?')) {
+                    const products = JSON.parse(localStorage.getItem('business-products') || '[]');
+                    const updated = products.filter(p => p.id !== id);
+                    localStorage.setItem('business-products', JSON.stringify(updated));
+                    this.refresh();
+                }
+            },
+
+            deleteIdea(id) {
+                if (confirm('Delete this idea?')) {
+                    const ideas = JSON.parse(localStorage.getItem('business-ideas') || '[]');
+                    const updated = ideas.filter(i => i.id !== id);
+                    localStorage.setItem('business-ideas', JSON.stringify(updated));
+                    this.refresh();
+                }
+            }
+        };
+
+        // TASKS MODULE
+        const tasks = {
+            init() {
+                this.refresh();
+            },
+
+            switchTab(tabName) {
+                document.querySelectorAll('#tasks .tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tasks-tab').forEach(t => t.style.display = 'none');
+
+                event.target.classList.add('active');
+                document.getElementById('tasks-' + tabName).style.display = 'block';
+            },
+
+            refresh() {
+                this.updateToday();
+                this.updateUpcoming();
+                this.updateGoals();
+                this.updateCompleted();
+            },
+
+            updateToday() {
+                const items = JSON.parse(localStorage.getItem('tasks-items') || '[]');
+                const today = new Date().toISOString().split('T')[0];
+                const todayTasks = items.filter(t => !t.completed && (!t.dueDate || t.dueDate <= today));
+
+                const container = document.getElementById('tasks-today-list');
+
+                if (todayTasks.length === 0) {
+                    container.innerHTML = '<div class="empty-state"><p>No tasks for today. Add a task to get started.</p></div>';
+                    return;
+                }
+
+                container.innerHTML = todayTasks.map(task => `
+                    <div class="card" style="margin-bottom: 0.5rem; padding: 1rem;">
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <input type="checkbox" onchange="tasks.toggleComplete('${task.id}')" style="width: 20px; height: 20px; cursor: pointer;">
+                            <div style="flex: 1;">
+                                <strong>${task.title}</strong>
+                                ${task.description ? `<p style="color: var(--gray-600); font-size: 0.875rem; margin-top: 0.25rem;">${task.description}</p>` : ''}
+                            </div>
+                            <button class="icon-btn" onclick="tasks.deleteTask('${task.id}')">🗑️</button>
+                        </div>
+                    </div>
+                `).join('');
+            },
+
+            updateUpcoming() {
+                const items = JSON.parse(localStorage.getItem('tasks-items') || '[]');
+                const today = new Date().toISOString().split('T')[0];
+                const upcomingTasks = items.filter(t => !t.completed && t.dueDate && t.dueDate > today);
+
+                const container = document.getElementById('tasks-upcoming-list');
+
+                if (upcomingTasks.length === 0) {
+                    container.innerHTML = '<div class="empty-state"><p>No upcoming tasks</p></div>';
+                    return;
+                }
+
+                container.innerHTML = upcomingTasks.map(task => `
+                    <div class="card" style="margin-bottom: 0.5rem; padding: 1rem;">
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <input type="checkbox" onchange="tasks.toggleComplete('${task.id}')" style="width: 20px; height: 20px; cursor: pointer;">
+                            <div style="flex: 1;">
+                                <strong>${task.title}</strong>
+                                ${task.description ? `<p style="color: var(--gray-600); font-size: 0.875rem; margin-top: 0.25rem;">${task.description}</p>` : ''}
+                                <p style="color: var(--gray-500); font-size: 0.75rem; margin-top: 0.25rem;">Due: ${new Date(task.dueDate).toLocaleDateString()}</p>
+                            </div>
+                            <button class="icon-btn" onclick="tasks.deleteTask('${task.id}')">🗑️</button>
+                        </div>
+                    </div>
+                `).join('');
+            },
+
+            updateGoals() {
+                const goals = JSON.parse(localStorage.getItem('tasks-goals') || '[]');
+                const container = document.getElementById('tasks-goals-list');
+
+                if (goals.length === 0) {
+                    container.innerHTML = `
+                        <div class="empty-state">
+                            <div class="empty-state-icon">🎯</div>
+                            <p>No goals set yet. Define your first goal above.</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                container.innerHTML = goals.map(goal => `
+                    <div class="card" style="margin-bottom: 1rem;">
+                        <div class="card-header">
+                            <h4>${goal.title}</h4>
+                            <button class="btn btn-sm btn-danger" onclick="tasks.deleteGoal('${goal.id}')">Delete</button>
+                        </div>
+                        <p>${goal.description}</p>
+                        ${goal.targetDate ? `<p style="color: var(--gray-600); font-size: 0.875rem; margin-top: 0.5rem;">Target: ${new Date(goal.targetDate).toLocaleDateString()}</p>` : ''}
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: ${goal.progress || 0}%"></div>
+                        </div>
+                        <p style="font-size: 0.75rem; color: var(--gray-500); margin-top: 0.5rem;">${goal.progress || 0}% complete</p>
+                    </div>
+                `).join('');
+            },
+
+            updateCompleted() {
+                const items = JSON.parse(localStorage.getItem('tasks-items') || '[]');
+                const completed = items.filter(t => t.completed);
+
+                const container = document.getElementById('tasks-completed-list');
+
+                if (completed.length === 0) {
+                    container.innerHTML = '<div class="empty-state"><p>No completed tasks yet</p></div>';
+                    return;
+                }
+
+                container.innerHTML = completed.slice().reverse().map(task => `
+                    <div class="card" style="margin-bottom: 0.5rem; padding: 1rem; opacity: 0.7;">
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <div style="flex: 1;">
+                                <strong style="text-decoration: line-through;">${task.title}</strong>
+                                <p style="color: var(--gray-500); font-size: 0.75rem; margin-top: 0.25rem;">
+                                    Completed ${new Date(task.completedAt).toLocaleDateString()}
+                                </p>
+                            </div>
+                            <button class="icon-btn" onclick="tasks.deleteTask('${task.id}')">🗑️</button>
+                        </div>
+                    </div>
+                `).join('');
+            },
+
+            showAddTask() {
+                const modal = `
+                    <div class="modal-header">Add Task</div>
+                    <form onsubmit="tasks.saveTask(event)">
+                        <div class="form-group">
+                            <label class="form-label">Title</label>
+                            <input type="text" class="form-input" name="title" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Description</label>
+                            <textarea class="form-textarea" name="description"></textarea>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Priority</label>
+                                <select class="form-select" name="priority">
+                                    <option value="low">Low</option>
+                                    <option value="medium" selected>Medium</option>
+                                    <option value="high">High</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Due Date</label>
+                                <input type="date" class="form-input" name="dueDate">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" onclick="app.hideModal()">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </form>
+                `;
+                app.showModal(modal);
+            },
+
+            saveTask(event) {
+                event.preventDefault();
+                const form = event.target;
+
+                const task = {
+                    id: Date.now().toString(),
+                    title: form.title.value,
+                    description: form.description.value || null,
+                    priority: form.priority.value,
+                    dueDate: form.dueDate.value || null,
+                    completed: false,
+                    createdAt: new Date().toISOString()
+                };
+
+                const items = JSON.parse(localStorage.getItem('tasks-items') || '[]');
+                items.push(task);
+                localStorage.setItem('tasks-items', JSON.stringify(items));
+
+                app.hideModal();
+                this.refresh();
+                app.updateDashboard();
+            },
+
+            showAddGoal() {
+                const modal = `
+                    <div class="modal-header">Add Goal</div>
+                    <form onsubmit="tasks.saveGoal(event)">
+                        <div class="form-group">
+                            <label class="form-label">Title</label>
+                            <input type="text" class="form-input" name="title" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Description</label>
+                            <textarea class="form-textarea" name="description" required></textarea>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Target Date</label>
+                                <input type="date" class="form-input" name="targetDate">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Initial Progress (%)</label>
+                                <input type="number" class="form-input" name="progress" value="0" min="0" max="100">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" onclick="app.hideModal()">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </form>
+                `;
+                app.showModal(modal);
+            },
+
+            saveGoal(event) {
+                event.preventDefault();
+                const form = event.target;
+
+                const goal = {
+                    id: Date.now().toString(),
+                    title: form.title.value,
+                    description: form.description.value,
+                    targetDate: form.targetDate.value || null,
+                    progress: parseInt(form.progress.value) || 0,
+                    createdAt: new Date().toISOString()
+                };
+
+                const goals = JSON.parse(localStorage.getItem('tasks-goals') || '[]');
+                goals.push(goal);
+                localStorage.setItem('tasks-goals', JSON.stringify(goals));
+
+                app.hideModal();
+                this.refresh();
+            },
+
+            toggleComplete(id) {
+                const items = JSON.parse(localStorage.getItem('tasks-items') || '[]');
+                const task = items.find(t => t.id === id);
+                if (task) {
+                    task.completed = !task.completed;
+                    task.completedAt = task.completed ? new Date().toISOString() : null;
+                    localStorage.setItem('tasks-items', JSON.stringify(items));
+                    this.refresh();
+                    app.updateDashboard();
+                }
+            },
+
+            deleteTask(id) {
+                if (confirm('Delete this task?')) {
+                    const items = JSON.parse(localStorage.getItem('tasks-items') || '[]');
+                    const updated = items.filter(t => t.id !== id);
+                    localStorage.setItem('tasks-items', JSON.stringify(updated));
+                    this.refresh();
+                    app.updateDashboard();
+                }
+            },
+
+            deleteGoal(id) {
+                if (confirm('Delete this goal?')) {
+                    const goals = JSON.parse(localStorage.getItem('tasks-goals') || '[]');
+                    const updated = goals.filter(g => g.id !== id);
+                    localStorage.setItem('tasks-goals', JSON.stringify(updated));
+                    this.refresh();
+                }
+            }
+        };
+
+        // Close modal when clicking outside
+        document.getElementById('modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                app.hideModal();
+            }
+        });
+
+        // Initialize app on load
+        document.addEventListener('DOMContentLoaded', () => {
+            app.init();
+            document.getElementById('settings-last-updated').textContent = new Date().toLocaleString();
+        });
+    </script>
+</body>
+</html>

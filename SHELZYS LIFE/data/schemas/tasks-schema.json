@@ -1,0 +1,153 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Tasks & Goals Data Schema",
+  "description": "Data structures for task and goal management",
+  "version": "1.0.0",
+
+  "items": {
+    "type": "array",
+    "description": "Task items",
+    "items": {
+      "type": "object",
+      "required": ["id", "title", "completed"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier (timestamp)"
+        },
+        "title": {
+          "type": "string",
+          "description": "Task title"
+        },
+        "description": {
+          "type": ["string", "null"],
+          "description": "Detailed task description"
+        },
+        "priority": {
+          "type": ["string", "null"],
+          "enum": ["low", "medium", "high", null],
+          "description": "Task priority"
+        },
+        "dueDate": {
+          "type": ["string", "null"],
+          "format": "date",
+          "description": "Due date (YYYY-MM-DD)"
+        },
+        "completed": {
+          "type": "boolean",
+          "description": "Whether task is completed"
+        },
+        "completedAt": {
+          "type": ["string", "null"],
+          "format": "date-time",
+          "description": "When task was completed"
+        },
+        "category": {
+          "type": ["string", "null"],
+          "enum": ["health", "career", "business", "personal", "financial", null],
+          "description": "Task category/life domain"
+        },
+        "recurring": {
+          "type": ["boolean", "null"],
+          "description": "Whether this is a recurring task"
+        },
+        "recurringPattern": {
+          "type": ["string", "null"],
+          "enum": ["daily", "weekly", "monthly", null],
+          "description": "Recurrence pattern if applicable"
+        },
+        "tags": {
+          "type": ["array", "null"],
+          "items": {
+            "type": "string"
+          },
+          "description": "Task tags for organization"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When task was created"
+        }
+      }
+    }
+  },
+
+  "goals": {
+    "type": "array",
+    "description": "Long-term goals",
+    "items": {
+      "type": "object",
+      "required": ["id", "title", "description"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier (timestamp)"
+        },
+        "title": {
+          "type": "string",
+          "description": "Goal title"
+        },
+        "description": {
+          "type": "string",
+          "description": "Detailed goal description"
+        },
+        "category": {
+          "type": ["string", "null"],
+          "enum": ["health", "career", "business", "personal", "financial", "relationship", null],
+          "description": "Goal category/life pillar"
+        },
+        "targetDate": {
+          "type": ["string", "null"],
+          "format": "date",
+          "description": "Target completion date"
+        },
+        "progress": {
+          "type": ["number", "null"],
+          "description": "Progress percentage (0-100)"
+        },
+        "timeframe": {
+          "type": ["string", "null"],
+          "enum": ["short", "medium", "long", null],
+          "description": "Short-term (<3mo), medium-term (3-12mo), long-term (>12mo)"
+        },
+        "milestones": {
+          "type": ["array", "null"],
+          "items": {
+            "type": "object",
+            "properties": {
+              "title": {
+                "type": "string"
+              },
+              "completed": {
+                "type": "boolean"
+              },
+              "completedAt": {
+                "type": ["string", "null"],
+                "format": "date"
+              }
+            }
+          },
+          "description": "Milestone tracking"
+        },
+        "notes": {
+          "type": ["string", "null"],
+          "description": "Progress notes and reflections"
+        },
+        "completed": {
+          "type": ["boolean", "null"],
+          "description": "Whether goal is completed"
+        },
+        "completedAt": {
+          "type": ["string", "null"],
+          "format": "date-time",
+          "description": "When goal was completed"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When goal was created"
+        }
+      }
+    }
+  }
+}

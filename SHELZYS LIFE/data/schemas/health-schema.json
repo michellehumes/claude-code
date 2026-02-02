@@ -1,0 +1,151 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Health & Fertility Data Schema",
+  "description": "Data structures for fertility tracking and pregnancy preparation",
+  "version": "1.0.0",
+
+  "cycles": {
+    "type": "array",
+    "description": "Menstrual cycle records",
+    "items": {
+      "type": "object",
+      "required": ["id", "startDate", "status"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier (timestamp)"
+        },
+        "startDate": {
+          "type": "string",
+          "format": "date",
+          "description": "First day of menstrual period (YYYY-MM-DD)"
+        },
+        "endDate": {
+          "type": ["string", "null"],
+          "format": "date",
+          "description": "Last day before next cycle starts"
+        },
+        "length": {
+          "type": ["number", "null"],
+          "description": "Total cycle length in days"
+        },
+        "ovulationDay": {
+          "type": ["number", "null"],
+          "description": "Cycle day when ovulation occurred (typically 12-16)"
+        },
+        "lutealPhaseLength": {
+          "type": ["number", "null"],
+          "description": "Days from ovulation to end of cycle (typically 12-16)"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["active", "completed", "pregnant"],
+          "description": "Current status of this cycle"
+        }
+      }
+    }
+  },
+
+  "log": {
+    "type": "array",
+    "description": "Daily fertility and health log entries",
+    "items": {
+      "type": "object",
+      "required": ["id", "date"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier (timestamp)"
+        },
+        "date": {
+          "type": "string",
+          "format": "date",
+          "description": "Date of entry (YYYY-MM-DD)"
+        },
+        "cycleDay": {
+          "type": ["number", "null"],
+          "description": "Day number in current cycle"
+        },
+        "phase": {
+          "type": ["string", "null"],
+          "enum": ["Follicular", "Fertile Window", "Luteal", "Implantation Window", "Pregnant", null],
+          "description": "Current fertility phase"
+        },
+        "temperature": {
+          "type": ["number", "null"],
+          "description": "Basal body temperature in Fahrenheit"
+        },
+        "lhTest": {
+          "type": ["string", "null"],
+          "enum": ["negative", "positive", "peak", null],
+          "description": "LH ovulation test result"
+        },
+        "cervicalMucus": {
+          "type": ["string", "null"],
+          "description": "Cervical mucus observations (dry, sticky, creamy, watery, egg-white)"
+        },
+        "symptoms": {
+          "type": ["string", "null"],
+          "description": "Physical or emotional symptoms"
+        },
+        "sexualActivity": {
+          "type": ["boolean", "null"],
+          "description": "Whether intercourse occurred (true/false)"
+        },
+        "sleep": {
+          "type": ["number", "null"],
+          "description": "Hours of sleep"
+        },
+        "stress": {
+          "type": ["string", "null"],
+          "enum": ["low", "medium", "high", null],
+          "description": "Stress level"
+        },
+        "notes": {
+          "type": ["string", "null"],
+          "description": "Additional notes or observations"
+        }
+      }
+    }
+  },
+
+  "insights": {
+    "type": "object",
+    "description": "Calculated insights from cycle data",
+    "properties": {
+      "averageCycleLength": {
+        "type": "number",
+        "description": "Average cycle length across all completed cycles"
+      },
+      "averageOvulationDay": {
+        "type": "number",
+        "description": "Average day of ovulation"
+      },
+      "averageLutealPhaseLength": {
+        "type": "number",
+        "description": "Average luteal phase length"
+      },
+      "predictedFertileWindow": {
+        "type": "object",
+        "properties": {
+          "start": {
+            "type": "number",
+            "description": "Predicted cycle day for start of fertile window"
+          },
+          "end": {
+            "type": "number",
+            "description": "Predicted cycle day for end of fertile window"
+          },
+          "ovulation": {
+            "type": "number",
+            "description": "Predicted ovulation day"
+          }
+        }
+      },
+      "cyclesTracked": {
+        "type": "number",
+        "description": "Total number of cycles in database"
+      }
+    }
+  }
+}

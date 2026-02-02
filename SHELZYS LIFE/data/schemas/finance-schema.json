@@ -1,0 +1,140 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Finance Data Schema",
+  "description": "Data structures for personal and business financial tracking",
+  "version": "1.0.0",
+
+  "accounts": {
+    "type": "array",
+    "description": "Financial account records",
+    "items": {
+      "type": "object",
+      "required": ["id", "name", "type", "owner", "balance"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier (timestamp)"
+        },
+        "name": {
+          "type": "string",
+          "description": "Account name (e.g., 'Chase Checking')"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["checking", "savings", "credit", "investment", "cash"],
+          "description": "Account type"
+        },
+        "owner": {
+          "type": "string",
+          "enum": ["Michelle", "Gray", "Joint", "Shelzys Designs"],
+          "description": "Account owner"
+        },
+        "balance": {
+          "type": "number",
+          "description": "Current account balance"
+        },
+        "institution": {
+          "type": ["string", "null"],
+          "description": "Bank or financial institution name"
+        },
+        "accountNumber": {
+          "type": ["string", "null"],
+          "description": "Last 4 digits of account number"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When this account was added"
+        }
+      }
+    }
+  },
+
+  "transactions": {
+    "type": "array",
+    "description": "Financial transaction records",
+    "items": {
+      "type": "object",
+      "required": ["id", "date", "description", "amount", "type", "owner", "entity"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier (timestamp)"
+        },
+        "date": {
+          "type": "string",
+          "format": "date",
+          "description": "Transaction date (YYYY-MM-DD)"
+        },
+        "description": {
+          "type": "string",
+          "description": "Transaction description"
+        },
+        "amount": {
+          "type": "number",
+          "description": "Transaction amount (always positive)"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["income", "expense"],
+          "description": "Transaction type"
+        },
+        "category": {
+          "type": ["string", "null"],
+          "description": "Category (e.g., groceries, salary, utilities)"
+        },
+        "owner": {
+          "type": "string",
+          "enum": ["Michelle", "Gray", "Joint", "Shelzys Designs"],
+          "description": "Transaction owner (must be ONE owner)"
+        },
+        "entity": {
+          "type": "string",
+          "enum": ["personal", "business"],
+          "description": "Personal or business transaction"
+        },
+        "accountId": {
+          "type": ["string", "null"],
+          "description": "Associated account ID"
+        },
+        "recurring": {
+          "type": ["boolean", "null"],
+          "description": "Whether this is a recurring transaction"
+        },
+        "notes": {
+          "type": ["string", "null"],
+          "description": "Additional notes"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When this transaction was logged"
+        }
+      }
+    }
+  },
+
+  "categories": {
+    "type": "array",
+    "description": "Transaction category definitions",
+    "items": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Category name"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["income", "expense", "both"],
+          "description": "Whether category applies to income, expense, or both"
+        },
+        "entity": {
+          "type": "string",
+          "enum": ["personal", "business", "both"],
+          "description": "Whether category is for personal, business, or both"
+        }
+      }
+    }
+  }
+}

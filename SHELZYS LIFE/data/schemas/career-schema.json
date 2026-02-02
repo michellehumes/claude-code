@@ -1,0 +1,100 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Career & Job Search Data Schema",
+  "description": "Data structure for job application pipeline management",
+  "version": "1.0.0",
+
+  "jobs": {
+    "type": "array",
+    "description": "Job application records",
+    "items": {
+      "type": "object",
+      "required": ["id", "company", "role", "status", "appliedDate"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier (timestamp)"
+        },
+        "company": {
+          "type": "string",
+          "description": "Company name"
+        },
+        "role": {
+          "type": "string",
+          "description": "Job title/role"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["applied", "screening", "interview", "offer", "rejected", "stalled", "withdrawn"],
+          "description": "Current application status"
+        },
+        "appliedDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date application was submitted"
+        },
+        "salaryMin": {
+          "type": ["number", "null"],
+          "description": "Minimum salary in thousands (e.g., 200 for $200K)"
+        },
+        "salaryMax": {
+          "type": ["number", "null"],
+          "description": "Maximum salary in thousands (e.g., 240 for $240K)"
+        },
+        "recruiter": {
+          "type": ["string", "null"],
+          "description": "Recruiter or contact person name"
+        },
+        "recruiterEmail": {
+          "type": ["string", "null"],
+          "format": "email",
+          "description": "Recruiter email address"
+        },
+        "nextAction": {
+          "type": ["string", "null"],
+          "description": "Next step or action to take"
+        },
+        "nextActionDate": {
+          "type": ["string", "null"],
+          "format": "date",
+          "description": "Date for next action"
+        },
+        "interviewDates": {
+          "type": ["array", "null"],
+          "items": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "description": "List of interview dates"
+        },
+        "notes": {
+          "type": ["string", "null"],
+          "description": "General notes, interview prep, follow-ups"
+        },
+        "jobDescription": {
+          "type": ["string", "null"],
+          "description": "Full job description or URL"
+        },
+        "location": {
+          "type": ["string", "null"],
+          "description": "Job location (remote, hybrid, office location)"
+        },
+        "remotePolicy": {
+          "type": ["string", "null"],
+          "enum": ["remote", "hybrid", "office", null],
+          "description": "Remote work policy"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When this record was created"
+        },
+        "updatedAt": {
+          "type": ["string", "null"],
+          "format": "date-time",
+          "description": "When this record was last updated"
+        }
+      }
+    }
+  }
+}
