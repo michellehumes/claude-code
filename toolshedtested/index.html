@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ToolShed Tested - Independent, honest reviews of power tools. 150+ tools tested with 500+ hours of real-world testing. 100% unbiased.">
+    <meta name="keywords" content="power tools, tool reviews, drill reviews, saw reviews, grinder reviews, sander reviews, independent tool testing">
+    <meta name="author" content="Shelzy Perkins">
+    <meta name="theme-color" content="#ff6b00">
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="ToolShed Tested - Independent Power Tool Reviews">
+    <meta property="og:description" content="150+ tools tested with 500+ hours of real-world testing. 100% independent reviews.">
+    <meta property="og:url" content="https://toolshedtested.com">
+
+    <title>ToolShed Tested - Independent Power Tool Reviews</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "ToolShed Tested",
+        "url": "https://toolshedtested.com",
+        "description": "Independent power tool reviews and testing",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://toolshedtested.com/search?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
+</head>
+<body>
+    <!-- Skip to content for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Theme Toggle -->
+    <button class="theme-toggle" aria-label="Toggle dark/light mode" title="Toggle theme">
+        <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+    </button>
+
+    <!-- Header -->
+    <header class="site-header" role="banner">
+        <nav class="main-nav" role="navigation" aria-label="Main navigation">
+            <div class="nav-container">
+                <a href="/" class="logo" aria-label="ToolShed Tested Home">
+                    <span class="logo-text">TOOLSHED TESTED</span>
+                </a>
+
+                <button class="mobile-menu-toggle" aria-label="Toggle mobile menu" aria-expanded="false">
+                    <span class="hamburger"></span>
+                    <span class="hamburger"></span>
+                    <span class="hamburger"></span>
+                </button>
+
+                <div class="nav-menu" id="nav-menu">
+                    <ul class="nav-list">
+                        <li><a href="#drills">Drills</a></li>
+                        <li><a href="#saws">Saws</a></li>
+                        <li><a href="#grinders">Grinders</a></li>
+                        <li><a href="#sanders">Sanders</a></li>
+                        <li><a href="#comparison">Compare Tools</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Search Bar -->
+        <div class="search-container" role="search">
+            <div class="search-wrapper">
+                <label for="site-search" class="sr-only">Search tools and reviews</label>
+                <input
+                    type="search"
+                    id="site-search"
+                    class="search-input"
+                    placeholder="Search tools, brands, or reviews..."
+                    aria-label="Search tools and reviews"
+                    autocomplete="off"
+                >
+                <button class="search-button" aria-label="Submit search">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="search-results" id="search-results" role="listbox" aria-label="Search results"></div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Breadcrumbs -->
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+            <ol>
+                <li><a href="/">Home</a></li>
+            </ol>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="hero" aria-labelledby="hero-heading">
+            <div class="hero-content">
+                <span class="badge">100% Independent Reviews</span>
+                <h1 id="hero-heading">
+                    Tools That <span class="highlight">Actually Work</span>
+                    <br>Tested In Real Conditions
+                </h1>
+                <p class="hero-subtitle">No sponsorships. No bias. Just honest reviews from 500+ hours of hands-on testing.</p>
+
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">150+</span>
+                        <span class="stat-label">Tools Tested</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">500+</span>
+                        <span class="stat-label">Hours Testing</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Independent</span>
+                    </div>
+                </div>
+
+                <div class="hero-cta">
+                    <a href="#reviews" class="btn btn-primary">Browse Reviews</a>
+                    <a href="#categories" class="btn btn-secondary">See Categories</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Filter/Sort Bar -->
+        <section class="filter-bar" aria-label="Filter and sort options">
+            <div class="filter-container">
+                <div class="filter-group">
+                    <label for="category-filter">Category:</label>
+                    <select id="category-filter" aria-label="Filter by category">
+                        <option value="all">All Categories</option>
+                        <option value="drills">Drills</option>
+                        <option value="saws">Saws</option>
+                        <option value="grinders">Grinders</option>
+                        <option value="sanders">Sanders</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="sort-filter">Sort by:</label>
+                    <select id="sort-filter" aria-label="Sort reviews">
+                        <option value="rating">Highest Rated</option>
+                        <option value="recent">Most Recent</option>
+                        <option value="popular">Most Popular</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="brand-filter">Brand:</label>
+                    <select id="brand-filter" aria-label="Filter by brand">
+                        <option value="all">All Brands</option>
+                        <option value="dewalt">DeWalt</option>
+                        <option value="milwaukee">Milwaukee</option>
+                        <option value="makita">Makita</option>
+                        <option value="bosch">Bosch</option>
+                        <option value="ryobi">Ryobi</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        <!-- Categories Section -->
+        <section id="categories" class="categories" aria-labelledby="categories-heading">
+            <h2 id="categories-heading">Browse By Category</h2>
+            <div class="category-grid">
+                <article class="category-card" data-category="drills">
+                    <div class="category-icon">🔧</div>
+                    <h3>Drills & Drivers</h3>
+                    <p>Cordless drills, impact drivers, and hammer drills tested for power and durability</p>
+                    <a href="#drills" class="category-link">View 35 Reviews</a>
+                </article>
+
+                <article class="category-card" data-category="saws">
+                    <div class="category-icon">🪚</div>
+                    <h3>Saws</h3>
+                    <p>Circular saws, miter saws, jigsaws, and reciprocating saws put to the test</p>
+                    <a href="#saws" class="category-link">View 42 Reviews</a>
+                </article>
+
+                <article class="category-card" data-category="grinders">
+                    <div class="category-icon">⚙️</div>
+                    <h3>Grinders</h3>
+                    <p>Angle grinders and die grinders tested for cutting and grinding performance</p>
+                    <a href="#grinders" class="category-link">View 28 Reviews</a>
+                </article>
+
+                <article class="category-card" data-category="sanders">
+                    <div class="category-icon">📐</div>
+                    <h3>Sanders</h3>
+                    <p>Orbital, belt, and detail sanders reviewed for finish quality and efficiency</p>
+                    <a href="#sanders" class="category-link">View 31 Reviews</a>
+                </article>
+            </div>
+        </section>
+
+        <!-- Featured Reviews Section -->
+        <section id="reviews" class="reviews" aria-labelledby="reviews-heading">
+            <h2 id="reviews-heading">Featured Reviews</h2>
+            <div class="reviews-grid" id="reviews-grid">
+                <!-- Review cards will be populated by JavaScript -->
+            </div>
+            <div class="load-more-container">
+                <button class="btn btn-secondary" id="load-more">Load More Reviews</button>
+            </div>
+        </section>
+
+        <!-- Tool Comparison Section -->
+        <section id="comparison" class="comparison" aria-labelledby="comparison-heading">
+            <h2 id="comparison-heading">Compare Tools Side-by-Side</h2>
+            <p class="comparison-intro">Select up to 3 tools to compare specifications, ratings, and performance.</p>
+
+            <div class="comparison-container">
+                <div class="comparison-selector">
+                    <label for="compare-tool-1">Tool 1:</label>
+                    <select id="compare-tool-1" class="compare-select" aria-label="Select first tool to compare">
+                        <option value="">Select a tool...</option>
+                    </select>
+                </div>
+
+                <div class="comparison-selector">
+                    <label for="compare-tool-2">Tool 2:</label>
+                    <select id="compare-tool-2" class="compare-select" aria-label="Select second tool to compare">
+                        <option value="">Select a tool...</option>
+                    </select>
+                </div>
+
+                <div class="comparison-selector">
+                    <label for="compare-tool-3">Tool 3:</label>
+                    <select id="compare-tool-3" class="compare-select" aria-label="Select third tool to compare">
+                        <option value="">Select a tool...</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="comparison-results" id="comparison-results">
+                <p class="comparison-placeholder">Select tools above to begin comparing</p>
+            </div>
+        </section>
+
+        <!-- Trust Section -->
+        <section class="trust" aria-labelledby="trust-heading">
+            <h2 id="trust-heading">Why Trust Our Reviews?</h2>
+            <div class="trust-grid">
+                <div class="trust-item">
+                    <div class="trust-icon">✓</div>
+                    <h3>We Buy Our Own Tools</h3>
+                    <p>Every tool is purchased at retail price. No freebies, no special treatment from manufacturers.</p>
+                </div>
+
+                <div class="trust-item">
+                    <div class="trust-icon">✓</div>
+                    <h3>Real-World Testing</h3>
+                    <p>We test in actual job site conditions, not controlled labs. You see how tools perform in reality.</p>
+                </div>
+
+                <div class="trust-item">
+                    <div class="trust-icon">✓</div>
+                    <h3>No Sponsored Content</h3>
+                    <p>Our opinions can't be bought. We make money through affiliate links, but reviews remain unbiased.</p>
+                </div>
+
+                <div class="trust-item">
+                    <div class="trust-icon">✓</div>
+                    <h3>Long-Term Testing</h3>
+                    <p>We don't just unbox and review. Tools are tested over weeks and months for durability.</p>
+                </div>
+
+                <div class="trust-item">
+                    <div class="trust-icon">✓</div>
+                    <h3>Transparent Methodology</h3>
+                    <p>Our testing process is documented and consistent. You know exactly how we evaluate each tool.</p>
+                </div>
+
+                <div class="trust-item">
+                    <div class="trust-icon">✓</div>
+                    <h3>Expert Background</h3>
+                    <p>20+ years of professional carpentry and construction experience behind every review.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="faq" aria-labelledby="faq-heading">
+            <h2 id="faq-heading">Frequently Asked Questions</h2>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>How do you make money if you don't accept sponsorships?</span>
+                        <span class="faq-icon" aria-hidden="true">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>We earn commissions through affiliate links when you purchase tools through our recommendations. However, this never influences our reviews. We test every tool objectively and report honestly, regardless of potential earnings.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>How long do you test each tool?</span>
+                        <span class="faq-icon" aria-hidden="true">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Most tools are tested for 2-4 weeks minimum, with some undergoing months of real-world use. We conduct initial performance tests, durability assessments, and long-term reliability evaluations before publishing reviews.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>Can I request a specific tool review?</span>
+                        <span class="faq-icon" aria-hidden="true">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Absolutely! We maintain a review request list based on reader interest. Submit your request through our contact form, and we'll prioritize tools with the most requests.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>Do you accept review units from manufacturers?</span>
+                        <span class="faq-icon" aria-hidden="true">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>No. We purchase all tools at retail price to ensure complete independence. This way, manufacturers have zero influence over our testing or opinions.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>What happens to tools after testing?</span>
+                        <span class="faq-icon" aria-hidden="true">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Tools that perform well become part of our regular workshop rotation. Some are donated to vocational schools or trade programs. Damaged or failed tools are kept for reference and comparison.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>How do you rate tools?</span>
+                        <span class="faq-icon" aria-hidden="true">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>We use a comprehensive 5-star system based on performance, durability, ergonomics, value, and features. Each category is weighted, and the overall rating reflects real-world usability and long-term value.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter Section -->
+        <section class="newsletter" aria-labelledby="newsletter-heading">
+            <div class="newsletter-content">
+                <h2 id="newsletter-heading">Get Tool Reviews In Your Inbox</h2>
+                <p>New reviews, buying guides, and tool deals delivered weekly. No spam, unsubscribe anytime.</p>
+                <form class="newsletter-form" id="newsletter-form" aria-label="Newsletter signup form">
+                    <label for="newsletter-email" class="sr-only">Email address</label>
+                    <input
+                        type="email"
+                        id="newsletter-email"
+                        name="email"
+                        placeholder="Your email address"
+                        required
+                        aria-required="true"
+                        aria-describedby="newsletter-description"
+                    >
+                    <button type="submit" class="btn btn-primary">Subscribe</button>
+                </form>
+                <p id="newsletter-description" class="newsletter-privacy">We respect your privacy. Read our <a href="#privacy">privacy policy</a>.</p>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact" aria-labelledby="contact-heading">
+            <h2 id="contact-heading">Get In Touch</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Have a question or suggestion?</h3>
+                    <p>We'd love to hear from you. Whether you have a tool review request, a question about our testing methodology, or just want to say hi, drop us a message.</p>
+                    <ul class="contact-methods">
+                        <li>📧 Email: reviews@toolshedtested.com</li>
+                        <li>⏱️ Response time: Within 48 hours</li>
+                    </ul>
+                </div>
+
+                <form class="contact-form" id="contact-form" aria-label="Contact form">
+                    <div class="form-group">
+                        <label for="contact-name">Name</label>
+                        <input type="text" id="contact-name" name="name" required aria-required="true">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contact-email">Email</label>
+                        <input type="email" id="contact-email" name="email" required aria-required="true">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contact-subject">Subject</label>
+                        <input type="text" id="contact-subject" name="subject" required aria-required="true">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contact-message">Message</label>
+                        <textarea id="contact-message" name="message" rows="5" required aria-required="true"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About ToolShed Tested</h3>
+                <p>Independent power tool reviews from a professional carpenter with 20+ years of experience. We buy, test, and review every tool with complete honesty.</p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#reviews">Latest Reviews</a></li>
+                    <li><a href="#categories">Tool Categories</a></li>
+                    <li><a href="#comparison">Compare Tools</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="#privacy">Privacy Policy</a></li>
+                    <li><a href="#terms">Terms of Service</a></li>
+                    <li><a href="#disclosure">Affiliate Disclosure</a></li>
+                    <li><a href="#cookies">Cookie Policy</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Newsletter</h3>
+                <p>Weekly tool reviews and buying guides delivered to your inbox.</p>
+                <form class="footer-newsletter-form" aria-label="Footer newsletter signup">
+                    <input type="email" placeholder="Your email" aria-label="Email for newsletter" required>
+                    <button type="submit" class="btn btn-small">Subscribe</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 ToolShed Tested. All rights reserved. | <a href="#disclosure">Affiliate Disclosure</a></p>
+            <p class="footer-disclaimer">As an Amazon Associate, we earn from qualifying purchases through affiliate links on this site.</p>
+        </div>
+    </footer>
+
+    <!-- Sticky Newsletter Bar (shows on scroll) -->
+    <div class="sticky-newsletter" id="sticky-newsletter" aria-live="polite">
+        <div class="sticky-newsletter-content">
+            <span class="sticky-newsletter-text">📧 Get weekly tool reviews in your inbox</span>
+            <form class="sticky-newsletter-form" aria-label="Sticky newsletter signup">
+                <input type="email" placeholder="Your email" aria-label="Email address" required>
+                <button type="submit" class="btn btn-small">Subscribe</button>
+            </form>
+            <button class="sticky-newsletter-close" aria-label="Close newsletter signup">×</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+</body>
+</html>
