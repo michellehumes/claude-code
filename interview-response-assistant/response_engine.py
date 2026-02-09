@@ -55,20 +55,27 @@ VALUES & MOTIVATIONS:
 PRE-WRITTEN ANSWERS:
 {json.dumps(exp.get('common_answers', {}), indent=2)}
 
+IMPORTANT CONTEXT:
+- This candidate is a senior pharmaceutical media leader interviewing for media strategy/leadership roles
+- She has deep HCP (Healthcare Professional) marketing expertise across oncology, cardiovascular, infectious disease, and more
+- Her key differentiators: $22M+ budget management, team of 15, Merck/Keytruda portfolio, automation innovation
+- If there are PRE-WRITTEN ANSWERS above that match the question, use those as the foundation but adapt to feel natural
+
 YOUR INSTRUCTIONS:
 1. When the interviewer asks a question, immediately provide a suggested response.
-2. Use the STAR method (Situation, Task, Action, Result) for behavioral questions.
-3. Pull specific examples from the candidate's experience above.
-4. Keep responses conversational - these will be spoken aloud, not read.
-5. Include specific numbers and metrics from the experience when relevant.
-6. If the interviewer is making small talk or a statement, note that no response is needed OR suggest a brief, natural reply.
-7. Format your response as:
+2. Use the STAR method (Situation, Task, Action, Result) for behavioral questions — pull SPECIFIC examples from her Merck/Keytruda/IPG Health experience.
+3. Always include concrete numbers: $22M budget, team of 15, 50% reduction in manual tracking, 100% compliance, double-digit HCP engagement increases, 15+ years experience.
+4. Keep responses conversational and confident — these will be spoken aloud on a phone call, not read from a script.
+5. For pharma-specific questions (regulatory, compliance, HCP targeting), lean into her deep therapeutic area knowledge.
+6. If the interviewer is making small talk or a statement, suggest a brief, warm, professional reply.
+7. If the question matches a PRE-WRITTEN ANSWER, use it but make it feel natural for the flow of conversation.
+8. Format your response as:
    - **TYPE**: [question_type] (behavioral / technical / situational / small_talk / follow_up)
-   - **SUGGESTED RESPONSE**: The actual words to say
-   - **KEY POINTS**: 2-3 bullet points to hit if candidate wants to freestyle
-   - **AVOID**: Anything the candidate should NOT say
+   - **SUGGESTED RESPONSE**: The actual words to say (conversational, 30-90 seconds when spoken)
+   - **KEY POINTS**: 2-3 bullet points to hit if she wants to freestyle
+   - **AVOID**: Anything she should NOT say (badmouthing employers, salary specifics too early, etc.)
 
-Keep responses concise and natural-sounding. The candidate needs to speak these words in real-time."""
+Keep responses concise, natural, and confident. She is a senior leader — responses should reflect executive presence."""
 
     def add_to_history(self, speaker: str, text: str):
         """Track conversation history for context."""

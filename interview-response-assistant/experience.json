@@ -1,72 +1,137 @@
 {
-  "name": "YOUR NAME",
-  "title": "YOUR TITLE",
-  "summary": "Experienced professional with a strong background in [your field]. Passionate about delivering results and driving growth.",
+  "name": "Michelle Humes",
+  "title": "Director, Client Advice & Management | Strategic Media Leader",
+  "contact": {
+    "location": "Greater New York City Area",
+    "phone": "724-316-8296",
+    "email": "michelle.e.humes@gmail.com",
+    "linkedin": "linkedin.com/in/michellehumes"
+  },
+  "summary": "Strategic media leader with over 15 years of experience driving integrated HCP and consumer campaigns for top-tier pharmaceutical brands. Expert in HCP & HCC pharmaceutical marketing with a proven track record managing over $22M in annual budgets across Merck's Keytruda portfolio. Known for developing scalable processes that accelerate time-to-market, leading cross-functional teams, and translating complex data into actionable media strategies. Brings deep expertise in omnichannel planning spanning digital, programmatic, social, search, conventions, print, and point-of-care. Passionate about innovation, automation, and delivering measurable business results.",
 
   "work_experience": [
     {
-      "company": "Company Name",
-      "role": "Your Role",
-      "dates": "2022 - Present",
+      "company": "IPG Health — Initiative",
+      "location": "New York, NY",
+      "role": "Director, Client Advice & Management",
+      "dates": "May 2023 - Present",
       "highlights": [
-        "Led a team of X to deliver Y, resulting in Z% improvement",
-        "Designed and implemented a system that handled X requests/day",
-        "Reduced costs by X% through process optimization"
+        "Lead $22M+ integrated HCP and consumer media strategy for Merck's oncology and U.S. Pharma portfolio, including Keytruda (Pan-Tumor, Head & Neck, cSCC, Melanoma), Winrevair, Lagevrio, Bridion, and additional brands, representing the largest HCP account at the agency",
+        "Delivered double-digit increases in HCP engagement and improved script lift metrics through data-driven optimization and strategic channel mix adjustments",
+        "Lead and develop team of 15 planners and specialists across digital partnerships, search, social, and point-of-care; established mentorship programs and streamlined workflows to improve team efficiency",
+        "Built an automated creative matrix system in partnership with technology teams, reducing manual tracking by 50% and ensuring 100% compliance with label updates and asset expiration requirements",
+        "Optimize channel mix allocation using performance analytics and tumor-type insights, partnering with analytics and brand teams to improve ROI and reallocate spend to high-performing tactics",
+        "Negotiate vendor contracts and scopes across HCP endemic publishers, programmatic partners, and POC networks, accelerating campaign launches and securing value-added placements",
+        "Serve as senior client lead, presenting strategic recommendations to brand teams and fostering long-term partnerships that have expanded the scope of work and retained business"
       ]
     },
     {
-      "company": "Previous Company",
-      "role": "Previous Role",
-      "dates": "2019 - 2022",
+      "company": "IPG Health — Solve(d)",
+      "location": "New York, NY",
+      "role": "VP, Media Director",
+      "dates": "December 2021 - May 2023",
       "highlights": [
-        "Built feature X from scratch, adopted by Y users",
-        "Mentored Z junior team members",
-        "Improved system reliability from X% to Y% uptime"
+        "Directed HCP media investment for Lynparza, Molnupiravir, Januvia, and Steglatro, spanning digital, social, search, programmatic, convention, and print",
+        "Developed omnichannel HCP campaigns across multiple therapeutic areas and tumor types, coordinating with creative teams to deliver compliant, high-impact messaging"
+      ]
+    },
+    {
+      "company": "IPG Health — Solve(d)",
+      "location": "New York, NY",
+      "role": "Media Director",
+      "dates": "March 2020 - December 2021",
+      "highlights": [
+        "Directed HCP media investment across multiple pharmaceutical brands",
+        "Developed omnichannel HCP campaigns spanning digital, social, search, programmatic, convention, and print channels"
       ]
     }
   ],
 
   "skills": {
-    "technical": ["Python", "JavaScript", "TypeScript", "React", "Node.js", "SQL", "AWS"],
-    "soft": ["Leadership", "Communication", "Problem Solving", "Project Management", "Mentoring"],
-    "tools": ["Git", "Docker", "CI/CD", "Jira", "Figma"]
+    "technical": [
+      "Omnichannel media planning & buying",
+      "HCP & consumer pharmaceutical marketing",
+      "Digital, programmatic, social, search, conventions, print, point-of-care",
+      "Performance analytics & ROI optimization",
+      "Channel mix allocation & data-driven optimization",
+      "Creative matrix automation",
+      "Budget management ($22M+ annual)",
+      "Vendor contract negotiation",
+      "Campaign compliance (label updates, asset expiration)"
+    ],
+    "soft": [
+      "Cross-functional team leadership",
+      "Client relationship management",
+      "Strategic presentation & storytelling",
+      "Team development & mentorship",
+      "Process improvement & scalability",
+      "Stakeholder management",
+      "Business retention & growth"
+    ],
+    "therapeutic_areas": [
+      "Oncology (Keytruda — Pan-Tumor, Head & Neck, cSCC, Melanoma)",
+      "Cardiovascular (Winrevair)",
+      "Infectious disease (Lagevrio, Molnupiravir)",
+      "Anesthesia (Bridion)",
+      "Diabetes (Januvia, Steglatro)",
+      "Gynecologic oncology (Lynparza)"
+    ]
   },
 
   "education": [
     {
-      "institution": "University Name",
-      "degree": "Degree Type in Field",
-      "year": "2019"
+      "institution": "UPDATE: Add your university",
+      "degree": "UPDATE: Add your degree",
+      "year": "UPDATE: Add your graduation year"
     }
   ],
 
   "achievements": [
-    "Achievement 1 - quantify with numbers where possible",
-    "Achievement 2 - focus on impact and results",
-    "Achievement 3 - highlight leadership and initiative"
+    "Managing $22M+ annual media budget across Merck's largest HCP account at IPG Health",
+    "Delivered double-digit increases in HCP engagement through data-driven optimization",
+    "Built and lead team of 15 planners and specialists across multiple disciplines",
+    "Built automated creative matrix system reducing manual tracking by 50% and achieving 100% compliance",
+    "Represent the largest HCP account at the agency — expanded scope of work and retained business",
+    "15+ years of pharmaceutical media leadership experience across top-tier brands",
+    "Promoted from Media Director to VP Media Director to Director, Client Advice & Management"
   ],
 
   "projects": [
     {
-      "name": "Project Name",
-      "description": "Brief description of what you built and why",
-      "impact": "Quantifiable results or business impact"
+      "name": "Automated Creative Matrix System",
+      "description": "Partnered with technology teams to build an automated creative matrix system for tracking label updates and asset expiration across the Merck portfolio",
+      "impact": "Reduced manual tracking by 50% and ensured 100% compliance with label updates and asset expiration requirements"
+    },
+    {
+      "name": "Merck Oncology Omnichannel Strategy",
+      "description": "Led $22M+ integrated HCP and consumer media strategy for Keytruda across Pan-Tumor, Head & Neck, cSCC, and Melanoma",
+      "impact": "Delivered double-digit increases in HCP engagement and improved script lift metrics"
+    },
+    {
+      "name": "Team Mentorship & Workflow Program",
+      "description": "Established mentorship programs and streamlined workflows for a team of 15 across digital partnerships, search, social, and point-of-care",
+      "impact": "Improved team efficiency and professional development across all disciplines"
     }
   ],
 
   "values_and_motivations": [
-    "I thrive in collaborative environments where I can both learn and teach",
-    "I'm motivated by solving complex problems that have real user impact",
-    "I value continuous learning and staying current with industry trends"
+    "I'm passionate about translating complex data into actionable media strategies that drive real health outcomes",
+    "I thrive when building and mentoring high-performing teams — seeing team members grow is one of the most rewarding parts of my career",
+    "I'm driven by innovation and finding smarter, more scalable ways to work — like automating processes that used to be manual",
+    "I care deeply about delivering measurable business results and being a trusted strategic partner to my clients",
+    "I value cross-functional collaboration and believe the best campaigns come from integrating diverse perspectives"
   ],
 
   "common_answers": {
-    "why_leaving": "I'm looking for new challenges and opportunities to grow in [area]. While I've learned a lot at my current role, I'm excited about [what this new role offers].",
-    "greatest_strength": "My ability to break down complex problems into manageable pieces and communicate technical concepts to non-technical stakeholders.",
-    "greatest_weakness": "I sometimes spend too much time perfecting details. I've learned to set timeboxes and prioritize shipping over perfection.",
-    "where_in_5_years": "I see myself growing into a leadership role where I can drive technical strategy while mentoring the next generation of engineers.",
-    "salary_expectations": "I'm focused on finding the right fit. I'd love to learn more about the total compensation package and ensure we're aligned.",
-    "why_this_company": "CUSTOMIZE: Research the company and add specific reasons here.",
-    "tell_me_about_yourself": "CUSTOMIZE: Write your 60-second elevator pitch here."
+    "tell_me_about_yourself": "I'm a strategic media leader with over 15 years of experience in pharmaceutical marketing. Currently at IPG Health, I lead the largest HCP account at the agency — a $22M+ integrated media strategy for Merck's oncology and U.S. Pharma portfolio, including Keytruda. I manage a team of 15 across digital, search, social, and point-of-care. What I'm most proud of is how I combine data-driven optimization with creative strategy — for example, I built an automated creative matrix system that reduced manual tracking by 50% while ensuring 100% compliance. I'm passionate about innovation, mentoring teams, and delivering measurable results.",
+    "why_leaving": "I've had an incredible run at IPG Health and I'm proud of what I've built there — from managing the largest HCP account to developing my team. I'm now looking for my next challenge where I can bring my 15 years of pharmaceutical media expertise to a new environment and continue to grow as a leader. I'm particularly excited about opportunities where I can drive strategic innovation at a broader scale.",
+    "greatest_strength": "My ability to translate complex data into clear, actionable media strategies. In pharma, we're dealing with multiple therapeutic areas, compliance requirements, and sophisticated audiences. I'm able to take all of that complexity and turn it into a clear strategic direction that my team can execute on and that clients trust. I also bring a strong combination of analytical rigor and relationship building — I've retained and expanded business by being a true strategic partner.",
+    "greatest_weakness": "Earlier in my career, I tended to take on too much myself rather than delegating effectively. As I moved into leadership, I realized that developing my team means trusting them with meaningful work. I've become much more intentional about delegation — setting clear expectations, providing the right support, and then stepping back. It's made my team stronger and me a better leader.",
+    "where_in_5_years": "I see myself in a senior leadership role where I'm shaping media strategy at an organizational level — whether that's as a VP or SVP leading a practice area or a portfolio of clients. I want to continue building high-performing teams and driving innovation in how we approach pharmaceutical media. I'm also passionate about mentoring the next generation of media leaders.",
+    "salary_expectations": "I'm focused on finding the right opportunity and cultural fit. I'd love to learn more about the full compensation package. I'm confident we can find alignment based on my experience managing $22M+ budgets and leading large teams.",
+    "why_this_company": "CUSTOMIZE: Research the specific company and add reasons here — their clients, culture, innovation, growth trajectory, etc.",
+    "leadership_style": "I lead by empowering my team. I set a clear strategic vision and expectations, then give my team the autonomy to execute. I've built mentorship programs and streamlined workflows specifically so my 15 planners and specialists can do their best work. I believe in being accessible, giving direct feedback, and celebrating wins. My approach has led to strong retention and team members who've been promoted under my leadership.",
+    "handling_conflict": "In pharma media, we deal with a lot of stakeholders — brand teams, legal, creative, vendors. When conflicts arise, I focus on understanding each perspective and finding the solution that serves the campaign goals. For example, when there's tension between creative ambition and compliance requirements, I bring both sides together early in the process so we can solve it collaboratively rather than reactively.",
+    "biggest_accomplishment": "Leading the $22M+ Merck oncology media strategy as the largest HCP account at IPG Health. But what I'm most personally proud of is the automated creative matrix system I built. It was a real pain point — tracking label updates and asset expirations manually across dozens of brands. I partnered with our technology team to automate it, which cut manual tracking by 50% and got us to 100% compliance. It's a great example of how I think — find the bottleneck, innovate a solution, and deliver measurable impact."
   }
 }
