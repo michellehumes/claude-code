@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interview Response Assistant</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: #0a0a0f;
+            color: #e0e0e0;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .app {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto 1fr auto;
+            height: 100vh;
+            gap: 1px;
+            background: #1a1a2e;
+        }
+
+        /* Header */
+        .header {
+            grid-column: 1 / -1;
+            background: #0f0f1a;
+            padding: 12px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #2a2a4a;
+        }
+
+        .header h1 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #7c7cff;
+            letter-spacing: -0.5px;
+        }
+
+        .status-bar {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #444;
+        }
+
+        .status-dot.active {
+            background: #4caf50;
+            box-shadow: 0 0 8px #4caf5088;
+            animation: pulse 2s infinite;
+        }
+
+        .status-dot.error { background: #f44336; }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Panels */
+        .panel {
+            background: #0f0f1a;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .panel-header {
+            padding: 12px 20px;
+            border-bottom: 1px solid #1a1a2e;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #888;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .panel-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px 20px;
+            scroll-behavior: smooth;
+        }
+
+        /* Transcript Panel */
+        .transcript-entry {
+            margin-bottom: 16px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .transcript-speaker {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .transcript-speaker.interviewer { color: #ff6b6b; }
+        .transcript-speaker.you { color: #4caf50; }
+
+        .transcript-text {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #ccc;
+            padding-left: 12px;
+            border-left: 2px solid #2a2a4a;
+        }
+
+        .transcript-time {
+            font-size: 10px;
+            color: #555;
+            margin-top: 2px;
+            padding-left: 12px;
+        }
+
+        /* Response Panel */
+        .response-card {
+            background: #12122a;
+            border: 1px solid #2a2a4a;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 16px;
+            animation: slideIn 0.4s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .response-card.latest {
+            border-color: #7c7cff44;
+            box-shadow: 0 0 20px #7c7cff11;
+        }
+
+        .response-type {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        .response-type.behavioral { background: #4caf5022; color: #4caf50; }
+        .response-type.technical { background: #2196f322; color: #2196f3; }
+        .response-type.situational { background: #ff980022; color: #ff9800; }
+        .response-type.small_talk { background: #9c27b022; color: #ce93d8; }
+        .response-type.follow_up { background: #00bcd422; color: #00bcd4; }
+
+        .response-text {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #e8e8e8;
+            margin-bottom: 12px;
+        }
+
+        .response-text strong { color: #7c7cff; }
+
+        .key-points {
+            background: #1a1a30;
+            border-radius: 6px;
+            padding: 10px 14px;
+            margin-bottom: 8px;
+        }
+
+        .key-points-title {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #7c7cff;
+            margin-bottom: 6px;
+        }
+
+        .key-points ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .key-points li {
+            font-size: 13px;
+            color: #aaa;
+            padding: 2px 0;
+            padding-left: 16px;
+            position: relative;
+        }
+
+        .key-points li::before {
+            content: ">";
+            position: absolute;
+            left: 0;
+            color: #7c7cff;
+            font-weight: bold;
+        }
+
+        .avoid-section {
+            font-size: 12px;
+            color: #f4433688;
+            margin-top: 6px;
+            padding-left: 12px;
+            border-left: 2px solid #f4433644;
+        }
+
+        /* Streaming indicator */
+        .streaming-indicator {
+            display: inline-block;
+            width: 6px;
+            height: 16px;
+            background: #7c7cff;
+            animation: blink 0.8s infinite;
+            vertical-align: text-bottom;
+            margin-left: 2px;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Footer Controls */
+        .footer {
+            grid-column: 1 / -1;
+            background: #0f0f1a;
+            padding: 12px 24px;
+            border-top: 1px solid #2a2a4a;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        button {
+            padding: 8px 20px;
+            border-radius: 6px;
+            border: 1px solid #2a2a4a;
+            background: #1a1a2e;
+            color: #e0e0e0;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        button:hover {
+            background: #2a2a4a;
+            border-color: #7c7cff44;
+        }
+
+        button.primary {
+            background: #7c7cff;
+            color: #0a0a0f;
+            border-color: #7c7cff;
+            font-weight: 600;
+        }
+
+        button.primary:hover { background: #9c9cff; }
+
+        button.danger {
+            border-color: #f4433644;
+            color: #f44336;
+        }
+
+        button.danger:hover { background: #f4433622; }
+
+        .device-select {
+            background: #1a1a2e;
+            border: 1px solid #2a2a4a;
+            color: #e0e0e0;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            min-width: 200px;
+        }
+
+        .device-select:focus {
+            outline: none;
+            border-color: #7c7cff44;
+        }
+
+        /* Manual input */
+        .manual-input-group {
+            display: flex;
+            gap: 8px;
+            flex: 1;
+            margin-left: 16px;
+        }
+
+        .manual-input {
+            flex: 1;
+            background: #1a1a2e;
+            border: 1px solid #2a2a4a;
+            color: #e0e0e0;
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-size: 13px;
+        }
+
+        .manual-input:focus {
+            outline: none;
+            border-color: #7c7cff;
+        }
+
+        .manual-input::placeholder { color: #555; }
+
+        /* Scrollbar */
+        .panel-body::-webkit-scrollbar { width: 6px; }
+        .panel-body::-webkit-scrollbar-track { background: transparent; }
+        .panel-body::-webkit-scrollbar-thumb { background: #2a2a4a; border-radius: 3px; }
+        .panel-body::-webkit-scrollbar-thumb:hover { background: #3a3a5a; }
+
+        /* Audio Level */
+        .audio-level {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .level-bar {
+            width: 3px;
+            height: 14px;
+            background: #2a2a4a;
+            border-radius: 2px;
+            transition: background 0.1s;
+        }
+
+        .level-bar.active { background: #4caf50; }
+
+        /* Empty state */
+        .empty-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: #444;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .empty-state svg {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 16px;
+            opacity: 0.3;
+        }
+
+        .empty-state p {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* Mode tabs */
+        .mode-tabs {
+            display: flex;
+            gap: 2px;
+            background: #1a1a2e;
+            border-radius: 6px;
+            padding: 2px;
+        }
+
+        .mode-tab {
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            border: none;
+            background: transparent;
+            color: #888;
+            cursor: pointer;
+        }
+
+        .mode-tab.active {
+            background: #2a2a4a;
+            color: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <!-- Header -->
+        <div class="header">
+            <h1>Interview Response Assistant</h1>
+            <div class="status-bar">
+                <div class="audio-level" id="audioLevel">
+                    <div class="level-bar"></div>
+                    <div class="level-bar"></div>
+                    <div class="level-bar"></div>
+                    <div class="level-bar"></div>
+                    <div class="level-bar"></div>
+                </div>
+                <div class="status-indicator">
+                    <div class="status-dot" id="wsStatus"></div>
+                    <span id="wsStatusText">Disconnected</span>
+                </div>
+                <div class="status-indicator">
+                    <div class="status-dot" id="micStatus"></div>
+                    <span id="micStatusText">Mic Off</span>
+                </div>
+                <div class="mode-tabs">
+                    <button class="mode-tab active" data-mode="live" onclick="setMode('live')">Live</button>
+                    <button class="mode-tab" data-mode="manual" onclick="setMode('manual')">Manual</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Left Panel: Live Transcript -->
+        <div class="panel">
+            <div class="panel-header">
+                <span>Live Transcript</span>
+                <button onclick="clearTranscript()" style="padding:4px 8px;font-size:11px;">Clear</button>
+            </div>
+            <div class="panel-body" id="transcriptPanel">
+                <div class="empty-state" id="transcriptEmpty">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                        <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                        <line x1="12" y1="19" x2="12" y2="23"/>
+                        <line x1="8" y1="23" x2="16" y2="23"/>
+                    </svg>
+                    <p>Waiting for audio...<br>Start the session to see the live transcript.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Panel: Suggested Responses -->
+        <div class="panel">
+            <div class="panel-header">
+                <span>Suggested Responses</span>
+                <span id="responseCount" style="color:#7c7cff;">0 responses</span>
+            </div>
+            <div class="panel-body" id="responsePanel">
+                <div class="empty-state" id="responseEmpty">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                    </svg>
+                    <p>Responses will appear here<br>as the interviewer speaks.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Controls -->
+        <div class="footer">
+            <select class="device-select" id="deviceSelect">
+                <option value="">Select audio device...</option>
+            </select>
+            <button class="primary" id="startBtn" onclick="toggleSession()">Start Listening</button>
+            <button class="danger" onclick="clearAll()">Reset</button>
+
+            <div class="manual-input-group">
+                <input
+                    type="text"
+                    class="manual-input"
+                    id="manualInput"
+                    placeholder="Type interviewer's question here (manual mode)..."
+                    onkeydown="if(event.key==='Enter')sendManual()"
+                />
+                <button onclick="sendManual()">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let ws = null;
+        let sessionActive = false;
+        let responseCount = 0;
+        let mode = 'live';
+
+        // --- WebSocket Connection ---
+        function connect() {
+            const protocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            ws = new WebSocket(`${protocol}//${location.host}/ws`);
+
+            ws.onopen = () => {
+                document.getElementById('wsStatus').className = 'status-dot active';
+                document.getElementById('wsStatusText').textContent = 'Connected';
+                // Request device list
+                ws.send(JSON.stringify({ type: 'list_devices' }));
+            };
+
+            ws.onmessage = (event) => {
+                const msg = JSON.parse(event.data);
+                handleMessage(msg);
+            };
+
+            ws.onclose = () => {
+                document.getElementById('wsStatus').className = 'status-dot';
+                document.getElementById('wsStatusText').textContent = 'Disconnected';
+                // Reconnect after 2 seconds
+                setTimeout(connect, 2000);
+            };
+
+            ws.onerror = () => {
+                document.getElementById('wsStatus').className = 'status-dot error';
+                document.getElementById('wsStatusText').textContent = 'Error';
+            };
+        }
+
+        // --- Message Handler ---
+        function handleMessage(msg) {
+            switch (msg.type) {
+                case 'devices':
+                    populateDevices(msg.devices);
+                    break;
+                case 'transcript':
+                    addTranscript(msg.speaker, msg.text, msg.timestamp);
+                    break;
+                case 'response_start':
+                    startResponse(msg.question);
+                    break;
+                case 'response_chunk':
+                    appendResponseChunk(msg.text);
+                    break;
+                case 'response_done':
+                    finalizeResponse();
+                    break;
+                case 'audio_level':
+                    updateAudioLevel(msg.level);
+                    break;
+                case 'mic_status':
+                    updateMicStatus(msg.active);
+                    break;
+                case 'error':
+                    showError(msg.message);
+                    break;
+            }
+        }
+
+        // --- Device Selection ---
+        function populateDevices(devices) {
+            const select = document.getElementById('deviceSelect');
+            select.innerHTML = '<option value="">Select audio device...</option>';
+            devices.forEach(d => {
+                const opt = document.createElement('option');
+                opt.value = d.index;
+                opt.textContent = `${d.name} (${d.channels}ch)`;
+                select.appendChild(opt);
+            });
+        }
+
+        // --- Session Control ---
+        function toggleSession() {
+            if (!ws || ws.readyState !== WebSocket.OPEN) return;
+
+            if (sessionActive) {
+                ws.send(JSON.stringify({ type: 'stop' }));
+                document.getElementById('startBtn').textContent = 'Start Listening';
+                document.getElementById('startBtn').classList.add('primary');
+                document.getElementById('startBtn').classList.remove('danger');
+                sessionActive = false;
+            } else {
+                const device = document.getElementById('deviceSelect').value;
+                ws.send(JSON.stringify({
+                    type: 'start',
+                    device_index: device ? parseInt(device) : null
+                }));
+                document.getElementById('startBtn').textContent = 'Stop';
+                document.getElementById('startBtn').classList.remove('primary');
+                document.getElementById('startBtn').classList.add('danger');
+                sessionActive = true;
+            }
+        }
+
+        // --- Transcript ---
+        function addTranscript(speaker, text, timestamp) {
+            const empty = document.getElementById('transcriptEmpty');
+            if (empty) empty.remove();
+
+            const panel = document.getElementById('transcriptPanel');
+            const entry = document.createElement('div');
+            entry.className = 'transcript-entry';
+
+            const speakerClass = speaker.toLowerCase() === 'interviewer' ? 'interviewer' : 'you';
+            const time = timestamp ? new Date(timestamp * 1000).toLocaleTimeString() : new Date().toLocaleTimeString();
+
+            entry.innerHTML = `
+                <div class="transcript-speaker ${speakerClass}">${speaker}</div>
+                <div class="transcript-text">${escapeHtml(text)}</div>
+                <div class="transcript-time">${time}</div>
+            `;
+
+            panel.appendChild(entry);
+            panel.scrollTop = panel.scrollHeight;
+        }
+
+        // --- Responses ---
+        let currentResponseCard = null;
+        let currentResponseText = null;
+
+        function startResponse(question) {
+            const empty = document.getElementById('responseEmpty');
+            if (empty) empty.remove();
+
+            const panel = document.getElementById('responsePanel');
+
+            // Remove 'latest' class from previous cards
+            panel.querySelectorAll('.response-card.latest').forEach(c => c.classList.remove('latest'));
+
+            currentResponseCard = document.createElement('div');
+            currentResponseCard.className = 'response-card latest';
+
+            currentResponseText = document.createElement('div');
+            currentResponseText.className = 'response-text';
+
+            const cursor = document.createElement('span');
+            cursor.className = 'streaming-indicator';
+            cursor.id = 'streamCursor';
+
+            currentResponseCard.appendChild(currentResponseText);
+            currentResponseText.appendChild(cursor);
+
+            panel.appendChild(currentResponseCard);
+            panel.scrollTop = panel.scrollHeight;
+        }
+
+        function appendResponseChunk(text) {
+            if (!currentResponseText) return;
+
+            const cursor = document.getElementById('streamCursor');
+            if (cursor) cursor.remove();
+
+            // Parse markdown-like formatting
+            currentResponseText.innerHTML += escapeHtml(text);
+
+            // Re-add cursor
+            const newCursor = document.createElement('span');
+            newCursor.className = 'streaming-indicator';
+            newCursor.id = 'streamCursor';
+            currentResponseText.appendChild(newCursor);
+
+            const panel = document.getElementById('responsePanel');
+            panel.scrollTop = panel.scrollHeight;
+        }
+
+        function finalizeResponse() {
+            const cursor = document.getElementById('streamCursor');
+            if (cursor) cursor.remove();
+
+            if (currentResponseText) {
+                // Format the final response with proper styling
+                let html = currentResponseText.textContent;
+                html = formatResponse(html);
+                currentResponseCard.innerHTML = html;
+            }
+
+            responseCount++;
+            document.getElementById('responseCount').textContent = `${responseCount} response${responseCount !== 1 ? 's' : ''}`;
+            currentResponseCard = null;
+            currentResponseText = null;
+        }
+
+        function formatResponse(text) {
+            let html = '';
+
+            // Extract type
+            const typeMatch = text.match(/\*?\*?TYPE\*?\*?:\s*\[?(\w+)\]?/i);
+            if (typeMatch) {
+                const type = typeMatch[1].toLowerCase();
+                html += `<span class="response-type ${type}">${type.replace('_', ' ')}</span>`;
+            }
+
+            // Extract suggested response
+            const responseMatch = text.match(/\*?\*?SUGGESTED RESPONSE\*?\*?:([\s\S]*?)(?=\*?\*?KEY POINTS|$)/i);
+            if (responseMatch) {
+                html += `<div class="response-text">${escapeHtml(responseMatch[1].trim())}</div>`;
+            }
+
+            // Extract key points
+            const keyPointsMatch = text.match(/\*?\*?KEY POINTS\*?\*?:([\s\S]*?)(?=\*?\*?AVOID|$)/i);
+            if (keyPointsMatch) {
+                const points = keyPointsMatch[1].trim().split('\n').filter(l => l.trim().startsWith('-') || l.trim().startsWith('*'));
+                if (points.length > 0) {
+                    html += '<div class="key-points"><div class="key-points-title">Key Points</div><ul>';
+                    points.forEach(p => {
+                        html += `<li>${escapeHtml(p.replace(/^[\s\-\*]+/, '').trim())}</li>`;
+                    });
+                    html += '</ul></div>';
+                }
+            }
+
+            // Extract avoid
+            const avoidMatch = text.match(/\*?\*?AVOID\*?\*?:([\s\S]*?)$/i);
+            if (avoidMatch) {
+                html += `<div class="avoid-section">${escapeHtml(avoidMatch[1].trim())}</div>`;
+            }
+
+            // If no structured format detected, show raw text
+            if (!typeMatch && !responseMatch) {
+                html = `<div class="response-text">${escapeHtml(text)}</div>`;
+            }
+
+            return html;
+        }
+
+        // --- Audio Level ---
+        function updateAudioLevel(level) {
+            const bars = document.querySelectorAll('#audioLevel .level-bar');
+            const threshold = level * bars.length;
+            bars.forEach((bar, i) => {
+                bar.classList.toggle('active', i < threshold);
+            });
+        }
+
+        // --- Mic Status ---
+        function updateMicStatus(active) {
+            document.getElementById('micStatus').className = `status-dot ${active ? 'active' : ''}`;
+            document.getElementById('micStatusText').textContent = active ? 'Listening' : 'Mic Off';
+        }
+
+        // --- Manual Input ---
+        function sendManual() {
+            const input = document.getElementById('manualInput');
+            const text = input.value.trim();
+            if (!text || !ws || ws.readyState !== WebSocket.OPEN) return;
+
+            ws.send(JSON.stringify({ type: 'manual_input', text }));
+            input.value = '';
+        }
+
+        // --- Mode ---
+        function setMode(m) {
+            mode = m;
+            document.querySelectorAll('.mode-tab').forEach(t => {
+                t.classList.toggle('active', t.dataset.mode === m);
+            });
+        }
+
+        // --- Utilities ---
+        function clearTranscript() {
+            const panel = document.getElementById('transcriptPanel');
+            panel.innerHTML = '';
+        }
+
+        function clearAll() {
+            clearTranscript();
+            document.getElementById('responsePanel').innerHTML = '';
+            responseCount = 0;
+            document.getElementById('responseCount').textContent = '0 responses';
+            if (ws && ws.readyState === WebSocket.OPEN) {
+                ws.send(JSON.stringify({ type: 'clear_history' }));
+            }
+        }
+
+        function showError(msg) {
+            console.error('[server]', msg);
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // --- Init ---
+        connect();
+    </script>
+</body>
+</html>
