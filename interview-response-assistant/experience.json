@@ -1,0 +1,72 @@
+{
+  "name": "YOUR NAME",
+  "title": "YOUR TITLE",
+  "summary": "Experienced professional with a strong background in [your field]. Passionate about delivering results and driving growth.",
+
+  "work_experience": [
+    {
+      "company": "Company Name",
+      "role": "Your Role",
+      "dates": "2022 - Present",
+      "highlights": [
+        "Led a team of X to deliver Y, resulting in Z% improvement",
+        "Designed and implemented a system that handled X requests/day",
+        "Reduced costs by X% through process optimization"
+      ]
+    },
+    {
+      "company": "Previous Company",
+      "role": "Previous Role",
+      "dates": "2019 - 2022",
+      "highlights": [
+        "Built feature X from scratch, adopted by Y users",
+        "Mentored Z junior team members",
+        "Improved system reliability from X% to Y% uptime"
+      ]
+    }
+  ],
+
+  "skills": {
+    "technical": ["Python", "JavaScript", "TypeScript", "React", "Node.js", "SQL", "AWS"],
+    "soft": ["Leadership", "Communication", "Problem Solving", "Project Management", "Mentoring"],
+    "tools": ["Git", "Docker", "CI/CD", "Jira", "Figma"]
+  },
+
+  "education": [
+    {
+      "institution": "University Name",
+      "degree": "Degree Type in Field",
+      "year": "2019"
+    }
+  ],
+
+  "achievements": [
+    "Achievement 1 - quantify with numbers where possible",
+    "Achievement 2 - focus on impact and results",
+    "Achievement 3 - highlight leadership and initiative"
+  ],
+
+  "projects": [
+    {
+      "name": "Project Name",
+      "description": "Brief description of what you built and why",
+      "impact": "Quantifiable results or business impact"
+    }
+  ],
+
+  "values_and_motivations": [
+    "I thrive in collaborative environments where I can both learn and teach",
+    "I'm motivated by solving complex problems that have real user impact",
+    "I value continuous learning and staying current with industry trends"
+  ],
+
+  "common_answers": {
+    "why_leaving": "I'm looking for new challenges and opportunities to grow in [area]. While I've learned a lot at my current role, I'm excited about [what this new role offers].",
+    "greatest_strength": "My ability to break down complex problems into manageable pieces and communicate technical concepts to non-technical stakeholders.",
+    "greatest_weakness": "I sometimes spend too much time perfecting details. I've learned to set timeboxes and prioritize shipping over perfection.",
+    "where_in_5_years": "I see myself growing into a leadership role where I can drive technical strategy while mentoring the next generation of engineers.",
+    "salary_expectations": "I'm focused on finding the right fit. I'd love to learn more about the total compensation package and ensure we're aligned.",
+    "why_this_company": "CUSTOMIZE: Research the company and add specific reasons here.",
+    "tell_me_about_yourself": "CUSTOMIZE: Write your 60-second elevator pitch here."
+  }
+}
