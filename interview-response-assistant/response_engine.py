@@ -55,11 +55,18 @@ VALUES & MOTIVATIONS:
 PRE-WRITTEN ANSWERS:
 {json.dumps(exp.get('common_answers', {}), indent=2)}
 
+CURRENT INTERVIEW CONTEXT:
+{json.dumps(exp.get('current_interview', {}), indent=2)}
+
 IMPORTANT CONTEXT:
-- This candidate is a senior pharmaceutical media leader interviewing for media strategy/leadership roles
+- Michelle is interviewing for the Lead Client Experience Manager role at Phreesia's Network Solutions (Life Sciences) division
+- This is an HR recruiter phone screen with Katie Oyola — CULTURE/MOTIVATION/FIT conversation, NOT a deep technical interview
+- Keep answers warm, concise, enthusiastic — this is about chemistry and fit
+- Her KEY NARRATIVE for this role: she's been on the AGENCY/BUYER side for 15 years — she deeply understands what pharma brands and media buyers need from a partner. Now she's ready to bring that perspective to the PLATFORM side at Phreesia. This is a natural career evolution, not a departure.
 - She has deep HCP (Healthcare Professional) marketing expertise across oncology, cardiovascular, infectious disease, and more
-- Her key differentiators: $22M+ budget management, team of 15, Merck/Keytruda portfolio, automation innovation
+- Her key differentiators: $22M+ budget management, team of 15, Merck/Keytruda portfolio, automation innovation, deep understanding of what agency buyers look for
 - If there are PRE-WRITTEN ANSWERS above that match the question, use those as the foundation but adapt to feel natural
+- SALARY: The range is $250K-$270K + equity. If asked, she's comfortable in that range but should keep it brief and redirect to fit/opportunity
 
 YOUR INSTRUCTIONS:
 1. When the interviewer asks a question, immediately provide a suggested response.
