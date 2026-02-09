@@ -1,20 +1,22 @@
 """
 AI-powered response engine that generates interview answer suggestions
 based on the user's experience profile and the transcribed conversation.
+
+Uses Google Gemini (free tier) for response generation.
 """
 
 import json
 import os
 from pathlib import Path
 
-import anthropic
+from google import genai
 
 
 class ResponseEngine:
-    """Generates real-time interview response suggestions using Claude."""
+    """Generates real-time interview response suggestions using Gemini."""
 
     def __init__(self, experience_path: str = "experience.json"):
-        self.client = anthropic.AsyncAnthropic()  # async client for non-blocking streaming
+        self.client = genai.Client()  # reads GEMINI_API_KEY or GOOGLE_API_KEY from env
         self.experience = self._load_experience(experience_path)
         self.conversation_history: list[dict] = []
         self.system_prompt = self._build_system_prompt()
@@ -94,42 +96,37 @@ Keep responses concise, natural, and confident. She is a senior leader — respo
     async def generate_response(self, interviewer_text: str) -> str:
         """
         Generate a suggested response based on what the interviewer just said.
-
-        Returns the full suggestion text with type, response, key points, etc.
         """
         self.add_to_history("Interviewer", interviewer_text)
 
-        # Build the conversation context
         context_lines = []
         for entry in self.conversation_history:
             context_lines.append(f"{entry['speaker']}: {entry['text']}")
         conversation_context = "\n".join(context_lines)
 
-        message = await self.client.messages.create(
-            model="claude-sonnet-4-20250514",
-            max_tokens=1024,
-            system=self.system_prompt,
-            messages=[
-                {
-                    "role": "user",
-                    "content": f"""LIVE INTERVIEW TRANSCRIPT SO FAR:
+        prompt = f"""LIVE INTERVIEW TRANSCRIPT SO FAR:
 {conversation_context}
 
 The interviewer just said: "{interviewer_text}"
 
-Provide a suggested response for the candidate to say RIGHT NOW. Be concise and natural.""",
-                }
-            ],
+Provide a suggested response for the candidate to say RIGHT NOW. Be concise and natural."""
+
+        response = await self.client.aio.models.generate_content(
+            model="gemini-2.0-flash",
+            contents=prompt,
+            config=genai.types.GenerateContentConfig(
+                system_instruction=self.system_prompt,
+                max_output_tokens=1024,
+            ),
         )
 
-        response_text = message.content[0].text
+        response_text = response.text
         self.add_to_history("Suggested Response", response_text)
         return response_text
 
     async def generate_response_stream(self, interviewer_text: str):
         """
         Stream a suggested response token-by-token for faster display.
-
         Yields text chunks as they arrive from the API.
         """
         self.add_to_history("Interviewer", interviewer_text)
@@ -139,25 +136,25 @@ Provide a suggested response for the candidate to say RIGHT NOW. Be concise and 
             context_lines.append(f"{entry['speaker']}: {entry['text']}")
         conversation_context = "\n".join(context_lines)
 
-        full_response = ""
-
-        async with self.client.messages.stream(
-            model="claude-sonnet-4-20250514",
-            max_tokens=1024,
-            system=self.system_prompt,
-            messages=[
-                {
-                    "role": "user",
-                    "content": f"""LIVE INTERVIEW TRANSCRIPT SO FAR:
+        prompt = f"""LIVE INTERVIEW TRANSCRIPT SO FAR:
 {conversation_context}
 
 The interviewer just said: "{interviewer_text}"
 
-Provide a suggested response for the candidate to say RIGHT NOW. Be concise and natural.""",
-                }
-            ],
-        ) as stream:
-            async for text in stream.text_stream:
+Provide a suggested response for the candidate to say RIGHT NOW. Be concise and natural."""
+
+        full_response = ""
+
+        async for chunk in await self.client.aio.models.generate_content_stream(
+            model="gemini-2.0-flash",
+            contents=prompt,
+            config=genai.types.GenerateContentConfig(
+                system_instruction=self.system_prompt,
+                max_output_tokens=1024,
+            ),
+        ):
+            text = chunk.text
+            if text:
                 full_response += text
                 yield text
 
