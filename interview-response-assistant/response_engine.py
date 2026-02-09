@@ -14,7 +14,7 @@ class ResponseEngine:
     """Generates real-time interview response suggestions using Claude."""
 
     def __init__(self, experience_path: str = "experience.json"):
-        self.client = anthropic.Anthropic()  # reads ANTHROPIC_API_KEY from env
+        self.client = anthropic.AsyncAnthropic()  # async client for non-blocking streaming
         self.experience = self._load_experience(experience_path)
         self.conversation_history: list[dict] = []
         self.system_prompt = self._build_system_prompt()
@@ -105,7 +105,7 @@ Keep responses concise, natural, and confident. She is a senior leader — respo
             context_lines.append(f"{entry['speaker']}: {entry['text']}")
         conversation_context = "\n".join(context_lines)
 
-        message = self.client.messages.create(
+        message = await self.client.messages.create(
             model="claude-sonnet-4-20250514",
             max_tokens=1024,
             system=self.system_prompt,
@@ -141,7 +141,7 @@ Provide a suggested response for the candidate to say RIGHT NOW. Be concise and 
 
         full_response = ""
 
-        with self.client.messages.stream(
+        async with self.client.messages.stream(
             model="claude-sonnet-4-20250514",
             max_tokens=1024,
             system=self.system_prompt,
@@ -157,7 +157,7 @@ Provide a suggested response for the candidate to say RIGHT NOW. Be concise and 
                 }
             ],
         ) as stream:
-            for text in stream.text_stream:
+            async for text in stream.text_stream:
                 full_response += text
                 yield text
 

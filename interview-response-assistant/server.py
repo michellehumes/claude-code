@@ -60,12 +60,15 @@ async def on_transcript(speaker: str, text: str):
     })
 
     # Generate AI response
+    print(f"[response] Generating response for: {text[:80]}...")
     await broadcast({"type": "response_start", "question": text})
 
     try:
         async for chunk in response_engine.generate_response_stream(text):
             await broadcast({"type": "response_chunk", "text": chunk})
+        print("[response] Done.")
     except Exception as e:
+        print(f"[response] ERROR: {e}")
         await broadcast({"type": "error", "message": f"Response generation failed: {e}"})
 
     await broadcast({"type": "response_done"})
