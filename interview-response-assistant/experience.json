@@ -1,72 +1,153 @@
 {
-  "name": "YOUR NAME",
-  "title": "YOUR TITLE",
-  "summary": "Experienced professional with a strong background in [your field]. Passionate about delivering results and driving growth.",
+  "name": "Michelle Humes",
+  "title": "Director, Client Advice & Management | Strategic Media Leader",
+  "contact": {
+    "location": "Greater New York City Area",
+    "phone": "724-316-8296",
+    "email": "michelle.e.humes@gmail.com",
+    "linkedin": "linkedin.com/in/michellehumes"
+  },
+  "summary": "Strategic media leader with over 15 years of experience driving integrated HCP and consumer campaigns for top-tier pharmaceutical brands. Expert in HCP & HCC pharmaceutical marketing with a proven track record managing over $22M in annual budgets across Merck's Keytruda portfolio. Known for developing scalable processes that accelerate time-to-market, leading cross-functional teams, and translating complex data into actionable media strategies. Brings deep expertise in omnichannel planning spanning digital, programmatic, social, search, conventions, print, and point-of-care. Passionate about innovation, automation, and delivering measurable business results.",
 
   "work_experience": [
     {
-      "company": "Company Name",
-      "role": "Your Role",
-      "dates": "2022 - Present",
+      "company": "IPG Health — Initiative",
+      "location": "New York, NY",
+      "role": "Director, Client Advice & Management",
+      "dates": "May 2023 - Present",
       "highlights": [
-        "Led a team of X to deliver Y, resulting in Z% improvement",
-        "Designed and implemented a system that handled X requests/day",
-        "Reduced costs by X% through process optimization"
+        "Lead $22M+ integrated HCP and consumer media strategy for Merck's oncology and U.S. Pharma portfolio, including Keytruda (Pan-Tumor, Head & Neck, cSCC, Melanoma), Winrevair, Lagevrio, Bridion, and additional brands, representing the largest HCP account at the agency",
+        "Delivered double-digit increases in HCP engagement and improved script lift metrics through data-driven optimization and strategic channel mix adjustments",
+        "Lead and develop team of 15 planners and specialists across digital partnerships, search, social, and point-of-care; established mentorship programs and streamlined workflows to improve team efficiency",
+        "Built an automated creative matrix system in partnership with technology teams, reducing manual tracking by 50% and ensuring 100% compliance with label updates and asset expiration requirements",
+        "Optimize channel mix allocation using performance analytics and tumor-type insights, partnering with analytics and brand teams to improve ROI and reallocate spend to high-performing tactics",
+        "Negotiate vendor contracts and scopes across HCP endemic publishers, programmatic partners, and POC networks, accelerating campaign launches and securing value-added placements",
+        "Serve as senior client lead, presenting strategic recommendations to brand teams and fostering long-term partnerships that have expanded the scope of work and retained business"
       ]
     },
     {
-      "company": "Previous Company",
-      "role": "Previous Role",
-      "dates": "2019 - 2022",
+      "company": "IPG Health — Solve(d)",
+      "location": "New York, NY",
+      "role": "VP, Media Director",
+      "dates": "December 2021 - May 2023",
       "highlights": [
-        "Built feature X from scratch, adopted by Y users",
-        "Mentored Z junior team members",
-        "Improved system reliability from X% to Y% uptime"
+        "Directed HCP media investment for Lynparza, Molnupiravir, Januvia, and Steglatro, spanning digital, social, search, programmatic, convention, and print",
+        "Developed omnichannel HCP campaigns across multiple therapeutic areas and tumor types, coordinating with creative teams to deliver compliant, high-impact messaging"
+      ]
+    },
+    {
+      "company": "IPG Health — Solve(d)",
+      "location": "New York, NY",
+      "role": "Media Director",
+      "dates": "March 2020 - December 2021",
+      "highlights": [
+        "Directed HCP media investment across multiple pharmaceutical brands",
+        "Developed omnichannel HCP campaigns spanning digital, social, search, programmatic, convention, and print channels"
       ]
     }
   ],
 
   "skills": {
-    "technical": ["Python", "JavaScript", "TypeScript", "React", "Node.js", "SQL", "AWS"],
-    "soft": ["Leadership", "Communication", "Problem Solving", "Project Management", "Mentoring"],
-    "tools": ["Git", "Docker", "CI/CD", "Jira", "Figma"]
+    "technical": [
+      "Omnichannel media planning & buying",
+      "HCP & consumer pharmaceutical marketing",
+      "Digital, programmatic, social, search, conventions, print, point-of-care",
+      "Performance analytics & ROI optimization",
+      "Channel mix allocation & data-driven optimization",
+      "Creative matrix automation",
+      "Budget management ($22M+ annual)",
+      "Vendor contract negotiation",
+      "Campaign compliance (label updates, asset expiration)"
+    ],
+    "soft": [
+      "Cross-functional team leadership",
+      "Client relationship management",
+      "Strategic presentation & storytelling",
+      "Team development & mentorship",
+      "Process improvement & scalability",
+      "Stakeholder management",
+      "Business retention & growth"
+    ],
+    "therapeutic_areas": [
+      "Oncology (Keytruda — Pan-Tumor, Head & Neck, cSCC, Melanoma)",
+      "Cardiovascular (Winrevair)",
+      "Infectious disease (Lagevrio, Molnupiravir)",
+      "Anesthesia (Bridion)",
+      "Diabetes (Januvia, Steglatro)",
+      "Gynecologic oncology (Lynparza)"
+    ]
   },
 
   "education": [
     {
-      "institution": "University Name",
-      "degree": "Degree Type in Field",
-      "year": "2019"
+      "institution": "UPDATE: Add your university",
+      "degree": "UPDATE: Add your degree",
+      "year": "UPDATE: Add your graduation year"
     }
   ],
 
   "achievements": [
-    "Achievement 1 - quantify with numbers where possible",
-    "Achievement 2 - focus on impact and results",
-    "Achievement 3 - highlight leadership and initiative"
+    "Managing $22M+ annual media budget across Merck's largest HCP account at IPG Health",
+    "Delivered double-digit increases in HCP engagement through data-driven optimization",
+    "Built and lead team of 15 planners and specialists across multiple disciplines",
+    "Built automated creative matrix system reducing manual tracking by 50% and achieving 100% compliance",
+    "Represent the largest HCP account at the agency — expanded scope of work and retained business",
+    "15+ years of pharmaceutical media leadership experience across top-tier brands",
+    "Promoted from Media Director to VP Media Director to Director, Client Advice & Management"
   ],
 
   "projects": [
     {
-      "name": "Project Name",
-      "description": "Brief description of what you built and why",
-      "impact": "Quantifiable results or business impact"
+      "name": "Automated Creative Matrix System",
+      "description": "Partnered with technology teams to build an automated creative matrix system for tracking label updates and asset expiration across the Merck portfolio",
+      "impact": "Reduced manual tracking by 50% and ensured 100% compliance with label updates and asset expiration requirements"
+    },
+    {
+      "name": "Merck Oncology Omnichannel Strategy",
+      "description": "Led $22M+ integrated HCP and consumer media strategy for Keytruda across Pan-Tumor, Head & Neck, cSCC, and Melanoma",
+      "impact": "Delivered double-digit increases in HCP engagement and improved script lift metrics"
+    },
+    {
+      "name": "Team Mentorship & Workflow Program",
+      "description": "Established mentorship programs and streamlined workflows for a team of 15 across digital partnerships, search, social, and point-of-care",
+      "impact": "Improved team efficiency and professional development across all disciplines"
     }
   ],
 
   "values_and_motivations": [
-    "I thrive in collaborative environments where I can both learn and teach",
-    "I'm motivated by solving complex problems that have real user impact",
-    "I value continuous learning and staying current with industry trends"
+    "I'm passionate about translating complex data into actionable media strategies that drive real health outcomes",
+    "I thrive when building and mentoring high-performing teams — seeing team members grow is one of the most rewarding parts of my career",
+    "I'm driven by innovation and finding smarter, more scalable ways to work — like automating processes that used to be manual",
+    "I care deeply about delivering measurable business results and being a trusted strategic partner to my clients",
+    "I value cross-functional collaboration and believe the best campaigns come from integrating diverse perspectives"
   ],
 
+  "current_interview": {
+    "company": "Phreesia",
+    "division": "Network Solutions (Life Sciences)",
+    "role": "Lead Client Experience Manager",
+    "interviewer": "Katie Oyola, Recruiter",
+    "format": "HR Phone Screen — culture/motivation/fit conversation, NOT a deep technical interview",
+    "date": "Monday, February 9, 2026 at 1:30 PM ET",
+    "location": "Remote — United States (NYC commutable for client meetings)",
+    "salary_range": "$250,000 – $270,000 + Equity",
+    "about_phreesia": "Phreesia is the trusted leader in patient activation — a healthcare SaaS company that facilitates ~170 million patient visits annually. Their Network Solutions / Life Sciences division activates and empowers patients to participate in their care, working with life sciences companies and agency media buyers to deliver targeted patient engagement and HCP digital campaigns. Phreesia helps pharma brands reach clinically-qualified patients at the point of care with brand messages, health education, and adherence programs. Five-time Best Places to Work in Healthcare winner.",
+    "why_this_role_fits": "This role is the perfect bridge from agency-side to health tech. Michelle has spent 15+ years as the BUYER of pharma media — she deeply understands what agency buyers and life science brands need. Now she can bring that expertise to Phreesia, where she'd be on the platform/solutions side, helping clients leverage Phreesia's patient activation network. Her experience managing the largest HCP account at IPG Health, negotiating vendor contracts, and leading client relationships maps directly to this client experience leadership role."
+  },
+
   "common_answers": {
-    "why_leaving": "I'm looking for new challenges and opportunities to grow in [area]. While I've learned a lot at my current role, I'm excited about [what this new role offers].",
-    "greatest_strength": "My ability to break down complex problems into manageable pieces and communicate technical concepts to non-technical stakeholders.",
-    "greatest_weakness": "I sometimes spend too much time perfecting details. I've learned to set timeboxes and prioritize shipping over perfection.",
-    "where_in_5_years": "I see myself growing into a leadership role where I can drive technical strategy while mentoring the next generation of engineers.",
-    "salary_expectations": "I'm focused on finding the right fit. I'd love to learn more about the total compensation package and ensure we're aligned.",
-    "why_this_company": "CUSTOMIZE: Research the company and add specific reasons here.",
-    "tell_me_about_yourself": "CUSTOMIZE: Write your 60-second elevator pitch here."
+    "tell_me_about_yourself": "I'm a strategic media leader with over 15 years in pharmaceutical marketing. Currently at IPG Health, I lead the largest HCP account at the agency — a $22M+ integrated media strategy for Merck's oncology and U.S. Pharma portfolio, including Keytruda. I manage a team of 15 across digital, search, social, and point-of-care. What excites me about Phreesia is the chance to bring my deep understanding of what pharma brands and agency buyers need to the platform side. I've spent my career working with partners like Phreesia — I know what makes a great vendor relationship, what drives results for brands, and how to translate data into strategies that move the needle. I'm ready to bring all of that to the other side of the table.",
+    "why_leaving": "I've had an incredible run at IPG Health — managing the largest HCP account, building a team of 15, driving double-digit engagement increases. I'm really proud of what I've built. But I'm at a point in my career where I'm excited about a new kind of challenge. I've always been on the agency side, buying media and managing campaigns for pharma brands. What draws me to Phreesia is the opportunity to bring that deep agency and brand understanding to a platform that's actually changing how patients engage with their care. It feels like a natural evolution — I know what buyers need because I've been one for 15 years.",
+    "why_phreesia": "A few things really stand out to me. First, Phreesia's mission resonates — activating patients to participate in their care is meaningful work, and the scale is incredible with 170 million patient visits a year. Second, the Network Solutions life sciences division is exactly where my experience fits. I've spent 15 years on the agency side buying HCP and patient media for top pharma brands like Keytruda, Lynparza, and Januvia. I understand what agency buyers and brand teams are looking for in a partner — the data, the targeting, the compliance, the results. I can bring that perspective to Phreesia and help life sciences clients see real value. And third, I love that Phreesia has been recognized as a Best Place to Work in Healthcare — culture matters to me, especially after building and mentoring teams for so long.",
+    "why_this_role": "This role feels like it was written for my experience. As Lead Client Experience Manager, I'd be doing what I do best — leading client relationships, driving strategic media conversations, and managing a team — but from the platform side instead of the agency side. I've negotiated vendor contracts and scopes with publishers, programmatic partners, and POC networks for years. I know what makes a great partner experience because I've evaluated it from the buyer's chair. Now I'm excited to bring that understanding to Phreesia and help life sciences clients succeed.",
+    "greatest_strength": "My ability to translate complex data into clear, actionable strategies — and to build trusted client relationships while doing it. In pharma, we're dealing with multiple therapeutic areas, compliance requirements, and sophisticated audiences. I take all of that complexity and turn it into a clear strategic direction that teams can execute and clients trust. At IPG Health, that's how I retained and expanded the largest HCP account at the agency. I'd bring that same approach to Phreesia's life sciences clients.",
+    "greatest_weakness": "Earlier in my career, I tended to take on too much myself rather than delegating effectively. As I moved into leadership, I realized that developing my team means trusting them with meaningful work. I've become much more intentional about delegation — setting clear expectations, providing the right support, and then stepping back. It's made my team stronger and me a better leader.",
+    "where_in_5_years": "I see myself growing into a senior leadership role at Phreesia — helping shape the life sciences strategy and expanding how the platform serves pharma clients. I want to build a high-performing team, deepen client relationships, and contribute to Phreesia's growth in the life sciences space. I'm also passionate about mentoring — I've always invested in developing the people around me and I want to keep doing that.",
+    "salary_expectations": "I'm really focused on finding the right fit and I'm excited about this opportunity. I saw the range of $250K to $270K plus equity, and I'm comfortable within that range. I'd love to learn more about the full compensation package and benefits as we move forward.",
+    "leadership_style": "I lead by empowering my team. I set a clear strategic vision and expectations, then give my team the autonomy to execute. At IPG Health, I built mentorship programs and streamlined workflows for my 15 planners and specialists. I believe in being accessible, giving direct feedback, and celebrating wins. My approach has led to strong retention and team members who've been promoted under my leadership.",
+    "handling_conflict": "In pharma media, we deal with many stakeholders — brand teams, legal, creative, vendors. When conflicts arise, I focus on understanding each perspective and finding the solution that serves the client's goals. For example, when there's tension between creative ambition and compliance requirements, I bring both sides together early so we can solve it collaboratively rather than reactively. I'd bring that same approach to managing client relationships at Phreesia.",
+    "biggest_accomplishment": "Leading the $22M+ Merck oncology media strategy as the largest HCP account at IPG Health. But what I'm most personally proud of is the automated creative matrix system I built. Tracking label updates and asset expirations manually across dozens of brands was a huge pain point. I partnered with our technology team to automate it — cut manual tracking by 50% and achieved 100% compliance. That's how I think: find the bottleneck, innovate a solution, deliver measurable impact. I'd bring that same mindset to improving client experience at Phreesia.",
+    "what_do_you_know_about_us": "I know Phreesia is the leader in patient activation — you facilitate about 170 million patient visits a year, which is more than 1 in 10 visits across the U.S. The Network Solutions life sciences division specifically works with pharma brands and agencies to deliver targeted patient engagement and HCP campaigns at the point of care. What I find really compelling is the ability to reach clinically-qualified patients with the right message at the right moment in their care journey. As someone who's spent 15 years planning and optimizing that kind of targeting from the agency side, I can see how powerful Phreesia's platform is. And I know you've been recognized as a Best Place to Work in Healthcare multiple times, which tells me a lot about the culture.",
+    "questions_for_them": "I'd love to understand more about the team structure — how large is the team I'd be leading, and what does the current client portfolio look like? I'm also curious about what success looks like in the first 6-12 months in this role. And I'd love to hear about the growth trajectory for the life sciences division — where is Phreesia investing and expanding?"
   }
 }

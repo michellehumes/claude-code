@@ -770,6 +770,16 @@
 
         function showError(msg) {
             console.error('[server]', msg);
+            // Show error visibly in the response panel
+            const panel = document.getElementById('responsePanel');
+            const empty = document.getElementById('responseEmpty');
+            if (empty) empty.remove();
+            const errDiv = document.createElement('div');
+            errDiv.className = 'response-card';
+            errDiv.style.borderColor = '#f44336';
+            errDiv.innerHTML = `<div class="response-type" style="background:#f4433622;color:#f44336;">ERROR</div><div class="response-text" style="color:#f44336;">${escapeHtml(msg)}</div>`;
+            panel.appendChild(errDiv);
+            panel.scrollTop = panel.scrollHeight;
         }
 
         function escapeHtml(text) {
