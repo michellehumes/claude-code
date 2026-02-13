@@ -402,10 +402,14 @@ class ReviewsManager {
                         <span class="rating-number">${tool.rating}/5</span>
                     </div>
                     <p class="review-excerpt">${tool.excerpt}</p>
+                    <div class="review-specs">
+                        ${Object.entries(tool.specs).map(([key, val]) => `<span class="review-spec"><strong>${key}:</strong> ${val}</span>`).join('')}
+                    </div>
                     <div class="review-meta">
                         <span class="review-price">$${tool.price}</span>
-                        <a href="#" class="review-link">Read Review →</a>
+                        <a href="#" class="review-link">Read Review &rarr;</a>
                     </div>
+                    <a href="#" class="btn-check-price" rel="sponsored nofollow" aria-label="Check price for ${tool.name}">Check Today's Price &rarr;</a>
                 </div>
             </article>
         `).join('');

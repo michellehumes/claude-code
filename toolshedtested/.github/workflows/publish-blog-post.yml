@@ -1,0 +1,108 @@
+name: Publish Blog Post (Every Other Day)
+
+on:
+  # Run every other day at 10:00 AM UTC (5:00 AM EST)
+  # Cron runs daily; the script checks if it's an "even" day to skip alternate days
+  schedule:
+    - cron: '0 10 */2 * *'  # Every 2nd day at 10:00 UTC
+
+  # Allow manual trigger with options
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run (preview without publishing)'
+        required: false
+        default: 'false'
+        type: choice
+        options:
+          - 'false'
+          - 'true'
+      custom_date:
+        description: 'Override publish date (YYYY-MM-DD format, leave empty for today)'
+        required: false
+        default: ''
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  generate-and-publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Set environment variables
+        run: |
+          if [ -n "${{ github.event.inputs.custom_date }}" ]; then
+            echo "POST_DATE=${{ github.event.inputs.custom_date }}" >> $GITHUB_ENV
+          else
+            echo "POST_DATE=$(date +%Y-%m-%d)" >> $GITHUB_ENV
+          fi
+
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+            echo "DRY_RUN=true" >> $GITHUB_ENV
+          else
+            echo "DRY_RUN=false" >> $GITHUB_ENV
+          fi
+
+      - name: Generate blog post
+        run: |
+          chmod +x ./scripts/generate-blog-post.sh
+          ./scripts/generate-blog-post.sh
+        working-directory: toolshedtested
+
+      - name: Check for changes
+        id: changes
+        run: |
+          cd toolshedtested
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+            echo "Changes detected:"
+            git status --short
+          else
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+            echo "No changes to commit."
+          fi
+
+      - name: Commit and push
+        if: steps.changes.outputs.has_changes == 'true' && env.DRY_RUN != 'true'
+        run: |
+          cd toolshedtested
+          git config user.name "ToolShed Bot"
+          git config user.email "bot@toolshedtested.com"
+
+          # Get the slug of the new post for the commit message
+          NEW_POST=$(git status --short | grep "blog/" | head -1 | awk '{print $2}' | xargs basename .html)
+
+          git add -A
+          git commit -m "Publish new blog post: ${NEW_POST}
+
+          Automated blog post generated on ${POST_DATE}.
+          Published via GitHub Actions workflow."
+
+          git push
+
+      - name: Generate summary
+        run: |
+          echo "## Blog Post Generation Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- **Date:** ${{ env.POST_DATE }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Dry Run:** ${{ env.DRY_RUN }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Changes:** ${{ steps.changes.outputs.has_changes }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          if [ "${{ steps.changes.outputs.has_changes }}" = "true" ]; then
+            echo "### New Files" >> $GITHUB_STEP_SUMMARY
+            cd toolshedtested
+            git diff --name-only HEAD~1 2>/dev/null || echo "First commit or no previous commit" >> $GITHUB_STEP_SUMMARY
+          fi

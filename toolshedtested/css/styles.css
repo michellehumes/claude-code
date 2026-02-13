@@ -804,6 +804,49 @@ ul, ol {
     text-transform: uppercase;
 }
 
+.review-specs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+    margin-bottom: var(--spacing-md);
+}
+
+.review-spec {
+    background: var(--bg-tertiary);
+    padding: 2px var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-xs);
+    color: var(--text-secondary);
+}
+
+.review-spec strong {
+    color: var(--text-primary);
+    text-transform: capitalize;
+}
+
+.btn-check-price {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: var(--spacing-md);
+    background: #ff9900;
+    color: #111 !important;
+    font-weight: 700;
+    font-size: var(--font-size-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    border-radius: var(--radius-md);
+    margin-top: var(--spacing-md);
+    transition: all var(--transition-fast);
+}
+
+.btn-check-price:hover {
+    background: #ffad33;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(255, 153, 0, 0.35);
+    color: #111 !important;
+}
+
 .load-more-container {
     text-align: center;
 }

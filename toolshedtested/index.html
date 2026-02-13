@@ -23,6 +23,7 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/blog.css">
 
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -37,6 +38,21 @@
             "target": "https://toolshedtested.com/search?q={search_term_string}",
             "query-input": "required name=search_term_string"
         }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "ToolShed Tested",
+        "url": "https://toolshedtested.com",
+        "description": "Independent power tool reviews and testing",
+        "founder": {
+            "@type": "Person",
+            "name": "Shelzy Perkins",
+            "jobTitle": "Professional Carpenter & Tool Reviewer"
+        },
+        "sameAs": []
     }
     </script>
 </head>
@@ -78,12 +94,12 @@
 
                 <div class="nav-menu" id="nav-menu">
                     <ul class="nav-list">
+                        <li><a href="/blog/">Blog</a></li>
                         <li><a href="#drills">Drills</a></li>
                         <li><a href="#saws">Saws</a></li>
                         <li><a href="#grinders">Grinders</a></li>
                         <li><a href="#sanders">Sanders</a></li>
-                        <li><a href="#comparison">Compare Tools</a></li>
-                        <li><a href="#about">About</a></li>
+                        <li><a href="#comparison">Compare</a></li>
                         <li><a href="#faq">FAQ</a></li>
                         <li><a href="#contact">Contact</a></li>
                     </ul>
@@ -272,6 +288,18 @@
             </div>
         </section>
 
+        <!-- Latest Articles Section -->
+        <section class="latest-articles" aria-labelledby="latest-articles-heading">
+            <h2 id="latest-articles-heading">Latest From The Blog</h2>
+            <p class="latest-articles-subtitle">Buying guides, tool comparisons, and expert tips to help you make smarter purchases.</p>
+            <div class="latest-articles-grid" id="latest-articles-grid">
+                <!-- Populated by blog.js -->
+            </div>
+            <div class="view-all-link">
+                <a href="/blog/">View All Articles &rarr;</a>
+            </div>
+        </section>
+
         <!-- Trust Section -->
         <section class="trust" aria-labelledby="trust-heading">
             <h2 id="trust-heading">Why Trust Our Reviews?</h2>
@@ -383,8 +411,8 @@
         <!-- Newsletter Section -->
         <section class="newsletter" aria-labelledby="newsletter-heading">
             <div class="newsletter-content">
-                <h2 id="newsletter-heading">Get Tool Reviews In Your Inbox</h2>
-                <p>New reviews, buying guides, and tool deals delivered weekly. No spam, unsubscribe anytime.</p>
+                <h2 id="newsletter-heading">Get Tool Deals Before They Sell Out</h2>
+                <p>Join 15,000+ DIYers who get our weekly newsletter: honest reviews, exclusive deal alerts, and a free Workshop Setup Checklist when you subscribe.</p>
                 <form class="newsletter-form" id="newsletter-form" aria-label="Newsletter signup form">
                     <label for="newsletter-email" class="sr-only">Email address</label>
                     <input
@@ -396,9 +424,9 @@
                         aria-required="true"
                         aria-describedby="newsletter-description"
                     >
-                    <button type="submit" class="btn btn-primary">Subscribe</button>
+                    <button type="submit" class="btn btn-primary">Get Free Checklist</button>
                 </form>
-                <p id="newsletter-description" class="newsletter-privacy">We respect your privacy. Read our <a href="#privacy">privacy policy</a>.</p>
+                <p id="newsletter-description" class="newsletter-privacy">No spam, ever. Unsubscribe anytime. Read our <a href="#privacy">privacy policy</a>.</p>
             </div>
         </section>
 
@@ -453,10 +481,10 @@
             <div class="footer-section">
                 <h3>Quick Links</h3>
                 <ul>
+                    <li><a href="/blog/">Blog & Guides</a></li>
                     <li><a href="#reviews">Latest Reviews</a></li>
                     <li><a href="#categories">Tool Categories</a></li>
                     <li><a href="#comparison">Compare Tools</a></li>
-                    <li><a href="#about">About Us</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </div>
@@ -501,5 +529,6 @@
 
     <!-- Scripts -->
     <script src="js/main.js"></script>
+    <script src="js/blog.js"></script>
 </body>
 </html>
