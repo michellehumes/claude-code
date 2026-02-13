@@ -476,6 +476,187 @@
         "affordable"
       ],
       "used": false
+    },
+    {
+      "id": "m041",
+      "title": "Best Cream Blushes for a Natural Flush",
+      "category": "makeup",
+      "type": "roundup",
+      "productTags": [
+        "blush",
+        "cream-blush",
+        "natural-finish"
+      ],
+      "used": false
+    },
+    {
+      "id": "m042",
+      "title": "Best Tinted Lip Balms That Actually Hydrate",
+      "category": "makeup",
+      "type": "roundup",
+      "productTags": [
+        "lip-gloss",
+        "lip-plumper",
+        "hydrating"
+      ],
+      "used": false
+    },
+    {
+      "id": "m043",
+      "title": "The Best Face Oils for Every Skin Type",
+      "category": "skincare",
+      "type": "guide",
+      "productTags": [
+        "face-oil",
+        "hydrating",
+        "lightweight"
+      ],
+      "used": false
+    },
+    {
+      "id": "m044",
+      "title": "Best Hair Growth Serums and Oils That Work",
+      "category": "hair",
+      "type": "roundup",
+      "productTags": [
+        "hair-oil",
+        "growth",
+        "scalp-care"
+      ],
+      "used": false
+    },
+    {
+      "id": "m045",
+      "title": "Best Waterproof Mascaras That Won't Smudge",
+      "category": "makeup",
+      "type": "roundup",
+      "productTags": [
+        "mascara",
+        "waterproof",
+        "long-wear"
+      ],
+      "used": false
+    },
+    {
+      "id": "m046",
+      "title": "Best Body Lotions for Silky Smooth Skin",
+      "category": "skincare",
+      "type": "roundup",
+      "productTags": [
+        "moisturizer",
+        "hydrating",
+        "body-care"
+      ],
+      "used": false
+    },
+    {
+      "id": "m047",
+      "title": "How to Build a Complete Curly Hair Routine",
+      "category": "hair",
+      "type": "routine",
+      "productTags": [
+        "curl-cream",
+        "curly-hair",
+        "gel",
+        "defining"
+      ],
+      "used": false
+    },
+    {
+      "id": "m048",
+      "title": "Best Under-Eye Concealers for a Brightened Look",
+      "category": "makeup",
+      "type": "roundup",
+      "productTags": [
+        "concealer",
+        "brightening",
+        "crease-proof"
+      ],
+      "used": false
+    },
+    {
+      "id": "m049",
+      "title": "Best Facial Sunscreens for Oily and Acne-Prone Skin",
+      "category": "skincare",
+      "type": "roundup",
+      "productTags": [
+        "sunscreen",
+        "acne-prone",
+        "oil-free"
+      ],
+      "used": false
+    },
+    {
+      "id": "m050",
+      "title": "Best Volumizing Shampoos for Fine, Flat Hair",
+      "category": "hair",
+      "type": "roundup",
+      "productTags": [
+        "shampoo",
+        "volume",
+        "fine-hair"
+      ],
+      "used": false
+    },
+    {
+      "id": "m051",
+      "title": "Best Liquid Eyeliners for the Perfect Wing",
+      "category": "makeup",
+      "type": "roundup",
+      "productTags": [
+        "eyeliner",
+        "liquid",
+        "precise"
+      ],
+      "used": false
+    },
+    {
+      "id": "m052",
+      "title": "Best Overnight Face Masks for Glowing Mornings",
+      "category": "skincare",
+      "type": "roundup",
+      "productTags": [
+        "sleeping-mask",
+        "hydrating",
+        "overnight"
+      ],
+      "used": false
+    },
+    {
+      "id": "m053",
+      "title": "Best Texturizing Sprays for Effortless Hair",
+      "category": "hair",
+      "type": "roundup",
+      "productTags": [
+        "texturizing",
+        "wave-spray",
+        "volume"
+      ],
+      "used": false
+    },
+    {
+      "id": "m054",
+      "title": "Lip Liner Guide: Best Products and Techniques",
+      "category": "makeup",
+      "type": "guide",
+      "productTags": [
+        "lip-liner",
+        "lipstick",
+        "long-wear"
+      ],
+      "used": false
+    },
+    {
+      "id": "m055",
+      "title": "Best Peptide Serums for Firmer, Younger-Looking Skin",
+      "category": "skincare",
+      "type": "roundup",
+      "productTags": [
+        "serum",
+        "peptides",
+        "anti-aging"
+      ],
+      "used": false
     }
   ]
 }

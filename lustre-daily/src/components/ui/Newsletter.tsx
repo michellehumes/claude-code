@@ -41,11 +41,11 @@ export function Newsletter() {
 
         {/* Heading */}
         <h2 className="text-2xl font-bold md:text-3xl">
-          Get the Latest Beauty Drops
+          Never Miss a Beauty Find
         </h2>
         <p className="mt-3 text-pink-100">
-          Subscribe to {siteConfig.name} for weekly beauty tips, product picks, and
-          trend alerts delivered straight to your inbox.
+          Join the {siteConfig.name} community. Get new product picks, skincare tips, and
+          trend alerts delivered to your inbox every week — free.
         </p>
 
         {/* Form */}
@@ -71,11 +71,11 @@ export function Newsletter() {
                 disabled={status === "loading"}
                 className="rounded-lg bg-white px-6 py-3 font-semibold text-pink-600 transition-colors hover:bg-pink-50 disabled:opacity-70"
               >
-                {status === "loading" ? "Subscribing..." : "Subscribe"}
+                {status === "loading" ? "Subscribing..." : "Subscribe Free"}
               </button>
             </div>
             <p className="mt-3 text-xs text-pink-200">
-              No spam, ever. Unsubscribe anytime.
+              No spam, ever. Unsubscribe anytime. We respect your privacy.
             </p>
           </form>
         )}

@@ -34,7 +34,7 @@ export function Header() {
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex md:items-center md:gap-8">
+        <div className="hidden md:flex md:items-center md:gap-6">
           {siteConfig.categories.map((category) => (
             <Link
               key={category.slug}
@@ -44,6 +44,12 @@ export function Header() {
               {category.name}
             </Link>
           ))}
+          <Link
+            href="/posts"
+            className="text-sm font-medium text-gray-700 transition-colors hover:text-pink-600 dark:text-gray-300 dark:hover:text-pink-400"
+          >
+            All Posts
+          </Link>
           <Link
             href="/about"
             className="text-sm font-medium text-gray-700 transition-colors hover:text-pink-600 dark:text-gray-300 dark:hover:text-pink-400"
@@ -89,6 +95,13 @@ export function Header() {
               {category.name}
             </Link>
           ))}
+          <Link
+            href="/posts"
+            onClick={() => setMobileMenuOpen(false)}
+            className="block rounded-lg px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800"
+          >
+            All Posts
+          </Link>
           <Link
             href="/about"
             onClick={() => setMobileMenuOpen(false)}
