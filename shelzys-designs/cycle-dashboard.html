@@ -1,0 +1,1720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cycle Dashboard — Shelzy's Life</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --pink: #ff6b9d;
+            --pink-light: #ffa4c4;
+            --pink-soft: #fff0f5;
+            --purple: #c678ff;
+            --purple-dark: #9b4dff;
+            --purple-soft: #f3e8ff;
+            --coral: #ff7675;
+            --mint: #00d9a5;
+            --blue: #74b9ff;
+            --amber: #f59e0b;
+            --amber-soft: #fef3c7;
+
+            --dark: #1a1a2e;
+            --dark-soft: #2d2d44;
+            --light: #fefefe;
+            --light-soft: #f8f7ff;
+            --gray: #6c6c8a;
+            --gray-light: #e5e7eb;
+            --gray-200: #e5e7eb;
+
+            --gradient-primary: linear-gradient(135deg, var(--pink) 0%, var(--purple) 50%, #ff9f43 100%);
+            --gradient-secondary: linear-gradient(135deg, var(--purple) 0%, var(--pink) 100%);
+            --gradient-fertile: linear-gradient(135deg, var(--mint) 0%, #34d399 100%);
+            --gradient-luteal: linear-gradient(135deg, var(--amber) 0%, #fbbf24 100%);
+            --gradient-follicular: linear-gradient(135deg, var(--purple) 0%, #a78bfa 100%);
+            --gradient-implantation: linear-gradient(135deg, var(--blue) 0%, #60a5fa 100%);
+
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-xl: 32px;
+            --radius-full: 9999px;
+
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.14);
+
+            --font-display: 'Syne', sans-serif;
+            --font-body: 'Space Grotesk', sans-serif;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--font-body);
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--dark);
+            background: var(--light-soft);
+            min-height: 100vh;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-display);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        /* ===================== HEADER ===================== */
+        .header {
+            background: rgba(254, 254, 254, 0.92);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            padding: 16px 24px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--dark);
+            text-decoration: none;
+        }
+
+        .logo-accent { color: var(--pink); }
+
+        .header-actions {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        /* ===================== LAYOUT ===================== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+
+        .page-title {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            margin-bottom: 8px;
+        }
+
+        .page-subtitle {
+            color: var(--gray);
+            font-size: 1rem;
+            margin-bottom: 32px;
+        }
+
+        /* ===================== TABS ===================== */
+        .tabs {
+            display: flex;
+            gap: 4px;
+            background: white;
+            padding: 6px;
+            border-radius: var(--radius-full);
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 32px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .tab {
+            padding: 10px 20px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            border-radius: var(--radius-full);
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--gray);
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+
+        .tab:hover { color: var(--dark); background: var(--light-soft); }
+
+        .tab.active {
+            background: var(--gradient-primary);
+            color: white;
+        }
+
+        .tab-panel { display: none; }
+        .tab-panel.active { display: block; }
+
+        /* ===================== CARDS ===================== */
+        .card {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 28px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .card:hover { box-shadow: var(--shadow-md); }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        /* ===================== PHASE HERO ===================== */
+        .phase-hero {
+            background: var(--gradient-primary);
+            border-radius: var(--radius-xl);
+            padding: 40px;
+            color: white;
+            margin-bottom: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .phase-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 50%;
+        }
+
+        .phase-hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+        }
+
+        .phase-hero-content { position: relative; z-index: 1; }
+
+        .phase-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            opacity: 0.85;
+            margin-bottom: 8px;
+        }
+
+        .phase-name {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+
+        .phase-detail {
+            font-size: 1.15rem;
+            opacity: 0.9;
+            margin-bottom: 24px;
+        }
+
+        .phase-meta {
+            display: flex;
+            gap: 32px;
+            flex-wrap: wrap;
+        }
+
+        .phase-meta-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .phase-meta-value {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .phase-meta-label {
+            font-size: 0.8rem;
+            opacity: 0.75;
+        }
+
+        /* ===================== STAT GRID ===================== */
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 24px;
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .stat-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+
+        .stat-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+        }
+
+        .stat-value {
+            font-family: var(--font-display);
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--gray);
+            margin-top: 2px;
+        }
+
+        /* ===================== CYCLE RING ===================== */
+        .cycle-ring-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .cycle-ring {
+            position: relative;
+            width: 240px;
+            height: 240px;
+        }
+
+        .cycle-ring svg {
+            width: 100%;
+            height: 100%;
+            transform: rotate(-90deg);
+        }
+
+        .cycle-ring-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .cycle-ring-day {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--dark);
+            line-height: 1;
+        }
+
+        .cycle-ring-label {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+
+        /* ===================== TIMELINE ===================== */
+        .cycle-timeline {
+            display: flex;
+            gap: 2px;
+            margin: 20px 0;
+            border-radius: var(--radius-full);
+            overflow: hidden;
+            height: 12px;
+        }
+
+        .timeline-segment {
+            height: 100%;
+            transition: var(--transition);
+            position: relative;
+            cursor: pointer;
+        }
+
+        .timeline-segment:hover { opacity: 0.8; transform: scaleY(1.4); }
+
+        .timeline-follicular { background: var(--purple); }
+        .timeline-fertile { background: var(--mint); }
+        .timeline-ovulation { background: #059669; }
+        .timeline-luteal { background: var(--amber); }
+        .timeline-implantation { background: var(--blue); }
+
+        .timeline-legend {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+
+        .legend-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        /* ===================== BUTTONS ===================== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 24px;
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            font-weight: 600;
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            border: none;
+            transition: var(--transition);
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(255, 107, 157, 0.35);
+        }
+
+        .btn-secondary {
+            background: var(--light-soft);
+            color: var(--dark);
+            border: 1px solid var(--gray-light);
+        }
+
+        .btn-secondary:hover { background: var(--gray-light); }
+
+        .btn-sm {
+            padding: 8px 16px;
+            font-size: 0.8rem;
+        }
+
+        .btn-danger {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .btn-danger:hover { background: #fecaca; }
+
+        /* ===================== BADGES ===================== */
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: var(--radius-full);
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .badge-follicular { background: var(--purple-soft); color: #7c3aed; }
+        .badge-fertile { background: #d1fae5; color: #065f46; }
+        .badge-luteal { background: var(--amber-soft); color: #92400e; }
+        .badge-implantation { background: #dbeafe; color: #1e40af; }
+
+        /* ===================== TABLE ===================== */
+        .table-wrap {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.875rem;
+        }
+
+        .table th {
+            text-align: left;
+            padding: 12px 16px;
+            background: var(--light-soft);
+            border-bottom: 2px solid var(--gray-light);
+            font-weight: 600;
+            color: var(--gray);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--gray-light);
+            color: var(--dark);
+        }
+
+        .table tbody tr:hover { background: var(--light-soft); }
+
+        .table-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: var(--radius-sm);
+            border: none;
+            background: var(--light-soft);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            transition: var(--transition);
+        }
+
+        .btn-icon:hover { background: var(--gray-light); }
+        .btn-icon.delete:hover { background: #fee2e2; }
+
+        /* ===================== FORMS ===================== */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(26, 26, 46, 0.5);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-overlay.active { display: flex; }
+
+        .modal {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: 36px;
+            max-width: 520px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .modal-title {
+            font-size: 1.4rem;
+            margin-bottom: 24px;
+        }
+
+        .form-group { margin-bottom: 20px; }
+
+        .form-label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 6px;
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid var(--gray-light);
+            border-radius: var(--radius-md);
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            transition: var(--transition);
+            background: white;
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--pink);
+            box-shadow: 0 0 0 4px rgba(255, 107, 157, 0.1);
+        }
+
+        .form-textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+            margin-top: 28px;
+        }
+
+        /* ===================== INSIGHTS ===================== */
+        .insight-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .insight-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 28px;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .insight-card h3 {
+            font-size: 1rem;
+            margin-bottom: 16px;
+            color: var(--dark);
+        }
+
+        .insight-big {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .insight-unit {
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+
+        .insight-note {
+            margin-top: 16px;
+            padding: 12px 16px;
+            background: var(--light-soft);
+            border-radius: var(--radius-sm);
+            font-size: 0.85rem;
+            color: var(--gray);
+            line-height: 1.5;
+        }
+
+        /* ===================== EMPTY STATE ===================== */
+        .empty-state {
+            text-align: center;
+            padding: 60px 24px;
+            color: var(--gray);
+        }
+
+        .empty-state-icon {
+            font-size: 3.5rem;
+            margin-bottom: 16px;
+        }
+
+        .empty-state h3 {
+            font-size: 1.2rem;
+            color: var(--dark);
+            margin-bottom: 8px;
+        }
+
+        .empty-state p {
+            max-width: 400px;
+            margin: 0 auto 24px;
+            font-size: 0.9rem;
+        }
+
+        /* ===================== CALENDAR ===================== */
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+        }
+
+        .calendar-header {
+            text-align: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--gray);
+            padding: 8px 0;
+            text-transform: uppercase;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-sm);
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .calendar-day:hover { background: var(--light-soft); }
+        .calendar-day.empty { cursor: default; }
+        .calendar-day.empty:hover { background: transparent; }
+        .calendar-day.today { border: 2px solid var(--pink); font-weight: 700; }
+        .calendar-day.period { background: var(--pink-soft); color: var(--pink); }
+        .calendar-day.fertile { background: #d1fae5; color: #065f46; }
+        .calendar-day.ovulation { background: #059669; color: white; font-weight: 700; }
+        .calendar-day.luteal { background: var(--amber-soft); color: #92400e; }
+        .calendar-day.implantation { background: #dbeafe; color: #1e40af; }
+
+        .calendar-day .log-dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--pink);
+            position: absolute;
+            bottom: 4px;
+        }
+
+        .calendar-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .calendar-month {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .calendar-nav-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1px solid var(--gray-light);
+            background: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .calendar-nav-btn:hover { background: var(--light-soft); }
+
+        /* ===================== NOTIFICATION ===================== */
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            max-width: 380px;
+            padding: 16px 24px;
+            border-radius: var(--radius-md);
+            color: white;
+            font-weight: 500;
+            font-size: 0.9rem;
+            z-index: 9999;
+            box-shadow: var(--shadow-lg);
+            animation: slideInToast 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .toast.success { background: linear-gradient(135deg, #059669, #34d399); }
+        .toast.error { background: linear-gradient(135deg, #dc2626, var(--coral)); }
+
+        .toast-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0;
+            margin-left: auto;
+        }
+
+        @keyframes slideInToast {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        /* ===================== RESPONSIVE ===================== */
+        @media (max-width: 768px) {
+            .container { padding: 16px; }
+            .phase-hero { padding: 28px 24px; }
+            .phase-meta { gap: 20px; }
+            .stat-grid { grid-template-columns: repeat(2, 1fr); }
+            .form-row { grid-template-columns: 1fr; }
+            .card { padding: 20px; }
+            .modal { padding: 24px; }
+            .tabs { gap: 2px; }
+            .tab { padding: 8px 14px; font-size: 0.8rem; }
+            .calendar-day { font-size: 0.75rem; }
+            .insight-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 480px) {
+            .stat-grid { grid-template-columns: 1fr; }
+            .phase-meta { flex-direction: column; gap: 12px; }
+            .header-actions .btn span { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+    <div class="header-inner">
+        <a href="index.html" class="logo">shelzy's<span class="logo-accent">.</span> cycle</a>
+        <div class="header-actions">
+            <button class="btn btn-secondary btn-sm" onclick="exportData()">Export</button>
+            <button class="btn btn-primary btn-sm" onclick="showNewCycleModal()">+ New Cycle</button>
+        </div>
+    </div>
+</header>
+
+<!-- Main Content -->
+<div class="container">
+    <h1 class="page-title">Cycle Dashboard</h1>
+    <p class="page-subtitle">your body, your data, your power.</p>
+
+    <!-- Tabs -->
+    <div class="tabs" role="tablist">
+        <button class="tab active" data-tab="overview" role="tab">Overview</button>
+        <button class="tab" data-tab="log" role="tab">Daily Log</button>
+        <button class="tab" data-tab="calendar" role="tab">Calendar</button>
+        <button class="tab" data-tab="history" role="tab">Cycle History</button>
+        <button class="tab" data-tab="insights" role="tab">Insights</button>
+    </div>
+
+    <!-- OVERVIEW TAB -->
+    <div class="tab-panel active" id="panel-overview">
+        <div id="phase-hero-container"></div>
+        <div class="stat-grid" id="overview-stats"></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+            <div class="card" id="overview-timeline-card">
+                <div class="card-header">
+                    <h3 class="card-title">Cycle Progress</h3>
+                </div>
+                <div id="overview-ring"></div>
+                <div id="overview-timeline"></div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Recent Logs</h3>
+                    <button class="btn btn-sm btn-secondary" onclick="switchTab('log')">View All</button>
+                </div>
+                <div id="overview-recent-logs"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DAILY LOG TAB -->
+    <div class="tab-panel" id="panel-log">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Daily Log</h3>
+                <button class="btn btn-primary btn-sm" onclick="showLogEntryModal()">+ Add Entry</button>
+            </div>
+            <div id="log-table-container"></div>
+        </div>
+    </div>
+
+    <!-- CALENDAR TAB -->
+    <div class="tab-panel" id="panel-calendar">
+        <div class="card">
+            <div id="calendar-container"></div>
+            <div class="timeline-legend" style="margin-top:16px;">
+                <div class="legend-item"><div class="legend-dot" style="background:var(--pink)"></div> Period</div>
+                <div class="legend-item"><div class="legend-dot" style="background:var(--purple)"></div> Follicular</div>
+                <div class="legend-item"><div class="legend-dot" style="background:var(--mint)"></div> Fertile</div>
+                <div class="legend-item"><div class="legend-dot" style="background:#059669"></div> Ovulation</div>
+                <div class="legend-item"><div class="legend-dot" style="background:var(--amber)"></div> Luteal</div>
+                <div class="legend-item"><div class="legend-dot" style="background:var(--blue)"></div> Implantation</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CYCLE HISTORY TAB -->
+    <div class="tab-panel" id="panel-history">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Cycle History</h3>
+            </div>
+            <div id="history-table-container"></div>
+        </div>
+    </div>
+
+    <!-- INSIGHTS TAB -->
+    <div class="tab-panel" id="panel-insights">
+        <div id="insights-container"></div>
+    </div>
+</div>
+
+<!-- New Cycle Modal -->
+<div class="modal-overlay" id="modal-new-cycle">
+    <div class="modal">
+        <h2 class="modal-title">Start New Cycle</h2>
+        <form id="form-new-cycle" onsubmit="saveNewCycle(event)">
+            <div class="form-group">
+                <label class="form-label">Period Start Date</label>
+                <input type="date" class="form-input" name="startDate" required>
+            </div>
+            <div class="form-actions">
+                <button type="button" class="btn btn-secondary" onclick="hideModal('modal-new-cycle')">Cancel</button>
+                <button type="submit" class="btn btn-primary">Start Cycle</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Log Entry Modal -->
+<div class="modal-overlay" id="modal-log-entry">
+    <div class="modal">
+        <h2 class="modal-title">Log Daily Entry</h2>
+        <form id="form-log-entry" onsubmit="saveLogEntry(event)">
+            <div class="form-group">
+                <label class="form-label">Date</label>
+                <input type="date" class="form-input" name="date" required>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label">Temperature (F)</label>
+                    <input type="number" class="form-input" name="temperature" step="0.1" min="95" max="103" placeholder="e.g. 97.8">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">LH Test</label>
+                    <select class="form-select" name="lhTest">
+                        <option value="">--</option>
+                        <option value="negative">Negative</option>
+                        <option value="positive">Positive</option>
+                        <option value="peak">Peak</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Symptoms</label>
+                <input type="text" class="form-input" name="symptoms" placeholder="cramps, bloating, headache...">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Notes</label>
+                <textarea class="form-textarea" name="notes" placeholder="anything else to note..."></textarea>
+            </div>
+            <div class="form-actions">
+                <button type="button" class="btn btn-secondary" onclick="hideModal('modal-log-entry')">Cancel</button>
+                <button type="submit" class="btn btn-primary">Save Entry</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Edit Cycle Modal -->
+<div class="modal-overlay" id="modal-edit-cycle">
+    <div class="modal">
+        <h2 class="modal-title">Edit Cycle</h2>
+        <form id="form-edit-cycle" onsubmit="saveEditCycle(event)">
+            <input type="hidden" name="cycleId">
+            <div class="form-group">
+                <label class="form-label">Period Start Date</label>
+                <input type="date" class="form-input" name="startDate" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Ovulation Day (cycle day)</label>
+                <input type="number" class="form-input" name="ovulationDay" min="1" max="50" placeholder="e.g. 14">
+            </div>
+            <div class="form-actions">
+                <button type="button" class="btn btn-secondary" onclick="hideModal('modal-edit-cycle')">Cancel</button>
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+// ============================================================
+// DATA LAYER — compatible with Shelzy's Life OS localStorage
+// ============================================================
+const KEYS = {
+    cycles: 'health-cycles',
+    log: 'health-log'
+};
+
+function getCycles() {
+    return JSON.parse(localStorage.getItem(KEYS.cycles) || '[]');
+}
+
+function saveCycles(cycles) {
+    localStorage.setItem(KEYS.cycles, JSON.stringify(cycles));
+}
+
+function getLog() {
+    return JSON.parse(localStorage.getItem(KEYS.log) || '[]');
+}
+
+function saveLog(log) {
+    localStorage.setItem(KEYS.log, JSON.stringify(log));
+}
+
+// ============================================================
+// PHASE CALCULATIONS
+// ============================================================
+function getCurrentStatus() {
+    const cycles = getCycles();
+    if (cycles.length === 0) {
+        return { phase: 'No Data', detail: 'Start a cycle to begin tracking', cycleDay: 0, cycle: null, dpo: null };
+    }
+
+    const currentCycle = cycles[cycles.length - 1];
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const cycleStart = new Date(currentCycle.startDate + 'T00:00:00');
+    const cycleDay = Math.floor((today - cycleStart) / (1000 * 60 * 60 * 24)) + 1;
+
+    let phase = 'Follicular';
+    let detail = `Cycle Day ${cycleDay}`;
+    let dpo = null;
+
+    if (currentCycle.ovulationDay) {
+        dpo = cycleDay - currentCycle.ovulationDay;
+        if (dpo >= 0) {
+            phase = 'Luteal';
+            detail = `${dpo} DPO`;
+            if (dpo >= 6 && dpo <= 12) {
+                phase = 'Implantation Window';
+            }
+        } else if (cycleDay >= currentCycle.ovulationDay - 5 && cycleDay <= currentCycle.ovulationDay) {
+            phase = 'Fertile Window';
+        }
+    } else {
+        // Estimate from averages
+        const avgOv = getAverageOvulationDay();
+        if (cycleDay >= avgOv - 5 && cycleDay <= avgOv) {
+            phase = 'Fertile Window (est.)';
+        } else if (cycleDay > avgOv) {
+            phase = 'Luteal (est.)';
+            dpo = cycleDay - avgOv;
+            detail = `~${dpo} DPO (est.)`;
+        }
+    }
+
+    return { phase, detail, cycleDay, cycle: currentCycle, dpo };
+}
+
+function getAverageCycleLength() {
+    const cycles = getCycles();
+    const completed = cycles.filter(c => c.length);
+    if (completed.length === 0) return 28;
+    return Math.round(completed.reduce((s, c) => s + c.length, 0) / completed.length);
+}
+
+function getAverageOvulationDay() {
+    const cycles = getCycles();
+    const withOv = cycles.filter(c => c.ovulationDay);
+    if (withOv.length === 0) return 14;
+    return Math.round(withOv.reduce((s, c) => s + c.ovulationDay, 0) / withOv.length);
+}
+
+function getAverageLutealLength() {
+    const cycles = getCycles();
+    const valid = cycles.filter(c => c.ovulationDay && c.length);
+    if (valid.length === 0) return 14;
+    return Math.round(valid.reduce((s, c) => s + (c.length - c.ovulationDay), 0) / valid.length);
+}
+
+function getNextPeriodDate() {
+    const status = getCurrentStatus();
+    if (!status.cycle) return null;
+    const avgLen = getAverageCycleLength();
+    const next = new Date(status.cycle.startDate + 'T00:00:00');
+    next.setDate(next.getDate() + avgLen);
+    return next;
+}
+
+function getDaysUntilPeriod() {
+    const next = getNextPeriodDate();
+    if (!next) return null;
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return Math.floor((next - today) / (1000 * 60 * 60 * 24));
+}
+
+function getPhaseClass(phase) {
+    const p = phase.toLowerCase();
+    if (p.includes('fertile')) return 'fertile';
+    if (p.includes('luteal')) return 'luteal';
+    if (p.includes('implantation')) return 'implantation';
+    return 'follicular';
+}
+
+function getPhaseGradient(phase) {
+    const p = phase.toLowerCase();
+    if (p.includes('fertile')) return 'var(--gradient-fertile)';
+    if (p.includes('implantation')) return 'var(--gradient-implantation)';
+    if (p.includes('luteal')) return 'var(--gradient-luteal)';
+    return 'var(--gradient-follicular)';
+}
+
+// ============================================================
+// RENDER: OVERVIEW TAB
+// ============================================================
+function renderOverview() {
+    const status = getCurrentStatus();
+    const cycles = getCycles();
+    const log = getLog();
+
+    // Phase Hero
+    const heroEl = document.getElementById('phase-hero-container');
+    if (!status.cycle) {
+        heroEl.innerHTML = `
+            <div class="phase-hero">
+                <div class="phase-hero-content">
+                    <div class="phase-label">current phase</div>
+                    <div class="phase-name">No Active Cycle</div>
+                    <div class="phase-detail">Tap "+ New Cycle" to start tracking.</div>
+                </div>
+            </div>`;
+    } else {
+        const daysUntil = getDaysUntilPeriod();
+        const nextDate = getNextPeriodDate();
+        const gradient = status.phase === 'No Data' ? 'var(--gradient-primary)' : getPhaseGradient(status.phase);
+
+        heroEl.innerHTML = `
+            <div class="phase-hero" style="background:${gradient}">
+                <div class="phase-hero-content">
+                    <div class="phase-label">current phase</div>
+                    <div class="phase-name">${status.phase}</div>
+                    <div class="phase-detail">${status.detail}</div>
+                    <div class="phase-meta">
+                        <div class="phase-meta-item">
+                            <span class="phase-meta-value">${status.cycleDay}</span>
+                            <span class="phase-meta-label">cycle day</span>
+                        </div>
+                        ${status.dpo !== null ? `
+                        <div class="phase-meta-item">
+                            <span class="phase-meta-value">${status.dpo}</span>
+                            <span class="phase-meta-label">DPO</span>
+                        </div>` : ''}
+                        ${daysUntil !== null ? `
+                        <div class="phase-meta-item">
+                            <span class="phase-meta-value">${daysUntil}</span>
+                            <span class="phase-meta-label">days until period</span>
+                        </div>` : ''}
+                        ${nextDate ? `
+                        <div class="phase-meta-item">
+                            <span class="phase-meta-value">${nextDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span>
+                            <span class="phase-meta-label">next period (est.)</span>
+                        </div>` : ''}
+                    </div>
+                </div>
+            </div>`;
+    }
+
+    // Stat Cards
+    const avgCycle = getAverageCycleLength();
+    const avgOv = getAverageOvulationDay();
+    const avgLuteal = getAverageLutealLength();
+    const completedCycles = cycles.filter(c => c.length).length;
+
+    document.getElementById('overview-stats').innerHTML = `
+        <div class="stat-card">
+            <div class="stat-icon" style="background:var(--purple-soft);color:#7c3aed;">Avg</div>
+            <div class="stat-value">${avgCycle}</div>
+            <div class="stat-label">avg cycle length (days)</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon" style="background:#d1fae5;color:#059669;">Ov</div>
+            <div class="stat-value">${avgOv}</div>
+            <div class="stat-label">avg ovulation day</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon" style="background:var(--amber-soft);color:#d97706;">LP</div>
+            <div class="stat-value">${avgLuteal}</div>
+            <div class="stat-label">avg luteal phase (days)</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon" style="background:var(--pink-soft);color:var(--pink);">#</div>
+            <div class="stat-value">${completedCycles}</div>
+            <div class="stat-label">completed cycles</div>
+        </div>
+    `;
+
+    // Cycle Ring
+    const ringEl = document.getElementById('overview-ring');
+    if (status.cycle) {
+        const expectedLen = getAverageCycleLength();
+        const progress = Math.min(status.cycleDay / expectedLen, 1);
+        const circumference = 2 * Math.PI * 100;
+        const dashOffset = circumference * (1 - progress);
+        const phaseColor = getPhaseClass(status.phase);
+        const colorMap = { follicular: '#c678ff', fertile: '#00d9a5', luteal: '#f59e0b', implantation: '#74b9ff' };
+        const strokeColor = colorMap[phaseColor] || '#c678ff';
+
+        ringEl.innerHTML = `
+            <div class="cycle-ring-container">
+                <div class="cycle-ring">
+                    <svg viewBox="0 0 220 220">
+                        <circle cx="110" cy="110" r="100" fill="none" stroke="#f0f0f0" stroke-width="12"/>
+                        <circle cx="110" cy="110" r="100" fill="none" stroke="${strokeColor}" stroke-width="12"
+                            stroke-dasharray="${circumference}" stroke-dashoffset="${dashOffset}"
+                            stroke-linecap="round"/>
+                    </svg>
+                    <div class="cycle-ring-center">
+                        <div class="cycle-ring-day">${status.cycleDay}</div>
+                        <div class="cycle-ring-label">of ~${expectedLen} days</div>
+                    </div>
+                </div>
+            </div>`;
+    } else {
+        ringEl.innerHTML = '<div class="empty-state"><div class="empty-state-icon">&#9711;</div><p>No active cycle</p></div>';
+    }
+
+    // Timeline
+    const timelineEl = document.getElementById('overview-timeline');
+    if (status.cycle) {
+        const avgLen = getAverageCycleLength();
+        const ov = status.cycle.ovulationDay || getAverageOvulationDay();
+        const fertileStart = Math.max(1, ov - 5);
+        const follicularPct = ((fertileStart - 1) / avgLen) * 100;
+        const fertilePct = (5 / avgLen) * 100;
+        const ovPct = (1 / avgLen) * 100;
+        const implantStart = ov + 6;
+        const implantEnd = Math.min(ov + 12, avgLen);
+        const lutealPrePct = ((implantStart - ov - 1) / avgLen) * 100;
+        const implantPct = ((implantEnd - implantStart + 1) / avgLen) * 100;
+        const lutealPostPct = Math.max(0, ((avgLen - implantEnd) / avgLen) * 100);
+
+        timelineEl.innerHTML = `
+            <div class="cycle-timeline">
+                <div class="timeline-segment timeline-follicular" style="width:${follicularPct}%" title="Follicular"></div>
+                <div class="timeline-segment timeline-fertile" style="width:${fertilePct}%" title="Fertile Window"></div>
+                <div class="timeline-segment timeline-ovulation" style="width:${ovPct}%" title="Ovulation"></div>
+                <div class="timeline-segment timeline-luteal" style="width:${lutealPrePct}%" title="Luteal"></div>
+                <div class="timeline-segment timeline-implantation" style="width:${implantPct}%" title="Implantation Window"></div>
+                <div class="timeline-segment timeline-luteal" style="width:${lutealPostPct}%" title="Luteal"></div>
+            </div>
+            <div class="timeline-legend">
+                <div class="legend-item"><div class="legend-dot" style="background:var(--purple)"></div>Follicular</div>
+                <div class="legend-item"><div class="legend-dot" style="background:var(--mint)"></div>Fertile</div>
+                <div class="legend-item"><div class="legend-dot" style="background:#059669"></div>Ovulation</div>
+                <div class="legend-item"><div class="legend-dot" style="background:var(--amber)"></div>Luteal</div>
+                <div class="legend-item"><div class="legend-dot" style="background:var(--blue)"></div>Implantation</div>
+            </div>`;
+    } else {
+        timelineEl.innerHTML = '';
+    }
+
+    // Recent Logs
+    const recentEl = document.getElementById('overview-recent-logs');
+    const sortedLog = [...log].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 5);
+    if (sortedLog.length === 0) {
+        recentEl.innerHTML = '<div class="empty-state"><div class="empty-state-icon">&#128221;</div><p>No log entries yet</p><button class="btn btn-primary btn-sm" onclick="showLogEntryModal()">+ Add Entry</button></div>';
+    } else {
+        recentEl.innerHTML = `<div class="table-wrap"><table class="table"><thead><tr><th>Date</th><th>Phase</th><th>Temp</th><th>LH</th></tr></thead><tbody>
+            ${sortedLog.map(e => `<tr>
+                <td>${formatDate(e.date)}</td>
+                <td><span class="badge badge-${getPhaseClass(e.phase || 'follicular')}">${e.phase || '—'}</span></td>
+                <td>${e.temperature ? e.temperature + '°F' : '—'}</td>
+                <td>${e.lhTest || '—'}</td>
+            </tr>`).join('')}
+        </tbody></table></div>`;
+    }
+}
+
+// ============================================================
+// RENDER: DAILY LOG TAB
+// ============================================================
+function renderLog() {
+    const log = getLog();
+    const container = document.getElementById('log-table-container');
+
+    if (log.length === 0) {
+        container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">&#128221;</div><h3>No entries yet</h3><p>Start logging your daily data to track patterns and predict your cycle.</p><button class="btn btn-primary" onclick="showLogEntryModal()">+ Add First Entry</button></div>';
+        return;
+    }
+
+    const sorted = [...log].sort((a, b) => b.date.localeCompare(a.date));
+    container.innerHTML = `
+        <div class="table-wrap"><table class="table">
+            <thead><tr><th>Date</th><th>Day</th><th>Phase</th><th>Temp</th><th>LH</th><th>Symptoms</th><th>Notes</th><th></th></tr></thead>
+            <tbody>
+                ${sorted.map(e => `<tr>
+                    <td>${formatDate(e.date)}</td>
+                    <td>${e.cycleDay || '—'}</td>
+                    <td><span class="badge badge-${getPhaseClass(e.phase || 'follicular')}">${e.phase || '—'}</span></td>
+                    <td>${e.temperature ? e.temperature + '°F' : '—'}</td>
+                    <td>${e.lhTest || '—'}</td>
+                    <td>${e.symptoms || '—'}</td>
+                    <td>${e.notes || '—'}</td>
+                    <td><div class="table-actions"><button class="btn-icon delete" onclick="deleteLogEntry('${e.id}')" title="Delete">&#10005;</button></div></td>
+                </tr>`).join('')}
+            </tbody>
+        </table></div>`;
+}
+
+// ============================================================
+// RENDER: CALENDAR TAB
+// ============================================================
+let calendarDate = new Date();
+
+function renderCalendar() {
+    const container = document.getElementById('calendar-container');
+    const year = calendarDate.getFullYear();
+    const month = calendarDate.getMonth();
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const firstDay = new Date(year, month, 1);
+    const lastDay = new Date(year, month + 1, 0);
+    const startDow = firstDay.getDay();
+    const daysInMonth = lastDay.getDate();
+
+    const cycles = getCycles();
+    const log = getLog();
+    const monthName = firstDay.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+
+    // Build day classification map
+    const dayMap = {};
+    for (let d = 1; d <= daysInMonth; d++) {
+        const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+        const dateObj = new Date(dateStr + 'T00:00:00');
+        dayMap[d] = { classes: [], hasLog: log.some(l => l.date === dateStr) };
+
+        // Check each cycle
+        for (const cycle of cycles) {
+            const cs = new Date(cycle.startDate + 'T00:00:00');
+            const cycleDay = Math.floor((dateObj - cs) / (1000 * 60 * 60 * 24)) + 1;
+            if (cycleDay < 1) continue;
+
+            const len = cycle.length || getAverageCycleLength();
+            if (cycleDay > len) continue;
+
+            const ov = cycle.ovulationDay || getAverageOvulationDay();
+
+            if (cycleDay <= 5) {
+                dayMap[d].classes.push('period');
+            } else if (cycleDay >= ov - 5 && cycleDay < ov) {
+                dayMap[d].classes.push('fertile');
+            } else if (cycleDay === ov) {
+                dayMap[d].classes.push('ovulation');
+            } else if (cycleDay > ov) {
+                const dpo = cycleDay - ov;
+                if (dpo >= 6 && dpo <= 12) {
+                    dayMap[d].classes.push('implantation');
+                } else {
+                    dayMap[d].classes.push('luteal');
+                }
+            }
+        }
+    }
+
+    const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    let html = `
+        <div class="calendar-nav">
+            <button class="calendar-nav-btn" onclick="changeMonth(-1)">&#8249;</button>
+            <span class="calendar-month">${monthName}</span>
+            <button class="calendar-nav-btn" onclick="changeMonth(1)">&#8250;</button>
+        </div>
+        <div class="calendar-grid">
+            ${dayNames.map(d => `<div class="calendar-header">${d}</div>`).join('')}
+            ${Array(startDow).fill('<div class="calendar-day empty"></div>').join('')}`;
+
+    for (let d = 1; d <= daysInMonth; d++) {
+        const info = dayMap[d];
+        const cls = info.classes[0] || '';
+        const isToday = (d === today.getDate() && month === today.getMonth() && year === today.getFullYear());
+        html += `<div class="calendar-day ${cls} ${isToday ? 'today' : ''}">
+            ${d}
+            ${info.hasLog ? '<div class="log-dot"></div>' : ''}
+        </div>`;
+    }
+
+    html += '</div>';
+    container.innerHTML = html;
+}
+
+function changeMonth(delta) {
+    calendarDate.setMonth(calendarDate.getMonth() + delta);
+    renderCalendar();
+}
+
+// ============================================================
+// RENDER: CYCLE HISTORY TAB
+// ============================================================
+function renderHistory() {
+    const cycles = getCycles();
+    const container = document.getElementById('history-table-container');
+
+    if (cycles.length === 0) {
+        container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">&#128197;</div><h3>No cycles recorded</h3><p>Start your first cycle to begin building your history.</p><button class="btn btn-primary" onclick="showNewCycleModal()">+ New Cycle</button></div>';
+        return;
+    }
+
+    const sorted = [...cycles].reverse();
+    container.innerHTML = `
+        <div class="table-wrap"><table class="table">
+            <thead><tr><th>#</th><th>Start Date</th><th>End Date</th><th>Length</th><th>Ovulation Day</th><th>Luteal Phase</th><th>Status</th><th></th></tr></thead>
+            <tbody>
+                ${sorted.map((c, i) => {
+                    const num = cycles.length - i;
+                    const luteal = (c.ovulationDay && c.length) ? (c.length - c.ovulationDay) : '—';
+                    return `<tr>
+                        <td>${num}</td>
+                        <td>${formatDate(c.startDate)}</td>
+                        <td>${c.endDate ? formatDate(c.endDate) : '—'}</td>
+                        <td>${c.length || '—'}</td>
+                        <td>${c.ovulationDay || '—'}</td>
+                        <td>${luteal}</td>
+                        <td><span class="badge ${c.endDate ? 'badge-follicular' : 'badge-fertile'}">${c.endDate ? 'completed' : 'active'}</span></td>
+                        <td><div class="table-actions">
+                            <button class="btn-icon" onclick="editCycle('${c.id}')" title="Edit">&#9998;</button>
+                            <button class="btn-icon delete" onclick="deleteCycle('${c.id}')" title="Delete">&#10005;</button>
+                        </div></td>
+                    </tr>`;
+                }).join('')}
+            </tbody>
+        </table></div>`;
+}
+
+// ============================================================
+// RENDER: INSIGHTS TAB
+// ============================================================
+function renderInsights() {
+    const cycles = getCycles();
+    const completed = cycles.filter(c => c.length);
+    const container = document.getElementById('insights-container');
+
+    if (completed.length < 3) {
+        container.innerHTML = `
+            <div class="card">
+                <div class="empty-state">
+                    <div class="empty-state-icon">&#128300;</div>
+                    <h3>Not enough data yet</h3>
+                    <p>Track at least 3 complete cycles to unlock insights and predictive patterns. You have ${completed.length} so far.</p>
+                    <div style="background:var(--light-soft);border-radius:var(--radius-full);height:12px;max-width:300px;margin:16px auto;overflow:hidden;">
+                        <div style="background:var(--gradient-primary);height:100%;width:${(completed.length / 3) * 100}%;border-radius:var(--radius-full);transition:width 0.5s;"></div>
+                    </div>
+                    <p style="font-size:0.8rem;color:var(--gray);">${completed.length}/3 cycles completed</p>
+                </div>
+            </div>`;
+        return;
+    }
+
+    const avgCycle = getAverageCycleLength();
+    const avgOv = getAverageOvulationDay();
+    const avgLuteal = getAverageLutealLength();
+    const fertileStart = avgOv - 5;
+    const fertileEnd = avgOv;
+
+    // Cycle length range
+    const lengths = completed.map(c => c.length);
+    const minLen = Math.min(...lengths);
+    const maxLen = Math.max(...lengths);
+
+    // Ovulation range
+    const ovDays = cycles.filter(c => c.ovulationDay).map(c => c.ovulationDay);
+    const minOv = ovDays.length ? Math.min(...ovDays) : '—';
+    const maxOv = ovDays.length ? Math.max(...ovDays) : '—';
+
+    container.innerHTML = `
+        <div class="insight-grid">
+            <div class="insight-card">
+                <h3>Cycle Length</h3>
+                <div class="insight-big" style="background:var(--gradient-follicular);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">${avgCycle}</div>
+                <div class="insight-unit">average days</div>
+                <div class="insight-note">Range: ${minLen}–${maxLen} days across ${completed.length} cycles</div>
+            </div>
+            <div class="insight-card">
+                <h3>Ovulation Day</h3>
+                <div class="insight-big" style="background:var(--gradient-fertile);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">${avgOv}</div>
+                <div class="insight-unit">average day</div>
+                <div class="insight-note">${ovDays.length > 0 ? `Range: Day ${minOv}–${maxOv}` : 'No ovulation data recorded yet'}</div>
+            </div>
+            <div class="insight-card">
+                <h3>Luteal Phase</h3>
+                <div class="insight-big" style="background:var(--gradient-luteal);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">${avgLuteal}</div>
+                <div class="insight-unit">average days</div>
+                <div class="insight-note">Luteal phase = cycle length - ovulation day. Typical: 10–16 days.</div>
+            </div>
+            <div class="insight-card">
+                <h3>Fertile Window</h3>
+                <div class="insight-big" style="background:var(--gradient-primary);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Day ${fertileStart}–${fertileEnd}</div>
+                <div class="insight-unit">predicted window</div>
+                <div class="insight-note">Based on your data, your fertile window typically falls around days ${fertileStart} to ${fertileEnd}, with ovulation around day ${avgOv}.</div>
+            </div>
+        </div>
+
+        <div class="card" style="margin-top:20px;">
+            <h3 class="card-title" style="margin-bottom:16px;">Cycle Length Trend</h3>
+            <div style="display:flex;align-items:flex-end;gap:8px;height:120px;padding:0 8px;">
+                ${completed.map((c, i) => {
+                    const pct = (c.length / Math.max(...lengths)) * 100;
+                    return `<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
+                        <span style="font-size:0.7rem;color:var(--gray);">${c.length}</span>
+                        <div style="width:100%;max-width:40px;height:${pct}%;background:var(--gradient-follicular);border-radius:6px 6px 0 0;min-height:4px;"></div>
+                        <span style="font-size:0.65rem;color:var(--gray);">#${i + 1}</span>
+                    </div>`;
+                }).join('')}
+            </div>
+        </div>`;
+}
+
+// ============================================================
+// ACTIONS
+// ============================================================
+function showNewCycleModal() {
+    const form = document.getElementById('form-new-cycle');
+    form.reset();
+    form.startDate.value = new Date().toISOString().split('T')[0];
+    showModal('modal-new-cycle');
+}
+
+function showLogEntryModal() {
+    const form = document.getElementById('form-log-entry');
+    form.reset();
+    form.date.value = new Date().toISOString().split('T')[0];
+    showModal('modal-log-entry');
+}
+
+function saveNewCycle(e) {
+    e.preventDefault();
+    const form = e.target;
+    const cycles = getCycles();
+
+    // Close previous cycle
+    if (cycles.length > 0) {
+        const prev = cycles[cycles.length - 1];
+        if (!prev.endDate) {
+            const start = new Date(prev.startDate + 'T00:00:00');
+            const end = new Date(form.startDate.value + 'T00:00:00');
+            prev.endDate = form.startDate.value;
+            prev.length = Math.floor((end - start) / (1000 * 60 * 60 * 24));
+            prev.status = 'completed';
+        }
+    }
+
+    cycles.push({
+        id: Date.now().toString(),
+        startDate: form.startDate.value,
+        endDate: null,
+        length: null,
+        ovulationDay: null,
+        status: 'active'
+    });
+
+    saveCycles(cycles);
+    hideModal('modal-new-cycle');
+    toast('New cycle started', 'success');
+    refreshAll();
+}
+
+function saveLogEntry(e) {
+    e.preventDefault();
+    const form = e.target;
+    const status = getCurrentStatus();
+
+    const entry = {
+        id: Date.now().toString(),
+        date: form.date.value,
+        temperature: form.temperature.value ? parseFloat(form.temperature.value) : null,
+        lhTest: form.lhTest.value || null,
+        symptoms: form.symptoms.value || null,
+        notes: form.notes.value || null,
+        phase: status.phase,
+        cycleDay: status.cycleDay
+    };
+
+    const log = getLog();
+    log.push(entry);
+    saveLog(log);
+
+    hideModal('modal-log-entry');
+    toast('Entry logged', 'success');
+    refreshAll();
+}
+
+function deleteLogEntry(id) {
+    if (!confirm('Delete this log entry?')) return;
+    const log = getLog().filter(e => e.id !== id);
+    saveLog(log);
+    toast('Entry deleted', 'success');
+    refreshAll();
+}
+
+function editCycle(id) {
+    const cycles = getCycles();
+    const cycle = cycles.find(c => c.id === id);
+    if (!cycle) return;
+
+    const form = document.getElementById('form-edit-cycle');
+    form.cycleId.value = cycle.id;
+    form.startDate.value = cycle.startDate;
+    form.ovulationDay.value = cycle.ovulationDay || '';
+    showModal('modal-edit-cycle');
+}
+
+function saveEditCycle(e) {
+    e.preventDefault();
+    const form = e.target;
+    const cycles = getCycles();
+    const idx = cycles.findIndex(c => c.id === form.cycleId.value);
+    if (idx === -1) return;
+
+    cycles[idx].startDate = form.startDate.value;
+    cycles[idx].ovulationDay = form.ovulationDay.value ? parseInt(form.ovulationDay.value) : null;
+
+    // Recalculate length if end date exists
+    if (cycles[idx].endDate) {
+        const start = new Date(cycles[idx].startDate + 'T00:00:00');
+        const end = new Date(cycles[idx].endDate + 'T00:00:00');
+        cycles[idx].length = Math.floor((end - start) / (1000 * 60 * 60 * 24));
+    }
+
+    saveCycles(cycles);
+    hideModal('modal-edit-cycle');
+    toast('Cycle updated', 'success');
+    refreshAll();
+}
+
+function deleteCycle(id) {
+    if (!confirm('Delete this cycle? This cannot be undone.')) return;
+    const cycles = getCycles().filter(c => c.id !== id);
+    saveCycles(cycles);
+    toast('Cycle deleted', 'success');
+    refreshAll();
+}
+
+function exportData() {
+    const data = {
+        exportDate: new Date().toISOString(),
+        source: 'cycle-dashboard',
+        cycles: getCycles(),
+        log: getLog()
+    };
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `cycle-data-${new Date().toISOString().split('T')[0]}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+    toast('Data exported', 'success');
+}
+
+// ============================================================
+// UI HELPERS
+// ============================================================
+function showModal(id) {
+    document.getElementById(id).classList.add('active');
+}
+
+function hideModal(id) {
+    document.getElementById(id).classList.remove('active');
+}
+
+function formatDate(dateStr) {
+    if (!dateStr) return '—';
+    const d = new Date(dateStr + 'T00:00:00');
+    return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+}
+
+function toast(message, type) {
+    const existing = document.querySelector('.toast');
+    if (existing) existing.remove();
+
+    const el = document.createElement('div');
+    el.className = `toast ${type}`;
+    el.innerHTML = `<span>${message}</span><button class="toast-close" onclick="this.parentElement.remove()">&#10005;</button>`;
+    document.body.appendChild(el);
+    setTimeout(() => { if (el.parentElement) el.remove(); }, 3500);
+}
+
+function switchTab(tabName) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+    document.getElementById(`panel-${tabName}`).classList.add('active');
+    renderTab(tabName);
+}
+
+function renderTab(name) {
+    switch (name) {
+        case 'overview': renderOverview(); break;
+        case 'log': renderLog(); break;
+        case 'calendar': renderCalendar(); break;
+        case 'history': renderHistory(); break;
+        case 'insights': renderInsights(); break;
+    }
+}
+
+function refreshAll() {
+    const activeTab = document.querySelector('.tab.active');
+    if (activeTab) renderTab(activeTab.dataset.tab);
+}
+
+// ============================================================
+// TABS & INIT
+// ============================================================
+document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', () => switchTab(tab.dataset.tab));
+});
+
+// Close modals on overlay click
+document.querySelectorAll('.modal-overlay').forEach(overlay => {
+    overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) overlay.classList.remove('active');
+    });
+});
+
+// Keyboard: Escape to close modals
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        document.querySelectorAll('.modal-overlay.active').forEach(m => m.classList.remove('active'));
+    }
+});
+
+// Initialize
+document.addEventListener('DOMContentLoaded', () => {
+    renderOverview();
+});
+</script>
+</body>
+</html>
