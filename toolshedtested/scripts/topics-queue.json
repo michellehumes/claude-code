@@ -1,0 +1,186 @@
+{
+  "description": "Blog post topics queue for automated publishing. Each topic generates one blog post.",
+  "schedule": "every_other_day",
+  "topics": [
+    {
+      "slug": "best-miter-saws-2026",
+      "title": "Best Miter Saws 2026: 6 Models Tested for Accuracy and Power",
+      "category": "buying-guide",
+      "excerpt": "We tested 6 miter saws across 500+ cuts in hardwood, softwood, and composite materials. Here are the ones that delivered consistently accurate cuts.",
+      "readTime": "14 min read",
+      "imageUrl": "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=800&h=500&fit=crop",
+      "used": false
+    },
+    {
+      "slug": "makita-vs-milwaukee-impact-drivers",
+      "title": "Makita vs Milwaukee Impact Drivers: Which Hits Harder in 2026?",
+      "category": "comparison",
+      "excerpt": "Two of the best impact driver brands go head-to-head. We tested torque, speed, battery life, and comfort to find the winner.",
+      "readTime": "12 min read",
+      "imageUrl": "https://images.unsplash.com/photo-1581783898377-1c85bf937427?w=800&h=500&fit=crop",
+      "used": false
+    },
+    {
+      "slug": "how-to-maintain-power-tool-batteries",
+      "title": "How to Make Your Power Tool Batteries Last Twice as Long",
+      "category": "how-to",
+      "excerpt": "Most people kill their batteries early with simple mistakes. Here are 8 proven tips to maximize lithium-ion battery lifespan and performance.",
+      "readTime": "7 min read",
+      "imageUrl": "https://images.unsplash.com/photo-1513828583688-c52646db42da?w=800&h=500&fit=crop",
+      "used": false
+    },
+    {
+      "slug": "best-reciprocating-saws-2026",
+      "title": "Best Reciprocating Saws 2026: Demolition Tested",
+      "category": "buying-guide",
+      "excerpt": "We demolished walls, cut pipes, and pruned trees to find the best reciprocating saws for both demolition and precision work.",
+      "readTime": "11 min read",
+      "imageUrl": "https://images.unsplash.com/photo-1572981779307-38b8cabb2407?w=800&h=500&fit=crop",
+      "used": false
+    },
+    {
+      "slug": "brushless-vs-brushed-motors-explained",
+      "title": "Brushless vs Brushed Motors: Is the Upgrade Worth It?",
+      "category": "how-to",
+      "excerpt": "Brushless tools cost 30-50% more. We explain exactly what you get for that money and when it's worth the upgrade.",
+      "readTime": "8 min read",
+      "imageUrl": "https://images.unsplash.com/photo-1504148455328-c376907d081c?w=800&h=500&fit=crop",
+      "used": false
+    },
+    {
+      "slug": "best-jigsaws-for-woodworking",
+      "title": "Best Jigsaws for Woodworking 2026: Precision Curve Cutting",
+      "category": "review",
+      "excerpt": "We tested 8 jigsaws on intricate curve cuts, bevel cuts, and plunge cuts in hardwood and plywood to find the smoothest cutters.",
+      "readTime": "12 min read",
+      "imageUrl": "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=800&h=500&fit=crop",
+      "used": false
+    },
+    {
+      "slug": "best-tools-for-deck-building",
+      "title": "Essential Tools for Building a Deck: Complete Checklist",
+      "category": "tips",
+      "excerpt": "Planning a deck build? Here's every tool you need from layout to finish, plus our recommended models for each task.",
+      "readTime": "15 min read",
+      "imageUrl": "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800&h=500&fit=crop",
+      "used": false
+    },
+    {
+      "slug": "dewalt-20v-max-vs-flexvolt",
+      "title": "DeWalt 20V MAX vs 60V FLEXVOLT: When Do You Need More Power?",
+      "category": "comparison",
+      "excerpt": "FLEXVOLT costs significantly more than standard 20V MAX. We break down exactly when the extra voltage matters and when you're paying for nothing.",
+      "readTime": "10 min read",
+      "imageUrl": "https://images.unsplash.com/photo-1530124566582-a45a7e3f2783?w=800&h=500&fit=crop",
+      "used": false
+    },
+    {
+      "slug": "best-oscillating-multi-tools",
+      "title": "Best Oscillating Multi-Tools 2026: The Most Versatile Workshop Tool",
+      "category": "buying-guide",
+      "excerpt": "We tested 7 oscillating multi-tools on cutting, sanding, scraping, and grout removal to find the most versatile performers.",
+      "readTime": "11 min read",
+      "imageUrl": "https://images.unsplash.com/photo-1590479773265-7464e5d48118?w=800&h=500&fit=crop",
+      "used": false
+    },
+    {
+      "slug": "how-to-cut-straight-with-circular-saw",
+      "title": "How to Cut Perfectly Straight With a Circular Saw (No Track Saw Needed)",
+      "category": "how-to",
+      "excerpt": "A $15 guide and these techniques will get you table-saw-straight cuts with just a circular saw. Here's the step-by-step method we use daily.",
+      "readTime": "8 min read",
+      "imageUrl": "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=800&h=500&fit=crop",
+      "used": false
+    },
+    {
+      "slug": "best-cordless-brad-nailers-2026",
+      "title": "Best Cordless Brad Nailers 2026: No Compressor Needed",
+      "category": "buying-guide",
+      "excerpt": "Cordless brad nailers have finally caught up to pneumatic performance. We tested 5 models on trim, cabinets, and furniture work.",
+      "readTime": "10 min read",
+      "imageUrl": "https://images.unsplash.com/photo-1504148455328-c376907d081c?w=800&h=500&fit=crop",
+      "used": false
+    },
+    {
+      "slug": "milwaukee-m18-vs-m12-which-system",
+      "title": "Milwaukee M18 vs M12: Which Battery System Should You Choose?",
+      "category": "comparison",
+      "excerpt": "Milwaukee has 200+ tools across two platforms. We explain which system is right for your work and when you need both.",
+      "readTime": "9 min read",
+      "imageUrl": "https://images.unsplash.com/photo-1581783898377-1c85bf937427?w=800&h=500&fit=crop",
+      "used": false
+    },
+    {
+      "slug": "best-router-for-woodworking-beginners",
+      "title": "Best Wood Routers for Beginners 2026: Start Routing With Confidence",
+      "category": "buying-guide",
+      "excerpt": "Routers are intimidating but incredibly useful. We tested 6 models focused on ease of use, safety features, and versatility for beginners.",
+      "readTime": "13 min read",
+      "imageUrl": "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=800&h=500&fit=crop",
+      "used": false
+    },
+    {
+      "slug": "workshop-dust-collection-guide",
+      "title": "Workshop Dust Collection: Protect Your Lungs Without Breaking the Bank",
+      "category": "tips",
+      "excerpt": "Wood dust is a serious health hazard most DIYers ignore. Here's how to set up effective dust collection for under $300.",
+      "readTime": "11 min read",
+      "imageUrl": "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800&h=500&fit=crop",
+      "used": false
+    },
+    {
+      "slug": "best-table-saws-under-500",
+      "title": "Best Table Saws Under $500: Jobsite and Contractor Models Tested",
+      "category": "buying-guide",
+      "excerpt": "You don't need a $2000 cabinet saw for great results. We tested 6 portable table saws under $500 for accuracy, power, and dust collection.",
+      "readTime": "14 min read",
+      "imageUrl": "https://images.unsplash.com/photo-1572981779307-38b8cabb2407?w=800&h=500&fit=crop",
+      "used": false
+    },
+    {
+      "slug": "corded-vs-cordless-power-tools",
+      "title": "Corded vs Cordless Power Tools in 2026: Has Cordless Finally Won?",
+      "category": "how-to",
+      "excerpt": "Cordless tools keep getting better, but corded still has advantages. We compare both across 10 tool categories to give you the definitive answer.",
+      "readTime": "10 min read",
+      "imageUrl": "https://images.unsplash.com/photo-1504148455328-c376907d081c?w=800&h=500&fit=crop",
+      "used": false
+    },
+    {
+      "slug": "best-laser-levels-for-home-projects",
+      "title": "Best Laser Levels for Home Projects 2026: Tested for Accuracy",
+      "category": "review",
+      "excerpt": "We tested 7 laser levels for accuracy, visibility, and battery life on real home improvement projects from hanging pictures to tiling.",
+      "readTime": "10 min read",
+      "imageUrl": "https://images.unsplash.com/photo-1530124566582-a45a7e3f2783?w=800&h=500&fit=crop",
+      "used": false
+    },
+    {
+      "slug": "power-tool-safety-essential-guide",
+      "title": "Power Tool Safety: The Complete Guide Every DIYer Must Read",
+      "category": "how-to",
+      "excerpt": "Over 400,000 ER visits per year from power tool injuries. Most are preventable. Here are the safety rules that protect professionals every day.",
+      "readTime": "12 min read",
+      "imageUrl": "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=800&h=500&fit=crop",
+      "used": false
+    },
+    {
+      "slug": "best-cordless-leaf-blowers-2026",
+      "title": "Best Cordless Leaf Blowers 2026: Tested for Power and Runtime",
+      "category": "buying-guide",
+      "excerpt": "We tested 8 cordless leaf blowers on wet leaves, dry leaves, and debris to find the ones with the best blowing force and battery life.",
+      "readTime": "11 min read",
+      "imageUrl": "https://images.unsplash.com/photo-1590479773265-7464e5d48118?w=800&h=500&fit=crop",
+      "used": false
+    },
+    {
+      "slug": "tool-gift-guide-fathers-day-2026",
+      "title": "Best Power Tool Gifts for Father's Day 2026: Every Budget Covered",
+      "category": "tips",
+      "excerpt": "From $30 stocking stuffers to $500 dream tools, here are the power tools that actually make great gifts — tested and approved.",
+      "readTime": "9 min read",
+      "imageUrl": "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800&h=500&fit=crop",
+      "used": false
+    }
+  ]
+}
