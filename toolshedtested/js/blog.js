@@ -157,7 +157,8 @@ class BlogListManager {
     }
 
     createPostCard(post) {
-        const dateFormatted = new Date(post.date).toLocaleDateString('en-US', {
+        const [year, month, day] = post.date.split('-').map(Number);
+        const dateFormatted = new Date(year, month - 1, day).toLocaleDateString('en-US', {
             year: 'numeric', month: 'long', day: 'numeric'
         });
 
@@ -209,7 +210,8 @@ class LatestArticlesManager {
     render() {
         const latest = blogPosts.slice(0, 3);
         this.grid.innerHTML = latest.map(post => {
-            const dateFormatted = new Date(post.date).toLocaleDateString('en-US', {
+            const [year, month, day] = post.date.split('-').map(Number);
+            const dateFormatted = new Date(year, month - 1, day).toLocaleDateString('en-US', {
                 year: 'numeric', month: 'long', day: 'numeric'
             });
             const categoryLabels = {
