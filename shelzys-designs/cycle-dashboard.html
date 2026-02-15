@@ -797,6 +797,109 @@
             .phase-meta { flex-direction: column; gap: 12px; }
             .header-actions .btn span { display: none; }
         }
+
+        /* ===================== HEALTH DATA ===================== */
+        .health-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .health-stat {
+            background: white;
+            padding: 20px;
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .health-stat-label {
+            font-size: 0.75rem;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .health-stat-value {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .health-stat-unit {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+
+        .chart-container { position: relative; width: 100%; overflow-x: auto; }
+        .chart-svg { width: 100%; height: 200px; }
+        .chart-line { fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+        .chart-area { opacity: 0.1; }
+        .chart-dot { transition: r 0.2s; cursor: pointer; }
+        .chart-dot:hover { r: 5; }
+        .chart-label { font-family: var(--font-body); font-size: 10px; fill: var(--gray); }
+        .chart-grid-line { stroke: var(--gray-light); stroke-width: 0.5; }
+        .chart-phase-bg { opacity: 0.08; }
+
+        .drop-zone {
+            border: 2px dashed var(--gray-light);
+            border-radius: var(--radius-lg);
+            padding: 48px 24px;
+            text-align: center;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .drop-zone:hover, .drop-zone.dragover {
+            border-color: var(--pink);
+            background: var(--pink-soft);
+        }
+
+        .drop-zone-icon { font-size: 2.5rem; margin-bottom: 12px; }
+        .drop-zone-text { font-size: 0.95rem; color: var(--dark); font-weight: 600; margin-bottom: 4px; }
+        .drop-zone-hint { font-size: 0.8rem; color: var(--gray); }
+
+        .import-file-list { margin-top: 20px; }
+
+        .import-file-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            background: var(--light-soft);
+            border-radius: var(--radius-sm);
+            margin-bottom: 8px;
+            font-size: 0.85rem;
+        }
+
+        .import-file-type {
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: var(--radius-full);
+            font-weight: 600;
+        }
+
+        .import-file-type.readiness { background: #fef3c7; color: #92400e; }
+        .import-file-type.sleep { background: #dbeafe; color: #1e40af; }
+        .import-file-type.activity { background: #d1fae5; color: #065f46; }
+        .import-file-type.unknown { background: var(--gray-light); color: var(--gray); }
+
+        .health-charts-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .health-charts-grid { grid-template-columns: 1fr; }
+            .health-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 480px) {
+            .health-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
@@ -806,6 +909,7 @@
     <div class="header-inner">
         <a href="index.html" class="logo">shelzy's<span class="logo-accent">.</span> cycle</a>
         <div class="header-actions">
+            <button class="btn btn-secondary btn-sm" onclick="showImportModal()">Import Oura</button>
             <button class="btn btn-secondary btn-sm" onclick="exportData()">Export</button>
             <button class="btn btn-primary btn-sm" onclick="showNewCycleModal()">+ New Cycle</button>
         </div>
@@ -822,6 +926,7 @@
         <button class="tab active" data-tab="overview" role="tab">Overview</button>
         <button class="tab" data-tab="log" role="tab">Daily Log</button>
         <button class="tab" data-tab="calendar" role="tab">Calendar</button>
+        <button class="tab" data-tab="health" role="tab">Health Data</button>
         <button class="tab" data-tab="history" role="tab">Cycle History</button>
         <button class="tab" data-tab="insights" role="tab">Insights</button>
     </div>
@@ -872,6 +977,53 @@
                 <div class="legend-item"><div class="legend-dot" style="background:var(--blue)"></div> Implantation</div>
             </div>
         </div>
+    </div>
+
+    <!-- HEALTH DATA TAB -->
+    <div class="tab-panel" id="panel-health">
+        <div id="health-summary-stats"></div>
+        <div class="health-charts-grid" id="health-charts-grid">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Body Temperature</h3>
+                    <span style="font-size:0.8rem;color:var(--gray);">deviation from baseline</span>
+                </div>
+                <div id="chart-temperature" class="chart-container"></div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Heart Rate Variability</h3>
+                    <span style="font-size:0.8rem;color:var(--gray);">ms</span>
+                </div>
+                <div id="chart-hrv" class="chart-container"></div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Resting Heart Rate</h3>
+                    <span style="font-size:0.8rem;color:var(--gray);">bpm</span>
+                </div>
+                <div id="chart-rhr" class="chart-container"></div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Sleep Score</h3>
+                </div>
+                <div id="chart-sleep" class="chart-container"></div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Readiness Score</h3>
+                </div>
+                <div id="chart-readiness" class="chart-container"></div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Daily Steps</h3>
+                </div>
+                <div id="chart-steps" class="chart-container"></div>
+            </div>
+        </div>
+        <div id="health-empty-state"></div>
     </div>
 
     <!-- CYCLE HISTORY TAB -->
@@ -966,6 +1118,26 @@
                 <button type="submit" class="btn btn-primary">Save Changes</button>
             </div>
         </form>
+    </div>
+</div>
+
+<!-- Import Oura Modal -->
+<div class="modal-overlay" id="modal-import">
+    <div class="modal">
+        <h2 class="modal-title">Import Oura Ring Data</h2>
+        <p style="color:var(--gray);font-size:0.9rem;margin-bottom:20px;">Export your data from <strong>cloud.ouraring.com</strong> and upload the CSV files here.</p>
+        <div class="drop-zone" id="oura-drop-zone">
+            <div class="drop-zone-icon">&#128225;</div>
+            <div class="drop-zone-text">Drop CSV files here</div>
+            <div class="drop-zone-hint">or click to browse</div>
+            <input type="file" id="oura-file-input" multiple accept=".csv" style="display:none;">
+        </div>
+        <div class="import-file-list" id="import-file-list"></div>
+        <div class="form-actions">
+            <button type="button" class="btn btn-secondary" onclick="hideModal('modal-import')">Cancel</button>
+            <button type="button" class="btn btn-danger btn-sm" onclick="clearOuraData()" id="btn-clear-oura" style="display:none;">Clear All Data</button>
+            <button type="button" class="btn btn-primary" onclick="processImport()" id="btn-import" style="display:none;">Import Data</button>
+        </div>
     </div>
 </div>
 
@@ -1640,6 +1812,377 @@ function exportData() {
 }
 
 // ============================================================
+// OURA DATA LAYER
+// ============================================================
+const OURA_KEYS = { readiness: 'oura-readiness', sleep: 'oura-sleep', activity: 'oura-activity' };
+
+function getOuraData(type) {
+    return JSON.parse(localStorage.getItem(OURA_KEYS[type]) || '[]');
+}
+
+function saveOuraData(type, data) {
+    const existing = getOuraData(type);
+    const dateMap = {};
+    existing.forEach(d => dateMap[d.date] = d);
+    data.forEach(d => dateMap[d.date] = d);
+    const merged = Object.values(dateMap).sort((a, b) => a.date.localeCompare(b.date));
+    localStorage.setItem(OURA_KEYS[type], JSON.stringify(merged));
+}
+
+function hasOuraData() {
+    return getOuraData('readiness').length > 0 || getOuraData('sleep').length > 0 || getOuraData('activity').length > 0;
+}
+
+function clearOuraData() {
+    if (!confirm('Clear all imported Oura Ring data?')) return;
+    Object.values(OURA_KEYS).forEach(k => localStorage.removeItem(k));
+    toast('Oura data cleared', 'success');
+    pendingFiles = [];
+    document.getElementById('import-file-list').innerHTML = '';
+    document.getElementById('btn-import').style.display = 'none';
+    document.getElementById('btn-clear-oura').style.display = 'none';
+    refreshAll();
+}
+
+// ============================================================
+// CSV PARSER
+// ============================================================
+function parseCSVLine(line) {
+    const result = [];
+    let current = '';
+    let inQuotes = false;
+    for (let i = 0; i < line.length; i++) {
+        const ch = line[i];
+        if (ch === '"') { inQuotes = !inQuotes; }
+        else if (ch === ',' && !inQuotes) { result.push(current.trim()); current = ''; }
+        else { current += ch; }
+    }
+    result.push(current.trim());
+    return result;
+}
+
+function detectOuraCSVType(headers, filename) {
+    const hl = headers.map(h => h.toLowerCase());
+    const fn = (filename || '').toLowerCase();
+    if (fn.includes('readiness')) return 'readiness';
+    if (fn.includes('sleep')) return 'sleep';
+    if (fn.includes('activity')) return 'activity';
+    if (hl.some(h => h.includes('readiness'))) return 'readiness';
+    if (hl.some(h => h.includes('sleep score') || h.includes('total sleep'))) return 'sleep';
+    if (hl.some(h => h.includes('steps') || h.includes('activity score'))) return 'activity';
+    if (hl.some(h => h.includes('temperature'))) return 'readiness';
+    if (hl.some(h => h.includes('hrv'))) return 'readiness';
+    return 'unknown';
+}
+
+function parseOuraCSV(text, filename) {
+    const lines = text.trim().split(/\r?\n/);
+    if (lines.length < 2) return null;
+
+    const headers = parseCSVLine(lines[0]);
+    const type = detectOuraCSVType(headers, filename);
+    const headerKeys = headers.map(h => h.toLowerCase().replace(/['"]/g, '').trim().replace(/\s+/g, '_'));
+
+    const dateCol = headerKeys.findIndex(h => h.includes('date') || h === 'day');
+    if (dateCol === -1) return null;
+
+    const data = [];
+    for (let i = 1; i < lines.length; i++) {
+        if (!lines[i].trim()) continue;
+        const values = parseCSVLine(lines[i]);
+        const row = {};
+        headerKeys.forEach((h, idx) => { row[h] = values[idx] || ''; });
+        const dateVal = values[dateCol];
+        if (!dateVal || !dateVal.match(/\d{4}/)) continue;
+        row.date = dateVal.substring(0, 10);
+        data.push(row);
+    }
+
+    return { type, headers: headerKeys, data, filename };
+}
+
+function normalizeOuraData(parsed) {
+    if (!parsed || !parsed.data.length) return null;
+    const { type, data } = parsed;
+    const normalized = [];
+
+    const findVal = (row, ...keys) => {
+        for (const k of keys) {
+            const match = Object.keys(row).find(rk => rk.includes(k));
+            if (match && row[match] !== '') return parseFloat(row[match]);
+        }
+        return null;
+    };
+
+    for (const row of data) {
+        const entry = { date: row.date };
+        if (type === 'readiness') {
+            entry.readinessScore = findVal(row, 'readiness_score', 'readiness', 'score');
+            entry.temperatureDeviation = findVal(row, 'temperature_deviation', 'temperature_delta', 'temp_dev', 'temperature');
+            entry.temperatureTrend = findVal(row, 'temperature_trend', 'temp_trend');
+            entry.restingHeartRate = findVal(row, 'resting_heart_rate', 'resting_hr', 'rest_hr');
+            entry.hrvBalance = findVal(row, 'hrv_balance', 'hrv');
+        } else if (type === 'sleep') {
+            entry.sleepScore = findVal(row, 'sleep_score', 'score');
+            entry.totalSleep = findVal(row, 'total_sleep', 'duration');
+            entry.remSleep = findVal(row, 'rem_sleep', 'rem');
+            entry.deepSleep = findVal(row, 'deep_sleep', 'deep');
+            entry.sleepEfficiency = findVal(row, 'efficiency', 'sleep_efficiency');
+            entry.avgHrv = findVal(row, 'average_hrv', 'hrv', 'avg_hrv');
+            entry.restingHeartRate = findVal(row, 'lowest_heart_rate', 'resting_heart_rate', 'lowest_hr');
+        } else if (type === 'activity') {
+            entry.activityScore = findVal(row, 'activity_score', 'score');
+            entry.steps = findVal(row, 'steps', 'total_steps');
+            entry.totalCalories = findVal(row, 'total_calories', 'calories');
+            entry.activeCalories = findVal(row, 'active_calories');
+        }
+        normalized.push(entry);
+    }
+    return { type, data: normalized };
+}
+
+// ============================================================
+// IMPORT UI
+// ============================================================
+let pendingFiles = [];
+
+function showImportModal() {
+    pendingFiles = [];
+    document.getElementById('import-file-list').innerHTML = '';
+    document.getElementById('btn-import').style.display = 'none';
+    document.getElementById('btn-clear-oura').style.display = hasOuraData() ? 'inline-flex' : 'none';
+    showModal('modal-import');
+}
+
+function setupImportHandlers() {
+    const dropZone = document.getElementById('oura-drop-zone');
+    const fileInput = document.getElementById('oura-file-input');
+    dropZone.addEventListener('click', () => fileInput.click());
+    dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('dragover'); });
+    dropZone.addEventListener('dragleave', () => { dropZone.classList.remove('dragover'); });
+    dropZone.addEventListener('drop', (e) => { e.preventDefault(); dropZone.classList.remove('dragover'); handleFiles(e.dataTransfer.files); });
+    fileInput.addEventListener('change', (e) => { handleFiles(e.target.files); });
+}
+
+function handleFiles(files) {
+    const list = document.getElementById('import-file-list');
+    Array.from(files).forEach(file => {
+        if (!file.name.endsWith('.csv')) return;
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const parsed = parseOuraCSV(e.target.result, file.name);
+            if (!parsed || parsed.data.length === 0) { toast('Could not parse ' + file.name, 'error'); return; }
+            const normalized = normalizeOuraData(parsed);
+            if (!normalized) { toast('No usable data in ' + file.name, 'error'); return; }
+            pendingFiles.push(normalized);
+            list.innerHTML += `<div class="import-file-item"><span>${file.name} (${parsed.data.length} days)</span><span class="import-file-type ${normalized.type}">${normalized.type}</span></div>`;
+            document.getElementById('btn-import').style.display = 'inline-flex';
+        };
+        reader.readAsText(file);
+    });
+}
+
+function processImport() {
+    let totalRows = 0;
+    pendingFiles.forEach(({ type, data }) => { saveOuraData(type, data); totalRows += data.length; });
+    hideModal('modal-import');
+    toast('Imported ' + totalRows + ' days of Oura data', 'success');
+    pendingFiles = [];
+    refreshAll();
+}
+
+// ============================================================
+// SVG CHART RENDERING
+// ============================================================
+function getDatePhase(dateStr, cycles) {
+    const dateObj = new Date(dateStr + 'T00:00:00');
+    for (const cycle of cycles) {
+        const cs = new Date(cycle.startDate + 'T00:00:00');
+        const cycleDay = Math.floor((dateObj - cs) / (1000 * 60 * 60 * 24)) + 1;
+        if (cycleDay < 1) continue;
+        const len = cycle.length || getAverageCycleLength();
+        if (cycleDay > len) continue;
+        const ov = cycle.ovulationDay || getAverageOvulationDay();
+        if (cycleDay <= 5) return 'period';
+        if (cycleDay >= ov - 5 && cycleDay < ov) return 'fertile';
+        if (cycleDay === ov) return 'ovulation';
+        if (cycleDay > ov) {
+            const dpo = cycleDay - ov;
+            return (dpo >= 6 && dpo <= 12) ? 'implantation' : 'luteal';
+        }
+        return 'follicular';
+    }
+    return null;
+}
+
+function renderLineChart(containerId, dataPoints, options = {}) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    const { color = '#ff6b9d', height = 180, unit = '', phaseOverlay = false, dateRange = 30 } = options;
+
+    const sorted = dataPoints.filter(d => d.value !== null && d.value !== undefined && !isNaN(d.value))
+        .sort((a, b) => a.date.localeCompare(b.date)).slice(-dateRange);
+
+    if (sorted.length === 0) {
+        container.innerHTML = '<div class="empty-state" style="padding:30px;"><p style="color:var(--gray);font-size:0.85rem;">No data available</p></div>';
+        return;
+    }
+
+    const pad = { top: 20, right: 20, bottom: 40, left: 50 };
+    const width = 500;
+    const chartW = width - pad.left - pad.right;
+    const chartH = height - pad.top - pad.bottom;
+    const values = sorted.map(d => d.value);
+    let minVal = Math.min(...values), maxVal = Math.max(...values);
+    const range = maxVal - minVal || 1;
+    minVal -= range * 0.1; maxVal += range * 0.1;
+    const xScale = (i) => pad.left + (i / (sorted.length - 1 || 1)) * chartW;
+    const yScale = (v) => pad.top + chartH - ((v - minVal) / (maxVal - minVal)) * chartH;
+
+    let phaseRects = '';
+    if (phaseOverlay) {
+        const cycles = getCycles();
+        const phaseColors = { period: '#ff6b9d', follicular: '#c678ff', fertile: '#00d9a5', ovulation: '#059669', luteal: '#f59e0b', implantation: '#74b9ff' };
+        sorted.forEach((d, i) => {
+            const x = xScale(i);
+            const w = sorted.length > 1 ? chartW / (sorted.length - 1) : chartW;
+            const phase = getDatePhase(d.date, cycles);
+            if (phase) phaseRects += `<rect x="${x - w/2}" y="${pad.top}" width="${w}" height="${chartH}" fill="${phaseColors[phase] || 'transparent'}" class="chart-phase-bg"/>`;
+        });
+    }
+
+    let gridSVG = '';
+    for (let i = 0; i <= 4; i++) {
+        const y = pad.top + (chartH / 4) * i;
+        const val = maxVal - ((maxVal - minVal) / 4) * i;
+        gridSVG += `<line x1="${pad.left}" y1="${y}" x2="${width - pad.right}" y2="${y}" class="chart-grid-line"/>`;
+        gridSVG += `<text x="${pad.left - 8}" y="${y + 4}" text-anchor="end" class="chart-label">${val.toFixed(1)}${unit}</text>`;
+    }
+
+    let xLabels = '';
+    const labelInterval = Math.max(1, Math.floor(sorted.length / 5));
+    sorted.forEach((d, i) => {
+        if (i % labelInterval === 0 || i === sorted.length - 1) {
+            const date = new Date(d.date + 'T00:00:00');
+            xLabels += `<text x="${xScale(i)}" y="${height - 5}" text-anchor="middle" class="chart-label">${date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</text>`;
+        }
+    });
+
+    const pathPoints = sorted.map((d, i) => `${xScale(i)},${yScale(d.value)}`);
+    const linePath = 'M' + pathPoints.join(' L');
+    const areaPath = linePath + ` L${xScale(sorted.length - 1)},${pad.top + chartH} L${xScale(0)},${pad.top + chartH} Z`;
+    let dotsSVG = '';
+    sorted.forEach((d, i) => { dotsSVG += `<circle cx="${xScale(i)}" cy="${yScale(d.value)}" r="3" class="chart-dot" fill="${color}"><title>${d.date}: ${d.value}${unit}</title></circle>`; });
+
+    container.innerHTML = `<svg viewBox="0 0 ${width} ${height}" class="chart-svg" preserveAspectRatio="xMidYMid meet">
+        ${phaseRects}${gridSVG}${xLabels}
+        <path d="${areaPath}" fill="${color}" class="chart-area"/>
+        <path d="${linePath}" stroke="${color}" class="chart-line"/>
+        ${dotsSVG}</svg>`;
+}
+
+function renderBarChart(containerId, dataPoints, options = {}) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    const { color = '#c678ff', height = 180, unit = '', dateRange = 30 } = options;
+
+    const sorted = dataPoints.filter(d => d.value !== null && d.value !== undefined && !isNaN(d.value))
+        .sort((a, b) => a.date.localeCompare(b.date)).slice(-dateRange);
+
+    if (sorted.length === 0) {
+        container.innerHTML = '<div class="empty-state" style="padding:30px;"><p style="color:var(--gray);font-size:0.85rem;">No data available</p></div>';
+        return;
+    }
+
+    const pad = { top: 20, right: 20, bottom: 40, left: 50 };
+    const width = 500;
+    const chartW = width - pad.left - pad.right;
+    const chartH = height - pad.top - pad.bottom;
+    const maxVal = Math.max(...sorted.map(d => d.value)) * 1.1;
+    const barWidth = Math.min(12, (chartW / sorted.length) * 0.7);
+    const barGap = chartW / sorted.length;
+
+    let gridSVG = '';
+    for (let i = 0; i <= 4; i++) {
+        const y = pad.top + (chartH / 4) * i;
+        const val = maxVal - (maxVal / 4) * i;
+        gridSVG += `<line x1="${pad.left}" y1="${y}" x2="${width - pad.right}" y2="${y}" class="chart-grid-line"/>`;
+        gridSVG += `<text x="${pad.left - 8}" y="${y + 4}" text-anchor="end" class="chart-label">${Math.round(val)}${unit}</text>`;
+    }
+
+    let barsSVG = '', xLabels = '';
+    const labelInterval = Math.max(1, Math.floor(sorted.length / 5));
+    sorted.forEach((d, i) => {
+        const x = pad.left + barGap * i + barGap / 2 - barWidth / 2;
+        const barH = (d.value / maxVal) * chartH;
+        const y = pad.top + chartH - barH;
+        barsSVG += `<rect x="${x}" y="${y}" width="${barWidth}" height="${barH}" rx="2" fill="${color}" opacity="0.8"><title>${d.date}: ${d.value}${unit}</title></rect>`;
+        if (i % labelInterval === 0 || i === sorted.length - 1) {
+            const date = new Date(d.date + 'T00:00:00');
+            xLabels += `<text x="${x + barWidth/2}" y="${height - 5}" text-anchor="middle" class="chart-label">${date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</text>`;
+        }
+    });
+
+    container.innerHTML = `<svg viewBox="0 0 ${width} ${height}" class="chart-svg" preserveAspectRatio="xMidYMid meet">${gridSVG}${xLabels}${barsSVG}</svg>`;
+}
+
+// ============================================================
+// RENDER: HEALTH DATA TAB
+// ============================================================
+function renderHealth() {
+    const readiness = getOuraData('readiness');
+    const sleep = getOuraData('sleep');
+    const activity = getOuraData('activity');
+    const statsEl = document.getElementById('health-summary-stats');
+    const chartsEl = document.getElementById('health-charts-grid');
+    const emptyEl = document.getElementById('health-empty-state');
+
+    if (!hasOuraData()) {
+        statsEl.innerHTML = '';
+        chartsEl.style.display = 'none';
+        emptyEl.innerHTML = '<div class="card"><div class="empty-state"><div class="empty-state-icon">&#9201;</div><h3>Connect Your Oura Ring</h3><p>Import your Oura Ring data to see temperature, HRV, sleep, and activity trends overlaid with your cycle phases.</p><button class="btn btn-primary" onclick="showImportModal()">Import Oura Data</button></div></div>';
+        return;
+    }
+
+    chartsEl.style.display = 'grid';
+    emptyEl.innerHTML = '';
+
+    const latest = (arr) => arr.length ? arr[arr.length - 1] : {};
+    const lr = latest(readiness), ls = latest(sleep), la = latest(activity);
+    const tempDev = lr.temperatureDeviation;
+    const rhr = lr.restingHeartRate || ls.restingHeartRate;
+    const hrv = lr.hrvBalance || ls.avgHrv;
+
+    let statsHTML = '<div class="health-grid">';
+    if (tempDev != null) statsHTML += `<div class="health-stat"><div class="health-stat-label">Temp Deviation</div><div class="health-stat-value" style="color:${tempDev >= 0 ? '#dc2626' : '#2563eb'};">${tempDev >= 0 ? '+' : ''}${tempDev.toFixed(2)}</div><div class="health-stat-unit">&deg;C from baseline</div></div>`;
+    if (rhr) statsHTML += `<div class="health-stat"><div class="health-stat-label">Resting HR</div><div class="health-stat-value" style="color:#ff7675;">${Math.round(rhr)}</div><div class="health-stat-unit">bpm</div></div>`;
+    if (hrv) statsHTML += `<div class="health-stat"><div class="health-stat-label">HRV</div><div class="health-stat-value" style="color:#c678ff;">${Math.round(hrv)}</div><div class="health-stat-unit">ms</div></div>`;
+    if (ls.sleepScore) statsHTML += `<div class="health-stat"><div class="health-stat-label">Sleep Score</div><div class="health-stat-value" style="color:#74b9ff;">${Math.round(ls.sleepScore)}</div><div class="health-stat-unit">/ 100</div></div>`;
+    if (lr.readinessScore) statsHTML += `<div class="health-stat"><div class="health-stat-label">Readiness</div><div class="health-stat-value" style="color:#00d9a5;">${Math.round(lr.readinessScore)}</div><div class="health-stat-unit">/ 100</div></div>`;
+    if (la.steps) statsHTML += `<div class="health-stat"><div class="health-stat-label">Steps</div><div class="health-stat-value" style="color:#f59e0b;">${la.steps.toLocaleString()}</div><div class="health-stat-unit">today</div></div>`;
+    statsHTML += '</div>';
+    statsEl.innerHTML = statsHTML;
+
+    // Charts
+    const tempData = readiness.filter(d => d.temperatureDeviation != null).map(d => ({ date: d.date, value: d.temperatureDeviation }));
+    renderLineChart('chart-temperature', tempData, { color: '#dc2626', unit: '\u00B0', phaseOverlay: true });
+
+    const hrvMap = {};
+    readiness.filter(d => d.hrvBalance != null).forEach(d => { hrvMap[d.date] = { date: d.date, value: d.hrvBalance }; });
+    sleep.filter(d => d.avgHrv != null).forEach(d => { if (!hrvMap[d.date]) hrvMap[d.date] = { date: d.date, value: d.avgHrv }; });
+    renderLineChart('chart-hrv', Object.values(hrvMap), { color: '#c678ff', unit: 'ms', phaseOverlay: true });
+
+    const rhrMap = {};
+    readiness.filter(d => d.restingHeartRate != null).forEach(d => { rhrMap[d.date] = { date: d.date, value: d.restingHeartRate }; });
+    sleep.filter(d => d.restingHeartRate != null).forEach(d => { if (!rhrMap[d.date]) rhrMap[d.date] = { date: d.date, value: d.restingHeartRate }; });
+    renderLineChart('chart-rhr', Object.values(rhrMap), { color: '#ff7675', unit: 'bpm', phaseOverlay: true });
+
+    renderBarChart('chart-sleep', sleep.filter(d => d.sleepScore != null).map(d => ({ date: d.date, value: d.sleepScore })), { color: '#74b9ff' });
+    renderBarChart('chart-readiness', readiness.filter(d => d.readinessScore != null).map(d => ({ date: d.date, value: d.readinessScore })), { color: '#00d9a5' });
+    renderBarChart('chart-steps', activity.filter(d => d.steps != null).map(d => ({ date: d.date, value: d.steps })), { color: '#f59e0b' });
+}
+
+// ============================================================
 // UI HELPERS
 // ============================================================
 function showModal(id) {
@@ -1680,6 +2223,7 @@ function renderTab(name) {
         case 'overview': renderOverview(); break;
         case 'log': renderLog(); break;
         case 'calendar': renderCalendar(); break;
+        case 'health': renderHealth(); break;
         case 'history': renderHistory(); break;
         case 'insights': renderInsights(); break;
     }
@@ -1714,6 +2258,7 @@ document.addEventListener('keydown', (e) => {
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
     renderOverview();
+    setupImportHandlers();
 });
 </script>
 </body>
