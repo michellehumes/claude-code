@@ -3,29 +3,29 @@
 
 export const siteConfig = {
   // Brand
-  name: "LustreDaily",
-  tagline: "Your Daily Dose of Beauty Inspiration",
-  description: "Discover the latest beauty trends, expert tips, and top-rated makeup, hair, and skincare products. Your trusted guide to looking and feeling your best.",
+  name: "Shelzy's Beauty",
+  tagline: "Honest Reviews. Real Results. Beauty That Works.",
+  description: "Expert-tested beauty product reviews, skincare routines, hair care tips, and makeup tutorials. Find the best products on Amazon with honest reviews from real beauty enthusiasts.",
 
   // URLs
-  url: process.env.NEXT_PUBLIC_SITE_URL || "https://lustredaily.com",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://shelzysbeauty.com",
 
   // Amazon Affiliate
   amazonAssociateTag: process.env.AMAZON_ASSOC_TAG || "shelzysbeauty-20",
 
   // Social (placeholders)
   social: {
-    instagram: "https://instagram.com/lustredaily",
-    pinterest: "https://pinterest.com/lustredaily",
-    tiktok: "https://tiktok.com/@lustredaily",
-    twitter: "https://twitter.com/lustredaily",
+    instagram: "https://instagram.com/shelzysbeauty",
+    pinterest: "https://pinterest.com/shelzysbeauty",
+    tiktok: "https://tiktok.com/@shelzysbeauty",
+    twitter: "https://twitter.com/shelzysbeauty",
   },
 
   // Categories
   categories: [
     { slug: "makeup", name: "Makeup", description: "Foundation to finishing touches - master your makeup game" },
-    { slug: "hair", name: "Hair", description: "Cuts, colors, and care for your best hair days" },
     { slug: "skincare", name: "Skincare", description: "Routines and products for glowing, healthy skin" },
+    { slug: "hair", name: "Hair", description: "Cuts, colors, and care for your best hair days" },
     { slug: "trends", name: "Trends", description: "What's hot in beauty right now" },
   ],
 
@@ -41,7 +41,7 @@ export const siteConfig = {
   },
 
   // Contact
-  contactEmail: "hello@lustredaily.com",
+  contactEmail: "hello@shelzysbeauty.com",
 
   // Legal
   copyrightYear: new Date().getFullYear(),

@@ -210,6 +210,76 @@
       "category": "trends",
       "type": "deep-dive",
       "used": false
+    },
+    {
+      "id": "nm031",
+      "title": "Skin Cycling: The Dermatologist-Approved Routine Method",
+      "category": "skincare",
+      "type": "educational",
+      "used": false
+    },
+    {
+      "id": "nm032",
+      "title": "The Rise of Skinimalism: When Less Skincare Is More",
+      "category": "trends",
+      "type": "trend-analysis",
+      "used": false
+    },
+    {
+      "id": "nm033",
+      "title": "Understanding Retinol: Strengths, Side Effects, and How to Start",
+      "category": "skincare",
+      "type": "educational",
+      "used": false
+    },
+    {
+      "id": "nm034",
+      "title": "Soft Girl Makeup vs. Clean Girl: Comparing the Aesthetics",
+      "category": "trends",
+      "type": "trend-analysis",
+      "used": false
+    },
+    {
+      "id": "nm035",
+      "title": "How Water Quality Affects Your Skin and Hair",
+      "category": "skincare",
+      "type": "educational",
+      "used": false
+    },
+    {
+      "id": "nm036",
+      "title": "The Science Behind Hair Porosity and Product Selection",
+      "category": "hair",
+      "type": "educational",
+      "used": false
+    },
+    {
+      "id": "nm037",
+      "title": "Beauty Standards Around the World: A Cultural Exploration",
+      "category": "trends",
+      "type": "deep-dive",
+      "used": false
+    },
+    {
+      "id": "nm038",
+      "title": "Copper Peptides: The Anti-Aging Ingredient Gaining Momentum",
+      "category": "skincare",
+      "type": "ingredient-deep-dive",
+      "used": false
+    },
+    {
+      "id": "nm039",
+      "title": "The Glazed Donut Skin Trend Explained",
+      "category": "trends",
+      "type": "trend-analysis",
+      "used": false
+    },
+    {
+      "id": "nm040",
+      "title": "How Stress Impacts Your Skin, Hair, and Nails",
+      "category": "skincare",
+      "type": "educational",
+      "used": false
     }
   ]
 }

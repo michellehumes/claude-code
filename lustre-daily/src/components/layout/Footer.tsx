@@ -91,12 +91,20 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Company */}
+          {/* Quick Links */}
           <div>
             <h3 className="text-sm font-semibold uppercase tracking-wide text-gray-900 dark:text-white">
-              Company
+              Quick Links
             </h3>
             <ul className="mt-4 space-y-3">
+              <li>
+                <Link
+                  href="/posts"
+                  className="text-sm text-gray-600 transition-colors hover:text-pink-600 dark:text-gray-400 dark:hover:text-pink-400"
+                >
+                  All Articles
+                </Link>
+              </li>
               <li>
                 <Link
                   href="/about"

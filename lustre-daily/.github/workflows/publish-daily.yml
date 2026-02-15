@@ -1,16 +1,16 @@
-# Daily Publishing Workflow
-# Generates and publishes 3 new posts daily (2 monetized, 1 non-monetized)
+# Every-Other-Day Publishing Workflow
+# Generates and publishes 3 new posts every other day (2 monetized, 1 non-monetized)
 #
-# Schedule: 06:10 AM America/New_York (11:10 UTC)
+# Schedule: 06:10 AM America/New_York (11:10 UTC) on odd days of month
 # Note: America/New_York is UTC-5 (EST) or UTC-4 (EDT)
 #       11:10 UTC = 06:10 EST or 07:10 EDT
 
-name: Daily Content Publishing
+name: Every-Other-Day Content Publishing
 
 on:
-  # Run daily at 11:10 UTC (06:10 America/New_York EST)
+  # Run every other day at 11:10 UTC (odd days: 1st, 3rd, 5th, etc.)
   schedule:
-    - cron: "10 11 * * *"
+    - cron: "10 11 1-31/2 * *"
 
   # Allow manual trigger for testing
   workflow_dispatch:
@@ -106,6 +106,9 @@ jobs:
           echo "### Posts Generated" >> $GITHUB_STEP_SUMMARY
           echo "- 2 monetized posts (with affiliate links)" >> $GITHUB_STEP_SUMMARY
           echo "- 1 non-monetized post (trend/news)" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Schedule" >> $GITHUB_STEP_SUMMARY
+          echo "- Runs every other day (odd days of month)" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### Validations Passed" >> $GITHUB_STEP_SUMMARY
           echo "- Affiliate compliance check" >> $GITHUB_STEP_SUMMARY
