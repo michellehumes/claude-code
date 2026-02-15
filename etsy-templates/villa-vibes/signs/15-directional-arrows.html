@@ -4,7 +4,522 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Directional Arrow Signs</title>
-  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+/* ============================================
+   VILLA VIBES BACHELORETTE PARTY BUNDLE
+   Shared Styles - Tropical Miami Love Island
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Montserrat:wght@300;400;500;600;700&family=Dancing+Script:wght@400;700&display=swap');
+
+:root {
+  /* Primary */
+  --coral: #FF2D78;
+  --coral-light: #FF73A5;
+  --coral-dark: #E0165E;
+  /* Secondary - Tropical Aqua */
+  --gold: #00D4AA;
+  --gold-light: #66F0D2;
+  --champagne: #E0FFF6;
+  /* Lime Green Accent */
+  --lime: #A8FF3E;
+  --lime-dark: #7ACC2D;
+  /* Backgrounds */
+  --blush: #FFF0F6;
+  --white: #FFFFFF;
+  --cream: #FAFFFE;
+  /* Neutrals */
+  --dark: #1A1A2E;
+  --dark-light: #4A4A6A;
+  /* Accent Colors */
+  --rose: #FF5CAD;
+  --hot-pink: #FF1493;
+  --spicy-red: #FF3366;
+  --mild-green: #00E676;
+  --medium-orange: #FFAB40;
+  --sunset-orange: #FF6E40;
+  --electric-blue: #00B4FF;
+  --palm-green: #00E676;
+  --paradise-purple: #B388FF;
+  --neon-yellow: #E8FF00;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  color: var(--dark);
+  background: var(--white);
+}
+
+/* Print Setup - US Letter */
+@page {
+  size: 8.5in 11in;
+  margin: 0;
+}
+
+@media print {
+  body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page { page-break-after: always; break-after: page; }
+  .page:last-child { page-break-after: avoid; }
+  .no-print { display: none !important; }
+}
+
+/* Page Container */
+.page {
+  width: 8.5in;
+  min-height: 11in;
+  margin: 0 auto;
+  padding: 0.6in;
+  background: var(--white);
+  position: relative;
+  overflow: hidden;
+}
+
+.page-blush {
+  background: var(--blush);
+}
+
+.page-cream {
+  background: var(--cream);
+}
+
+/* ---- Typography ---- */
+.font-display {
+  font-family: 'Playfair Display', serif;
+}
+
+.font-script {
+  font-family: 'Dancing Script', cursive;
+}
+
+.font-body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+h1, h2, h3 {
+  font-family: 'Playfair Display', serif;
+}
+
+/* ---- Decorative Elements ---- */
+.gold-border {
+  border: 2px solid var(--gold);
+}
+
+.coral-border {
+  border: 2px solid var(--coral);
+}
+
+.double-border {
+  border: 3px double var(--gold);
+}
+
+.corner-flourish {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border-color: var(--gold);
+}
+
+.corner-flourish.top-left {
+  top: 20px; left: 20px;
+  border-top: 2px solid;
+  border-left: 2px solid;
+}
+
+.corner-flourish.top-right {
+  top: 20px; right: 20px;
+  border-top: 2px solid;
+  border-right: 2px solid;
+}
+
+.corner-flourish.bottom-left {
+  bottom: 20px; left: 20px;
+  border-bottom: 2px solid;
+  border-left: 2px solid;
+}
+
+.corner-flourish.bottom-right {
+  bottom: 20px; right: 20px;
+  border-bottom: 2px solid;
+  border-right: 2px solid;
+}
+
+/* ---- Header Styles ---- */
+.villa-header {
+  text-align: center;
+  margin-bottom: 0.3in;
+}
+
+.villa-header .subtitle {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  font-size: 11px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+
+.villa-header .title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: 36px;
+  color: var(--coral);
+  line-height: 1.1;
+  margin-bottom: 6px;
+}
+
+.villa-header .title-large {
+  font-size: 44px;
+}
+
+.villa-header .tagline {
+  font-family: 'Dancing Script', cursive;
+  font-size: 18px;
+  color: var(--gold);
+}
+
+.villa-header .divider {
+  width: 100px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--coral), var(--lime), var(--gold), transparent);
+  margin: 10px auto;
+}
+
+/* ---- Card / Box Styles ---- */
+.game-card {
+  background: var(--white);
+  border: 1.5px solid var(--gold-light);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 12px;
+  box-shadow: 0 1px 4px rgba(0, 212, 170, 0.08);
+}
+
+.game-card-coral {
+  border-left: 4px solid var(--coral);
+}
+
+.game-card-gold {
+  border-left: 4px solid var(--gold);
+}
+
+.prompt-box {
+  background: var(--champagne);
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-bottom: 8px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-left: 3px solid var(--lime);
+}
+
+.prompt-number {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  background: var(--coral);
+  color: var(--white);
+  border-radius: 50%;
+  text-align: center;
+  line-height: 22px;
+  font-size: 10px;
+  font-weight: 700;
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+
+/* ---- Grid Layouts ---- */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+}
+
+.grid-4 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 8px;
+}
+
+/* ---- Sign Styles ---- */
+.sign-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.sign-frame {
+  border: 3px solid var(--gold);
+  padding: 40px;
+  position: relative;
+  width: 100%;
+  box-shadow: 0 0 0 6px var(--champagne), 0 4px 20px rgba(0, 212, 170, 0.12);
+}
+
+.sign-frame-inner {
+  border: 1px solid var(--gold-light);
+  padding: 30px;
+}
+
+/* ---- Editable Fields ---- */
+.editable {
+  border-bottom: 1.5px dashed var(--coral-light);
+  min-width: 150px;
+  display: inline-block;
+  padding: 2px 4px;
+  color: var(--dark-light);
+  font-style: italic;
+}
+
+.write-line {
+  border-bottom: 1px solid var(--gold-light);
+  height: 28px;
+  margin-bottom: 6px;
+  width: 100%;
+}
+
+/* ---- Badges & Tags ---- */
+.badge {
+  display: inline-block;
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.badge-coral {
+  background: var(--coral);
+  color: var(--white);
+}
+
+.badge-gold {
+  background: var(--gold);
+  color: var(--white);
+}
+
+.badge-lime {
+  background: var(--lime);
+  color: var(--dark);
+}
+
+.badge-mild {
+  background: var(--mild-green);
+  color: var(--white);
+}
+
+.badge-medium {
+  background: var(--medium-orange);
+  color: var(--dark);
+}
+
+.badge-spicy {
+  background: var(--spicy-red);
+  color: var(--white);
+}
+
+/* ---- Checkbox / Checklist ---- */
+.checklist-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 6px;
+  font-size: 12px;
+}
+
+.checkbox {
+  width: 14px;
+  height: 14px;
+  border: 1.5px solid var(--coral);
+  border-radius: 3px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* ---- Phone/Message Styles ---- */
+.phone-frame {
+  width: 280px;
+  margin: 0 auto;
+  border: 3px solid var(--dark);
+  border-radius: 30px;
+  padding: 20px 16px;
+  background: var(--white);
+  position: relative;
+}
+
+.phone-notch {
+  width: 80px;
+  height: 6px;
+  background: var(--dark);
+  border-radius: 3px;
+  margin: 0 auto 16px;
+}
+
+.message-bubble {
+  background: var(--coral);
+  color: var(--white);
+  padding: 10px 16px;
+  border-radius: 18px 18px 4px 18px;
+  margin-bottom: 8px;
+  font-size: 13px;
+  max-width: 85%;
+}
+
+.message-bubble-reply {
+  background: var(--blush);
+  color: var(--dark);
+  border-radius: 18px 18px 18px 4px;
+  margin-left: auto;
+}
+
+/* ---- Tent Card ---- */
+.tent-card {
+  border: 1.5px dashed var(--gold-light);
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---- Footer ---- */
+.villa-footer {
+  text-align: center;
+  margin-top: auto;
+  padding-top: 12px;
+  font-family: 'Dancing Script', cursive;
+  font-size: 14px;
+  color: var(--coral);
+}
+
+/* ---- Utility ---- */
+.text-center { text-align: center; }
+.text-coral { color: var(--coral); }
+.text-gold { color: var(--gold); }
+.text-dark { color: var(--dark); }
+.text-white { color: var(--white); }
+.text-rose { color: var(--rose); }
+.text-lime { color: var(--lime-dark); }
+.bg-coral { background-color: var(--coral); }
+.bg-lime { background-color: var(--lime); }
+.bg-gold { background-color: var(--gold); }
+.bg-blush { background-color: var(--blush); }
+.bg-champagne { background-color: var(--champagne); }
+.bg-white { background-color: var(--white); }
+.mt-1 { margin-top: 8px; }
+.mt-2 { margin-top: 16px; }
+.mt-3 { margin-top: 24px; }
+.mb-1 { margin-bottom: 8px; }
+.mb-2 { margin-bottom: 16px; }
+.mb-3 { margin-bottom: 24px; }
+.fw-bold { font-weight: 700; }
+.fw-light { font-weight: 300; }
+.ls-wide { letter-spacing: 3px; }
+.uppercase { text-transform: uppercase; }
+.italic { font-style: italic; }
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.gap-1 { gap: 8px; }
+.gap-2 { gap: 16px; }
+
+/* ---- Dashed cut line ---- */
+.cut-line {
+  border-top: 1px dashed #ccc;
+  margin: 16px 0;
+  position: relative;
+}
+.cut-line::before {
+  content: "cut here";
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--white);
+  padding: 0 8px;
+  font-size: 8px;
+  color: #ccc;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* ---- Voting Paddle ---- */
+.paddle {
+  width: 3in;
+  height: 4.5in;
+  border: 2px solid var(--gold);
+  border-radius: 50% 50% 10px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+}
+
+.paddle-handle {
+  width: 30px;
+  height: 60px;
+  background: var(--gold-light);
+  border: 1.5px solid var(--gold);
+  border-radius: 0 0 8px 8px;
+  margin-top: -2px;
+}
+
+/* ---- Arrow Sign ---- */
+.arrow-sign {
+  position: relative;
+  background: var(--coral);
+  color: var(--white);
+  padding: 14px 40px 14px 24px;
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  clip-path: polygon(0% 0%, 85% 0%, 100% 50%, 85% 100%, 0% 100%);
+}
+
+.arrow-sign-gold {
+  background: var(--gold);
+}
+
+/* ---- Instagram Story Template ---- */
+.story-template {
+  width: 3in;
+  height: 5.33in;
+  border: 1.5px solid var(--gold-light);
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  position: relative;
+}
+
+  </style>
   <style>
     .arrows-page {
       display: flex;
