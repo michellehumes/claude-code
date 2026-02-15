@@ -1,0 +1,91 @@
+{
+  "name": "Gray",
+  "sex": "Male",
+  "traits": {
+    "eye_color": {
+      "phenotype": "Brown",
+      "genotype": ["B", "b"],
+      "description": "Heterozygous brown eyes (carries blue recessive)"
+    },
+    "hair_color": {
+      "phenotype": "Dark Brown",
+      "genotype": ["B", "b"],
+      "description": "Heterozygous dark hair (carries light recessive)"
+    },
+    "hair_texture": {
+      "phenotype": "Straight",
+      "genotype": ["s", "s"],
+      "description": "Homozygous straight hair"
+    },
+    "dimples": {
+      "phenotype": "Dimples",
+      "genotype": ["D", "d"],
+      "description": "Heterozygous dimples (dominant trait)"
+    },
+    "freckles": {
+      "phenotype": "No Freckles",
+      "genotype": ["f", "f"],
+      "description": "Homozygous recessive - no freckles"
+    },
+    "cleft_chin": {
+      "phenotype": "Cleft Chin",
+      "genotype": ["C", "c"],
+      "description": "Heterozygous cleft chin (dominant trait)"
+    },
+    "widow_peak": {
+      "phenotype": "Widow's Peak",
+      "genotype": ["W", "w"],
+      "description": "Heterozygous widow's peak (dominant trait)"
+    },
+    "earlobe_type": {
+      "phenotype": "Free (Detached)",
+      "genotype": ["E", "e"],
+      "description": "Heterozygous free earlobes (dominant trait)"
+    },
+    "blood_type": {
+      "phenotype": "Type A",
+      "genotype": ["A", "O"],
+      "description": "Carries one A allele and one O allele"
+    },
+    "rh_factor": {
+      "phenotype": "Rh Positive",
+      "genotype": ["Rh+", "Rh-"],
+      "description": "Heterozygous Rh positive"
+    },
+    "tongue_rolling": {
+      "phenotype": "Can Roll Tongue",
+      "genotype": ["R", "r"],
+      "description": "Heterozygous tongue roller (dominant trait)"
+    },
+    "handedness": {
+      "phenotype": "Right-Handed",
+      "genotype": ["RH", "rh"],
+      "description": "Right-hand dominant"
+    },
+    "lactose_tolerance": {
+      "phenotype": "Lactose Tolerant",
+      "genotype": ["L", "L"],
+      "description": "Homozygous lactose tolerant"
+    },
+    "color_vision": {
+      "phenotype": "Normal Color Vision",
+      "genotype": ["XN", "Y"],
+      "description": "Normal color vision (X-linked)"
+    }
+  },
+  "genetic_markers": {
+    "BRCA1": "Normal",
+    "APOE": "e3/e3",
+    "MTHFR": "C677T heterozygous",
+    "HFE": "Normal",
+    "CFTR": "Normal carrier (one copy)",
+    "ancestry_composition": {
+      "European": 72,
+      "African": 5,
+      "East_Asian": 8,
+      "South_Asian": 10,
+      "Native_American": 3,
+      "Middle_Eastern": 2
+    }
+  }
+}

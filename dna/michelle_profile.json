@@ -1,0 +1,91 @@
+{
+  "name": "Michelle",
+  "sex": "Female",
+  "traits": {
+    "eye_color": {
+      "phenotype": "Green",
+      "genotype": ["G", "b"],
+      "description": "Heterozygous green eyes (carries blue recessive)"
+    },
+    "hair_color": {
+      "phenotype": "Light Brown",
+      "genotype": ["b", "b"],
+      "description": "Homozygous light/blonde hair"
+    },
+    "hair_texture": {
+      "phenotype": "Wavy",
+      "genotype": ["C", "s"],
+      "description": "Heterozygous wavy hair (incomplete dominance)"
+    },
+    "dimples": {
+      "phenotype": "No Dimples",
+      "genotype": ["d", "d"],
+      "description": "Homozygous recessive - no dimples"
+    },
+    "freckles": {
+      "phenotype": "Freckles",
+      "genotype": ["F", "f"],
+      "description": "Heterozygous freckles (dominant trait)"
+    },
+    "cleft_chin": {
+      "phenotype": "Smooth Chin",
+      "genotype": ["c", "c"],
+      "description": "Homozygous recessive - smooth chin"
+    },
+    "widow_peak": {
+      "phenotype": "Straight Hairline",
+      "genotype": ["w", "w"],
+      "description": "Homozygous recessive - straight hairline"
+    },
+    "earlobe_type": {
+      "phenotype": "Free (Detached)",
+      "genotype": ["E", "E"],
+      "description": "Homozygous free earlobes"
+    },
+    "blood_type": {
+      "phenotype": "Type B",
+      "genotype": ["B", "O"],
+      "description": "Carries one B allele and one O allele"
+    },
+    "rh_factor": {
+      "phenotype": "Rh Positive",
+      "genotype": ["Rh+", "Rh+"],
+      "description": "Homozygous Rh positive"
+    },
+    "tongue_rolling": {
+      "phenotype": "Can Roll Tongue",
+      "genotype": ["R", "R"],
+      "description": "Homozygous tongue roller"
+    },
+    "handedness": {
+      "phenotype": "Left-Handed",
+      "genotype": ["rh", "rh"],
+      "description": "Left-hand dominant"
+    },
+    "lactose_tolerance": {
+      "phenotype": "Lactose Tolerant",
+      "genotype": ["L", "l"],
+      "description": "Heterozygous lactose tolerant (carries intolerant)"
+    },
+    "color_vision": {
+      "phenotype": "Normal Color Vision",
+      "genotype": ["XN", "Xn"],
+      "description": "Carrier for color blindness (X-linked)"
+    }
+  },
+  "genetic_markers": {
+    "BRCA1": "Normal",
+    "APOE": "e3/e4",
+    "MTHFR": "Normal",
+    "HFE": "Normal",
+    "CFTR": "Normal (no copies)",
+    "ancestry_composition": {
+      "European": 65,
+      "African": 8,
+      "East_Asian": 3,
+      "South_Asian": 4,
+      "Native_American": 12,
+      "Middle_Eastern": 8
+    }
+  }
+}
