@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Switch-Up - Partner Pick Matching Game</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    .match-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .match-card {
+      flex: 1;
+      background: var(--white);
+      border: 1.5px solid var(--gold-light);
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-size: 12px;
+      min-height: 50px;
+      display: flex;
+      align-items: center;
+    }
+    .match-card-left {
+      border-left: 3px solid var(--coral);
+    }
+    .match-card-right {
+      border-left: 3px solid var(--gold);
+    }
+    .match-connector {
+      font-family: 'Dancing Script', cursive;
+      color: var(--coral);
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+    .match-number {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      color: var(--coral);
+      margin-right: 10px;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+    .answer-key {
+      background: var(--blush);
+      border-radius: 10px;
+      padding: 14px;
+      font-size: 10px;
+      line-height: 1.6;
+      border: 1px dashed var(--coral-light);
+    }
+    .instructions-box {
+      background: var(--blush);
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin-bottom: 16px;
+      font-size: 11px;
+      line-height: 1.6;
+      text-align: center;
+    }
+    .blank-line {
+      display: inline-block;
+      border-bottom: 1.5px solid var(--gold-light);
+      width: 120px;
+      margin: 0 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="page page-cream">
+    <div class="corner-flourish top-left"></div>
+    <div class="corner-flourish top-right"></div>
+    <div class="corner-flourish bottom-left"></div>
+    <div class="corner-flourish bottom-right"></div>
+
+    <div class="villa-header">
+      <div class="subtitle">Villa Vibes Bachelorette</div>
+      <div class="title">The Switch-Up</div>
+      <div class="tagline">Partner Pick Matching Game</div>
+      <div class="divider"></div>
+    </div>
+
+    <div class="instructions-box">
+      <strong>How to Play:</strong> Match each "partner trait" on the left with the correct person on the right.<br>
+      The bride fills in the answers beforehand. Guests race to match them up!<br>
+      Most correct matches wins!
+    </div>
+
+    <div class="match-row">
+      <div class="match-card match-card-left"><span class="match-number">1.</span> First to say "I love you"</div>
+      <span class="match-connector">&harr;</span>
+      <div class="match-card match-card-right"><span class="blank-line"></span></div>
+    </div>
+
+    <div class="match-row">
+      <div class="match-card match-card-left"><span class="match-number">2.</span> Better cook in the relationship</div>
+      <span class="match-connector">&harr;</span>
+      <div class="match-card match-card-right"><span class="blank-line"></span></div>
+    </div>
+
+    <div class="match-row">
+      <div class="match-card match-card-left"><span class="match-number">3.</span> Most likely to hog the blanket</div>
+      <span class="match-connector">&harr;</span>
+      <div class="match-card match-card-right"><span class="blank-line"></span></div>
+    </div>
+
+    <div class="match-row">
+      <div class="match-card match-card-left"><span class="match-number">4.</span> More jealous one</div>
+      <span class="match-connector">&harr;</span>
+      <div class="match-card match-card-right"><span class="blank-line"></span></div>
+    </div>
+
+    <div class="match-row">
+      <div class="match-card match-card-left"><span class="match-number">5.</span> The one who apologizes first</div>
+      <span class="match-connector">&harr;</span>
+      <div class="match-card match-card-right"><span class="blank-line"></span></div>
+    </div>
+
+    <div class="match-row">
+      <div class="match-card match-card-left"><span class="match-number">6.</span> Better sense of direction</div>
+      <span class="match-connector">&harr;</span>
+      <div class="match-card match-card-right"><span class="blank-line"></span></div>
+    </div>
+
+    <div class="match-row">
+      <div class="match-card match-card-left"><span class="match-number">7.</span> Falls asleep first every night</div>
+      <span class="match-connector">&harr;</span>
+      <div class="match-card match-card-right"><span class="blank-line"></span></div>
+    </div>
+
+    <div class="match-row">
+      <div class="match-card match-card-left"><span class="match-number">8.</span> Most likely to plan a surprise</div>
+      <span class="match-connector">&harr;</span>
+      <div class="match-card match-card-right"><span class="blank-line"></span></div>
+    </div>
+
+    <div class="match-row">
+      <div class="match-card match-card-left"><span class="match-number">9.</span> More addicted to their phone</div>
+      <span class="match-connector">&harr;</span>
+      <div class="match-card match-card-right"><span class="blank-line"></span></div>
+    </div>
+
+    <div class="match-row">
+      <div class="match-card match-card-left"><span class="match-number">10.</span> Said "I want to marry you" first</div>
+      <span class="match-connector">&harr;</span>
+      <div class="match-card match-card-right"><span class="blank-line"></span></div>
+    </div>
+
+    <p style="text-align:center; font-size: 10px; color: var(--dark-light); margin-top: 10px; font-style: italic;">
+      Write "Bride" or "Groom" in each blank. Answers: Bride pre-fills the answer key below!
+    </p>
+
+    <div class="cut-line" style="margin-top: 14px;"></div>
+
+    <div class="answer-key">
+      <strong style="color: var(--coral);">ANSWER KEY (Bride fills in before the party!):</strong><br>
+      1. <span class="blank-line" style="width:80px;"></span> &nbsp;
+      2. <span class="blank-line" style="width:80px;"></span> &nbsp;
+      3. <span class="blank-line" style="width:80px;"></span> &nbsp;
+      4. <span class="blank-line" style="width:80px;"></span> &nbsp;
+      5. <span class="blank-line" style="width:80px;"></span><br>
+      6. <span class="blank-line" style="width:80px;"></span> &nbsp;
+      7. <span class="blank-line" style="width:80px;"></span> &nbsp;
+      8. <span class="blank-line" style="width:80px;"></span> &nbsp;
+      9. <span class="blank-line" style="width:80px;"></span> &nbsp;
+      10. <span class="blank-line" style="width:80px;"></span>
+    </div>
+
+    <div class="villa-footer">Villa Vibes Bachelorette</div>
+  </div>
+</body>
+</html>

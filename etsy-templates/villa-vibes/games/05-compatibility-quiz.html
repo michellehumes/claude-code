@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Compatibility Quiz</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    .quiz-card {
+      background: var(--white);
+      border: 1.5px solid var(--gold-light);
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 10px;
+    }
+    .quiz-question {
+      font-family: 'Playfair Display', serif;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .quiz-answers {
+      display: flex;
+      gap: 12px;
+      padding-left: 28px;
+    }
+    .answer-col {
+      flex: 1;
+      text-align: center;
+    }
+    .answer-label {
+      font-size: 9px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 4px;
+    }
+    .answer-label-bride {
+      color: var(--coral);
+    }
+    .answer-label-groom {
+      color: var(--gold);
+    }
+    .answer-write {
+      border-bottom: 1.5px solid var(--gold-light);
+      min-height: 20px;
+      width: 100%;
+    }
+    .answer-write-bride {
+      border-color: var(--coral-light);
+    }
+    .score-section {
+      background: var(--blush);
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+      border: 1.5px dashed var(--coral-light);
+    }
+    .score-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--coral);
+      margin-bottom: 8px;
+    }
+    .score-scale {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+      padding: 0 10px;
+    }
+    .score-item {
+      text-align: center;
+      font-size: 10px;
+    }
+    .score-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--coral);
+    }
+    .heart-meter {
+      display: flex;
+      gap: 4px;
+      justify-content: center;
+      margin: 8px 0;
+    }
+    .heart {
+      width: 24px;
+      height: 24px;
+      border: 1.5px solid var(--coral);
+      border-radius: 50%;
+    }
+    .vs-badge {
+      font-family: 'Dancing Script', cursive;
+      font-size: 14px;
+      color: var(--gold);
+    }
+  </style>
+</head>
+<body>
+  <div class="page page-cream">
+    <div class="corner-flourish top-left"></div>
+    <div class="corner-flourish top-right"></div>
+    <div class="corner-flourish bottom-left"></div>
+    <div class="corner-flourish bottom-right"></div>
+
+    <div class="villa-header">
+      <div class="subtitle">Villa Vibes Bachelorette</div>
+      <div class="title">The Compatibility Quiz</div>
+      <div class="tagline">How well do they really know each other?</div>
+      <div class="divider"></div>
+      <p style="font-size: 10px; color: var(--dark-light); margin-top: 6px; font-weight: 300; line-height: 1.5;">
+        The bride and groom answer these 10 questions separately before the party.<br>
+        At the party, read aloud and see how many answers match!
+      </p>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-question"><span class="prompt-number">1</span>What would you say is your partner's guilty pleasure TV show?</div>
+      <div class="quiz-answers">
+        <div class="answer-col"><div class="answer-label answer-label-bride">Bride Says</div><div class="answer-write answer-write-bride"></div></div>
+        <div class="answer-col"><div class="answer-label answer-label-groom">Groom Says</div><div class="answer-write"></div></div>
+      </div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-question"><span class="prompt-number">2</span>What's one thing your partner can't live without?</div>
+      <div class="quiz-answers">
+        <div class="answer-col"><div class="answer-label answer-label-bride">Bride Says</div><div class="answer-write answer-write-bride"></div></div>
+        <div class="answer-col"><div class="answer-label answer-label-groom">Groom Says</div><div class="answer-write"></div></div>
+      </div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-question"><span class="prompt-number">3</span>What does your partner spend the most money on?</div>
+      <div class="quiz-answers">
+        <div class="answer-col"><div class="answer-label answer-label-bride">Bride Says</div><div class="answer-write answer-write-bride"></div></div>
+        <div class="answer-col"><div class="answer-label answer-label-groom">Groom Says</div><div class="answer-write"></div></div>
+      </div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-question"><span class="prompt-number">4</span>What's the most embarrassing thing your partner has done?</div>
+      <div class="quiz-answers">
+        <div class="answer-col"><div class="answer-label answer-label-bride">Bride Says</div><div class="answer-write answer-write-bride"></div></div>
+        <div class="answer-col"><div class="answer-label answer-label-groom">Groom Says</div><div class="answer-write"></div></div>
+      </div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-question"><span class="prompt-number">5</span>If your partner were a cocktail, what would they be?</div>
+      <div class="quiz-answers">
+        <div class="answer-col"><div class="answer-label answer-label-bride">Bride Says</div><div class="answer-write answer-write-bride"></div></div>
+        <div class="answer-col"><div class="answer-label answer-label-groom">Groom Says</div><div class="answer-write"></div></div>
+      </div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-question"><span class="prompt-number">6</span>What's one thing your partner does that drives you crazy?</div>
+      <div class="quiz-answers">
+        <div class="answer-col"><div class="answer-label answer-label-bride">Bride Says</div><div class="answer-write answer-write-bride"></div></div>
+        <div class="answer-col"><div class="answer-label answer-label-groom">Groom Says</div><div class="answer-write"></div></div>
+      </div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-question"><span class="prompt-number">7</span>What would your partner choose: beach vacation or city trip?</div>
+      <div class="quiz-answers">
+        <div class="answer-col"><div class="answer-label answer-label-bride">Bride Says</div><div class="answer-write answer-write-bride"></div></div>
+        <div class="answer-col"><div class="answer-label answer-label-groom">Groom Says</div><div class="answer-write"></div></div>
+      </div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-question"><span class="prompt-number">8</span>Who said "I love you" first?</div>
+      <div class="quiz-answers">
+        <div class="answer-col"><div class="answer-label answer-label-bride">Bride Says</div><div class="answer-write answer-write-bride"></div></div>
+        <div class="answer-col"><div class="answer-label answer-label-groom">Groom Says</div><div class="answer-write"></div></div>
+      </div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-question"><span class="prompt-number">9</span>What's the first thing your partner would save in a fire?</div>
+      <div class="quiz-answers">
+        <div class="answer-col"><div class="answer-label answer-label-bride">Bride Says</div><div class="answer-write answer-write-bride"></div></div>
+        <div class="answer-col"><div class="answer-label answer-label-groom">Groom Says</div><div class="answer-write"></div></div>
+      </div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-question"><span class="prompt-number">10</span>Describe your partner in three words.</div>
+      <div class="quiz-answers">
+        <div class="answer-col"><div class="answer-label answer-label-bride">Bride Says</div><div class="answer-write answer-write-bride"></div></div>
+        <div class="answer-col"><div class="answer-label answer-label-groom">Groom Says</div><div class="answer-write"></div></div>
+      </div>
+    </div>
+
+    <div class="score-section" style="margin-top: 12px;">
+      <div class="score-title">Compatibility Score</div>
+      <div class="heart-meter">
+        <div class="heart"></div><div class="heart"></div><div class="heart"></div><div class="heart"></div><div class="heart"></div>
+        <div class="heart"></div><div class="heart"></div><div class="heart"></div><div class="heart"></div><div class="heart"></div>
+      </div>
+      <div style="font-size: 10px; color: var(--dark-light);">Color in one heart for each matching answer!</div>
+      <div class="score-scale">
+        <div class="score-item">0-3<br><span style="font-size: 8px;">It's Complicated</span></div>
+        <div class="score-item">4-6<br><span style="font-size: 8px;">Getting There</span></div>
+        <div class="score-item">7-8<br><span style="font-size: 8px;">Coupled Up</span></div>
+        <div class="score-item">9-10<br><span style="font-size: 8px;">Soulmates!</span></div>
+      </div>
+    </div>
+
+    <div class="villa-footer">Villa Vibes Bachelorette</div>
+  </div>
+</body>
+</html>

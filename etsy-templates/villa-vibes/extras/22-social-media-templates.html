@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Social Media Story Templates</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    .stories-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      padding: 10px;
+    }
+    .story-frame {
+      width: 3in;
+      height: 5.33in;
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+    }
+    /* Story 1: Arrival */
+    .story-arrival {
+      background: linear-gradient(180deg, var(--coral), var(--coral-dark));
+      color: white;
+      padding: 24px 16px;
+      justify-content: space-between;
+    }
+    .story-arrival .story-top {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 9px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      opacity: 0.8;
+    }
+    .story-arrival .story-main {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      font-weight: 900;
+      line-height: 1.1;
+    }
+    .story-arrival .story-script {
+      font-family: 'Dancing Script', cursive;
+      font-size: 22px;
+      opacity: 0.9;
+    }
+    .story-arrival .story-tag {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 8px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      opacity: 0.6;
+    }
+    .story-photo-area {
+      width: 80%;
+      height: 120px;
+      border: 2px dashed rgba(255,255,255,0.4);
+      border-radius: 12px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      opacity: 0.6;
+    }
+
+    /* Story 2: Getting Ready */
+    .story-glam {
+      background: linear-gradient(180deg, var(--champagne), var(--gold-light));
+      color: var(--dark);
+      padding: 24px 16px;
+      justify-content: space-between;
+    }
+
+    /* Story 3: Night Out */
+    .story-night {
+      background: linear-gradient(180deg, #2C2C2C, #1a1a1a);
+      color: white;
+      padding: 24px 16px;
+      justify-content: space-between;
+    }
+    .story-night .gold-accent {
+      color: var(--gold);
+    }
+
+    /* Story 4: Morning After */
+    .story-morning {
+      background: linear-gradient(180deg, var(--blush), var(--white));
+      color: var(--dark);
+      padding: 24px 16px;
+      justify-content: space-between;
+    }
+
+    .story-border-accent {
+      position: absolute;
+      top: 8px; left: 8px; right: 8px; bottom: 8px;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 12px;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="page page-cream">
+    <div class="corner-flourish top-left"></div>
+    <div class="corner-flourish top-right"></div>
+    <div class="corner-flourish bottom-left"></div>
+    <div class="corner-flourish bottom-right"></div>
+
+    <div class="villa-header">
+      <div class="subtitle">Villa Vibes Bachelorette</div>
+      <div class="title" style="font-size: 26px;">Social Media Story Templates</div>
+      <div class="tagline">4 Instagram / TikTok Designs</div>
+      <div class="divider"></div>
+      <p style="font-size: 10px; color: var(--dark-light); margin-top: 4px; font-weight: 300;">
+        Screenshot or save and use as story backgrounds. Add your own photos on top!
+      </p>
+    </div>
+
+    <div class="stories-grid">
+      <!-- Story 1: Villa Arrival -->
+      <div class="story-frame story-arrival">
+        <div class="story-border-accent"></div>
+        <div class="story-top">Just Arrived At</div>
+        <div>
+          <div class="story-script">the</div>
+          <div class="story-main">VILLA</div>
+        </div>
+        <div class="story-photo-area">[ add your photo here ]</div>
+        <div>
+          <div class="story-script">let the chaos begin</div>
+          <div class="story-tag" style="margin-top: 8px;">Villa Vibes Bachelorette</div>
+        </div>
+      </div>
+
+      <!-- Story 2: Getting Ready / Glam -->
+      <div class="story-frame story-glam">
+        <div class="story-border-accent" style="border-color: rgba(0,0,0,0.1);"></div>
+        <div style="font-family: 'Montserrat', sans-serif; font-size: 9px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold);">
+          Currently
+        </div>
+        <div>
+          <div style="font-family: 'Dancing Script', cursive; font-size: 20px; color: var(--gold);">getting</div>
+          <div style="font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 900; color: var(--dark);">VILLA</div>
+          <div style="font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 900; color: var(--dark);">READY</div>
+        </div>
+        <div class="story-photo-area" style="border-color: rgba(0,0,0,0.2); color: var(--dark);">[ add your photo here ]</div>
+        <div>
+          <div style="font-family: 'Dancing Script', cursive; font-size: 18px; color: var(--gold);">glam station activated</div>
+          <div style="font-family: 'Montserrat', sans-serif; font-size: 7px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-top: 8px;">
+            Villa Vibes Bachelorette
+          </div>
+        </div>
+      </div>
+
+      <!-- Story 3: Night Out -->
+      <div class="story-frame story-night">
+        <div class="story-border-accent" style="border-color: rgba(201,169,110,0.3);"></div>
+        <div style="font-family: 'Montserrat', sans-serif; font-size: 9px; letter-spacing: 4px; text-transform: uppercase;" class="gold-accent">
+          Tonight
+        </div>
+        <div>
+          <div style="font-family: 'Dancing Script', cursive; font-size: 20px;" class="gold-accent">the</div>
+          <div style="font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 900; color: white;">SWITCH-UP</div>
+          <div style="font-family: 'Playfair Display', serif; font-size: 14px; font-weight: 300; color: rgba(255,255,255,0.6); letter-spacing: 3px;">CEREMONY</div>
+        </div>
+        <div class="story-photo-area" style="border-color: rgba(201,169,110,0.3);">[ add your photo here ]</div>
+        <div>
+          <div style="font-family: 'Dancing Script', cursive; font-size: 18px;" class="gold-accent">the villa is open</div>
+          <div style="font-family: 'Montserrat', sans-serif; font-size: 7px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-top: 8px;">
+            Villa Vibes Bachelorette
+          </div>
+        </div>
+      </div>
+
+      <!-- Story 4: Morning After -->
+      <div class="story-frame story-morning">
+        <div class="story-border-accent" style="border-color: rgba(232,131,107,0.2);"></div>
+        <div style="font-family: 'Montserrat', sans-serif; font-size: 9px; letter-spacing: 4px; text-transform: uppercase; color: var(--coral);">
+          The Morning After
+        </div>
+        <div>
+          <div style="font-family: 'Dancing Script', cursive; font-size: 20px; color: var(--gold);">survived</div>
+          <div style="font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 900; color: var(--coral);">THE</div>
+          <div style="font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 900; color: var(--coral);">VILLA</div>
+        </div>
+        <div class="story-photo-area" style="border-color: var(--coral-light); color: var(--dark);">[ add your photo here ]</div>
+        <div>
+          <div style="font-family: 'Dancing Script', cursive; font-size: 18px; color: var(--coral);">barely</div>
+          <div style="font-family: 'Montserrat', sans-serif; font-size: 7px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-top: 8px;">
+            Villa Vibes Bachelorette
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="villa-footer">Villa Vibes Bachelorette</div>
+  </div>
+</body>
+</html>

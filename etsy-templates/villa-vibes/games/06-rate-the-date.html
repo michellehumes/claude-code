@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rate the Date - Worst Date Storytelling Game</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    .date-card {
+      background: var(--white);
+      border: 1.5px solid var(--gold-light);
+      border-radius: 14px;
+      padding: 18px;
+      margin-bottom: 12px;
+    }
+    .date-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--champagne);
+    }
+    .date-num {
+      width: 32px;
+      height: 32px;
+      background: var(--coral);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 15px;
+    }
+    .date-name-write {
+      border-bottom: 1.5px dashed var(--gold-light);
+      flex: 1;
+      min-height: 18px;
+    }
+    .story-lines {
+      margin-bottom: 12px;
+    }
+    .story-line {
+      border-bottom: 1px solid var(--gold-light);
+      height: 24px;
+      margin-bottom: 4px;
+    }
+    .rating-section {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--blush);
+      border-radius: 8px;
+      padding: 10px 14px;
+    }
+    .rating-label {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--coral);
+      flex-shrink: 0;
+    }
+    .rating-stars {
+      display: flex;
+      gap: 6px;
+    }
+    .star {
+      width: 22px;
+      height: 22px;
+      border: 1.5px solid var(--gold);
+      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    }
+    .cringe-meter {
+      display: flex;
+      gap: 3px;
+      margin-left: auto;
+    }
+    .cringe-bar {
+      width: 8px;
+      height: 16px;
+      border: 1px solid var(--coral);
+      border-radius: 2px;
+    }
+    .winner-card {
+      background: linear-gradient(135deg, var(--coral), var(--coral-dark));
+      color: white;
+      border-radius: 14px;
+      padding: 20px;
+      text-align: center;
+    }
+    .winner-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 900;
+      margin-bottom: 4px;
+    }
+    .winner-sub {
+      font-family: 'Dancing Script', cursive;
+      font-size: 16px;
+      opacity: 0.9;
+      margin-bottom: 10px;
+    }
+    .winner-name-write {
+      border-bottom: 2px dashed rgba(255,255,255,0.5);
+      min-height: 24px;
+      width: 60%;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="page page-cream">
+    <div class="corner-flourish top-left"></div>
+    <div class="corner-flourish top-right"></div>
+    <div class="corner-flourish bottom-left"></div>
+    <div class="corner-flourish bottom-right"></div>
+
+    <div class="villa-header">
+      <div class="subtitle">Villa Vibes Bachelorette</div>
+      <div class="title">Rate the Date</div>
+      <div class="tagline">Worst Date Storytelling Game</div>
+      <div class="divider"></div>
+      <p style="font-size: 10.5px; color: var(--dark-light); margin-top: 6px; font-weight: 300; line-height: 1.5;">
+        Each Villa Babe shares their worst date story. The group rates it!<br>
+        Worst (best?) story wins the "Ick Award."
+      </p>
+    </div>
+
+    <div class="date-card">
+      <div class="date-header">
+        <div class="date-num">1</div>
+        <span style="font-size: 10px; color: var(--dark-light); text-transform: uppercase; letter-spacing: 1px;">Storyteller:</span>
+        <div class="date-name-write"></div>
+      </div>
+      <div class="story-lines">
+        <div class="story-line"></div>
+        <div class="story-line"></div>
+        <div class="story-line"></div>
+      </div>
+      <div class="rating-section">
+        <div class="rating-label">Cringe Rating</div>
+        <div class="rating-stars">
+          <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+        </div>
+        <div style="font-size: 8px; color: var(--dark-light); margin-left: auto; text-align: right;">
+          1 = meh<br>5 = horrifying
+        </div>
+      </div>
+    </div>
+
+    <div class="date-card">
+      <div class="date-header">
+        <div class="date-num">2</div>
+        <span style="font-size: 10px; color: var(--dark-light); text-transform: uppercase; letter-spacing: 1px;">Storyteller:</span>
+        <div class="date-name-write"></div>
+      </div>
+      <div class="story-lines">
+        <div class="story-line"></div>
+        <div class="story-line"></div>
+        <div class="story-line"></div>
+      </div>
+      <div class="rating-section">
+        <div class="rating-label">Cringe Rating</div>
+        <div class="rating-stars">
+          <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+        </div>
+        <div style="font-size: 8px; color: var(--dark-light); margin-left: auto; text-align: right;">
+          1 = meh<br>5 = horrifying
+        </div>
+      </div>
+    </div>
+
+    <div class="date-card">
+      <div class="date-header">
+        <div class="date-num">3</div>
+        <span style="font-size: 10px; color: var(--dark-light); text-transform: uppercase; letter-spacing: 1px;">Storyteller:</span>
+        <div class="date-name-write"></div>
+      </div>
+      <div class="story-lines">
+        <div class="story-line"></div>
+        <div class="story-line"></div>
+        <div class="story-line"></div>
+      </div>
+      <div class="rating-section">
+        <div class="rating-label">Cringe Rating</div>
+        <div class="rating-stars">
+          <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+        </div>
+        <div style="font-size: 8px; color: var(--dark-light); margin-left: auto; text-align: right;">
+          1 = meh<br>5 = horrifying
+        </div>
+      </div>
+    </div>
+
+    <div class="date-card">
+      <div class="date-header">
+        <div class="date-num">4</div>
+        <span style="font-size: 10px; color: var(--dark-light); text-transform: uppercase; letter-spacing: 1px;">Storyteller:</span>
+        <div class="date-name-write"></div>
+      </div>
+      <div class="story-lines">
+        <div class="story-line"></div>
+        <div class="story-line"></div>
+        <div class="story-line"></div>
+      </div>
+      <div class="rating-section">
+        <div class="rating-label">Cringe Rating</div>
+        <div class="rating-stars">
+          <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+        </div>
+        <div style="font-size: 8px; color: var(--dark-light); margin-left: auto; text-align: right;">
+          1 = meh<br>5 = horrifying
+        </div>
+      </div>
+    </div>
+
+    <div class="winner-card" style="margin-top: 12px;">
+      <div class="winner-title">The Ick Award</div>
+      <div class="winner-sub">goes to...</div>
+      <div class="winner-name-write"></div>
+      <p style="font-size: 9px; margin-top: 6px; opacity: 0.8;">For the worst date story the Villa has ever heard!</p>
+    </div>
+
+    <div class="villa-footer" style="color: var(--gold);">Villa Vibes Bachelorette</div>
+  </div>
+</body>
+</html>

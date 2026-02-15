@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to the Villa - Entry Sign</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    .sign-outer {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      min-height: 9.8in;
+    }
+    .sign-border {
+      border: 3px solid var(--gold);
+      padding: 8px;
+      width: 100%;
+      max-width: 6.5in;
+    }
+    .sign-inner {
+      border: 1px solid var(--gold-light);
+      padding: 50px 40px;
+      text-align: center;
+      background: var(--cream);
+      position: relative;
+    }
+    .sign-pre {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300;
+      font-size: 13px;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+    .sign-main {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: 56px;
+      color: var(--coral);
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+    .sign-the {
+      font-family: 'Dancing Script', cursive;
+      font-size: 32px;
+      color: var(--gold);
+      display: block;
+      margin-bottom: -4px;
+    }
+    .sign-villa {
+      display: block;
+    }
+    .sign-name {
+      font-family: 'Dancing Script', cursive;
+      font-size: 36px;
+      color: var(--gold);
+      margin: 16px 0;
+      border-bottom: 2px dashed var(--gold-light);
+      display: inline-block;
+      padding: 0 20px 4px;
+      min-width: 250px;
+    }
+    .sign-details {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300;
+      font-size: 12px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--dark-light);
+      margin-top: 20px;
+    }
+    .sign-date {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 400;
+      font-size: 14px;
+      letter-spacing: 4px;
+      color: var(--gold);
+      margin-top: 8px;
+      border-bottom: 1.5px dashed var(--gold-light);
+      display: inline-block;
+      padding: 0 16px 4px;
+      min-width: 200px;
+    }
+    .sign-divider {
+      width: 120px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 20px auto;
+    }
+    .sign-footer-text {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300;
+      font-size: 10px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--coral-light);
+    }
+    .corner-deco {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+    }
+    .corner-deco.tl { top: 12px; left: 12px; border-top: 2px solid var(--gold); border-left: 2px solid var(--gold); }
+    .corner-deco.tr { top: 12px; right: 12px; border-top: 2px solid var(--gold); border-right: 2px solid var(--gold); }
+    .corner-deco.bl { bottom: 12px; left: 12px; border-bottom: 2px solid var(--gold); border-left: 2px solid var(--gold); }
+    .corner-deco.br { bottom: 12px; right: 12px; border-bottom: 2px solid var(--gold); border-right: 2px solid var(--gold); }
+  </style>
+</head>
+<body>
+  <div class="page page-blush">
+    <div class="sign-outer">
+      <div class="sign-border">
+        <div class="sign-inner">
+          <div class="corner-deco tl"></div>
+          <div class="corner-deco tr"></div>
+          <div class="corner-deco bl"></div>
+          <div class="corner-deco br"></div>
+
+          <div class="sign-pre">Welcome to</div>
+          <div class="sign-main">
+            <span class="sign-the">the</span>
+            <span class="sign-villa">Villa</span>
+          </div>
+
+          <div class="sign-divider"></div>
+
+          <div class="sign-name">Bride's Name</div>
+
+          <div class="sign-details">Bachelorette Weekend</div>
+          <div class="sign-date">Date Here</div>
+
+          <div class="sign-divider"></div>
+
+          <div class="sign-footer-text">Villa Vibes Bachelorette</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

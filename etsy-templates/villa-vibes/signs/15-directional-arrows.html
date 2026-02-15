@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Directional Arrow Signs</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    .arrows-page {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      min-height: 9.8in;
+      padding: 30px;
+    }
+    .arrow-row {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+    .arrow-sign-custom {
+      position: relative;
+      padding: 20px 50px 20px 30px;
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: white;
+      clip-path: polygon(0% 0%, 82% 0%, 100% 50%, 82% 100%, 0% 100%);
+      min-width: 280px;
+      text-align: center;
+    }
+    .arrow-sign-left {
+      clip-path: polygon(18% 0%, 100% 0%, 100% 100%, 18% 100%, 0% 50%);
+      padding: 20px 30px 20px 50px;
+    }
+    .arrow-coral { background: var(--coral); }
+    .arrow-gold { background: var(--gold); }
+    .arrow-dark { background: var(--dark); }
+    .arrow-rose { background: var(--rose); }
+    .arrow-subtitle {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      opacity: 0.85;
+      margin-top: 2px;
+    }
+
+    .single-arrow {
+      width: 5.5in;
+      margin: 0 auto;
+    }
+    .cut-guide {
+      border: 1px dashed #ddd;
+      border-radius: 4px;
+      padding: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="page page-cream">
+    <div class="corner-flourish top-left"></div>
+    <div class="corner-flourish top-right"></div>
+    <div class="corner-flourish bottom-left"></div>
+    <div class="corner-flourish bottom-right"></div>
+
+    <div class="villa-header" style="margin-bottom: 20px;">
+      <div class="subtitle">Villa Vibes Bachelorette</div>
+      <div class="title" style="font-size: 32px;">Directional Signs</div>
+      <div class="tagline">Cut out &amp; tape around the venue</div>
+      <div class="divider"></div>
+    </div>
+
+    <!-- Arrow 1: Main Villa (right) -->
+    <div class="single-arrow cut-guide">
+      <div class="arrow-sign-custom arrow-coral">
+        Main Villa
+        <div class="arrow-subtitle">This way to the party</div>
+      </div>
+    </div>
+
+    <!-- Arrow 2: Secret Villa (right) -->
+    <div class="single-arrow cut-guide">
+      <div class="arrow-sign-custom arrow-gold">
+        Secret Villa
+        <div class="arrow-subtitle">VIP Gossip Zone</div>
+      </div>
+    </div>
+
+    <!-- Arrow 3: Pool Party (left) -->
+    <div class="single-arrow cut-guide">
+      <div class="arrow-sign-custom arrow-sign-left arrow-rose">
+        Pool Party
+        <div class="arrow-subtitle">Sun, Sips &amp; Selfies</div>
+      </div>
+    </div>
+
+    <!-- Arrow 4: Dance Floor (right) -->
+    <div class="single-arrow cut-guide">
+      <div class="arrow-sign-custom arrow-dark">
+        Dance Floor
+        <div class="arrow-subtitle">Show us your moves</div>
+      </div>
+    </div>
+
+    <!-- Arrow 5: Villa Bar (left) -->
+    <div class="single-arrow cut-guide">
+      <div class="arrow-sign-custom arrow-sign-left arrow-coral">
+        Villa Bar
+        <div class="arrow-subtitle">Drinks this way</div>
+      </div>
+    </div>
+
+    <!-- Arrow 6: The Hot Seat (right) -->
+    <div class="single-arrow cut-guide">
+      <div class="arrow-sign-custom arrow-gold">
+        The Hot Seat
+        <div class="arrow-subtitle">Gossip Corner</div>
+      </div>
+    </div>
+
+    <p style="text-align: center; font-size: 9px; color: var(--dark-light); font-style: italic; margin-top: 8px;">
+      Print on cardstock. Cut along the dashed lines. Attach to walls with tape or string!
+    </p>
+
+    <div class="villa-footer">Villa Vibes Bachelorette</div>
+  </div>
+</body>
+</html>
