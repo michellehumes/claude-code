@@ -1,27 +1,32 @@
 /* ============================================
    VILLA VIBES BACHELORETTE PARTY BUNDLE
-   Shared Styles - Dating Show Theme
+   Shared Styles - Tropical Miami Love Island
    ============================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Montserrat:wght@300;400;500;600;700&family=Dancing+Script:wght@400;700&display=swap');
 
 :root {
-  --coral: #E8836B;
-  --coral-light: #F2A899;
-  --coral-dark: #D4654D;
-  --gold: #C9A96E;
-  --gold-light: #E0CC9D;
-  --champagne: #F5E6D3;
-  --blush: #FDF0EB;
+  --coral: #FF6B8A;
+  --coral-light: #FF9BB5;
+  --coral-dark: #E9446A;
+  --gold: #00CEC9;
+  --gold-light: #81ECEC;
+  --champagne: #DFF9FB;
+  --blush: #FFF0F5;
   --white: #FFFFFF;
-  --cream: #FFF9F5;
-  --dark: #2C2C2C;
-  --dark-light: #4A4A4A;
-  --rose: #E8A0BF;
+  --cream: #FEFCFF;
+  --dark: #2D3436;
+  --dark-light: #636E72;
+  --rose: #FD79A8;
   --hot-pink: #E84393;
-  --spicy-red: #D63031;
+  --spicy-red: #FF4757;
   --mild-green: #00B894;
-  --medium-orange: #FDCB6E;
+  --medium-orange: #FECA57;
+  --sunset-orange: #FF9F43;
+  --electric-blue: #0ABDE3;
+  --palm-green: #1DD1A1;
+  --paradise-purple: #A29BFE;
+  --neon-yellow: #FFF200;
 }
 
 * {
