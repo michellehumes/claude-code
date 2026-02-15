@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Themed Cocktail Tent Cards</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    .tent-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .tent {
+      border: 1.5px solid var(--gold);
+      border-radius: 10px;
+      padding: 16px 12px;
+      text-align: center;
+      background: var(--white);
+      min-height: 155px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .tent-name {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--coral);
+      margin-bottom: 4px;
+      line-height: 1.2;
+    }
+    .tent-desc {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300;
+      font-size: 9px;
+      color: var(--dark-light);
+      line-height: 1.4;
+      max-width: 160px;
+    }
+    .tent-divider {
+      width: 30px;
+      height: 1px;
+      background: var(--gold-light);
+      margin: 6px auto;
+    }
+    .tent-icon {
+      font-size: 18px;
+      margin-bottom: 4px;
+    }
+    .tent-tag {
+      font-family: 'Dancing Script', cursive;
+      font-size: 11px;
+      color: var(--gold);
+      margin-top: 4px;
+    }
+    .tent-blank {
+      border: 1.5px dashed var(--gold-light);
+    }
+    .tent-blank .tent-name {
+      border-bottom: 1.5px dashed var(--gold-light);
+      min-width: 120px;
+      min-height: 20px;
+    }
+    .tent-blank .tent-desc-write {
+      border-bottom: 1px solid var(--gold-light);
+      width: 140px;
+      min-height: 16px;
+      margin: 3px auto;
+    }
+    .fold-line {
+      border-top: 1px dashed #ccc;
+      position: relative;
+      margin: 4px 0;
+    }
+    .fold-line::before {
+      content: "fold here";
+      position: absolute;
+      top: -7px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--cream);
+      padding: 0 6px;
+      font-size: 7px;
+      color: #ccc;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+    .tent-corner {
+      position: absolute;
+      width: 16px;
+      height: 16px;
+    }
+    .tent-corner.tl { top: 6px; left: 6px; border-top: 1px solid var(--gold-light); border-left: 1px solid var(--gold-light); }
+    .tent-corner.tr { top: 6px; right: 6px; border-top: 1px solid var(--gold-light); border-right: 1px solid var(--gold-light); }
+    .tent-corner.bl { bottom: 6px; left: 6px; border-bottom: 1px solid var(--gold-light); border-left: 1px solid var(--gold-light); }
+    .tent-corner.br { bottom: 6px; right: 6px; border-bottom: 1px solid var(--gold-light); border-right: 1px solid var(--gold-light); }
+  </style>
+</head>
+<body>
+  <!-- PAGE 1: 8 themed cocktails -->
+  <div class="page page-cream">
+    <div class="corner-flourish top-left"></div>
+    <div class="corner-flourish top-right"></div>
+    <div class="corner-flourish bottom-left"></div>
+    <div class="corner-flourish bottom-right"></div>
+
+    <div class="villa-header">
+      <div class="subtitle">Villa Vibes Bachelorette</div>
+      <div class="title" style="font-size: 28px;">Cocktail Menu Cards</div>
+      <div class="tagline">Themed Drink Tent Cards</div>
+      <div class="divider"></div>
+      <p style="font-size: 10px; color: var(--dark-light); margin-top: 4px; font-weight: 300;">
+        Print, fold in half, and place at your Villa Bar station!
+      </p>
+    </div>
+
+    <div class="tent-grid">
+      <div class="tent">
+        <div class="tent-corner tl"></div><div class="tent-corner tr"></div>
+        <div class="tent-corner bl"></div><div class="tent-corner br"></div>
+        <div class="tent-name">The First Impression</div>
+        <div class="tent-divider"></div>
+        <div class="tent-desc">Champagne + St-Germain + a splash of sparkling water. Light, bubbly &amp; unforgettable.</div>
+        <div class="tent-tag">Villa Bar</div>
+      </div>
+
+      <div class="tent">
+        <div class="tent-corner tl"></div><div class="tent-corner tr"></div>
+        <div class="tent-corner bl"></div><div class="tent-corner br"></div>
+        <div class="tent-name">The Recoupling</div>
+        <div class="tent-divider"></div>
+        <div class="tent-desc">Vodka + passion fruit + prosecco. Sweet, bold &amp; always stirring things up.</div>
+        <div class="tent-tag">Villa Bar</div>
+      </div>
+
+      <div class="tent">
+        <div class="tent-corner tl"></div><div class="tent-corner tr"></div>
+        <div class="tent-corner bl"></div><div class="tent-corner br"></div>
+        <div class="tent-name">Casa Amor</div>
+        <div class="tent-divider"></div>
+        <div class="tent-desc">Rum + coconut cream + pineapple. Tropical temptation in a glass.</div>
+        <div class="tent-tag">Villa Bar</div>
+      </div>
+
+      <div class="tent">
+        <div class="tent-corner tl"></div><div class="tent-corner tr"></div>
+        <div class="tent-corner bl"></div><div class="tent-corner br"></div>
+        <div class="tent-name">The Gossip</div>
+        <div class="tent-divider"></div>
+        <div class="tent-desc">Aperol + prosecco + soda. A classic spritz that spills the tea.</div>
+        <div class="tent-tag">Villa Bar</div>
+      </div>
+
+      <div class="tent">
+        <div class="tent-corner tl"></div><div class="tent-corner tr"></div>
+        <div class="tent-corner bl"></div><div class="tent-corner br"></div>
+        <div class="tent-name">The Hot Seat</div>
+        <div class="tent-divider"></div>
+        <div class="tent-desc">Tequila + lime + jalape&ntilde;o simple syrup. Spicy, daring &amp; unapologetic.</div>
+        <div class="tent-tag">Villa Bar</div>
+      </div>
+
+      <div class="tent">
+        <div class="tent-corner tl"></div><div class="tent-corner tr"></div>
+        <div class="tent-corner bl"></div><div class="tent-corner br"></div>
+        <div class="tent-name">Coupled Up</div>
+        <div class="tent-divider"></div>
+        <div class="tent-desc">Gin + elderflower + cucumber. Elegant, refreshing &amp; perfectly matched.</div>
+        <div class="tent-tag">Villa Bar</div>
+      </div>
+
+      <div class="tent">
+        <div class="tent-corner tl"></div><div class="tent-corner tr"></div>
+        <div class="tent-corner bl"></div><div class="tent-corner br"></div>
+        <div class="tent-name">The Final Rose</div>
+        <div class="tent-divider"></div>
+        <div class="tent-desc">Ros&eacute; + raspberry liqueur + edible flower. The one you've been waiting for.</div>
+        <div class="tent-tag">Villa Bar</div>
+      </div>
+
+      <div class="tent">
+        <div class="tent-corner tl"></div><div class="tent-corner tr"></div>
+        <div class="tent-corner bl"></div><div class="tent-corner br"></div>
+        <div class="tent-name">I Got a Text!</div>
+        <div class="tent-divider"></div>
+        <div class="tent-desc">Vodka + blue cura&ccedil;ao + lemonade. Electric blue &amp; full of surprises.</div>
+        <div class="tent-tag">Villa Bar</div>
+      </div>
+    </div>
+
+    <!-- 2 blank cards -->
+    <div class="tent-grid" style="margin-top: 12px;">
+      <div class="tent tent-blank">
+        <div class="tent-name"></div>
+        <div class="tent-divider"></div>
+        <div class="tent-desc-write"></div>
+        <div class="tent-desc-write"></div>
+        <div class="tent-tag">Villa Bar</div>
+      </div>
+
+      <div class="tent tent-blank">
+        <div class="tent-name"></div>
+        <div class="tent-divider"></div>
+        <div class="tent-desc-write"></div>
+        <div class="tent-desc-write"></div>
+        <div class="tent-tag">Villa Bar</div>
+      </div>
+    </div>
+
+    <p style="text-align: center; font-size: 9px; color: var(--dark-light); margin-top: 8px; font-style: italic;">
+      Print on cardstock. Cut out each card. Fold in half to stand as tent cards. Place at bar station!<br>
+      2 blank cards included for your own custom cocktails.
+    </p>
+
+    <div class="villa-footer">Villa Vibes Bachelorette</div>
+  </div>
+</body>
+</html>

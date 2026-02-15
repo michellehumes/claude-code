@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Villa Rules - House Rules Poster</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    .rules-outer {
+      width: 100%;
+      min-height: 9.8in;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 30px;
+    }
+    .rules-frame {
+      border: 3px solid var(--gold);
+      padding: 8px;
+      width: 100%;
+    }
+    .rules-inner {
+      border: 1px solid var(--gold-light);
+      padding: 40px;
+      text-align: center;
+      background: var(--white);
+      position: relative;
+    }
+    .rules-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: 48px;
+      color: var(--coral);
+      margin-bottom: 4px;
+    }
+    .rules-pre {
+      font-family: 'Dancing Script', cursive;
+      font-size: 24px;
+      color: var(--gold);
+    }
+    .rules-divider {
+      width: 100px;
+      height: 1.5px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 18px auto;
+    }
+    .rule-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 14px;
+      text-align: left;
+      max-width: 440px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .rule-number {
+      width: 30px;
+      height: 30px;
+      background: var(--coral);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+    .rule-text {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      color: var(--dark);
+      line-height: 1.5;
+      padding-top: 4px;
+    }
+    .rule-text-editable {
+      border-bottom: 1.5px dashed var(--gold-light);
+      min-height: 22px;
+      padding-top: 4px;
+      flex: 1;
+    }
+    .rules-footer {
+      font-family: 'Dancing Script', cursive;
+      font-size: 20px;
+      color: var(--coral);
+      margin-top: 8px;
+    }
+    .corner-deco {
+      position: absolute;
+      width: 36px;
+      height: 36px;
+    }
+    .corner-deco.tl { top: 10px; left: 10px; border-top: 2px solid var(--gold); border-left: 2px solid var(--gold); }
+    .corner-deco.tr { top: 10px; right: 10px; border-top: 2px solid var(--gold); border-right: 2px solid var(--gold); }
+    .corner-deco.bl { bottom: 10px; left: 10px; border-bottom: 2px solid var(--gold); border-left: 2px solid var(--gold); }
+    .corner-deco.br { bottom: 10px; right: 10px; border-bottom: 2px solid var(--gold); border-right: 2px solid var(--gold); }
+  </style>
+</head>
+<body>
+  <div class="page page-blush">
+    <div class="rules-outer">
+      <div class="rules-frame">
+        <div class="rules-inner">
+          <div class="corner-deco tl"></div>
+          <div class="corner-deco tr"></div>
+          <div class="corner-deco bl"></div>
+          <div class="corner-deco br"></div>
+
+          <div class="rules-pre">the official</div>
+          <div class="rules-title">Villa Rules</div>
+
+          <div class="rules-divider"></div>
+
+          <div class="rule-item">
+            <span class="rule-number">1</span>
+            <span class="rule-text">What happens in the Villa stays in the Villa</span>
+          </div>
+
+          <div class="rule-item">
+            <span class="rule-number">2</span>
+            <span class="rule-text">The Bride's word is law - no exceptions</span>
+          </div>
+
+          <div class="rule-item">
+            <span class="rule-number">3</span>
+            <span class="rule-text">No phones during games (unless it's for a dare)</span>
+          </div>
+
+          <div class="rule-item">
+            <span class="rule-number">4</span>
+            <span class="rule-text">If someone yells "NEW MESSAGE!" - everyone must gather immediately</span>
+          </div>
+
+          <div class="rule-item">
+            <span class="rule-number">5</span>
+            <span class="rule-text">Drama is encouraged. Tears are optional.</span>
+          </div>
+
+          <div class="rule-item">
+            <span class="rule-number">6</span>
+            <span class="rule-text">You must accept any dare or drink as punishment</span>
+          </div>
+
+          <div class="rule-item">
+            <span class="rule-number">7</span>
+            <span class="rule-text">All gossip must be shared with the group</span>
+          </div>
+
+          <div class="rule-item">
+            <span class="rule-number">8</span>
+            <span class="rule-text">Outfit changes are not only allowed - they're expected</span>
+          </div>
+
+          <div class="rule-item">
+            <span class="rule-number">9</span>
+            <div class="rule-text-editable"></div>
+          </div>
+
+          <div class="rule-item">
+            <span class="rule-number">10</span>
+            <div class="rule-text-editable"></div>
+          </div>
+
+          <div class="rules-divider"></div>
+
+          <div class="rules-footer">Break the rules? Everyone drinks.</div>
+
+          <p style="font-family: 'Montserrat', sans-serif; font-size: 8px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold-light); margin-top: 16px;">
+            Villa Vibes Bachelorette
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

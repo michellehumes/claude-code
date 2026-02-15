@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Do Not Disturb / Matched Up Door Hangers</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    .hangers-page {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      min-height: 9.8in;
+    }
+    .door-hanger {
+      width: 3.5in;
+      height: 4in;
+      border: 2px solid var(--gold);
+      border-radius: 0 0 20px 20px;
+      position: relative;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 30px 20px 20px;
+    }
+    .hanger-hole {
+      position: absolute;
+      top: -1px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 30px;
+      border: 2px solid var(--gold);
+      border-top: none;
+      border-radius: 0 0 30px 30px;
+      background: var(--white);
+    }
+    .hanger-dnd {
+      background: linear-gradient(180deg, var(--blush), var(--white));
+      border-color: var(--coral);
+    }
+    .hanger-dnd .hanger-hole {
+      border-color: var(--coral);
+    }
+    .hanger-matched {
+      background: linear-gradient(180deg, var(--champagne), var(--white));
+      border-color: var(--gold);
+    }
+    .hanger-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: 28px;
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+    .hanger-subtitle {
+      font-family: 'Dancing Script', cursive;
+      font-size: 18px;
+      margin-bottom: 6px;
+    }
+    .hanger-detail {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300;
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    .hanger-divider {
+      width: 60px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 10px auto;
+    }
+    .hanger-corner {
+      position: absolute;
+      width: 24px;
+      height: 24px;
+    }
+    .hanger-corner.bl { bottom: 8px; left: 8px; border-bottom: 1.5px solid; border-left: 1.5px solid; border-radius: 0 0 0 8px; }
+    .hanger-corner.br { bottom: 8px; right: 8px; border-bottom: 1.5px solid; border-right: 1.5px solid; border-radius: 0 0 8px 0; }
+  </style>
+</head>
+<body>
+  <div class="page page-cream">
+    <div class="hangers-page">
+      <p style="font-family: 'Montserrat', sans-serif; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold);">
+        Cut out &amp; hang on door - double sided
+      </p>
+
+      <!-- SIDE 1: Do Not Disturb -->
+      <div class="door-hanger hanger-dnd">
+        <div class="hanger-hole"></div>
+        <div class="hanger-corner bl" style="border-color: var(--coral);"></div>
+        <div class="hanger-corner br" style="border-color: var(--coral);"></div>
+
+        <div class="hanger-subtitle" style="color: var(--coral);">shhh...</div>
+        <div class="hanger-title" style="color: var(--coral);">Do Not<br>Disturb</div>
+        <div class="hanger-divider"></div>
+        <div class="hanger-detail" style="color: var(--dark-light);">
+          Villa Babe<br>Recharging
+        </div>
+        <div style="font-family: 'Dancing Script', cursive; font-size: 13px; color: var(--coral-light); margin-top: 8px;">
+          Villa Vibes Bachelorette
+        </div>
+      </div>
+
+      <div class="cut-line" style="width: 3.5in;"></div>
+
+      <!-- SIDE 2: Matched Up -->
+      <div class="door-hanger hanger-matched">
+        <div class="hanger-hole"></div>
+        <div class="hanger-corner bl" style="border-color: var(--gold);"></div>
+        <div class="hanger-corner br" style="border-color: var(--gold);"></div>
+
+        <div class="hanger-subtitle" style="color: var(--gold);">officially</div>
+        <div class="hanger-title" style="color: var(--gold);">Matched<br>Up!</div>
+        <div class="hanger-divider"></div>
+        <div class="hanger-detail" style="color: var(--dark-light);">
+          Come on in<br>The Villa is Open
+        </div>
+        <div style="font-family: 'Dancing Script', cursive; font-size: 13px; color: var(--gold); margin-top: 8px;">
+          Villa Vibes Bachelorette
+        </div>
+      </div>
+
+      <p style="font-size: 9px; color: var(--dark-light); text-align: center; font-style: italic; margin-top: 4px;">
+        Print on cardstock. Cut out both hangers. Tape or glue back-to-back. Hang on doorknob!
+      </p>
+    </div>
+  </div>
+</body>
+</html>

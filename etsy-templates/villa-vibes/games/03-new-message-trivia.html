@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Message! Bride Trivia</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    .trivia-card {
+      background: var(--white);
+      border: 1.5px solid var(--gold-light);
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 12px;
+      position: relative;
+    }
+    .trivia-q {
+      font-family: 'Playfair Display', serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--coral);
+      margin-bottom: 10px;
+      padding-left: 32px;
+      position: relative;
+    }
+    .trivia-q .q-num {
+      position: absolute;
+      left: 0;
+      top: -2px;
+      width: 24px;
+      height: 24px;
+      background: var(--coral);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .trivia-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      padding-left: 32px;
+    }
+    .trivia-option {
+      background: var(--blush);
+      border-radius: 8px;
+      padding: 7px 12px;
+      font-size: 11px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .option-letter {
+      width: 18px;
+      height: 18px;
+      border: 1.5px solid var(--coral-light);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--coral);
+      flex-shrink: 0;
+    }
+    .notification-bar {
+      background: var(--coral);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-size: 11px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .notif-icon {
+      width: 24px;
+      height: 24px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="page page-cream">
+    <div class="corner-flourish top-left"></div>
+    <div class="corner-flourish top-right"></div>
+    <div class="corner-flourish bottom-left"></div>
+    <div class="corner-flourish bottom-right"></div>
+
+    <div class="villa-header">
+      <div class="subtitle">Villa Vibes Bachelorette</div>
+      <div class="title">New Message!</div>
+      <div class="tagline">Bride Trivia</div>
+      <div class="divider"></div>
+    </div>
+
+    <div class="notification-bar">
+      <div class="notif-icon">!</div>
+      <div><strong>You've got a new message!</strong> How well do you really know the bride? Answer these 8 questions to find out!</div>
+    </div>
+
+    <div class="trivia-card">
+      <div class="trivia-q"><span class="q-num">1</span>What was the bride's first impression of the groom?</div>
+      <div class="trivia-options">
+        <div class="trivia-option"><span class="option-letter">A</span> <span class="editable">answer here</span></div>
+        <div class="trivia-option"><span class="option-letter">B</span> <span class="editable">answer here</span></div>
+        <div class="trivia-option"><span class="option-letter">C</span> <span class="editable">answer here</span></div>
+        <div class="trivia-option"><span class="option-letter">D</span> <span class="editable">answer here</span></div>
+      </div>
+    </div>
+
+    <div class="trivia-card">
+      <div class="trivia-q"><span class="q-num">2</span>What is the bride's go-to comfort food?</div>
+      <div class="trivia-options">
+        <div class="trivia-option"><span class="option-letter">A</span> <span class="editable">answer here</span></div>
+        <div class="trivia-option"><span class="option-letter">B</span> <span class="editable">answer here</span></div>
+        <div class="trivia-option"><span class="option-letter">C</span> <span class="editable">answer here</span></div>
+        <div class="trivia-option"><span class="option-letter">D</span> <span class="editable">answer here</span></div>
+      </div>
+    </div>
+
+    <div class="trivia-card">
+      <div class="trivia-q"><span class="q-num">3</span>Where was the couple's first date?</div>
+      <div class="trivia-options">
+        <div class="trivia-option"><span class="option-letter">A</span> <span class="editable">answer here</span></div>
+        <div class="trivia-option"><span class="option-letter">B</span> <span class="editable">answer here</span></div>
+        <div class="trivia-option"><span class="option-letter">C</span> <span class="editable">answer here</span></div>
+        <div class="trivia-option"><span class="option-letter">D</span> <span class="editable">answer here</span></div>
+      </div>
+    </div>
+
+    <div class="trivia-card">
+      <div class="trivia-q"><span class="q-num">4</span>What is the bride's most-used emoji?</div>
+      <div class="trivia-options">
+        <div class="trivia-option"><span class="option-letter">A</span> <span class="editable">answer here</span></div>
+        <div class="trivia-option"><span class="option-letter">B</span> <span class="editable">answer here</span></div>
+        <div class="trivia-option"><span class="option-letter">C</span> <span class="editable">answer here</span></div>
+        <div class="trivia-option"><span class="option-letter">D</span> <span class="editable">answer here</span></div>
+      </div>
+    </div>
+
+    <div class="trivia-card">
+      <div class="trivia-q"><span class="q-num">5</span>What song does the bride sing in the shower?</div>
+      <div class="trivia-options">
+        <div class="trivia-option"><span class="option-letter">A</span> <span class="editable">answer here</span></div>
+        <div class="trivia-option"><span class="option-letter">B</span> <span class="editable">answer here</span></div>
+        <div class="trivia-option"><span class="option-letter">C</span> <span class="editable">answer here</span></div>
+        <div class="trivia-option"><span class="option-letter">D</span> <span class="editable">answer here</span></div>
+      </div>
+    </div>
+
+    <div class="trivia-card">
+      <div class="trivia-q"><span class="q-num">6</span>What's the bride's biggest pet peeve?</div>
+      <div class="trivia-options">
+        <div class="trivia-option"><span class="option-letter">A</span> <span class="editable">answer here</span></div>
+        <div class="trivia-option"><span class="option-letter">B</span> <span class="editable">answer here</span></div>
+        <div class="trivia-option"><span class="option-letter">C</span> <span class="editable">answer here</span></div>
+        <div class="trivia-option"><span class="option-letter">D</span> <span class="editable">answer here</span></div>
+      </div>
+    </div>
+
+    <div class="trivia-card">
+      <div class="trivia-q"><span class="q-num">7</span>What's the bride's dream honeymoon destination?</div>
+      <div class="trivia-options">
+        <div class="trivia-option"><span class="option-letter">A</span> <span class="editable">answer here</span></div>
+        <div class="trivia-option"><span class="option-letter">B</span> <span class="editable">answer here</span></div>
+        <div class="trivia-option"><span class="option-letter">C</span> <span class="editable">answer here</span></div>
+        <div class="trivia-option"><span class="option-letter">D</span> <span class="editable">answer here</span></div>
+      </div>
+    </div>
+
+    <div class="trivia-card">
+      <div class="trivia-q"><span class="q-num">8</span>What would the bride say is the groom's most annoying habit?</div>
+      <div class="trivia-options">
+        <div class="trivia-option"><span class="option-letter">A</span> <span class="editable">answer here</span></div>
+        <div class="trivia-option"><span class="option-letter">B</span> <span class="editable">answer here</span></div>
+        <div class="trivia-option"><span class="option-letter">C</span> <span class="editable">answer here</span></div>
+        <div class="trivia-option"><span class="option-letter">D</span> <span class="editable">answer here</span></div>
+      </div>
+    </div>
+
+    <p style="text-align: center; font-size: 10px; color: var(--dark-light); margin-top: 8px; font-style: italic;">
+      Bride or MOH: Fill in the multiple choice answers before printing. Correct answers circled on answer key!
+    </p>
+
+    <div class="villa-footer">Villa Vibes Bachelorette</div>
+  </div>
+</body>
+</html>

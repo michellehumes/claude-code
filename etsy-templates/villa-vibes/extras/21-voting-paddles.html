@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stay or Switch Voting Paddles</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    .paddles-page {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      min-height: 9.8in;
+      padding: 30px;
+    }
+    .paddle-pair {
+      display: flex;
+      gap: 32px;
+      align-items: flex-start;
+    }
+    .paddle-unit {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .paddle-face {
+      width: 3in;
+      height: 3in;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+    }
+    .paddle-stay {
+      border: 3px solid var(--coral);
+      background: linear-gradient(135deg, var(--blush), var(--white));
+    }
+    .paddle-switch {
+      border: 3px solid var(--gold);
+      background: linear-gradient(135deg, var(--champagne), var(--white));
+    }
+    .paddle-text {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: 28px;
+      line-height: 1.1;
+    }
+    .paddle-sub {
+      font-family: 'Dancing Script', cursive;
+      font-size: 16px;
+      margin-top: 4px;
+    }
+    .paddle-handle-area {
+      width: 36px;
+      height: 70px;
+      border: 2px solid var(--gold-light);
+      border-top: none;
+      border-radius: 0 0 10px 10px;
+      background: var(--champagne);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .handle-text {
+      writing-mode: vertical-rl;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 7px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    /* Additional paddle designs */
+    .paddle-yes {
+      border: 3px solid var(--mild-green);
+      background: linear-gradient(135deg, #e8f8f5, var(--white));
+    }
+    .paddle-no {
+      border: 3px solid var(--spicy-red);
+      background: linear-gradient(135deg, #fde8e8, var(--white));
+    }
+    .paddle-sip {
+      border: 3px solid var(--rose);
+      background: linear-gradient(135deg, #fce4ec, var(--white));
+    }
+    .paddle-spill {
+      border: 3px solid var(--coral);
+      background: linear-gradient(135deg, var(--blush), var(--white));
+    }
+  </style>
+</head>
+<body>
+  <div class="page page-cream">
+    <div class="paddles-page">
+      <div class="villa-header" style="margin-bottom: 0;">
+        <div class="subtitle">Villa Vibes Bachelorette</div>
+        <div class="title" style="font-size: 28px;">Voting Paddles</div>
+        <div class="tagline">Cut out, glue to sticks, and vote!</div>
+        <div class="divider"></div>
+      </div>
+
+      <!-- STAY / SWITCH -->
+      <div class="paddle-pair">
+        <div class="paddle-unit">
+          <div class="paddle-face paddle-stay">
+            <div class="paddle-text" style="color: var(--coral);">STAY</div>
+            <div class="paddle-sub" style="color: var(--coral);">I'm coupled up</div>
+          </div>
+          <div class="paddle-handle-area" style="border-color: var(--coral-light);">
+            <span class="handle-text" style="color: var(--coral);">STAY</span>
+          </div>
+        </div>
+
+        <div class="paddle-unit">
+          <div class="paddle-face paddle-switch">
+            <div class="paddle-text" style="color: var(--gold);">SWITCH</div>
+            <div class="paddle-sub" style="color: var(--gold);">I want to recouple</div>
+          </div>
+          <div class="paddle-handle-area">
+            <span class="handle-text">SWITCH</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="cut-line" style="width: 80%;"></div>
+
+      <!-- SIP / SPILL -->
+      <div class="paddle-pair">
+        <div class="paddle-unit">
+          <div class="paddle-face paddle-sip">
+            <div class="paddle-text" style="color: var(--rose);">SIP</div>
+            <div class="paddle-sub" style="color: var(--rose);">Take a drink</div>
+          </div>
+          <div class="paddle-handle-area" style="border-color: var(--rose);">
+            <span class="handle-text" style="color: var(--rose);">SIP</span>
+          </div>
+        </div>
+
+        <div class="paddle-unit">
+          <div class="paddle-face paddle-spill">
+            <div class="paddle-text" style="color: var(--coral);">SPILL</div>
+            <div class="paddle-sub" style="color: var(--coral);">Tell the truth</div>
+          </div>
+          <div class="paddle-handle-area" style="border-color: var(--coral-light);">
+            <span class="handle-text" style="color: var(--coral);">SPILL</span>
+          </div>
+        </div>
+      </div>
+
+      <p style="text-align: center; font-size: 9px; color: var(--dark-light); font-style: italic; max-width: 400px;">
+        Print on cardstock. Cut out each paddle. Glue or tape to a popsicle stick, wooden dowel, or straw.<br>
+        Use during games to vote, or just for fun photo props!
+      </p>
+
+      <div class="villa-footer" style="margin-top: 4px;">Villa Vibes Bachelorette</div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shoot Your Shot - Pickup Line Battle</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    .pickup-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .pickup-card {
+      background: var(--white);
+      border: 1.5px solid var(--gold-light);
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 10.5px;
+      line-height: 1.4;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      min-height: 52px;
+    }
+    .pickup-num {
+      width: 20px;
+      height: 20px;
+      background: var(--coral);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .pickup-card:nth-child(even) {
+      background: var(--blush);
+    }
+    .instructions-card {
+      background: linear-gradient(135deg, var(--coral), var(--coral-dark));
+      color: white;
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+      margin-bottom: 14px;
+    }
+    .instructions-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+    .instructions-card p {
+      font-size: 10px;
+      line-height: 1.5;
+      opacity: 0.9;
+    }
+    .scoreboard {
+      background: var(--white);
+      border: 2px solid var(--gold);
+      border-radius: 12px;
+      padding: 14px;
+      margin-top: 10px;
+    }
+    .score-header {
+      font-family: 'Playfair Display', serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--coral);
+      text-align: center;
+      margin-bottom: 8px;
+    }
+    .score-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 0;
+      border-bottom: 1px solid var(--champagne);
+      font-size: 10px;
+    }
+    .score-name {
+      flex: 1;
+      border-bottom: 1px dashed var(--gold-light);
+      min-height: 16px;
+    }
+    .score-tally {
+      width: 80px;
+      border-bottom: 1px dashed var(--gold-light);
+      min-height: 16px;
+    }
+  </style>
+</head>
+<body>
+  <!-- PAGE 1 -->
+  <div class="page page-cream">
+    <div class="corner-flourish top-left"></div>
+    <div class="corner-flourish top-right"></div>
+    <div class="corner-flourish bottom-left"></div>
+    <div class="corner-flourish bottom-right"></div>
+
+    <div class="villa-header">
+      <div class="subtitle">Villa Vibes Bachelorette</div>
+      <div class="title">Shoot Your Shot</div>
+      <div class="tagline">Pickup Line Battle</div>
+      <div class="divider"></div>
+    </div>
+
+    <div class="instructions-card">
+      <h3>How to Play</h3>
+      <p>Two Villa Babes face off each round. Draw a card and deliver the pickup line with your BEST delivery.<br>
+      The group votes on who sold it better. Winner stays, loser drinks! 30 lines - who will be the last one standing?</p>
+    </div>
+
+    <div class="pickup-grid">
+      <div class="pickup-card"><span class="pickup-num">1</span>"Are you a magician? Because whenever I look at you, everyone else disappears."</div>
+      <div class="pickup-card"><span class="pickup-num">2</span>"Do you have a map? I just got lost in your eyes."</div>
+      <div class="pickup-card"><span class="pickup-num">3</span>"Is your name Google? Because you've got everything I've been searching for."</div>
+      <div class="pickup-card"><span class="pickup-num">4</span>"Are you a parking ticket? Because you've got 'fine' written all over you."</div>
+      <div class="pickup-card"><span class="pickup-num">5</span>"Do you believe in love at first sight, or should I walk by again?"</div>
+      <div class="pickup-card"><span class="pickup-num">6</span>"If you were a vegetable, you'd be a cute-cumber."</div>
+      <div class="pickup-card"><span class="pickup-num">7</span>"Are you a campfire? Because you're hot and I want s'more."</div>
+      <div class="pickup-card"><span class="pickup-num">8</span>"I must be a snowflake, because I've fallen for you."</div>
+      <div class="pickup-card"><span class="pickup-num">9</span>"Is it hot in here, or is it just the chemistry between us?"</div>
+      <div class="pickup-card"><span class="pickup-num">10</span>"Are you a time traveler? Because I can see you in my future."</div>
+      <div class="pickup-card"><span class="pickup-num">11</span>"I'm not a photographer, but I can definitely picture us together."</div>
+      <div class="pickup-card"><span class="pickup-num">12</span>"Are you a bank loan? Because you've got my interest."</div>
+      <div class="pickup-card"><span class="pickup-num">13</span>"If beauty were a crime, you'd be serving a life sentence."</div>
+      <div class="pickup-card"><span class="pickup-num">14</span>"Do you have a sunburn, or are you always this hot?"</div>
+      <div class="pickup-card"><span class="pickup-num">15</span>"I'd say God bless you, but it looks like He already did."</div>
+      <div class="pickup-card"><span class="pickup-num">16</span>"Are you Wi-Fi? Because I'm feeling a connection."</div>
+      <div class="pickup-card"><span class="pickup-num">17</span>"You must be tired because you've been running through my mind all day."</div>
+      <div class="pickup-card"><span class="pickup-num">18</span>"I'm writing a phone book. Can I have your number?"</div>
+      <div class="pickup-card"><span class="pickup-num">19</span>"If you were a triangle, you'd be acute one."</div>
+      <div class="pickup-card"><span class="pickup-num">20</span>"I must be in a museum, because you truly are a work of art."</div>
+    </div>
+
+    <div class="villa-footer">Villa Vibes Bachelorette</div>
+  </div>
+
+  <!-- PAGE 2 -->
+  <div class="page page-cream">
+    <div class="corner-flourish top-left"></div>
+    <div class="corner-flourish top-right"></div>
+    <div class="corner-flourish bottom-left"></div>
+    <div class="corner-flourish bottom-right"></div>
+
+    <div class="villa-header" style="margin-bottom: 14px;">
+      <div class="subtitle">Shoot Your Shot</div>
+      <div class="title" style="font-size: 28px;">Pickup Line Battle</div>
+      <div class="tagline">Lines 21-30</div>
+    </div>
+
+    <div class="pickup-grid">
+      <div class="pickup-card"><span class="pickup-num">21</span>"Did it hurt when you fell from heaven? Because your face is pretty messed up... just kidding, you're gorgeous."</div>
+      <div class="pickup-card"><span class="pickup-num">22</span>"Are you a 45-degree angle? Because you're acute-y."</div>
+      <div class="pickup-card"><span class="pickup-num">23</span>"I'm not drunk, I'm just intoxicated by you."</div>
+      <div class="pickup-card"><span class="pickup-num">24</span>"Roses are red, violets are blue, Spotify says I'm your number one fan, is that true?"</div>
+      <div class="pickup-card"><span class="pickup-num">25</span>"Are you a dictionary? Because you add meaning to my life."</div>
+      <div class="pickup-card"><span class="pickup-num">26</span>"I'd offer you my jacket, but your smile is keeping me warm."</div>
+      <div class="pickup-card"><span class="pickup-num">27</span>"I think there's something wrong with my phone - it doesn't have your number in it."</div>
+      <div class="pickup-card"><span class="pickup-num">28</span>"You must be made of copper and tellurium because you're Cu-Te."</div>
+      <div class="pickup-card"><span class="pickup-num">29</span>"Is your dad a boxer? Because you're a knockout."</div>
+      <div class="pickup-card"><span class="pickup-num">30</span>"I'd take you to the movies, but they don't let you bring your own snack."</div>
+    </div>
+
+    <div class="scoreboard" style="margin-top: 20px;">
+      <div class="score-header">Battle Scoreboard</div>
+      <div class="score-row"><span style="width: 20px; font-weight: 600;">1.</span><div class="score-name"></div><span style="font-size: 9px; color: var(--dark-light);">Wins:</span><div class="score-tally"></div></div>
+      <div class="score-row"><span style="width: 20px; font-weight: 600;">2.</span><div class="score-name"></div><span style="font-size: 9px; color: var(--dark-light);">Wins:</span><div class="score-tally"></div></div>
+      <div class="score-row"><span style="width: 20px; font-weight: 600;">3.</span><div class="score-name"></div><span style="font-size: 9px; color: var(--dark-light);">Wins:</span><div class="score-tally"></div></div>
+      <div class="score-row"><span style="width: 20px; font-weight: 600;">4.</span><div class="score-name"></div><span style="font-size: 9px; color: var(--dark-light);">Wins:</span><div class="score-tally"></div></div>
+      <div class="score-row"><span style="width: 20px; font-weight: 600;">5.</span><div class="score-name"></div><span style="font-size: 9px; color: var(--dark-light);">Wins:</span><div class="score-tally"></div></div>
+      <div class="score-row"><span style="width: 20px; font-weight: 600;">6.</span><div class="score-name"></div><span style="font-size: 9px; color: var(--dark-light);">Wins:</span><div class="score-tally"></div></div>
+      <div class="score-row"><span style="width: 20px; font-weight: 600;">7.</span><div class="score-name"></div><span style="font-size: 9px; color: var(--dark-light);">Wins:</span><div class="score-tally"></div></div>
+      <div class="score-row" style="border: none;"><span style="width: 20px; font-weight: 600;">8.</span><div class="score-name"></div><span style="font-size: 9px; color: var(--dark-light);">Wins:</span><div class="score-tally"></div></div>
+    </div>
+
+    <div style="text-align: center; margin-top: 14px;">
+      <span style="font-family: 'Dancing Script', cursive; font-size: 18px; color: var(--coral);">Villa Smooth-Talker Champion: </span>
+      <span style="border-bottom: 2px dashed var(--gold); display: inline-block; width: 150px; min-height: 18px;"></span>
+    </div>
+
+    <div class="villa-footer">Villa Vibes Bachelorette</div>
+  </div>
+</body>
+</html>

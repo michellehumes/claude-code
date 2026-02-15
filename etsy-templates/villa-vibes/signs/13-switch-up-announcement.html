@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tonight: The Switch-Up Announcement Sign</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    .announce-outer {
+      width: 100%;
+      min-height: 9.8in;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+    }
+    .announce-frame {
+      border: 3px solid var(--gold);
+      padding: 8px;
+      width: 100%;
+    }
+    .announce-inner {
+      border: 1px solid var(--gold-light);
+      padding: 60px 40px;
+      text-align: center;
+      background: var(--white);
+      position: relative;
+    }
+    .announce-tonight {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      letter-spacing: 8px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+    .announce-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: 58px;
+      color: var(--coral);
+      line-height: 1.05;
+      margin-bottom: 6px;
+    }
+    .announce-the {
+      font-family: 'Dancing Script', cursive;
+      font-size: 36px;
+      color: var(--gold);
+      display: block;
+    }
+    .announce-divider {
+      width: 120px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 24px auto;
+    }
+    .announce-desc {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300;
+      font-size: 13px;
+      color: var(--dark-light);
+      letter-spacing: 2px;
+      line-height: 1.8;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    .announce-time {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--coral);
+      margin-top: 24px;
+      border: 2px solid var(--coral);
+      display: inline-block;
+      padding: 8px 28px;
+      border-radius: 4px;
+    }
+    .announce-warning {
+      font-family: 'Dancing Script', cursive;
+      font-size: 18px;
+      color: var(--gold);
+      margin-top: 20px;
+    }
+    .corner-deco {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+    }
+    .corner-deco.tl { top: 12px; left: 12px; border-top: 2px solid var(--gold); border-left: 2px solid var(--gold); }
+    .corner-deco.tr { top: 12px; right: 12px; border-top: 2px solid var(--gold); border-right: 2px solid var(--gold); }
+    .corner-deco.bl { bottom: 12px; left: 12px; border-bottom: 2px solid var(--gold); border-left: 2px solid var(--gold); }
+    .corner-deco.br { bottom: 12px; right: 12px; border-bottom: 2px solid var(--gold); border-right: 2px solid var(--gold); }
+  </style>
+</head>
+<body>
+  <div class="page page-blush">
+    <div class="announce-outer">
+      <div class="announce-frame">
+        <div class="announce-inner">
+          <div class="corner-deco tl"></div>
+          <div class="corner-deco tr"></div>
+          <div class="corner-deco bl"></div>
+          <div class="corner-deco br"></div>
+
+          <div class="announce-tonight">Tonight</div>
+
+          <div class="announce-title">
+            <span class="announce-the">The</span>
+            Switch-Up
+          </div>
+
+          <div class="announce-divider"></div>
+
+          <div class="announce-desc">
+            ALL VILLA BABES MUST REPORT<br>
+            TO THE LIVING ROOM<br>
+            FOR A DRAMATIC RECOUPLING
+          </div>
+
+          <div class="announce-time">9:00 PM</div>
+
+          <div class="announce-warning">No one is safe...</div>
+
+          <div class="announce-divider"></div>
+
+          <p style="font-family: 'Montserrat', sans-serif; font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold-light);">
+            Villa Vibes Bachelorette
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

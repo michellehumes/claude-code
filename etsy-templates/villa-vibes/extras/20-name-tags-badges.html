@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Villa Babe Name Tags + Bride & MOH Badges</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    .tags-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .name-tag {
+      border: 2px solid var(--gold);
+      border-radius: 14px;
+      padding: 16px;
+      text-align: center;
+      min-height: 170px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      background: var(--white);
+    }
+    .tag-role {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 8px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+    .tag-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 16px;
+      color: var(--coral);
+      margin-bottom: 4px;
+    }
+    .tag-name-write {
+      font-family: 'Dancing Script', cursive;
+      font-size: 22px;
+      color: var(--dark);
+      border-bottom: 2px dashed var(--gold-light);
+      min-width: 120px;
+      min-height: 28px;
+      margin: 6px 0;
+    }
+    .tag-footer {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 7px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      margin-top: 6px;
+    }
+    .tag-bride {
+      background: linear-gradient(135deg, var(--blush), var(--white));
+      border-color: var(--coral);
+      border-width: 3px;
+    }
+    .tag-bride .tag-title {
+      font-size: 20px;
+    }
+    .tag-moh {
+      background: linear-gradient(135deg, var(--champagne), var(--white));
+      border-color: var(--gold);
+      border-width: 3px;
+    }
+    .tag-divider {
+      width: 40px;
+      height: 1px;
+      background: var(--gold-light);
+      margin: 4px auto;
+    }
+
+    /* Badge styles */
+    .badges-row {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-top: 20px;
+    }
+    .badge-circle {
+      width: 2.2in;
+      height: 2.2in;
+      border: 3px solid var(--gold);
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 10px;
+    }
+    .badge-bride {
+      border-color: var(--coral);
+      background: linear-gradient(135deg, var(--blush), var(--white));
+    }
+    .badge-moh-circle {
+      border-color: var(--gold);
+      background: linear-gradient(135deg, var(--champagne), var(--white));
+    }
+    .badge-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: 14px;
+      color: var(--coral);
+      line-height: 1.2;
+    }
+    .badge-sub {
+      font-family: 'Dancing Script', cursive;
+      font-size: 12px;
+      color: var(--gold);
+    }
+  </style>
+</head>
+<body>
+  <div class="page page-cream">
+    <div class="corner-flourish top-left"></div>
+    <div class="corner-flourish top-right"></div>
+    <div class="corner-flourish bottom-left"></div>
+    <div class="corner-flourish bottom-right"></div>
+
+    <div class="villa-header">
+      <div class="subtitle">Villa Vibes Bachelorette</div>
+      <div class="title" style="font-size: 28px;">Name Tags &amp; Badges</div>
+      <div class="tagline">Cut out and wear with pride!</div>
+      <div class="divider"></div>
+    </div>
+
+    <!-- Special Tags: Bride + MOH -->
+    <div class="tags-grid" style="margin-bottom: 16px;">
+      <div class="name-tag tag-bride">
+        <div class="tag-role">The One &amp; Only</div>
+        <div class="tag-title" style="font-size: 20px;">The Bride</div>
+        <div class="tag-divider" style="background: var(--coral);"></div>
+        <div class="tag-name-write"></div>
+        <div class="tag-footer">Villa Vibes Bachelorette</div>
+      </div>
+
+      <div class="name-tag tag-moh">
+        <div class="tag-role">Right Hand Woman</div>
+        <div class="tag-title" style="color: var(--gold);">Maid of Honor</div>
+        <div class="tag-divider"></div>
+        <div class="tag-name-write"></div>
+        <div class="tag-footer">Villa Vibes Bachelorette</div>
+      </div>
+    </div>
+
+    <!-- Villa Babe Tags x6 -->
+    <div class="tags-grid">
+      <div class="name-tag">
+        <div class="tag-role">Official Islander</div>
+        <div class="tag-title">Villa Babe</div>
+        <div class="tag-divider"></div>
+        <div class="tag-name-write"></div>
+        <div class="tag-footer">Villa Vibes Bachelorette</div>
+      </div>
+      <div class="name-tag">
+        <div class="tag-role">Official Islander</div>
+        <div class="tag-title">Villa Babe</div>
+        <div class="tag-divider"></div>
+        <div class="tag-name-write"></div>
+        <div class="tag-footer">Villa Vibes Bachelorette</div>
+      </div>
+      <div class="name-tag">
+        <div class="tag-role">Official Islander</div>
+        <div class="tag-title">Villa Babe</div>
+        <div class="tag-divider"></div>
+        <div class="tag-name-write"></div>
+        <div class="tag-footer">Villa Vibes Bachelorette</div>
+      </div>
+      <div class="name-tag">
+        <div class="tag-role">Official Islander</div>
+        <div class="tag-title">Villa Babe</div>
+        <div class="tag-divider"></div>
+        <div class="tag-name-write"></div>
+        <div class="tag-footer">Villa Vibes Bachelorette</div>
+      </div>
+      <div class="name-tag">
+        <div class="tag-role">Official Islander</div>
+        <div class="tag-title">Villa Babe</div>
+        <div class="tag-divider"></div>
+        <div class="tag-name-write"></div>
+        <div class="tag-footer">Villa Vibes Bachelorette</div>
+      </div>
+      <div class="name-tag">
+        <div class="tag-role">Official Islander</div>
+        <div class="tag-title">Villa Babe</div>
+        <div class="tag-divider"></div>
+        <div class="tag-name-write"></div>
+        <div class="tag-footer">Villa Vibes Bachelorette</div>
+      </div>
+    </div>
+
+    <!-- Pin-on Badges -->
+    <div class="badges-row">
+      <div class="badge-circle badge-bride">
+        <div class="badge-sub">the</div>
+        <div class="badge-title" style="font-size: 16px;">BRIDE</div>
+        <div class="badge-sub">Villa Vibes</div>
+      </div>
+      <div class="badge-circle badge-moh-circle">
+        <div class="badge-sub">the</div>
+        <div class="badge-title" style="color: var(--gold); font-size: 13px;">MAID OF<br>HONOR</div>
+        <div class="badge-sub">Villa Vibes</div>
+      </div>
+      <div class="badge-circle" style="background: var(--white);">
+        <div class="badge-sub">official</div>
+        <div class="badge-title" style="font-size: 13px;">VILLA<br>BABE</div>
+        <div class="badge-sub">Villa Vibes</div>
+      </div>
+    </div>
+
+    <p style="text-align: center; font-size: 9px; color: var(--dark-light); margin-top: 12px; font-style: italic;">
+      Print on cardstock. Cut out name tags and badges. Use safety pins, lanyards, or tape to wear!
+    </p>
+
+    <div class="villa-footer">Villa Vibes Bachelorette</div>
+  </div>
+</body>
+</html>
