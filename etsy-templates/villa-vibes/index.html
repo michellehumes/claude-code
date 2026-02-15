@@ -54,7 +54,8 @@
       gap: 12px;
       margin-bottom: 16px;
       padding-bottom: 8px;
-      border-bottom: 2px solid var(--gold-light);
+      border-bottom: 2px solid transparent;
+      border-image: linear-gradient(90deg, var(--coral), var(--lime, #A8FF3E), var(--gold)) 1;
     }
     .section-num {
       width: 36px;
@@ -97,7 +98,8 @@
       transition: box-shadow 0.2s;
     }
     .item-card:hover {
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      box-shadow: 0 2px 12px rgba(0, 212, 170, 0.15);
+      border-color: var(--gold);
     }
     .item-num {
       width: 24px;
@@ -137,6 +139,7 @@
       border-radius: 14px;
       padding: 24px;
       margin-top: 30px;
+      box-shadow: 0 2px 16px rgba(0, 212, 170, 0.1);
     }
     .instructions h3 {
       font-family: 'Playfair Display', serif;
@@ -168,7 +171,7 @@
       </div>
       <div class="bundle-title">Villa Vibes</div>
       <div class="bundle-sub">Bachelorette Party Bundle</div>
-      <div class="bundle-count">23 Pieces - Dating Show Themed</div>
+      <div class="bundle-count">23 Pieces - Tropical Love Island Themed</div>
     </div>
 
     <!-- PARTY GAMES -->

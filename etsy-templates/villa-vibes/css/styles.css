@@ -6,27 +6,35 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Montserrat:wght@300;400;500;600;700&family=Dancing+Script:wght@400;700&display=swap');
 
 :root {
-  --coral: #FF6B8A;
-  --coral-light: #FF9BB5;
-  --coral-dark: #E9446A;
-  --gold: #00CEC9;
-  --gold-light: #81ECEC;
-  --champagne: #DFF9FB;
-  --blush: #FFF0F5;
+  /* Primary */
+  --coral: #FF2D78;
+  --coral-light: #FF73A5;
+  --coral-dark: #E0165E;
+  /* Secondary - Tropical Aqua */
+  --gold: #00D4AA;
+  --gold-light: #66F0D2;
+  --champagne: #E0FFF6;
+  /* Lime Green Accent */
+  --lime: #A8FF3E;
+  --lime-dark: #7ACC2D;
+  /* Backgrounds */
+  --blush: #FFF0F6;
   --white: #FFFFFF;
-  --cream: #FEFCFF;
-  --dark: #2D3436;
-  --dark-light: #636E72;
-  --rose: #FD79A8;
-  --hot-pink: #E84393;
-  --spicy-red: #FF4757;
-  --mild-green: #00B894;
-  --medium-orange: #FECA57;
-  --sunset-orange: #FF9F43;
-  --electric-blue: #0ABDE3;
-  --palm-green: #1DD1A1;
-  --paradise-purple: #A29BFE;
-  --neon-yellow: #FFF200;
+  --cream: #FAFFFE;
+  /* Neutrals */
+  --dark: #1A1A2E;
+  --dark-light: #4A4A6A;
+  /* Accent Colors */
+  --rose: #FF5CAD;
+  --hot-pink: #FF1493;
+  --spicy-red: #FF3366;
+  --mild-green: #00E676;
+  --medium-orange: #FFAB40;
+  --sunset-orange: #FF6E40;
+  --electric-blue: #00B4FF;
+  --palm-green: #00E676;
+  --paradise-purple: #B388FF;
+  --neon-yellow: #E8FF00;
 }
 
 * {
@@ -170,9 +178,9 @@ h1, h2, h3 {
 }
 
 .villa-header .divider {
-  width: 80px;
+  width: 100px;
   height: 2px;
-  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  background: linear-gradient(90deg, transparent, var(--coral), var(--lime), var(--gold), transparent);
   margin: 10px auto;
 }
 
@@ -183,6 +191,7 @@ h1, h2, h3 {
   border-radius: 12px;
   padding: 16px;
   margin-bottom: 12px;
+  box-shadow: 0 1px 4px rgba(0, 212, 170, 0.08);
 }
 
 .game-card-coral {
@@ -194,12 +203,13 @@ h1, h2, h3 {
 }
 
 .prompt-box {
-  background: var(--blush);
+  background: var(--champagne);
   border-radius: 8px;
   padding: 10px 14px;
   margin-bottom: 8px;
   font-size: 12px;
   line-height: 1.5;
+  border-left: 3px solid var(--lime);
 }
 
 .prompt-number {
@@ -250,6 +260,7 @@ h1, h2, h3 {
   padding: 40px;
   position: relative;
   width: 100%;
+  box-shadow: 0 0 0 6px var(--champagne), 0 4px 20px rgba(0, 212, 170, 0.12);
 }
 
 .sign-frame-inner {
@@ -293,6 +304,11 @@ h1, h2, h3 {
 .badge-gold {
   background: var(--gold);
   color: var(--white);
+}
+
+.badge-lime {
+  background: var(--lime);
+  color: var(--dark);
 }
 
 .badge-mild {
@@ -384,7 +400,7 @@ h1, h2, h3 {
   padding-top: 12px;
   font-family: 'Dancing Script', cursive;
   font-size: 14px;
-  color: var(--gold);
+  color: var(--coral);
 }
 
 /* ---- Utility ---- */
@@ -394,7 +410,9 @@ h1, h2, h3 {
 .text-dark { color: var(--dark); }
 .text-white { color: var(--white); }
 .text-rose { color: var(--rose); }
+.text-lime { color: var(--lime-dark); }
 .bg-coral { background-color: var(--coral); }
+.bg-lime { background-color: var(--lime); }
 .bg-gold { background-color: var(--gold); }
 .bg-blush { background-color: var(--blush); }
 .bg-champagne { background-color: var(--champagne); }
