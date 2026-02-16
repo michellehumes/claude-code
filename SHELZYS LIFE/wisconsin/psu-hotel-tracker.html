@@ -6,50 +6,56 @@
 <title>PSU vs Wisconsin Hotel Tracker — Sept 25–27, 2026</title>
 <style>
   :root {
-    --psu-navy: #041E42;
+    --psu-navy: #3b5998;
     --psu-white: #FFFFFF;
-    --psu-light: #96BEE6;
-    --psu-accent: #1E407C;
-    --green: #16a34a;
+    --psu-light: #a8c4e0;
+    --psu-accent: #5b7db5;
+    --green: #22c55e;
     --green-bg: #f0fdf4;
-    --red: #dc2626;
+    --red: #f87171;
     --red-bg: #fef2f2;
-    --amber: #d97706;
+    --amber: #f59e0b;
     --amber-bg: #fffbeb;
-    --blue: #2563eb;
+    --blue: #60a5fa;
     --blue-bg: #eff6ff;
-    --gray: #6b7280;
-    --gray-bg: #f9fafb;
-    --border: #e5e7eb;
-    --shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
-    --shadow-md: 0 4px 6px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.06);
-    --radius: 8px;
+    --gray: #9ca3af;
+    --gray-bg: #fafafa;
+    --border: #f0f0f0;
+    --shadow: 0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.03);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.04), 0 2px 4px rgba(0,0,0,0.03);
+    --radius: 10px;
+    --text-primary: #374151;
+    --text-secondary: #6b7280;
+    --text-light: #9ca3af;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    background: #f3f4f6;
-    color: #1f2937;
-    line-height: 1.5;
+    background: #fafbfc;
+    color: var(--text-primary);
+    line-height: 1.6;
+    font-size: 15px;
   }
 
   /* Header */
   .header {
-    background: linear-gradient(135deg, var(--psu-navy) 0%, var(--psu-accent) 100%);
-    color: white;
-    padding: 2rem 1.5rem;
+    background: linear-gradient(135deg, #e8eff8 0%, #dce6f2 50%, #eaf0f7 100%);
+    color: var(--text-primary);
+    padding: 2.5rem 1.5rem;
     text-align: center;
+    border-bottom: 1px solid #d4dce8;
   }
   .header h1 {
     font-size: 1.75rem;
     font-weight: 700;
     margin-bottom: 0.25rem;
+    color: #2c4a7c;
   }
   .header .subtitle {
     font-size: 1rem;
-    opacity: 0.85;
+    color: #5a7199;
     margin-bottom: 0.5rem;
   }
   .header .event-info {
@@ -58,7 +64,7 @@
     flex-wrap: wrap;
     justify-content: center;
     font-size: 0.875rem;
-    opacity: 0.9;
+    color: #6b829e;
     margin-top: 0.5rem;
   }
   .header .event-info span {
@@ -92,16 +98,16 @@
     border-radius: 50%;
     flex-shrink: 0;
   }
-  .stat-green { background: var(--green-bg); color: var(--green); }
-  .stat-green .dot { background: var(--green); }
-  .stat-red { background: var(--red-bg); color: var(--red); }
-  .stat-red .dot { background: var(--red); }
-  .stat-amber { background: var(--amber-bg); color: var(--amber); }
-  .stat-amber .dot { background: var(--amber); }
-  .stat-blue { background: var(--blue-bg); color: var(--blue); }
-  .stat-blue .dot { background: var(--blue); }
-  .stat-gray { background: var(--gray-bg); color: var(--gray); }
-  .stat-gray .dot { background: var(--gray); }
+  .stat-green { background: #eefbf3; color: #16a34a; }
+  .stat-green .dot { background: #4ade80; }
+  .stat-red { background: #fef2f2; color: #ef4444; }
+  .stat-red .dot { background: #fca5a5; }
+  .stat-amber { background: #fffbeb; color: #d97706; }
+  .stat-amber .dot { background: #fbbf24; }
+  .stat-blue { background: #eff6ff; color: #3b82f6; }
+  .stat-blue .dot { background: #93c5fd; }
+  .stat-gray { background: #f9fafb; color: #9ca3af; }
+  .stat-gray .dot { background: #d1d5db; }
 
   /* Container */
   .container {
@@ -141,9 +147,9 @@
   }
   .filter-btn:hover { background: #f9fafb; }
   .filter-btn.active {
-    background: var(--psu-navy);
+    background: #5b7db5;
     color: white;
-    border-color: var(--psu-navy);
+    border-color: #5b7db5;
   }
   .sort-select {
     padding: 0.5rem 0.75rem;
@@ -157,9 +163,9 @@
 
   /* Alert */
   .alert {
-    background: #fef3c7;
-    border: 1px solid #fbbf24;
-    border-left: 4px solid #f59e0b;
+    background: #fefce8;
+    border: 1px solid #fde68a;
+    border-left: 4px solid #fbbf24;
     border-radius: var(--radius);
     padding: 1rem 1.25rem;
     margin-bottom: 1.5rem;
@@ -168,7 +174,7 @@
     gap: 0.75rem;
   }
   .alert-icon { font-size: 1.25rem; flex-shrink: 0; line-height: 1.4; }
-  .alert-content { font-size: 0.875rem; }
+  .alert-content { font-size: 0.875rem; color: #78716c; }
   .alert-content strong { color: #92400e; }
   .alert-content .deadline { color: #dc2626; font-weight: 700; }
 
@@ -182,7 +188,7 @@
     gap: 0.75rem;
     margin-bottom: 1rem;
     padding-bottom: 0.5rem;
-    border-bottom: 2px solid var(--border);
+    border-bottom: 2px solid #eef1f5;
   }
   .section-badge {
     display: inline-flex;
@@ -195,18 +201,18 @@
     color: white;
     flex-shrink: 0;
   }
-  .badge-green { background: var(--green); }
-  .badge-red { background: var(--red); }
-  .badge-amber { background: var(--amber); }
-  .badge-blue { background: var(--blue); }
+  .badge-green { background: #4ade80; }
+  .badge-red { background: #fca5a5; }
+  .badge-amber { background: #fbbf24; }
+  .badge-blue { background: #93c5fd; }
   .section-title {
     font-size: 1.125rem;
     font-weight: 700;
-    color: var(--psu-navy);
+    color: #4a6fa5;
   }
   .section-count {
     font-size: 0.8125rem;
-    color: var(--gray);
+    color: #b0b8c4;
     font-weight: 400;
   }
 
@@ -228,11 +234,11 @@
     transform: translateY(-1px);
   }
   .hotel-card.held {
-    border-color: #fbbf24;
+    border-color: #fde68a;
     border-width: 2px;
   }
   .hotel-card.lowest-rate {
-    border-color: var(--green);
+    border-color: #86efac;
     border-width: 2px;
   }
 
@@ -246,13 +252,13 @@
   .card-top-left { flex: 1; }
   .hotel-name {
     font-size: 1rem;
-    font-weight: 700;
-    color: #111827;
+    font-weight: 600;
+    color: #374151;
     margin-bottom: 0.125rem;
   }
   .hotel-brand {
     font-size: 0.75rem;
-    color: var(--gray);
+    color: #b0b8c4;
   }
   .card-top-right {
     text-align: right;
@@ -260,13 +266,13 @@
   }
   .rate-big {
     font-size: 1.375rem;
-    font-weight: 800;
-    color: var(--psu-navy);
+    font-weight: 700;
+    color: #4a6fa5;
     line-height: 1.2;
   }
   .rate-total {
     font-size: 0.75rem;
-    color: var(--gray);
+    color: #b0b8c4;
   }
 
   .card-badges {
@@ -284,13 +290,13 @@
     font-size: 0.6875rem;
     font-weight: 600;
   }
-  .badge-walkable { background: #dbeafe; color: #1d4ed8; }
-  .badge-held { background: #fef3c7; color: #92400e; }
-  .badge-cheapest { background: #dcfce7; color: #166534; }
-  .badge-nonrefund { background: #fee2e2; color: #991b1b; }
-  .badge-soldout { background: #fee2e2; color: #991b1b; }
-  .badge-group { background: #e0e7ff; color: #3730a3; }
-  .badge-breakfast { background: #fef9c3; color: #854d0e; }
+  .badge-walkable { background: #e0f2fe; color: #0284c7; }
+  .badge-held { background: #fef9c3; color: #a16207; }
+  .badge-cheapest { background: #dcfce7; color: #15803d; }
+  .badge-nonrefund { background: #fee2e2; color: #dc2626; }
+  .badge-soldout { background: #fee2e2; color: #dc2626; }
+  .badge-group { background: #e8e0ff; color: #6d28d9; }
+  .badge-breakfast { background: #fef9c3; color: #a16207; }
 
   .card-details {
     display: grid;
@@ -306,21 +312,21 @@
   }
   .detail-label {
     font-size: 0.6875rem;
-    color: var(--gray);
+    color: #b0b8c4;
     text-transform: uppercase;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.04em;
     font-weight: 600;
     margin-bottom: 0.125rem;
   }
   .detail-value {
     font-weight: 500;
-    color: #374151;
+    color: #4b5563;
   }
 
   .card-notes {
     padding: 0.5rem 1.25rem 1rem;
     font-size: 0.8125rem;
-    color: #6b7280;
+    color: #9ca3af;
     font-style: italic;
   }
 
@@ -348,7 +354,7 @@
   }
   .simple-card .meta {
     font-size: 0.8125rem;
-    color: #6b7280;
+    color: #9ca3af;
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
@@ -359,7 +365,7 @@
     gap: 0.25rem;
   }
   .email-link {
-    color: var(--blue);
+    color: #60a5fa;
     text-decoration: none;
     font-size: 0.8125rem;
   }
@@ -376,8 +382,8 @@
     font-size: 0.875rem;
   }
   .price-table thead {
-    background: var(--psu-navy);
-    color: white;
+    background: #e8eff8;
+    color: #4a6fa5;
   }
   .price-table th {
     padding: 0.75rem 1rem;
@@ -389,57 +395,17 @@
   }
   .price-table td {
     padding: 0.75rem 1rem;
-    border-bottom: 1px solid #f3f4f6;
+    border-bottom: 1px solid #f5f5f5;
+    color: #4b5563;
   }
-  .price-table tbody tr:hover { background: #f9fafb; }
+  .price-table tbody tr:hover { background: #fafbfc; }
   .price-table .rank {
     font-weight: 700;
-    color: var(--psu-navy);
+    color: #4a6fa5;
     width: 40px;
     text-align: center;
   }
-  .price-table .star { color: #f59e0b; }
-
-  /* Management Companies */
-  .mgmt-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1rem;
-  }
-  .mgmt-card {
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    padding: 1rem 1.25rem;
-  }
-  .mgmt-card h4 {
-    font-size: 0.9375rem;
-    font-weight: 700;
-    color: var(--psu-navy);
-    margin-bottom: 0.25rem;
-  }
-  .mgmt-card .contact {
-    font-size: 0.8125rem;
-    color: var(--gray);
-    margin-bottom: 0.5rem;
-  }
-  .mgmt-card ul {
-    list-style: none;
-    font-size: 0.8125rem;
-  }
-  .mgmt-card li {
-    padding: 0.125rem 0;
-    padding-left: 1rem;
-    position: relative;
-  }
-  .mgmt-card li::before {
-    content: ">";
-    position: absolute;
-    left: 0;
-    color: var(--psu-light);
-    font-weight: 700;
-  }
+  .price-table .star { color: #fbbf24; }
 
   /* Action Items */
   .action-list {
@@ -459,8 +425,10 @@
   }
   .action-item:last-child { border-bottom: none; }
   .action-icon { flex-shrink: 0; font-size: 1rem; line-height: 1.4; }
-  .action-item.urgent { background: #fef2f2; }
-  .action-item.followup { background: #fffbeb; }
+  .action-item { color: #4b5563; }
+  .action-item strong { color: #374151; }
+  .action-item.urgent { background: #fef7f7; }
+  .action-item.followup { background: #fffdf5; }
 
   /* Footer */
   .footer {
@@ -520,7 +488,7 @@
   <div class="event-info">
     <span>Sept 25–27, 2026</span>
     <span>|</span>
-    <span>6 Couples / 6 Rooms</span>
+    <span>6 Rooms</span>
     <span>|</span>
     <span>Friday & Saturday Nights</span>
   </div>
@@ -529,11 +497,11 @@
 <!-- Stats Bar -->
 <div class="stats-bar" id="statsBar">
   <div class="stat stat-green"><span class="dot"></span>5 Responded</div>
-  <div class="stat stat-red"><span class="dot"></span>1 Sold Out</div>
+  <div class="stat stat-red"><span class="dot"></span>2 Sold Out</div>
   <div class="stat stat-amber"><span class="dot"></span>3 Awaiting Reply</div>
-  <div class="stat stat-blue"><span class="dot"></span>8 Just Emailed</div>
-  <div class="stat stat-gray"><span class="dot"></span>17 Total Hotels</div>
-  <div class="stat" style="background:#fef3c7;color:#92400e;"><span class="dot" style="background:#f59e0b;"></span>1 Room Held</div>
+  <div class="stat stat-blue"><span class="dot"></span>6 Emailed</div>
+  <div class="stat stat-gray"><span class="dot"></span>16 Total Hotels</div>
+  <div class="stat" style="background:#fef9c3;color:#a16207;"><span class="dot" style="background:#fbbf24;"></span>1 Room Held</div>
 </div>
 
 <div class="container">
@@ -552,7 +520,7 @@
     <button class="filter-btn active" data-filter="all" onclick="setFilter('all')">All</button>
     <button class="filter-btn" data-filter="responded" onclick="setFilter('responded')">Responded</button>
     <button class="filter-btn" data-filter="awaiting" onclick="setFilter('awaiting')">Awaiting</button>
-    <button class="filter-btn" data-filter="emailed" onclick="setFilter('emailed')">Just Emailed</button>
+    <button class="filter-btn" data-filter="emailed" onclick="setFilter('emailed')">Emailed</button>
     <button class="filter-btn" data-filter="walkable" onclick="setFilter('walkable')">Walkable</button>
     <select class="sort-select" id="sortSelect" onchange="applySort()">
       <option value="status">Sort by Status</option>
@@ -580,7 +548,7 @@
             <div class="hotel-brand">Choice Hotels / HFL Hotels</div>
           </div>
           <div class="card-top-right">
-            <div class="rate-big">$659<span style="font-size:0.625rem;font-weight:400;color:#6b7280">/night</span></div>
+            <div class="rate-big">$659<span style="font-size:0.625rem;font-weight:400;color:#b0b8c4">/night</span></div>
             <div class="rate-total">$1,318 total (2 nights)</div>
           </div>
         </div>
@@ -594,7 +562,7 @@
           <div class="detail-item"><span class="detail-label">Room Types</span><span class="detail-value">2 Queen + Pullout Sofa OR 1 King + Pullout Sofa</span></div>
           <div class="detail-item"><span class="detail-label">Deposit</span><span class="detail-value">Full prepayment at booking</span></div>
           <div class="detail-item"><span class="detail-label">Cancellation</span><span class="detail-value">60-day cancellation</span></div>
-          <div class="detail-item"><span class="detail-label">Distance</span><span class="detail-value">2.3 mi</span></div>
+          <div class="detail-item"><span class="detail-label">From Beaver Stadium</span><span class="detail-value">2.3 mi</span></div>
           <div class="detail-item"><span class="detail-label">Walkable</span><span class="detail-value">No</span></div>
         </div>
         <div class="card-notes">Standard rate $739 &middot; Michael Houser, Dir. of Sales & Operations &middot; Group rate for 6 rooms</div>
@@ -608,7 +576,7 @@
             <div class="hotel-brand">Hilton — Waddle Rd</div>
           </div>
           <div class="card-top-right">
-            <div class="rate-big">$749<span style="font-size:0.625rem;font-weight:400;color:#6b7280">/night</span></div>
+            <div class="rate-big">$749<span style="font-size:0.625rem;font-weight:400;color:#b0b8c4">/night</span></div>
             <div class="rate-total">$1,498 total (2 nights)</div>
           </div>
         </div>
@@ -618,7 +586,7 @@
           <div class="detail-item"><span class="detail-label">Room Type</span><span class="detail-value">—</span></div>
           <div class="detail-item"><span class="detail-label">Deposit</span><span class="detail-value">Deposit after 30-day window</span></div>
           <div class="detail-item"><span class="detail-label">Cancellation</span><span class="detail-value">30-day refundable</span></div>
-          <div class="detail-item"><span class="detail-label">Distance</span><span class="detail-value">2.1 mi</span></div>
+          <div class="detail-item"><span class="detail-label">From Beaver Stadium</span><span class="detail-value">2.1 mi</span></div>
           <div class="detail-item"><span class="detail-label">Walkable</span><span class="detail-value">No</span></div>
         </div>
         <div class="card-notes">2nd lowest rate</div>
@@ -632,7 +600,7 @@
             <div class="hotel-brand">Hilton</div>
           </div>
           <div class="card-top-right">
-            <div class="rate-big">$799<span style="font-size:0.625rem;font-weight:400;color:#6b7280">/night</span></div>
+            <div class="rate-big">$799<span style="font-size:0.625rem;font-weight:400;color:#b0b8c4">/night</span></div>
             <div class="rate-total">$1,598 total (2 nights)</div>
           </div>
         </div>
@@ -646,7 +614,7 @@
           <div class="detail-item"><span class="detail-label">Deposit</span><span class="detail-value">Full payment at booking</span></div>
           <div class="detail-item"><span class="detail-label">Cancellation</span><span class="detail-value">30-day refundable</span></div>
           <div class="detail-item"><span class="detail-label">Hold Deadline</span><span class="detail-value" style="color:#dc2626;font-weight:700;">March 2, 2026</span></div>
-          <div class="detail-item"><span class="detail-label">Distance</span><span class="detail-value">0.8 mi</span></div>
+          <div class="detail-item"><span class="detail-label">From Beaver Stadium</span><span class="detail-value">0.8 mi</span></div>
         </div>
         <div class="card-notes">Rooms currently held — 6 rooms for Fri & Sat nights</div>
       </div>
@@ -659,7 +627,7 @@
             <div class="hotel-brand">Independent</div>
           </div>
           <div class="card-top-right">
-            <div class="rate-big">$799<span style="font-size:0.625rem;font-weight:400;color:#6b7280">/night</span></div>
+            <div class="rate-big">$799<span style="font-size:0.625rem;font-weight:400;color:#b0b8c4">/night</span></div>
             <div class="rate-total">$1,598 total (2 nights)</div>
           </div>
         </div>
@@ -671,7 +639,7 @@
           <div class="detail-item"><span class="detail-label">Room Type</span><span class="detail-value">—</span></div>
           <div class="detail-item"><span class="detail-label">Deposit</span><span class="detail-value">Full prepayment required</span></div>
           <div class="detail-item"><span class="detail-label">Cancellation</span><span class="detail-value">Non-refundable</span></div>
-          <div class="detail-item"><span class="detail-label">Distance</span><span class="detail-value">1.2 mi</span></div>
+          <div class="detail-item"><span class="detail-label">From Beaver Stadium</span><span class="detail-value">1.2 mi</span></div>
           <div class="detail-item"><span class="detail-label">Walkable</span><span class="detail-value">No</span></div>
         </div>
         <div class="card-notes">Strict terms — full prepayment, no refunds</div>
@@ -685,7 +653,7 @@
             <div class="hotel-brand">University Park Inn</div>
           </div>
           <div class="card-top-right">
-            <div class="rate-big">$829–$1,299<span style="font-size:0.625rem;font-weight:400;color:#6b7280">/night</span></div>
+            <div class="rate-big">$829–$1,299<span style="font-size:0.625rem;font-weight:400;color:#b0b8c4">/night</span></div>
             <div class="rate-total">$1,658–$2,598 total (2 nights)</div>
           </div>
         </div>
@@ -695,7 +663,7 @@
           <div class="detail-item"><span class="detail-label">Room Type</span><span class="detail-value">Varies by room type</span></div>
           <div class="detail-item"><span class="detail-label">Deposit</span><span class="detail-value">1st night + tax</span></div>
           <div class="detail-item"><span class="detail-label">Cancellation</span><span class="detail-value">30-day (no cancel after)</span></div>
-          <div class="detail-item"><span class="detail-label">Distance</span><span class="detail-value">2.8 mi</span></div>
+          <div class="detail-item"><span class="detail-label">From Beaver Stadium</span><span class="detail-value">2.8 mi</span></div>
           <div class="detail-item"><span class="detail-label">Walkable</span><span class="detail-value">No</span></div>
         </div>
         <div class="card-notes">No event discounts &middot; 814-234-8393 &middot; bwup@nittanyhotel.com</div>
@@ -707,7 +675,7 @@
   <!-- RESPONDED — NOT AVAILABLE -->
   <div class="section" data-section="soldout" id="sectionSoldOut">
     <div class="section-header" onclick="toggleSection('sectionSoldOut')">
-      <span class="section-badge badge-red">1</span>
+      <span class="section-badge badge-red">2</span>
       <span class="section-title">Responded — Not Available</span>
       <span class="section-count">Sold out</span>
     </div>
@@ -720,6 +688,18 @@
         </div>
         <div class="meta">
           <span>0.3 mi</span>
+          <span class="badge badge-walkable">Walkable</span>
+          <span class="badge badge-soldout">Sold Out</span>
+        </div>
+      </div>
+
+      <div class="simple-card" data-name="Hyatt Place State College" data-brand="Hyatt / Scholar Hotels" data-rate="" data-distance="0.6" data-status="soldout" data-walkable="true" data-search="hyatt place state college hyatt scholar hotels sold out walkable">
+        <div>
+          <div class="hotel-name">Hyatt Place State College</div>
+          <div class="hotel-brand">Hyatt / Scholar Hotels</div>
+        </div>
+        <div class="meta">
+          <span>0.6 mi</span>
           <span class="badge badge-walkable">Walkable</span>
           <span class="badge badge-soldout">Sold Out</span>
         </div>
@@ -778,9 +758,9 @@
   <!-- JUST EMAILED — Feb 14, 2026 -->
   <div class="section" data-section="emailed" id="sectionEmailed">
     <div class="section-header" onclick="toggleSection('sectionEmailed')">
-      <span class="section-badge badge-blue">8</span>
-      <span class="section-title">Just Emailed — Feb 14, 2026</span>
-      <span class="section-count">Most recent outreach</span>
+      <span class="section-badge badge-blue">6</span>
+      <span class="section-title">Emailed — Feb 14, 2026</span>
+      <span class="section-count">Outreach sent</span>
     </div>
     <div class="section-content hotel-grid" id="sectionEmailedContent">
 
@@ -805,18 +785,6 @@
           <span>1.9 mi</span>
           <span class="badge badge-walkable">Walkable</span>
           <a class="email-link" href="mailto:scshsgm@shanerhotels.com">scshsgm@shanerhotels.com</a>
-        </div>
-      </div>
-
-      <div class="simple-card" data-name="Hyatt Place State College" data-brand="Hyatt / Scholar Hotels" data-rate="" data-distance="0.6" data-status="emailed" data-walkable="true" data-search="hyatt place state college hyatt scholar hotels dnixon@scholarhotels.com dawn nixon walkable">
-        <div>
-          <div class="hotel-name">Hyatt Place State College</div>
-          <div class="hotel-brand">Hyatt / Scholar Hotels</div>
-        </div>
-        <div class="meta">
-          <span>0.6 mi</span>
-          <span class="badge badge-walkable">Walkable</span>
-          <a class="email-link" href="mailto:dnixon@scholarhotels.com">dnixon@scholarhotels.com</a>
         </div>
       </div>
 
@@ -856,17 +824,6 @@
         </div>
       </div>
 
-      <div class="simple-card" data-name="Days Inn" data-brand="Wyndham / Lion Country Lodging" data-rate="" data-distance="2.5" data-status="emailed" data-walkable="false" data-search="days inn wyndham lion country lodging sales@centrehotel.com 1274 n atherton">
-        <div>
-          <div class="hotel-name">Days Inn</div>
-          <div class="hotel-brand">Wyndham / Lion Country Lodging — 1274 N. Atherton</div>
-        </div>
-        <div class="meta">
-          <span>2.5 mi</span>
-          <a class="email-link" href="mailto:sales@centrehotel.com">sales@centrehotel.com</a>
-        </div>
-      </div>
-
       <div class="simple-card" data-name="Quality Inn &amp; Suites" data-brand="Choice Hotels / Lion Country Lodging" data-rate="" data-distance="3.1" data-status="emailed" data-walkable="false" data-search="quality inn suites choice hotels lion country lodging sales@centrehotel.com 1274 n atherton">
         <div>
           <div class="hotel-name">Quality Inn & Suites</div>
@@ -884,7 +841,7 @@
   <!-- PRICE COMPARISON -->
   <div class="section" id="sectionPrices">
     <div class="section-header" onclick="toggleSection('sectionPrices')">
-      <span class="section-badge" style="background:#8b5cf6;">$</span>
+      <span class="section-badge" style="background:#c4b5fd;">$</span>
       <span class="section-title">Price Comparison</span>
       <span class="section-count">Ranked lowest to highest</span>
     </div>
@@ -897,7 +854,7 @@
             <th>Rate/Night</th>
             <th>Total (2 Nights)</th>
             <th>Cancellation</th>
-            <th>Distance</th>
+            <th>From Stadium</th>
           </tr>
         </thead>
         <tbody>
@@ -930,7 +887,7 @@
             <td>Penn Stater</td>
             <td>$799</td>
             <td>$1,598</td>
-            <td style="color:#dc2626;">Non-refundable</td>
+            <td style="color:#f87171;">Non-refundable</td>
             <td>1.2 mi</td>
           </tr>
           <tr>
@@ -946,60 +903,10 @@
     </div>
   </div>
 
-  <!-- MANAGEMENT COMPANIES -->
-  <div class="section" id="sectionMgmt">
-    <div class="section-header" onclick="toggleSection('sectionMgmt')">
-      <span class="section-badge" style="background:#6366f1;">&#9881;</span>
-      <span class="section-title">Management Companies</span>
-      <span class="section-count">Key contacts for multi-property groups</span>
-    </div>
-    <div class="section-content" id="sectionMgmtContent">
-      <div class="mgmt-grid">
-
-        <div class="mgmt-card">
-          <h4>Scholar Hotels</h4>
-          <div class="contact">Dawn Nixon, Dir. of Sales &middot; <a class="email-link" href="mailto:dnixon@scholarhotels.com">dnixon@scholarhotels.com</a></div>
-          <ul>
-            <li>Hyatt Place State College</li>
-            <li>Courtyard by Marriott</li>
-            <li>Residence Inn</li>
-          </ul>
-        </div>
-
-        <div class="mgmt-card">
-          <h4>Shaner Hotels</h4>
-          <div class="contact">Mike Corcoran, Sales Dir. &middot; <a class="email-link" href="mailto:info@shanercorp.com">info@shanercorp.com</a></div>
-          <ul>
-            <li>Fairfield Inn & Suites</li>
-            <li>SpringHill Suites</li>
-          </ul>
-        </div>
-
-        <div class="mgmt-card">
-          <h4>Lion Country Lodging</h4>
-          <div class="contact"><a class="email-link" href="mailto:sales@centrehotel.com">sales@centrehotel.com</a></div>
-          <ul>
-            <li>Days Inn (1274 N. Atherton)</li>
-            <li>Quality Inn & Suites (1274 N. Atherton)</li>
-          </ul>
-        </div>
-
-        <div class="mgmt-card">
-          <h4>HFL Hotels</h4>
-          <div class="contact">Michael Houser &middot; <a class="email-link" href="mailto:mhouser@hfl-hotels.com">mhouser@hfl-hotels.com</a></div>
-          <ul>
-            <li>Comfort Suites University Area</li>
-          </ul>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
   <!-- ACTION ITEMS -->
   <div class="section" id="sectionActions">
     <div class="section-header" onclick="toggleSection('sectionActions')">
-      <span class="section-badge" style="background:#ef4444;">!</span>
+      <span class="section-badge" style="background:#fca5a5;">!</span>
       <span class="section-title">Action Items</span>
       <span class="section-count">Tasks requiring attention</span>
     </div>
@@ -1023,21 +930,14 @@
         <div class="action-item followup">
           <div class="action-icon">&#128232;</div>
           <div>
-            <strong>8 hotels emailed Feb 14</strong> — Waiting for replies from Carnegie House, SpringHill Suites, Hyatt Place, Courtyard, Residence Inn, Fairfield Inn, Days Inn, Quality Inn.
+            <strong>6 hotels emailed Feb 14</strong> — Waiting for replies from Carnegie House, SpringHill Suites, Courtyard, Residence Inn, Fairfield Inn, Quality Inn.
           </div>
         </div>
 
         <div class="action-item followup">
           <div class="action-icon">&#10067;</div>
           <div>
-            <strong>Ask Scholar Hotels (Dawn Nixon) about Hyatt Place, Courtyard, Residence Inn</strong> — Her reply only mentioned Penn Stater. Need to ask about the other 3 Scholar-managed properties.
-          </div>
-        </div>
-
-        <div class="action-item">
-          <div class="action-icon">&#9888;</div>
-          <div>
-            <strong>Days Inn at 240 S. Pugh St appears CLOSED</strong> — Active location is 1274 N. Atherton St. Verify and update any contacts if needed.
+            <strong>Ask Scholar Hotels (Dawn Nixon) about Courtyard, Residence Inn</strong> — Her reply only mentioned Penn Stater. Hyatt Place confirmed sold out. Need to ask about the other 2 Scholar-managed properties.
           </div>
         </div>
 
@@ -1050,7 +950,7 @@
 <!-- Footer -->
 <div class="footer">
   PSU Football Weekend Hotel Tracker &middot; Penn State vs. Wisconsin &middot; Sept 25–27, 2026<br>
-  Last updated: <span id="lastUpdated"></span> &middot; 6 couples / 6 rooms / 2 nights
+  Last updated: <span id="lastUpdated"></span> &middot; 6 rooms / 2 nights
 </div>
 
 <script>
@@ -1172,9 +1072,8 @@
       }
     });
 
-    // Always show price comparison, management, and actions
+    // Always show price comparison and actions
     document.getElementById('sectionPrices').style.display = '';
-    document.getElementById('sectionMgmt').style.display = '';
     document.getElementById('sectionActions').style.display = '';
   }
 </script>
