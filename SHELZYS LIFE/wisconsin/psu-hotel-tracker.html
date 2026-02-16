@@ -1,0 +1,1182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PSU vs Wisconsin Hotel Tracker — Sept 25–27, 2026</title>
+<style>
+  :root {
+    --psu-navy: #041E42;
+    --psu-white: #FFFFFF;
+    --psu-light: #96BEE6;
+    --psu-accent: #1E407C;
+    --green: #16a34a;
+    --green-bg: #f0fdf4;
+    --red: #dc2626;
+    --red-bg: #fef2f2;
+    --amber: #d97706;
+    --amber-bg: #fffbeb;
+    --blue: #2563eb;
+    --blue-bg: #eff6ff;
+    --gray: #6b7280;
+    --gray-bg: #f9fafb;
+    --border: #e5e7eb;
+    --shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.06);
+    --radius: 8px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: #f3f4f6;
+    color: #1f2937;
+    line-height: 1.5;
+  }
+
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, var(--psu-navy) 0%, var(--psu-accent) 100%);
+    color: white;
+    padding: 2rem 1.5rem;
+    text-align: center;
+  }
+  .header h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+  }
+  .header .subtitle {
+    font-size: 1rem;
+    opacity: 0.85;
+    margin-bottom: 0.5rem;
+  }
+  .header .event-info {
+    display: inline-flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-size: 0.875rem;
+    opacity: 0.9;
+    margin-top: 0.5rem;
+  }
+  .header .event-info span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  /* Stats Bar */
+  .stats-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding: 1rem 1.5rem;
+    background: white;
+    border-bottom: 1px solid var(--border);
+    justify-content: center;
+  }
+  .stat {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .stat .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .stat-green { background: var(--green-bg); color: var(--green); }
+  .stat-green .dot { background: var(--green); }
+  .stat-red { background: var(--red-bg); color: var(--red); }
+  .stat-red .dot { background: var(--red); }
+  .stat-amber { background: var(--amber-bg); color: var(--amber); }
+  .stat-amber .dot { background: var(--amber); }
+  .stat-blue { background: var(--blue-bg); color: var(--blue); }
+  .stat-blue .dot { background: var(--blue); }
+  .stat-gray { background: var(--gray-bg); color: var(--gray); }
+  .stat-gray .dot { background: var(--gray); }
+
+  /* Container */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.5rem;
+  }
+
+  /* Controls */
+  .controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    align-items: center;
+  }
+  .search-box {
+    flex: 1;
+    min-width: 200px;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font-size: 0.875rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .search-box:focus { border-color: var(--psu-accent); }
+  .filter-btn {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: white;
+    font-size: 0.8125rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 500;
+  }
+  .filter-btn:hover { background: #f9fafb; }
+  .filter-btn.active {
+    background: var(--psu-navy);
+    color: white;
+    border-color: var(--psu-navy);
+  }
+  .sort-select {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font-size: 0.8125rem;
+    background: white;
+    cursor: pointer;
+    outline: none;
+  }
+
+  /* Alert */
+  .alert {
+    background: #fef3c7;
+    border: 1px solid #fbbf24;
+    border-left: 4px solid #f59e0b;
+    border-radius: var(--radius);
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+  .alert-icon { font-size: 1.25rem; flex-shrink: 0; line-height: 1.4; }
+  .alert-content { font-size: 0.875rem; }
+  .alert-content strong { color: #92400e; }
+  .alert-content .deadline { color: #dc2626; font-weight: 700; }
+
+  /* Section */
+  .section {
+    margin-bottom: 2rem;
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--border);
+  }
+  .section-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: white;
+    flex-shrink: 0;
+  }
+  .badge-green { background: var(--green); }
+  .badge-red { background: var(--red); }
+  .badge-amber { background: var(--amber); }
+  .badge-blue { background: var(--blue); }
+  .section-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--psu-navy);
+  }
+  .section-count {
+    font-size: 0.8125rem;
+    color: var(--gray);
+    font-weight: 400;
+  }
+
+  /* Hotel Cards */
+  .hotel-grid {
+    display: grid;
+    gap: 1rem;
+  }
+  .hotel-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    transition: box-shadow 0.2s, transform 0.1s;
+  }
+  .hotel-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+  }
+  .hotel-card.held {
+    border-color: #fbbf24;
+    border-width: 2px;
+  }
+  .hotel-card.lowest-rate {
+    border-color: var(--green);
+    border-width: 2px;
+  }
+
+  .card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 1rem 1.25rem 0.5rem;
+    gap: 1rem;
+  }
+  .card-top-left { flex: 1; }
+  .hotel-name {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 0.125rem;
+  }
+  .hotel-brand {
+    font-size: 0.75rem;
+    color: var(--gray);
+  }
+  .card-top-right {
+    text-align: right;
+    flex-shrink: 0;
+  }
+  .rate-big {
+    font-size: 1.375rem;
+    font-weight: 800;
+    color: var(--psu-navy);
+    line-height: 1.2;
+  }
+  .rate-total {
+    font-size: 0.75rem;
+    color: var(--gray);
+  }
+
+  .card-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+    padding: 0.375rem 1.25rem;
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.125rem 0.5rem;
+    border-radius: 9999px;
+    font-size: 0.6875rem;
+    font-weight: 600;
+  }
+  .badge-walkable { background: #dbeafe; color: #1d4ed8; }
+  .badge-held { background: #fef3c7; color: #92400e; }
+  .badge-cheapest { background: #dcfce7; color: #166534; }
+  .badge-nonrefund { background: #fee2e2; color: #991b1b; }
+  .badge-soldout { background: #fee2e2; color: #991b1b; }
+  .badge-group { background: #e0e7ff; color: #3730a3; }
+  .badge-breakfast { background: #fef9c3; color: #854d0e; }
+
+  .card-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    border-top: 1px solid #f3f4f6;
+    font-size: 0.8125rem;
+  }
+  .detail-item {
+    display: flex;
+    flex-direction: column;
+  }
+  .detail-label {
+    font-size: 0.6875rem;
+    color: var(--gray);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    font-weight: 600;
+    margin-bottom: 0.125rem;
+  }
+  .detail-value {
+    font-weight: 500;
+    color: #374151;
+  }
+
+  .card-notes {
+    padding: 0.5rem 1.25rem 1rem;
+    font-size: 0.8125rem;
+    color: #6b7280;
+    font-style: italic;
+  }
+
+  /* Waiting/Emailed cards */
+  .simple-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 0.875rem 1.25rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 1.5rem;
+    transition: box-shadow 0.2s;
+  }
+  .simple-card:hover { box-shadow: var(--shadow-md); }
+  .simple-card .hotel-name {
+    font-size: 0.9375rem;
+    min-width: 200px;
+  }
+  .simple-card .hotel-brand {
+    font-size: 0.75rem;
+    color: var(--gray);
+  }
+  .simple-card .meta {
+    font-size: 0.8125rem;
+    color: #6b7280;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .simple-card .meta span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+  .email-link {
+    color: var(--blue);
+    text-decoration: none;
+    font-size: 0.8125rem;
+  }
+  .email-link:hover { text-decoration: underline; }
+
+  /* Price Comparison */
+  .price-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    font-size: 0.875rem;
+  }
+  .price-table thead {
+    background: var(--psu-navy);
+    color: white;
+  }
+  .price-table th {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .price-table td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #f3f4f6;
+  }
+  .price-table tbody tr:hover { background: #f9fafb; }
+  .price-table .rank {
+    font-weight: 700;
+    color: var(--psu-navy);
+    width: 40px;
+    text-align: center;
+  }
+  .price-table .star { color: #f59e0b; }
+
+  /* Management Companies */
+  .mgmt-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+  .mgmt-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 1rem 1.25rem;
+  }
+  .mgmt-card h4 {
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: var(--psu-navy);
+    margin-bottom: 0.25rem;
+  }
+  .mgmt-card .contact {
+    font-size: 0.8125rem;
+    color: var(--gray);
+    margin-bottom: 0.5rem;
+  }
+  .mgmt-card ul {
+    list-style: none;
+    font-size: 0.8125rem;
+  }
+  .mgmt-card li {
+    padding: 0.125rem 0;
+    padding-left: 1rem;
+    position: relative;
+  }
+  .mgmt-card li::before {
+    content: ">";
+    position: absolute;
+    left: 0;
+    color: var(--psu-light);
+    font-weight: 700;
+  }
+
+  /* Action Items */
+  .action-list {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .action-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.875rem 1.25rem;
+    border-bottom: 1px solid #f3f4f6;
+    font-size: 0.875rem;
+  }
+  .action-item:last-child { border-bottom: none; }
+  .action-icon { flex-shrink: 0; font-size: 1rem; line-height: 1.4; }
+  .action-item.urgent { background: #fef2f2; }
+  .action-item.followup { background: #fffbeb; }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 2rem 1.5rem;
+    font-size: 0.75rem;
+    color: var(--gray);
+    border-top: 1px solid var(--border);
+    margin-top: 2rem;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .header h1 { font-size: 1.375rem; }
+    .container { padding: 1rem; }
+    .card-details { grid-template-columns: repeat(2, 1fr); }
+    .controls { flex-direction: column; }
+    .search-box { width: 100%; }
+    .price-table { font-size: 0.8125rem; }
+    .price-table th, .price-table td { padding: 0.5rem 0.625rem; }
+  }
+
+  @media (max-width: 480px) {
+    .card-details { grid-template-columns: 1fr; }
+    .stats-bar { gap: 0.5rem; }
+    .stat { padding: 0.375rem 0.75rem; font-size: 0.75rem; }
+  }
+
+  /* Collapsible sections */
+  .section-header { cursor: pointer; user-select: none; }
+  .section-header::after {
+    content: "";
+    margin-left: auto;
+    font-size: 0.75rem;
+    color: var(--gray);
+    transition: transform 0.2s;
+  }
+  .section-header.collapsed::after { transform: rotate(-90deg); }
+  .section-content { transition: max-height 0.3s ease; overflow: hidden; }
+  .section-content.collapsed { max-height: 0 !important; }
+
+  /* Print styles */
+  @media print {
+    body { background: white; }
+    .controls, .filter-btn, .search-box, .sort-select { display: none; }
+    .hotel-card, .simple-card { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+    .header { background: var(--psu-navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+  <h1>PSU Football Weekend Hotel Tracker</h1>
+  <div class="subtitle">Penn State vs. Wisconsin — Class Reunion Trip</div>
+  <div class="event-info">
+    <span>Sept 25–27, 2026</span>
+    <span>|</span>
+    <span>6 Couples / 6 Rooms</span>
+    <span>|</span>
+    <span>Friday & Saturday Nights</span>
+  </div>
+</div>
+
+<!-- Stats Bar -->
+<div class="stats-bar" id="statsBar">
+  <div class="stat stat-green"><span class="dot"></span>5 Responded</div>
+  <div class="stat stat-red"><span class="dot"></span>1 Sold Out</div>
+  <div class="stat stat-amber"><span class="dot"></span>3 Awaiting Reply</div>
+  <div class="stat stat-blue"><span class="dot"></span>8 Just Emailed</div>
+  <div class="stat stat-gray"><span class="dot"></span>17 Total Hotels</div>
+  <div class="stat" style="background:#fef3c7;color:#92400e;"><span class="dot" style="background:#f59e0b;"></span>1 Room Held</div>
+</div>
+
+<div class="container">
+
+  <!-- Urgent Alert -->
+  <div class="alert" id="urgentAlert">
+    <div class="alert-icon">&#9888;</div>
+    <div class="alert-content">
+      <strong>Hilton Garden Inn hold expires <span class="deadline">March 2, 2026</span></strong> — Confirm or release the 6 rooms currently being held. This is the nearest deadline requiring action.
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <div class="controls">
+    <input type="text" class="search-box" id="searchBox" placeholder="Search hotels, brands, notes...">
+    <button class="filter-btn active" data-filter="all" onclick="setFilter('all')">All</button>
+    <button class="filter-btn" data-filter="responded" onclick="setFilter('responded')">Responded</button>
+    <button class="filter-btn" data-filter="awaiting" onclick="setFilter('awaiting')">Awaiting</button>
+    <button class="filter-btn" data-filter="emailed" onclick="setFilter('emailed')">Just Emailed</button>
+    <button class="filter-btn" data-filter="walkable" onclick="setFilter('walkable')">Walkable</button>
+    <select class="sort-select" id="sortSelect" onchange="applySort()">
+      <option value="status">Sort by Status</option>
+      <option value="price-asc">Price: Low to High</option>
+      <option value="price-desc">Price: High to Low</option>
+      <option value="distance">Distance: Nearest</option>
+      <option value="name">Name: A–Z</option>
+    </select>
+  </div>
+
+  <!-- RESPONDED — AVAILABLE -->
+  <div class="section" data-section="responded" id="sectionResponded">
+    <div class="section-header" onclick="toggleSection('sectionResponded')">
+      <span class="section-badge badge-green">5</span>
+      <span class="section-title">Responded — Available</span>
+      <span class="section-count">Hotels with confirmed rates</span>
+    </div>
+    <div class="section-content hotel-grid" id="sectionRespondedContent">
+
+      <!-- Comfort Suites -->
+      <div class="hotel-card lowest-rate" data-name="Comfort Suites University Area" data-brand="Choice Hotels / HFL Hotels" data-rate="659" data-distance="2.3" data-status="responded" data-walkable="false" data-search="comfort suites choice hotels hfl hotels michael houser group rate free breakfast lowest">
+        <div class="card-top">
+          <div class="card-top-left">
+            <div class="hotel-name">Comfort Suites University Area</div>
+            <div class="hotel-brand">Choice Hotels / HFL Hotels</div>
+          </div>
+          <div class="card-top-right">
+            <div class="rate-big">$659<span style="font-size:0.625rem;font-weight:400;color:#6b7280">/night</span></div>
+            <div class="rate-total">$1,318 total (2 nights)</div>
+          </div>
+        </div>
+        <div class="card-badges">
+          <span class="badge badge-cheapest">&#9733; LOWEST RATE</span>
+          <span class="badge badge-group">Group Rate (6 rooms)</span>
+          <span class="badge badge-breakfast">Free Breakfast</span>
+        </div>
+        <div class="card-details">
+          <div class="detail-item"><span class="detail-label">Min Stay</span><span class="detail-value">2 nights</span></div>
+          <div class="detail-item"><span class="detail-label">Room Types</span><span class="detail-value">2 Queen + Pullout Sofa OR 1 King + Pullout Sofa</span></div>
+          <div class="detail-item"><span class="detail-label">Deposit</span><span class="detail-value">Full prepayment at booking</span></div>
+          <div class="detail-item"><span class="detail-label">Cancellation</span><span class="detail-value">60-day cancellation</span></div>
+          <div class="detail-item"><span class="detail-label">Distance</span><span class="detail-value">2.3 mi</span></div>
+          <div class="detail-item"><span class="detail-label">Walkable</span><span class="detail-value">No</span></div>
+        </div>
+        <div class="card-notes">Standard rate $739 &middot; Michael Houser, Dir. of Sales & Operations &middot; Group rate for 6 rooms</div>
+      </div>
+
+      <!-- Hampton Inn -->
+      <div class="hotel-card" data-name="Hampton Inn &amp; Suites" data-brand="Hilton, Waddle Rd" data-rate="749" data-distance="2.1" data-status="responded" data-walkable="false" data-search="hampton inn hilton waddle rd 2nd lowest rate">
+        <div class="card-top">
+          <div class="card-top-left">
+            <div class="hotel-name">Hampton Inn & Suites</div>
+            <div class="hotel-brand">Hilton — Waddle Rd</div>
+          </div>
+          <div class="card-top-right">
+            <div class="rate-big">$749<span style="font-size:0.625rem;font-weight:400;color:#6b7280">/night</span></div>
+            <div class="rate-total">$1,498 total (2 nights)</div>
+          </div>
+        </div>
+        <div class="card-badges"></div>
+        <div class="card-details">
+          <div class="detail-item"><span class="detail-label">Min Stay</span><span class="detail-value">—</span></div>
+          <div class="detail-item"><span class="detail-label">Room Type</span><span class="detail-value">—</span></div>
+          <div class="detail-item"><span class="detail-label">Deposit</span><span class="detail-value">Deposit after 30-day window</span></div>
+          <div class="detail-item"><span class="detail-label">Cancellation</span><span class="detail-value">30-day refundable</span></div>
+          <div class="detail-item"><span class="detail-label">Distance</span><span class="detail-value">2.1 mi</span></div>
+          <div class="detail-item"><span class="detail-label">Walkable</span><span class="detail-value">No</span></div>
+        </div>
+        <div class="card-notes">2nd lowest rate</div>
+      </div>
+
+      <!-- Hilton Garden Inn -->
+      <div class="hotel-card held" data-name="Hilton Garden Inn" data-brand="Hilton" data-rate="799" data-distance="0.8" data-status="responded" data-walkable="true" data-search="hilton garden inn rooms held hold deadline march 2 walkable">
+        <div class="card-top">
+          <div class="card-top-left">
+            <div class="hotel-name">Hilton Garden Inn</div>
+            <div class="hotel-brand">Hilton</div>
+          </div>
+          <div class="card-top-right">
+            <div class="rate-big">$799<span style="font-size:0.625rem;font-weight:400;color:#6b7280">/night</span></div>
+            <div class="rate-total">$1,598 total (2 nights)</div>
+          </div>
+        </div>
+        <div class="card-badges">
+          <span class="badge badge-walkable">Walkable (0.8 mi)</span>
+          <span class="badge badge-held">&#9200; Rooms Held — Exp. Mar 2</span>
+        </div>
+        <div class="card-details">
+          <div class="detail-item"><span class="detail-label">Min Stay</span><span class="detail-value">2 nights</span></div>
+          <div class="detail-item"><span class="detail-label">Room Type</span><span class="detail-value">Double Queen</span></div>
+          <div class="detail-item"><span class="detail-label">Deposit</span><span class="detail-value">Full payment at booking</span></div>
+          <div class="detail-item"><span class="detail-label">Cancellation</span><span class="detail-value">30-day refundable</span></div>
+          <div class="detail-item"><span class="detail-label">Hold Deadline</span><span class="detail-value" style="color:#dc2626;font-weight:700;">March 2, 2026</span></div>
+          <div class="detail-item"><span class="detail-label">Distance</span><span class="detail-value">0.8 mi</span></div>
+        </div>
+        <div class="card-notes">Rooms currently held — 6 rooms for Fri & Sat nights</div>
+      </div>
+
+      <!-- Penn Stater -->
+      <div class="hotel-card" data-name="Penn Stater Hotel" data-brand="Independent" data-rate="799" data-distance="1.2" data-status="responded" data-walkable="false" data-search="penn stater hotel independent strict terms non-refundable prepayment">
+        <div class="card-top">
+          <div class="card-top-left">
+            <div class="hotel-name">Penn Stater Hotel</div>
+            <div class="hotel-brand">Independent</div>
+          </div>
+          <div class="card-top-right">
+            <div class="rate-big">$799<span style="font-size:0.625rem;font-weight:400;color:#6b7280">/night</span></div>
+            <div class="rate-total">$1,598 total (2 nights)</div>
+          </div>
+        </div>
+        <div class="card-badges">
+          <span class="badge badge-nonrefund">Non-Refundable</span>
+        </div>
+        <div class="card-details">
+          <div class="detail-item"><span class="detail-label">Min Stay</span><span class="detail-value">2 nights</span></div>
+          <div class="detail-item"><span class="detail-label">Room Type</span><span class="detail-value">—</span></div>
+          <div class="detail-item"><span class="detail-label">Deposit</span><span class="detail-value">Full prepayment required</span></div>
+          <div class="detail-item"><span class="detail-label">Cancellation</span><span class="detail-value">Non-refundable</span></div>
+          <div class="detail-item"><span class="detail-label">Distance</span><span class="detail-value">1.2 mi</span></div>
+          <div class="detail-item"><span class="detail-label">Walkable</span><span class="detail-value">No</span></div>
+        </div>
+        <div class="card-notes">Strict terms — full prepayment, no refunds</div>
+      </div>
+
+      <!-- Best Western Plus -->
+      <div class="hotel-card" data-name="Best Western Plus" data-brand="University Park Inn" data-rate="829" data-distance="2.8" data-status="responded" data-walkable="false" data-search="best western plus university park inn no event discounts 814-234-8393 bwup@nittanyhotel.com">
+        <div class="card-top">
+          <div class="card-top-left">
+            <div class="hotel-name">Best Western Plus</div>
+            <div class="hotel-brand">University Park Inn</div>
+          </div>
+          <div class="card-top-right">
+            <div class="rate-big">$829–$1,299<span style="font-size:0.625rem;font-weight:400;color:#6b7280">/night</span></div>
+            <div class="rate-total">$1,658–$2,598 total (2 nights)</div>
+          </div>
+        </div>
+        <div class="card-badges"></div>
+        <div class="card-details">
+          <div class="detail-item"><span class="detail-label">Min Stay</span><span class="detail-value">2 nights</span></div>
+          <div class="detail-item"><span class="detail-label">Room Type</span><span class="detail-value">Varies by room type</span></div>
+          <div class="detail-item"><span class="detail-label">Deposit</span><span class="detail-value">1st night + tax</span></div>
+          <div class="detail-item"><span class="detail-label">Cancellation</span><span class="detail-value">30-day (no cancel after)</span></div>
+          <div class="detail-item"><span class="detail-label">Distance</span><span class="detail-value">2.8 mi</span></div>
+          <div class="detail-item"><span class="detail-label">Walkable</span><span class="detail-value">No</span></div>
+        </div>
+        <div class="card-notes">No event discounts &middot; 814-234-8393 &middot; bwup@nittanyhotel.com</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- RESPONDED — NOT AVAILABLE -->
+  <div class="section" data-section="soldout" id="sectionSoldOut">
+    <div class="section-header" onclick="toggleSection('sectionSoldOut')">
+      <span class="section-badge badge-red">1</span>
+      <span class="section-title">Responded — Not Available</span>
+      <span class="section-count">Sold out</span>
+    </div>
+    <div class="section-content hotel-grid" id="sectionSoldOutContent">
+
+      <div class="simple-card" data-name="Nittany Lion Inn" data-brand="Independent" data-rate="" data-distance="0.3" data-status="soldout" data-walkable="true" data-search="nittany lion inn independent sold out walkable">
+        <div>
+          <div class="hotel-name">Nittany Lion Inn</div>
+          <div class="hotel-brand">Independent</div>
+        </div>
+        <div class="meta">
+          <span>0.3 mi</span>
+          <span class="badge badge-walkable">Walkable</span>
+          <span class="badge badge-soldout">Sold Out</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- AWAITING REPLY -->
+  <div class="section" data-section="awaiting" id="sectionAwaiting">
+    <div class="section-header" onclick="toggleSection('sectionAwaiting')">
+      <span class="section-badge badge-amber">3</span>
+      <span class="section-title">Awaiting Reply — Earlier Outreach</span>
+      <span class="section-count">Contacted before Feb 14</span>
+    </div>
+    <div class="section-content hotel-grid" id="sectionAwaitingContent">
+
+      <div class="simple-card" data-name="Toftrees Resort" data-brand="Independent" data-rate="" data-distance="3.5" data-status="awaiting" data-walkable="false" data-search="toftrees resort independent groupsales@toftrees.com">
+        <div>
+          <div class="hotel-name">Toftrees Resort</div>
+          <div class="hotel-brand">Independent</div>
+        </div>
+        <div class="meta">
+          <span>3.5 mi</span>
+          <a class="email-link" href="mailto:groupsales@toftrees.com">groupsales@toftrees.com</a>
+        </div>
+      </div>
+
+      <div class="simple-card" data-name="Graduate State College" data-brand="Hilton" data-rate="" data-distance="0.5" data-status="awaiting" data-walkable="true" data-search="graduate state college hilton info@graduatestatecollege.com walkable">
+        <div>
+          <div class="hotel-name">Graduate State College</div>
+          <div class="hotel-brand">Hilton</div>
+        </div>
+        <div class="meta">
+          <span>0.5 mi</span>
+          <span class="badge badge-walkable">Walkable</span>
+          <a class="email-link" href="mailto:info@graduatestatecollege.com">info@graduatestatecollege.com</a>
+        </div>
+      </div>
+
+      <div class="simple-card" data-name="PSU Central Reservations" data-brand="Penn State" data-rate="" data-distance="0.4" data-status="awaiting" data-walkable="true" data-search="psu central reservations penn state reservations@psu.edu walkable">
+        <div>
+          <div class="hotel-name">PSU Central Reservations</div>
+          <div class="hotel-brand">Penn State</div>
+        </div>
+        <div class="meta">
+          <span>0.4 mi</span>
+          <span class="badge badge-walkable">Walkable</span>
+          <a class="email-link" href="mailto:reservations@psu.edu">reservations@psu.edu</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- JUST EMAILED — Feb 14, 2026 -->
+  <div class="section" data-section="emailed" id="sectionEmailed">
+    <div class="section-header" onclick="toggleSection('sectionEmailed')">
+      <span class="section-badge badge-blue">8</span>
+      <span class="section-title">Just Emailed — Feb 14, 2026</span>
+      <span class="section-count">Most recent outreach</span>
+    </div>
+    <div class="section-content hotel-grid" id="sectionEmailedContent">
+
+      <div class="simple-card" data-name="Carnegie House" data-brand="Independent, Boutique" data-rate="" data-distance="0.7" data-status="emailed" data-walkable="true" data-search="carnegie house independent boutique concierge@carnegiehouse.com walkable">
+        <div>
+          <div class="hotel-name">Carnegie House</div>
+          <div class="hotel-brand">Independent, Boutique</div>
+        </div>
+        <div class="meta">
+          <span>0.7 mi</span>
+          <span class="badge badge-walkable">Walkable</span>
+          <a class="email-link" href="mailto:Concierge@carnegiehouse.com">Concierge@carnegiehouse.com</a>
+        </div>
+      </div>
+
+      <div class="simple-card" data-name="SpringHill Suites" data-brand="Marriott / Shaner Hotels" data-rate="" data-distance="1.9" data-status="emailed" data-walkable="true" data-search="springhill suites marriott shaner hotels scshsgm@shanerhotels.com walkable">
+        <div>
+          <div class="hotel-name">SpringHill Suites</div>
+          <div class="hotel-brand">Marriott / Shaner Hotels</div>
+        </div>
+        <div class="meta">
+          <span>1.9 mi</span>
+          <span class="badge badge-walkable">Walkable</span>
+          <a class="email-link" href="mailto:scshsgm@shanerhotels.com">scshsgm@shanerhotels.com</a>
+        </div>
+      </div>
+
+      <div class="simple-card" data-name="Hyatt Place State College" data-brand="Hyatt / Scholar Hotels" data-rate="" data-distance="0.6" data-status="emailed" data-walkable="true" data-search="hyatt place state college hyatt scholar hotels dnixon@scholarhotels.com dawn nixon walkable">
+        <div>
+          <div class="hotel-name">Hyatt Place State College</div>
+          <div class="hotel-brand">Hyatt / Scholar Hotels</div>
+        </div>
+        <div class="meta">
+          <span>0.6 mi</span>
+          <span class="badge badge-walkable">Walkable</span>
+          <a class="email-link" href="mailto:dnixon@scholarhotels.com">dnixon@scholarhotels.com</a>
+        </div>
+      </div>
+
+      <div class="simple-card" data-name="Courtyard by Marriott" data-brand="Marriott / Scholar Hotels" data-rate="" data-distance="1.8" data-status="emailed" data-walkable="true" data-search="courtyard marriott scholar hotels dnixon@scholarhotels.com dawn nixon walkable">
+        <div>
+          <div class="hotel-name">Courtyard by Marriott</div>
+          <div class="hotel-brand">Marriott / Scholar Hotels</div>
+        </div>
+        <div class="meta">
+          <span>1.8 mi</span>
+          <span class="badge badge-walkable">Walkable</span>
+          <a class="email-link" href="mailto:dnixon@scholarhotels.com">dnixon@scholarhotels.com</a>
+        </div>
+      </div>
+
+      <div class="simple-card" data-name="Residence Inn" data-brand="Marriott / Scholar Hotels" data-rate="" data-distance="1.5" data-status="emailed" data-walkable="true" data-search="residence inn marriott scholar hotels dnixon@scholarhotels.com dawn nixon walkable">
+        <div>
+          <div class="hotel-name">Residence Inn</div>
+          <div class="hotel-brand">Marriott / Scholar Hotels</div>
+        </div>
+        <div class="meta">
+          <span>1.5 mi</span>
+          <span class="badge badge-walkable">Walkable</span>
+          <a class="email-link" href="mailto:dnixon@scholarhotels.com">dnixon@scholarhotels.com</a>
+        </div>
+      </div>
+
+      <div class="simple-card" data-name="Fairfield Inn &amp; Suites" data-brand="Marriott / Shaner Hotels" data-rate="" data-distance="1.6" data-status="emailed" data-walkable="true" data-search="fairfield inn suites marriott shaner hotels info@shanercorp.com mike corcoran walkable">
+        <div>
+          <div class="hotel-name">Fairfield Inn & Suites</div>
+          <div class="hotel-brand">Marriott / Shaner Hotels</div>
+        </div>
+        <div class="meta">
+          <span>1.6 mi</span>
+          <span class="badge badge-walkable">Walkable</span>
+          <a class="email-link" href="mailto:info@shanercorp.com">info@shanercorp.com</a>
+        </div>
+      </div>
+
+      <div class="simple-card" data-name="Days Inn" data-brand="Wyndham / Lion Country Lodging" data-rate="" data-distance="2.5" data-status="emailed" data-walkable="false" data-search="days inn wyndham lion country lodging sales@centrehotel.com 1274 n atherton">
+        <div>
+          <div class="hotel-name">Days Inn</div>
+          <div class="hotel-brand">Wyndham / Lion Country Lodging — 1274 N. Atherton</div>
+        </div>
+        <div class="meta">
+          <span>2.5 mi</span>
+          <a class="email-link" href="mailto:sales@centrehotel.com">sales@centrehotel.com</a>
+        </div>
+      </div>
+
+      <div class="simple-card" data-name="Quality Inn &amp; Suites" data-brand="Choice Hotels / Lion Country Lodging" data-rate="" data-distance="3.1" data-status="emailed" data-walkable="false" data-search="quality inn suites choice hotels lion country lodging sales@centrehotel.com 1274 n atherton">
+        <div>
+          <div class="hotel-name">Quality Inn & Suites</div>
+          <div class="hotel-brand">Choice Hotels / Lion Country Lodging — 1274 N. Atherton</div>
+        </div>
+        <div class="meta">
+          <span>3.1 mi</span>
+          <a class="email-link" href="mailto:sales@centrehotel.com">sales@centrehotel.com</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- PRICE COMPARISON -->
+  <div class="section" id="sectionPrices">
+    <div class="section-header" onclick="toggleSection('sectionPrices')">
+      <span class="section-badge" style="background:#8b5cf6;">$</span>
+      <span class="section-title">Price Comparison</span>
+      <span class="section-count">Ranked lowest to highest</span>
+    </div>
+    <div class="section-content" id="sectionPricesContent">
+      <table class="price-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Hotel</th>
+            <th>Rate/Night</th>
+            <th>Total (2 Nights)</th>
+            <th>Cancellation</th>
+            <th>Distance</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="rank"><span class="star">&#9733;</span> 1</td>
+            <td><strong>Comfort Suites</strong></td>
+            <td><strong>$659</strong></td>
+            <td>$1,318</td>
+            <td>60-day cancellation</td>
+            <td>2.3 mi</td>
+          </tr>
+          <tr>
+            <td class="rank">2</td>
+            <td>Hampton Inn</td>
+            <td>$749</td>
+            <td>$1,498</td>
+            <td>30-day refundable</td>
+            <td>2.1 mi</td>
+          </tr>
+          <tr>
+            <td class="rank">3</td>
+            <td>Hilton Garden Inn</td>
+            <td>$799</td>
+            <td>$1,598</td>
+            <td>30-day refundable</td>
+            <td>0.8 mi</td>
+          </tr>
+          <tr>
+            <td class="rank">4</td>
+            <td>Penn Stater</td>
+            <td>$799</td>
+            <td>$1,598</td>
+            <td style="color:#dc2626;">Non-refundable</td>
+            <td>1.2 mi</td>
+          </tr>
+          <tr>
+            <td class="rank">5</td>
+            <td>Best Western Plus</td>
+            <td>$829–$1,299</td>
+            <td>$1,658–$2,598</td>
+            <td>30-day then locked</td>
+            <td>2.8 mi</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- MANAGEMENT COMPANIES -->
+  <div class="section" id="sectionMgmt">
+    <div class="section-header" onclick="toggleSection('sectionMgmt')">
+      <span class="section-badge" style="background:#6366f1;">&#9881;</span>
+      <span class="section-title">Management Companies</span>
+      <span class="section-count">Key contacts for multi-property groups</span>
+    </div>
+    <div class="section-content" id="sectionMgmtContent">
+      <div class="mgmt-grid">
+
+        <div class="mgmt-card">
+          <h4>Scholar Hotels</h4>
+          <div class="contact">Dawn Nixon, Dir. of Sales &middot; <a class="email-link" href="mailto:dnixon@scholarhotels.com">dnixon@scholarhotels.com</a></div>
+          <ul>
+            <li>Hyatt Place State College</li>
+            <li>Courtyard by Marriott</li>
+            <li>Residence Inn</li>
+          </ul>
+        </div>
+
+        <div class="mgmt-card">
+          <h4>Shaner Hotels</h4>
+          <div class="contact">Mike Corcoran, Sales Dir. &middot; <a class="email-link" href="mailto:info@shanercorp.com">info@shanercorp.com</a></div>
+          <ul>
+            <li>Fairfield Inn & Suites</li>
+            <li>SpringHill Suites</li>
+          </ul>
+        </div>
+
+        <div class="mgmt-card">
+          <h4>Lion Country Lodging</h4>
+          <div class="contact"><a class="email-link" href="mailto:sales@centrehotel.com">sales@centrehotel.com</a></div>
+          <ul>
+            <li>Days Inn (1274 N. Atherton)</li>
+            <li>Quality Inn & Suites (1274 N. Atherton)</li>
+          </ul>
+        </div>
+
+        <div class="mgmt-card">
+          <h4>HFL Hotels</h4>
+          <div class="contact">Michael Houser &middot; <a class="email-link" href="mailto:mhouser@hfl-hotels.com">mhouser@hfl-hotels.com</a></div>
+          <ul>
+            <li>Comfort Suites University Area</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ACTION ITEMS -->
+  <div class="section" id="sectionActions">
+    <div class="section-header" onclick="toggleSection('sectionActions')">
+      <span class="section-badge" style="background:#ef4444;">!</span>
+      <span class="section-title">Action Items</span>
+      <span class="section-count">Tasks requiring attention</span>
+    </div>
+    <div class="section-content" id="sectionActionsContent">
+      <div class="action-list">
+
+        <div class="action-item urgent">
+          <div class="action-icon">&#128680;</div>
+          <div>
+            <strong>Hilton Garden Inn hold expires March 2, 2026</strong> — Confirm or release the 6 rooms currently being held. This is the most urgent deadline.
+          </div>
+        </div>
+
+        <div class="action-item followup">
+          <div class="action-icon">&#128232;</div>
+          <div>
+            <strong>Follow up with Toftrees, Graduate, PSU Central</strong> — Still waiting on replies from earlier outreach (before Feb 14).
+          </div>
+        </div>
+
+        <div class="action-item followup">
+          <div class="action-icon">&#128232;</div>
+          <div>
+            <strong>8 hotels emailed Feb 14</strong> — Waiting for replies from Carnegie House, SpringHill Suites, Hyatt Place, Courtyard, Residence Inn, Fairfield Inn, Days Inn, Quality Inn.
+          </div>
+        </div>
+
+        <div class="action-item followup">
+          <div class="action-icon">&#10067;</div>
+          <div>
+            <strong>Ask Scholar Hotels (Dawn Nixon) about Hyatt Place, Courtyard, Residence Inn</strong> — Her reply only mentioned Penn Stater. Need to ask about the other 3 Scholar-managed properties.
+          </div>
+        </div>
+
+        <div class="action-item">
+          <div class="action-icon">&#9888;</div>
+          <div>
+            <strong>Days Inn at 240 S. Pugh St appears CLOSED</strong> — Active location is 1274 N. Atherton St. Verify and update any contacts if needed.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  PSU Football Weekend Hotel Tracker &middot; Penn State vs. Wisconsin &middot; Sept 25–27, 2026<br>
+  Last updated: <span id="lastUpdated"></span> &middot; 6 couples / 6 rooms / 2 nights
+</div>
+
+<script>
+  // Set last updated date
+  document.getElementById('lastUpdated').textContent = new Date().toLocaleDateString('en-US', {
+    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+  });
+
+  // Days until deadline
+  (function() {
+    const deadline = new Date('2026-03-02');
+    const today = new Date();
+    today.setHours(0,0,0,0);
+    deadline.setHours(0,0,0,0);
+    const days = Math.ceil((deadline - today) / (1000 * 60 * 60 * 24));
+    if (days > 0) {
+      const alertEl = document.getElementById('urgentAlert');
+      const deadlineSpan = alertEl.querySelector('.deadline');
+      deadlineSpan.textContent = `March 2, 2026 (${days} days away)`;
+    }
+  })();
+
+  // Toggle sections
+  function toggleSection(sectionId) {
+    const section = document.getElementById(sectionId);
+    const header = section.querySelector('.section-header');
+    const content = section.querySelector('.section-content');
+    header.classList.toggle('collapsed');
+    content.classList.toggle('collapsed');
+  }
+
+  // Search
+  const searchBox = document.getElementById('searchBox');
+  searchBox.addEventListener('input', applyFilters);
+
+  // Filter buttons
+  let currentFilter = 'all';
+  function setFilter(filter) {
+    currentFilter = filter;
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.filter === filter);
+    });
+    applyFilters();
+  }
+
+  // Sort
+  function applySort() {
+    const sortVal = document.getElementById('sortSelect').value;
+    const sections = ['sectionRespondedContent', 'sectionEmailedContent', 'sectionAwaitingContent'];
+
+    sections.forEach(sectionId => {
+      const container = document.getElementById(sectionId);
+      if (!container) return;
+      const cards = Array.from(container.children);
+
+      cards.sort((a, b) => {
+        switch(sortVal) {
+          case 'price-asc': {
+            const ra = parseFloat(a.dataset.rate) || 99999;
+            const rb = parseFloat(b.dataset.rate) || 99999;
+            return ra - rb;
+          }
+          case 'price-desc': {
+            const ra = parseFloat(a.dataset.rate) || 0;
+            const rb = parseFloat(b.dataset.rate) || 0;
+            return rb - ra;
+          }
+          case 'distance': {
+            const da = parseFloat(a.dataset.distance) || 99;
+            const db = parseFloat(b.dataset.distance) || 99;
+            return da - db;
+          }
+          case 'name': {
+            return (a.dataset.name || '').localeCompare(b.dataset.name || '');
+          }
+          default: return 0;
+        }
+      });
+
+      cards.forEach(card => container.appendChild(card));
+    });
+  }
+
+  // Apply filters
+  function applyFilters() {
+    const query = searchBox.value.toLowerCase().trim();
+    const allCards = document.querySelectorAll('.hotel-card, .simple-card');
+
+    allCards.forEach(card => {
+      const searchText = (card.dataset.search || '').toLowerCase() + ' ' + (card.dataset.name || '').toLowerCase() + ' ' + (card.dataset.brand || '').toLowerCase();
+      const status = card.dataset.status || '';
+      const walkable = card.dataset.walkable === 'true';
+
+      let matchesFilter = true;
+      switch(currentFilter) {
+        case 'responded': matchesFilter = status === 'responded'; break;
+        case 'awaiting': matchesFilter = status === 'awaiting'; break;
+        case 'emailed': matchesFilter = status === 'emailed'; break;
+        case 'walkable': matchesFilter = walkable; break;
+        case 'all': default: matchesFilter = true; break;
+      }
+
+      let matchesSearch = true;
+      if (query) {
+        matchesSearch = searchText.includes(query);
+      }
+
+      card.style.display = (matchesFilter && matchesSearch) ? '' : 'none';
+    });
+
+    // Show/hide section headers based on visible cards
+    document.querySelectorAll('.section').forEach(section => {
+      const cards = section.querySelectorAll('.hotel-card, .simple-card');
+      const hasVisible = Array.from(cards).some(c => c.style.display !== 'none');
+      // Keep section visible but note if all cards hidden
+      const content = section.querySelector('.section-content');
+      if (content && cards.length > 0) {
+        section.style.display = hasVisible ? '' : 'none';
+      }
+    });
+
+    // Always show price comparison, management, and actions
+    document.getElementById('sectionPrices').style.display = '';
+    document.getElementById('sectionMgmt').style.display = '';
+    document.getElementById('sectionActions').style.display = '';
+  }
+</script>
+</body>
+</html>
