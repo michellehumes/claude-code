@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Save the Date - Michelle & Gray</title>
+  <link rel="stylesheet" href="../assets/design-system.css">
+  <style>
+    .save-the-date {
+      width: 5in;
+      height: 7in;
+      background: var(--ivory-bg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0.6in 0.5in;
+      position: relative;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    }
+
+    .std-header {
+      font-family: var(--font-sans);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--muted-charcoal);
+      margin-bottom: 20px;
+    }
+
+    .std-names {
+      font-family: var(--font-serif);
+      font-size: 36px;
+      font-weight: 400;
+      color: var(--charcoal-text);
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+
+    .std-ampersand {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--sage-accent);
+      display: block;
+      margin: 2px 0;
+    }
+
+    .std-divider {
+      width: 40px;
+      height: 1px;
+      background: var(--taupe-rules);
+      margin: 18px auto;
+    }
+
+    .std-cities {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 18px 0;
+    }
+
+    .std-cities li {
+      font-family: var(--font-sans);
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--charcoal-text);
+      padding: 5px 0;
+      position: relative;
+    }
+
+    .std-cities li::after {
+      content: '';
+      display: block;
+      width: 4px;
+      height: 4px;
+      background: var(--sage-accent);
+      border-radius: 50%;
+      margin: 5px auto 0;
+    }
+
+    .std-cities li:last-child::after {
+      display: none;
+    }
+
+    .std-date {
+      font-family: var(--font-serif);
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--charcoal-text);
+      letter-spacing: 0.05em;
+      margin-bottom: 6px;
+    }
+
+    .std-venue {
+      font-family: var(--font-sans);
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted-charcoal);
+      margin-bottom: 4px;
+    }
+
+    .std-footer {
+      font-family: var(--font-sans);
+      font-size: 8px;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--taupe-rules);
+      margin-top: 18px;
+    }
+
+    /* Corner accents */
+    .corner {
+      position: absolute;
+      width: 24px;
+      height: 24px;
+    }
+    .corner--tl { top: 16px; left: 16px; border-top: 1px solid var(--taupe-rules); border-left: 1px solid var(--taupe-rules); }
+    .corner--tr { top: 16px; right: 16px; border-top: 1px solid var(--taupe-rules); border-right: 1px solid var(--taupe-rules); }
+    .corner--bl { bottom: 16px; left: 16px; border-bottom: 1px solid var(--taupe-rules); border-left: 1px solid var(--taupe-rules); }
+    .corner--br { bottom: 16px; right: 16px; border-bottom: 1px solid var(--taupe-rules); border-right: 1px solid var(--taupe-rules); }
+
+    @media print {
+      body { background: none; padding: 0; }
+      .save-the-date { box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="save-the-date">
+    <div class="corner corner--tl"></div>
+    <div class="corner corner--tr"></div>
+    <div class="corner corner--bl"></div>
+    <div class="corner corner--br"></div>
+
+    <div class="std-header">Save the Date</div>
+
+    <div class="std-names">
+      Michelle
+      <span class="std-ampersand">&amp;</span>
+      Gray
+    </div>
+
+    <div class="std-divider"></div>
+
+    <ul class="std-cities">
+      <li>New York City</li>
+      <li>Los Angeles</li>
+      <li>Chicago</li>
+      <li>Houston</li>
+      <li>Phoenix</li>
+      <li>Philadelphia</li>
+      <li>San Antonio</li>
+      <li>San Diego</li>
+      <li>Dallas</li>
+      <li>Austin</li>
+    </ul>
+
+    <div class="std-divider"></div>
+
+    <div class="std-date">September 14, 2025</div>
+    <div class="std-venue">Rosewood Gardens</div>
+
+    <div class="std-footer">Formal invitation to follow</div>
+  </div>
+</body>
+</html>
