@@ -123,6 +123,10 @@ PLEASE NOTE:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 Start taking control of your finances today. Your future self will thank you.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+♡ Love our spreadsheets? Check out our full shop for more — including our Villa Vibes Personalised Water Bottles and Bachelorette Party Packs!
 ```
 
 ## TAGS (13 max, each up to 20 characters)

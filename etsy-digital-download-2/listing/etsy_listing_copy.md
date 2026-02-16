@@ -157,6 +157,10 @@ PLEASE NOTE:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 Your business deserves to be organized. Start today — your future self will thank you.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+♡ Running an Etsy shop or side hustle? Check out our Villa Vibes Personalised Water Bottles — the trending product your shop could be selling next! Browse our full collection.
 ```
 
 ## TAGS (13 max, each up to 20 characters)

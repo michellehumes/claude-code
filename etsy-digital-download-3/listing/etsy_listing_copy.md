@@ -165,6 +165,10 @@ PLEASE NOTE:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 Your wellness journey starts with one small step. Take it today.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+♡ Staying hydrated is self-care too! Check out our Villa Vibes Personalised Water Bottles — the perfect daily companion for your wellness journey. Browse our shop!
 ```
 
 ## TAGS (13 max, each up to 20 characters)

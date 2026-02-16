@@ -302,7 +302,10 @@ purchase. Due to the digital nature of this product, no refunds
 or exchanges are offered.
 
 ♡ Love the villa vibes? Complete the look with our matching
-Villa Water Bottles — check our shop for the perfect pair!
+Villa Water Bottles — personalised with each bridesmaid's name
+in signature cursive script. Or grab the Ultimate Bundle (bottles
++ this party pack) and save 15%! Check our shop for the full
+Villa Vibes collection.
 
 ━━━━━━━━━━━━━━━━━━━━━━
 © [Your Shop Name] — All designs are for personal use only.
