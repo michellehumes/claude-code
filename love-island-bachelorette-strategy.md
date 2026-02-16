@@ -429,6 +429,12 @@ Before launching the digital pack, review your current water bottle listings:
 - This protects your entire shop from takedown risk and creates a cohesive
   brand across all your products
 
+**The optimized water bottle listing copy is now available at:**
+`etsy-water-bottle/listing/etsy_listing_copy.md`
+— This listing has been fully rebranded with Villa Vibes language, SEO-optimized
+tags (all 13 slots used), bulk pricing tiers for hen party orders, and built-in
+cross-sell copy pointing back to the Villa Vibes Bachelorette Party Pack.
+
 ### Tactic 1: Bundle Listing
 Create a separate Etsy listing that bundles the digital pack + water bottles.
 - Title includes both "water bottle" and "digital downloads"
