@@ -4,12 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Save the Date - Michelle & Gray</title>
-  <link rel="stylesheet" href="../assets/design-system.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #888;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 40px;
+    }
+
     .save-the-date {
       width: 5in;
       height: 7in;
-      background: var(--ivory-bg);
+      background: #F8F6F2;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -21,30 +31,30 @@
     }
 
     .std-header {
-      font-family: var(--font-sans);
+      font-family: 'Montserrat', sans-serif;
       font-size: 10px;
       font-weight: 500;
       letter-spacing: 0.25em;
       text-transform: uppercase;
-      color: var(--muted-charcoal);
+      color: #5A5A5A;
       margin-bottom: 20px;
     }
 
     .std-names {
-      font-family: var(--font-serif);
+      font-family: 'Playfair Display', serif;
       font-size: 36px;
       font-weight: 400;
-      color: var(--charcoal-text);
+      color: #2E2E2E;
       letter-spacing: -0.02em;
       line-height: 1.2;
       margin-bottom: 6px;
     }
 
     .std-ampersand {
-      font-family: var(--font-serif);
+      font-family: 'Playfair Display', serif;
       font-size: 20px;
       font-weight: 400;
-      color: var(--sage-accent);
+      color: #B7C1B2;
       display: block;
       margin: 2px 0;
     }
@@ -52,7 +62,7 @@
     .std-divider {
       width: 40px;
       height: 1px;
-      background: var(--taupe-rules);
+      background: #CFC6BC;
       margin: 18px auto;
     }
 
@@ -63,14 +73,13 @@
     }
 
     .std-cities li {
-      font-family: var(--font-sans);
+      font-family: 'Montserrat', sans-serif;
       font-size: 9px;
       font-weight: 500;
       letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: var(--charcoal-text);
+      color: #2E2E2E;
       padding: 5px 0;
-      position: relative;
     }
 
     .std-cities li::after {
@@ -78,7 +87,7 @@
       display: block;
       width: 4px;
       height: 4px;
-      background: var(--sage-accent);
+      background: #B7C1B2;
       border-radius: 50%;
       margin: 5px auto 0;
     }
@@ -88,44 +97,43 @@
     }
 
     .std-date {
-      font-family: var(--font-serif);
+      font-family: 'Playfair Display', serif;
       font-size: 18px;
       font-weight: 400;
-      color: var(--charcoal-text);
+      color: #2E2E2E;
       letter-spacing: 0.05em;
       margin-bottom: 6px;
     }
 
     .std-venue {
-      font-family: var(--font-sans);
+      font-family: 'Montserrat', sans-serif;
       font-size: 9px;
       font-weight: 400;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--muted-charcoal);
+      color: #5A5A5A;
       margin-bottom: 4px;
     }
 
     .std-footer {
-      font-family: var(--font-sans);
+      font-family: 'Montserrat', sans-serif;
       font-size: 8px;
       font-weight: 400;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: var(--taupe-rules);
+      color: #CFC6BC;
       margin-top: 18px;
     }
 
-    /* Corner accents */
     .corner {
       position: absolute;
       width: 24px;
       height: 24px;
     }
-    .corner--tl { top: 16px; left: 16px; border-top: 1px solid var(--taupe-rules); border-left: 1px solid var(--taupe-rules); }
-    .corner--tr { top: 16px; right: 16px; border-top: 1px solid var(--taupe-rules); border-right: 1px solid var(--taupe-rules); }
-    .corner--bl { bottom: 16px; left: 16px; border-bottom: 1px solid var(--taupe-rules); border-left: 1px solid var(--taupe-rules); }
-    .corner--br { bottom: 16px; right: 16px; border-bottom: 1px solid var(--taupe-rules); border-right: 1px solid var(--taupe-rules); }
+    .corner--tl { top: 16px; left: 16px; border-top: 1px solid #CFC6BC; border-left: 1px solid #CFC6BC; }
+    .corner--tr { top: 16px; right: 16px; border-top: 1px solid #CFC6BC; border-right: 1px solid #CFC6BC; }
+    .corner--bl { bottom: 16px; left: 16px; border-bottom: 1px solid #CFC6BC; border-left: 1px solid #CFC6BC; }
+    .corner--br { bottom: 16px; right: 16px; border-bottom: 1px solid #CFC6BC; border-right: 1px solid #CFC6BC; }
 
     @media print {
       body { background: none; padding: 0; }
