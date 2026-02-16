@@ -371,42 +371,6 @@
   }
   .email-link:hover { text-decoration: underline; }
 
-  /* Price Comparison */
-  .price-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: white;
-    border-radius: var(--radius);
-    overflow: hidden;
-    box-shadow: var(--shadow);
-    font-size: 0.875rem;
-  }
-  .price-table thead {
-    background: #e8eff8;
-    color: #4a6fa5;
-  }
-  .price-table th {
-    padding: 0.75rem 1rem;
-    text-align: left;
-    font-weight: 600;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-  }
-  .price-table td {
-    padding: 0.75rem 1rem;
-    border-bottom: 1px solid #f5f5f5;
-    color: #4b5563;
-  }
-  .price-table tbody tr:hover { background: #fafbfc; }
-  .price-table .rank {
-    font-weight: 700;
-    color: #4a6fa5;
-    width: 40px;
-    text-align: center;
-  }
-  .price-table .star { color: #fbbf24; }
-
   /* Action Items */
   .action-list {
     background: white;
@@ -838,71 +802,6 @@
     </div>
   </div>
 
-  <!-- PRICE COMPARISON -->
-  <div class="section" id="sectionPrices">
-    <div class="section-header" onclick="toggleSection('sectionPrices')">
-      <span class="section-badge" style="background:#c4b5fd;">$</span>
-      <span class="section-title">Price Comparison</span>
-      <span class="section-count">Ranked lowest to highest</span>
-    </div>
-    <div class="section-content" id="sectionPricesContent">
-      <table class="price-table">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Hotel</th>
-            <th>Rate/Night</th>
-            <th>Total (2 Nights)</th>
-            <th>Cancellation</th>
-            <th>From Stadium</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="rank"><span class="star">&#9733;</span> 1</td>
-            <td><strong>Comfort Suites</strong></td>
-            <td><strong>$659</strong></td>
-            <td>$1,318</td>
-            <td>60-day cancellation</td>
-            <td>2.3 mi</td>
-          </tr>
-          <tr>
-            <td class="rank">2</td>
-            <td>Hampton Inn</td>
-            <td>$749</td>
-            <td>$1,498</td>
-            <td>30-day refundable</td>
-            <td>2.1 mi</td>
-          </tr>
-          <tr>
-            <td class="rank">3</td>
-            <td>Hilton Garden Inn</td>
-            <td>$799</td>
-            <td>$1,598</td>
-            <td>30-day refundable</td>
-            <td>0.8 mi</td>
-          </tr>
-          <tr>
-            <td class="rank">4</td>
-            <td>Penn Stater</td>
-            <td>$799</td>
-            <td>$1,598</td>
-            <td style="color:#f87171;">Non-refundable</td>
-            <td>1.2 mi</td>
-          </tr>
-          <tr>
-            <td class="rank">5</td>
-            <td>Best Western Plus</td>
-            <td>$829–$1,299</td>
-            <td>$1,658–$2,598</td>
-            <td>30-day then locked</td>
-            <td>2.8 mi</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
   <!-- ACTION ITEMS -->
   <div class="section" id="sectionActions">
     <div class="section-header" onclick="toggleSection('sectionActions')">
@@ -1072,8 +971,7 @@
       }
     });
 
-    // Always show price comparison and actions
-    document.getElementById('sectionPrices').style.display = '';
+    // Always show actions
     document.getElementById('sectionActions').style.display = '';
   }
 </script>
