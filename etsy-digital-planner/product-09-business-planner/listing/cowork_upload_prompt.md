@@ -2,6 +2,16 @@
 
 ## Complete Step-by-Step Upload Guide
 
+## PRE-REQUISITE: FILES LOCATION
+All files for this listing are in `~/Desktop/uploads/product-09-business-planner/`. The folder structure is:
+```
+~/Desktop/uploads/product-09-business-planner/
+  images/          (10 JPG listing images)
+  video/           (1 MP4 promo video)
+  spreadsheets/    (8 XLSX digital download files)
+```
+All file paths below are relative to `~/Desktop/uploads/product-09-business-planner/`.
+
 ### STEP 1: Prepare Your Files
 
 Before uploading, organize your files:
