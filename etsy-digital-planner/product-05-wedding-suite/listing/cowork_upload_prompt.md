@@ -4,6 +4,16 @@
 
 You are uploading a new digital product listing to Etsy. Follow these steps precisely.
 
+## PRE-REQUISITE: FILES LOCATION
+All files for this listing are in `~/Desktop/uploads/product-05-wedding-suite/`. The folder structure is:
+```
+~/Desktop/uploads/product-05-wedding-suite/
+  images/          (10 JPG listing images)
+  video/           (1 MP4 promo video)
+  templates/       (81 PNG wedding stationery files - digital downloads)
+```
+All file paths below are relative to `~/Desktop/uploads/product-05-wedding-suite/`.
+
 ---
 
 ### Step 1: Navigate to Etsy Listing Page

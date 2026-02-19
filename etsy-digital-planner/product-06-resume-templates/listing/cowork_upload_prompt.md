@@ -2,6 +2,16 @@
 
 ## Complete Step-by-Step Upload Guide
 
+## PRE-REQUISITE: FILES LOCATION
+All files for this listing are in `~/Desktop/uploads/product-06-resume-templates/`. The folder structure is:
+```
+~/Desktop/uploads/product-06-resume-templates/
+  images/          (10 JPG listing images)
+  video/           (1 MP4 promo video)
+  templates/       (10 PNG resume template files - digital downloads)
+```
+All file paths below are relative to `~/Desktop/uploads/product-06-resume-templates/`.
+
 ### Pre-Upload Checklist
 
 Before starting, ensure you have the following files ready:

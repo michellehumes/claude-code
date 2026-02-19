@@ -3,6 +3,15 @@
 ## TASK
 You are uploading a new digital product listing to Etsy. Use the Chrome browser to navigate to Etsy's seller dashboard and create this listing. The user is already logged in.
 
+## PRE-REQUISITE: FILES LOCATION
+All files for this listing are in `~/Desktop/uploads/budget-spreadsheet-product/`. The folder structure is:
+```
+~/Desktop/uploads/budget-spreadsheet-product/
+  images/          (10 JPG listing images)
+  video/           (1 MP4 promo video)
+  spreadsheets/    (6 XLSX digital download files)
+```
+
 ---
 
 ## STEP-BY-STEP INSTRUCTIONS
@@ -12,7 +21,7 @@ You are uploading a new digital product listing to Etsy. Use the Chrome browser 
 - If that redirects, go to: https://www.etsy.com/your/shops/me/tools/listings and click "Add a listing"
 
 ### 2. Upload Listing Photos (10 images)
-Upload these images IN ORDER from the product folder `budget-spreadsheet-product/images/`:
+Upload these images IN ORDER from `~/Desktop/uploads/budget-spreadsheet-product/images/`:
 1. `01_hero_cover.jpg` — Main listing image (Hero)
 2. `02_whats_included.jpg` — What's Included overview
 3. `03_monthly_budget_detail.jpg` — Monthly Budget Tracker detail
@@ -25,11 +34,11 @@ Upload these images IN ORDER from the product folder `budget-spreadsheet-product
 10. `10_bundle_cta.jpg` — Bundle CTA / Pricing
 
 ### 3. Upload Video
-Upload from `budget-spreadsheet-product/video/`:
+Upload from `~/Desktop/uploads/budget-spreadsheet-product/video/`:
 - `budget_bundle_promo.mp4` (12 seconds, 1080x1080)
 
 ### 4. Upload Digital Files
-Upload these 6 XLSX files from `budget-spreadsheet-product/spreadsheets/`:
+Upload these 6 XLSX files from `~/Desktop/uploads/budget-spreadsheet-product/spreadsheets/`:
 1. `01_Monthly_Budget_Tracker_2026.xlsx`
 2. `02_Annual_Budget_Overview_2026.xlsx`
 3. `03_Debt_Payoff_Tracker_2026.xlsx`

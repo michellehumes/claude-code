@@ -5,6 +5,16 @@
 - **Price:** $7.99
 - **Category:** Art & Collectibles > Prints > Digital Prints
 
+## PRE-REQUISITE: FILES LOCATION
+All files for this listing are in `~/Desktop/uploads/product-08-quote-prints/`. The folder structure is:
+```
+~/Desktop/uploads/product-08-quote-prints/
+  images/          (10 JPG listing images)
+  video/           (1 MP4 promo video)
+  prints/          (30 JPG quote print files - digital downloads)
+```
+All file paths below are relative to `~/Desktop/uploads/product-08-quote-prints/`.
+
 ---
 
 ## Step-by-Step Upload Instructions
