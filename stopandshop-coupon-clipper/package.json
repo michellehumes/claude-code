@@ -1,0 +1,14 @@
+{
+  "name": "stopandshop-coupon-clipper",
+  "version": "1.0.0",
+  "description": "Automatically clip all Stop & Shop coupons",
+  "main": "clip-coupons.js",
+  "scripts": {
+    "start": "node clip-coupons.js",
+    "start:visible": "HEADLESS=false node clip-coupons.js"
+  },
+  "dependencies": {
+    "puppeteer": "^22.0.0",
+    "readline": "^1.3.0"
+  }
+}
