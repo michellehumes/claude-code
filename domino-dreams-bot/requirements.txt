@@ -1,0 +1,14 @@
+# Domino Dreams iOS Bot - Dependencies
+# Install with: pip install -r requirements.txt
+
+# Screen capture & device control
+pymobiledevice3>=4.0.0      # iOS device communication over USB
+Pillow>=10.0.0              # Image processing
+
+# Computer vision
+opencv-python>=4.8.0        # Game state detection, template matching
+numpy>=1.24.0               # Array operations for image processing
+
+# Utilities
+pyyaml>=6.0                 # Configuration file parsing
+colorama>=0.4.6             # Colored terminal output
