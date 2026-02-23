@@ -1,0 +1,67 @@
+# ============================================================
+# Domino Dreams Bot Configuration
+# ============================================================
+# Adjust these settings to match your device and preferences.
+
+# Device settings
+device:
+  # Set to your iPhone screen resolution (points, not pixels)
+  # Common: iPhone 15 Pro = 393x852, iPhone 14 = 390x844
+  screen_width: 393
+  screen_height: 852
+  # Screenshot scale factor (Retina = 2 or 3)
+  scale_factor: 3
+
+# Game detection thresholds (tune if detection is unreliable)
+detection:
+  # OpenCV template matching confidence (0.0 - 1.0)
+  match_threshold: 0.75
+  # Color tolerance for HSV-based detection (0-255)
+  color_tolerance: 25
+  # Minimum contour area to count as a domino piece (pixels^2)
+  min_domino_area: 500
+  # Maximum contour area
+  max_domino_area: 50000
+
+# Timing (seconds) - adjust if the bot moves too fast/slow
+timing:
+  # Delay after each tap
+  tap_delay: 0.3
+  # Delay after a swipe gesture
+  swipe_delay: 0.5
+  # Wait time between checking game state
+  poll_interval: 1.0
+  # Wait after level completion animation
+  level_complete_wait: 3.0
+  # Wait after chapter transition
+  chapter_transition_wait: 5.0
+  # Maximum time to wait for a screen to load
+  screen_load_timeout: 15.0
+  # Delay between retries when stuck
+  stuck_retry_delay: 2.0
+
+# Bot behavior
+bot:
+  # How many times to retry a level before skipping
+  max_level_retries: 5
+  # Take screenshots of each level for debugging
+  save_screenshots: true
+  # Screenshot save directory
+  screenshot_dir: "./screenshots"
+  # Enable verbose logging
+  verbose: true
+  # Auto-collect rewards between levels
+  auto_collect_rewards: true
+  # Auto-dismiss popups and dialogs
+  auto_dismiss_popups: true
+
+# Color definitions (HSV ranges) for detecting game elements
+# Format: [H_low, S_low, V_low, H_high, S_high, V_high]
+colors:
+  domino_white: [0, 0, 200, 180, 30, 255]
+  domino_dot_black: [0, 0, 0, 180, 255, 50]
+  play_button_green: [35, 100, 100, 85, 255, 255]
+  play_button_orange: [10, 150, 150, 25, 255, 255]
+  reward_gold: [15, 100, 100, 35, 255, 255]
+  popup_overlay: [0, 0, 0, 180, 50, 80]
+  progress_bar_fill: [90, 100, 100, 130, 255, 255]
