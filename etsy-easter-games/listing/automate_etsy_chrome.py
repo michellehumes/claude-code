@@ -191,20 +191,9 @@ async def run():
     async with async_playwright() as p:
         # Launch browser
         print("\n[1/8] Launching Chromium...")
-        # Use existing Chromium installation from previous project
-        chromium_path = "/root/.cache/ms-playwright/chromium-1194/chrome-linux/chrome"
-        if not os.path.exists(chromium_path):
-            print(f"  ERROR: Chromium not found at {chromium_path}")
-            print("  Run: python3 -m playwright install chromium")
-            return
-
         browser = await p.chromium.launch(
-            executable_path=chromium_path,
-            headless=True,
+            headless=False,
             args=[
-                '--no-sandbox',
-                '--disable-setuid-sandbox',
-                '--disable-dev-shm-usage',
                 '--disable-blink-features=AutomationControlled',
             ]
         )
@@ -215,12 +204,13 @@ async def run():
         )
 
         page = await context.new_page()
-        page.set_default_timeout(30000)
+        page.set_default_timeout(60000)
 
         # ── Step 1: Log in to Etsy ──
         print("\n[2/8] Logging into Etsy...")
+        print("  A browser window will open. If you see a CAPTCHA, solve it manually.")
         await page.goto("https://www.etsy.com/signin", wait_until="networkidle")
-        await page.wait_for_timeout(2000)
+        await page.wait_for_timeout(3000)
 
         await page.screenshot(path=os.path.join(SCREENSHOT_DIR, "01_signin.png"))
 
@@ -301,6 +291,17 @@ async def run():
 
         await page.screenshot(path=os.path.join(SCREENSHOT_DIR, "03_after_login.png"))
         print(f"  Current URL: {page.url}")
+
+        # Pause to let user handle CAPTCHA/2FA if needed
+        if "signin" in page.url or "captcha" in page.url.lower():
+            print("\n  ⏳ Waiting for you to complete login (CAPTCHA/2FA)...")
+            print("  Complete the login in the browser window, then it will continue automatically.")
+            try:
+                await page.wait_for_url("**/your/shops/**", timeout=120000)
+            except:
+                pass
+            await page.wait_for_timeout(3000)
+            print(f"  Current URL after login: {page.url}")
 
         # ── Step 2: Navigate to listing creation ──
         print("\n[3/8] Navigating to listing creation page...")
