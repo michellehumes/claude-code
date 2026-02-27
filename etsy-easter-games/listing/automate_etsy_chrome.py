@@ -191,7 +191,15 @@ async def run():
     async with async_playwright() as p:
         # Launch browser
         print("\n[1/8] Launching Chromium...")
+        # Use existing Chromium installation from previous project
+        chromium_path = "/root/.cache/ms-playwright/chromium-1194/chrome-linux/chrome"
+        if not os.path.exists(chromium_path):
+            print(f"  ERROR: Chromium not found at {chromium_path}")
+            print("  Run: python3 -m playwright install chromium")
+            return
+
         browser = await p.chromium.launch(
+            executable_path=chromium_path,
             headless=True,
             args=[
                 '--no-sandbox',
