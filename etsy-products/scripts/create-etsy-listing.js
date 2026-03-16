@@ -42,6 +42,7 @@ function getReadyProducts() {
   const skip = new Set(['logs', 'scripts']);
   const dirs = fs.readdirSync(PRODUCTS_DIR).filter(d => {
     if (skip.has(d)) return false;
+    if (d.startsWith('.')) return false;  // skip hidden dirs like .playwright-profile
     return fs.statSync(path.join(PRODUCTS_DIR, d)).isDirectory();
   });
 
@@ -109,7 +110,8 @@ function markCompleted(slug, listingUrl) {
 
 function markFailed(slug, error) {
   const p = loadProgress();
-  if (!p.failed) p.failed = {};
+  // Guard: failed must be a plain object, not an array or other type
+  if (!p.failed || Array.isArray(p.failed)) p.failed = {};
   p.failed[slug] = { error: String(error), failedAt: new Date().toISOString() };
   fs.writeFileSync(PROGRESS_FILE, JSON.stringify(p, null, 2));
 }
@@ -324,7 +326,9 @@ async function createListing(page, product) {
   await humanDelay(2000);
 
   if (page.url().includes('/signin') || page.url().includes('/login')) {
-    throw new Error('Not logged in — log into Etsy in the browser window, then re-run');
+    const err = new Error('NOT_LOGGED_IN');
+    err.fatal = true;
+    throw err;
   }
 
   await setDigitalType(page);
@@ -394,6 +398,11 @@ async function main() {
       results.success.push(product.slug);
       await humanDelay(3000);
     } catch (err) {
+      if (err.fatal) {
+        log('\nNot logged into Etsy. Log in in the browser window, then re-run the script.');
+        await browser.close().catch(() => {});
+        process.exit(1);
+      }
       log(`ERROR on ${product.slug}: ${err.message}`);
       markFailed(product.slug, err.message);
       results.failed.push({ slug: product.slug, error: err.message });
