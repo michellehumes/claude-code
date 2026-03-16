@@ -806,37 +806,11 @@ async def main():
     async with async_playwright() as p:
         log("  Launching Google Chrome (visible)...")
 
-        # ── Google Chrome executable paths by OS ──────────────────────────────
-        # Edit CHROME_PATH below if yours is in a different location.
-        CHROME_PATHS = {
-            "mac":     "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
-            "windows": r"C:\Program Files\Google\Chrome\Application\chrome.exe",
-            "windows_alt": r"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe",
-            "linux":   "/usr/bin/google-chrome",
-            "linux2":  "/usr/bin/google-chrome-stable",
-        }
-
-        chrome_exe = None
-        for path in CHROME_PATHS.values():
-            if os.path.exists(path):
-                chrome_exe = path
-                break
-
-        if not chrome_exe:
-            log("")
-            log("  ✗ Google Chrome not found in standard locations.")
-            log("  → Open Chrome, go to chrome://version, copy 'Executable Path',")
-            log("    then set it in the CHROME_PATHS dict at the top of this script.")
-            sys.exit(1)
-
-        log(f"  ✓ Found Chrome: {chrome_exe}")
-
         browser = await p.chromium.launch(
-            executable_path=chrome_exe,
+            channel="chrome",      # uses your installed Google Chrome, not Chromium
             headless=False,
             slow_mo=350,           # ms between actions — makes it watchable
             args=[
-                "--no-sandbox",
                 "--disable-blink-features=AutomationControlled",
                 "--start-maximized",
             ],
