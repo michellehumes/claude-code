@@ -1,0 +1,50 @@
+name: Claude Code Automation
+
+on:
+  workflow_dispatch:
+    inputs:
+      prompt:
+        description: 'Task prompt for Claude Code to execute'
+        required: true
+        type: string
+      working_directory:
+        description: 'Working directory (optional, defaults to repo root)'
+        required: false
+        default: '.'
+        type: string
+
+jobs:
+  claude:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Claude Code CLI
+        run: npm install -g @anthropic-ai/claude-code
+
+      - name: Run Claude Code
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        working-directory: ${{ github.event.inputs.working_directory }}
+        run: |
+          claude --dangerously-skip-permissions -p "${{ github.event.inputs.prompt }}"
+
+      - name: Commit any changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git diff --quiet && git diff --staged --quiet || \
+            (git add -A && git commit -m "Claude Code automation: ${{ github.event.inputs.prompt }}")
+
+      - name: Push changes
+        run: git push
