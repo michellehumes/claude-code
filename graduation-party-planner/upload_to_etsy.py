@@ -495,9 +495,9 @@ async def upload_listing(page, listing, num, total):
     await page.wait_for_timeout(3000)
 
     if "signin" in page.url.lower() or "login" in page.url.lower():
-        log("  ⚠  Redirected to login — session may have expired.")
-        log("  → Please log in manually, then press Enter.")
-        input("  Press Enter to continue: ")
+        log("  ⚠  Redirected to login — please log in manually in the browser window.")
+        log("  → Do NOT close the browser. After logging in, come back here.")
+        input("  Press Enter once you are logged in: ")
         await page.goto(
             "https://www.etsy.com/your/shops/me/tools/listings/create",
             wait_until="domcontentloaded",
@@ -804,30 +804,38 @@ async def main():
     results = []
 
     async with async_playwright() as p:
-        log("  Launching Google Chrome (visible)...")
+        log("  Launching Google Chrome with your existing profile...")
+        log("  (IMPORTANT: make sure Chrome is fully closed before continuing)")
+        log("")
+        input("  Press Enter when Chrome is closed: ")
 
-        browser = await p.chromium.launch(
-            channel="chrome",      # uses your installed Google Chrome, not Chromium
+        # Use the real Chrome profile so Etsy sees a normal logged-in browser.
+        # No login step needed — your existing session/cookies are reused.
+        CHROME_PROFILE = os.path.expanduser(
+            "~/Library/Application Support/Google/Chrome"
+        )
+
+        context = await p.chromium.launch_persistent_context(
+            user_data_dir=CHROME_PROFILE,
+            channel="chrome",
             headless=False,
-            slow_mo=350,           # ms between actions — makes it watchable
-            args=[
-                "--disable-blink-features=AutomationControlled",
-                "--start-maximized",
-            ],
+            slow_mo=350,
+            args=["--start-maximized"],
         )
-        context = await browser.new_context(
-            viewport={"width": 1440, "height": 900},
-            user_agent=(
-                "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
-                "AppleWebKit/537.36 (KHTML, like Gecko) "
-                "Chrome/120.0.0.0 Safari/537.36"
-            ),
-        )
+
         page = await context.new_page()
         page.set_default_timeout(30000)
 
-        # Login once
-        await login(page)
+        # Navigate to Etsy to confirm we're logged in
+        log("\n  Checking Etsy login status...")
+        await page.goto("https://www.etsy.com", wait_until="domcontentloaded")
+        await page.wait_for_timeout(3000)
+
+        if "signin" in page.url.lower():
+            log("  Not logged in — please log in manually in the browser window.")
+            input("  Press Enter once you're logged into Etsy: ")
+        else:
+            log("  ✓ Already logged into Etsy via your Chrome profile")
 
         # Upload all 3 listings
         for i, listing in enumerate(LISTINGS):
@@ -837,9 +845,11 @@ async def main():
                 log("\n  Pausing 3 seconds before next listing...")
                 await page.wait_for_timeout(3000)
 
-        log("\n  Leaving browser open for 10 seconds so you can review...")
-        await page.wait_for_timeout(10000)
-        await browser.close()
+        log("\n  All done! Leaving browser open so you can review the drafts...")
+        await page.goto("https://www.etsy.com/your/shops/me/tools/listings?status=draft",
+                        wait_until="domcontentloaded")
+        await page.wait_for_timeout(15000)
+        await context.close()
 
     # ── Summary ───────────────────────────────────────────────────────────────
     log("")
