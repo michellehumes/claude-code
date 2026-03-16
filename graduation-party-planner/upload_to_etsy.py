@@ -17,6 +17,8 @@ Products:
 import asyncio
 import os
 import sys
+import subprocess
+import time
 
 from playwright.async_api import async_playwright, TimeoutError as PlaywrightTimeout
 
@@ -805,9 +807,18 @@ async def main():
 
     async with async_playwright() as p:
         log("  Launching Google Chrome with your existing profile...")
-        log("  (IMPORTANT: make sure Chrome is fully closed before continuing)")
+        log("  The script will automatically close any open Chrome windows first.")
         log("")
-        input("  Press Enter when Chrome is closed: ")
+        log("  ⚠  SAVE any open work in Chrome, then press Enter.")
+        input("  Press Enter to close Chrome and launch the Etsy uploader: ")
+
+        # Kill any background Chrome processes that may be holding the profile lock.
+        # (This is safe — it only affects Chrome, not this script.)
+        log("  Killing any background Chrome processes...")
+        subprocess.run(["pkill", "-9", "-f", "Google Chrome"], capture_output=True)
+        subprocess.run(["pkill", "-9", "-f", "Google Chrome Helper"], capture_output=True)
+        time.sleep(2)
+        log("  ✓ Chrome processes cleared\n")
 
         # Use the real Chrome profile so Etsy sees a normal logged-in browser.
         # No login step needed — your existing session/cookies are reused.
@@ -820,7 +831,14 @@ async def main():
             channel="chrome",
             headless=False,
             slow_mo=350,
-            args=["--start-maximized"],
+            args=[
+                "--start-maximized",
+                "--no-first-run",
+                "--no-default-browser-check",
+                "--disable-sync",
+                "--disable-extensions-except=",
+                "--disable-background-networking",
+            ],
         )
 
         page = await context.new_page()
