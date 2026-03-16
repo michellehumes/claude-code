@@ -804,26 +804,35 @@ async def main():
     results = []
 
     async with async_playwright() as p:
-        log("  Launching Chrome (visible)...")
+        log("  Launching Google Chrome (visible)...")
 
-        # Find Chrome executable — try common locations
-        chrome_paths = [
-            # Mac
-            "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
-            # Linux
-            "/usr/bin/google-chrome",
-            "/usr/bin/google-chrome-stable",
-            "/usr/bin/chromium-browser",
-            "/usr/bin/chromium",
-            # Windows (Playwright default picks this up automatically)
-        ]
+        # ── Google Chrome executable paths by OS ──────────────────────────────
+        # Edit CHROME_PATH below if yours is in a different location.
+        CHROME_PATHS = {
+            "mac":     "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+            "windows": r"C:\Program Files\Google\Chrome\Application\chrome.exe",
+            "windows_alt": r"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe",
+            "linux":   "/usr/bin/google-chrome",
+            "linux2":  "/usr/bin/google-chrome-stable",
+        }
+
         chrome_exe = None
-        for path in chrome_paths:
+        for path in CHROME_PATHS.values():
             if os.path.exists(path):
                 chrome_exe = path
                 break
 
-        launch_kwargs = dict(
+        if not chrome_exe:
+            log("")
+            log("  ✗ Google Chrome not found in standard locations.")
+            log("  → Open Chrome, go to chrome://version, copy 'Executable Path',")
+            log("    then set it in the CHROME_PATHS dict at the top of this script.")
+            sys.exit(1)
+
+        log(f"  ✓ Found Chrome: {chrome_exe}")
+
+        browser = await p.chromium.launch(
+            executable_path=chrome_exe,
             headless=False,
             slow_mo=350,           # ms between actions — makes it watchable
             args=[
@@ -832,13 +841,6 @@ async def main():
                 "--start-maximized",
             ],
         )
-        if chrome_exe:
-            launch_kwargs["executable_path"] = chrome_exe
-            log(f"  Using Chrome: {chrome_exe}")
-        else:
-            log("  Using bundled Chromium (Chrome not found in standard paths)")
-
-        browser = await p.chromium.launch(**launch_kwargs)
         context = await browser.new_context(
             viewport={"width": 1440, "height": 900},
             user_agent=(
