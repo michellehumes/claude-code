@@ -1,35 +1,40 @@
 #!/usr/bin/env python3
 """
-Upload 3 Graduation Party Planner listings to Etsy as drafts.
+Etsy Draft Listing Uploader — runs in VISIBLE Chrome.
+Creates all 3 graduation listings as drafts.
+
+HOW TO RUN (on your local machine):
+  pip install playwright
+  playwright install chromium
+  python upload_to_etsy.py
 
 Products:
-  1. Graduation Party Planner Spreadsheet  — $5.99
-  2. Graduation Memory Book Printable      — $7.99
-  3. Graduation Party Welcome Sign (Canva) — $4.99
-
-Each listing is created as a DRAFT (not published).
-Images, copy, price, and tags are all filled in.
+  1. Graduation Party Planner Spreadsheet  ($5.99)
+  2. Graduation Memory Book Printable      ($7.99)
+  3. Graduation Party Welcome Sign Canva   ($4.99)
 """
 
 import asyncio
 import os
-import time
-from playwright.async_api import async_playwright
+import sys
 
-# ── Credentials ───────────────────────────────────────────────────────────────
+from playwright.async_api import async_playwright, TimeoutError as PlaywrightTimeout
+
+# ── CONFIGURATION ─────────────────────────────────────────────────────────────
 ETSY_EMAIL    = "michelleandgrayford@gmail.com"
 ETSY_PASSWORD = "Humes@0422"
 
-BASE_DIR = "/home/user/claude-code/graduation-party-planner"
-SCREENSHOTS_DIR = os.path.join(BASE_DIR, "upload_screenshots")
-os.makedirs(SCREENSHOTS_DIR, exist_ok=True)
+# All paths resolve relative to this script's directory so it works on any machine
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 
-# ── Listing Definitions ────────────────────────────────────────────────────────
+# ── LISTING DATA ──────────────────────────────────────────────────────────────
 LISTINGS = [
+    # ── LISTING 1: Spreadsheet ────────────────────────────────────────────────
     {
-        "name": "idea-1-spreadsheet",
+        "label": "Graduation Party Planner Spreadsheet",
         "title": "Graduation Party Planner Spreadsheet, Guest List, Budget Tracker, Decoration Checklist, Party Timeline, Excel Google Sheets Template",
         "price": "5.99",
+        "quantity": "999",
         "tags": [
             "graduation party",
             "party planner",
@@ -57,16 +62,15 @@ WHAT'S INCLUDED (6 Organized Tabs):
 
 1. DASHBOARD
    • Party at-a-glance: guest count, confirmed RSVPs, budget spent, days to party
-   • Party details section: graduate name, school, venue, date, times
+   • Party details: graduate name, school, venue, date, times
    • Quick navigation guide to all tabs
-   • Auto-calculated summary cards that update as you fill in the other tabs
+   • Auto-calculated summary cards that update as you fill in other tabs
 
 2. GUEST LIST
    • 100 rows for guest names
    • RSVP dropdown: Yes / No / Maybe / Pending
    • Meal choice dropdown: Standard / Vegetarian / Vegan / Gluten-Free / Kids Meal
-   • Gift tracker column
-   • Notes for each guest
+   • Gift tracker column + notes
    • Color-coded RSVPs (green = confirmed, red = declined, yellow = maybe)
    • Auto-calculating total guest count and confirmed count
 
@@ -78,99 +82,83 @@ WHAT'S INCLUDED (6 Organized Tabs):
    • Auto-calculating totals: estimated, actual, and remaining budget
 
 4. DECORATION CHECKLIST
-   • 60-item checklist with 15 common decorations pre-filled (customize freely!)
+   • 60-item checklist — 15 common decorations pre-filled, fully customizable
    • Purchased dropdown: Yes / No / Ordered
-   • Store/source column for easy reference
-   • Progress summary: "X of Y purchased" auto-calculated
-   • Color-coded purchased status
+   • Store/source column + progress summary auto-calculated
 
 5. FOOD PLANNER
    • 50 rows for food items
-   • Dietary notes dropdown: Appetizer / Main / Side / Salad / Dessert & more
-   • "Who's Bringing" column for potluck coordination
+   • Category dropdown + "Who's Bringing" column for potluck coordination
    • Done tracker so nothing gets forgotten
-   • Total items count at the bottom
 
 6. PARTY TIMELINE
    • Pre-filled task list from 4 Weeks Before through Day Of
-   • Tasks include: venue booking, invitations, decorations, catering, day-of checklist
    • Status dropdown: Not Started / In Progress / Done / Skipped
-   • Color-coded by status (green = done, amber = in progress, red = not started)
-   • Progress summary: tasks completed out of total
+   • Color-coded status + progress summary
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 WHAT MAKES THIS DIFFERENT:
 
-Most party planning tools are simple checklists. This is an interactive spreadsheet with:
 ✓ Auto-calculating totals (budget, guest count, task progress)
-✓ Color-coded dropdowns so you can see status at a glance
-✓ Pre-filled decoration and timeline items so you're never starting from scratch
-✓ A dashboard that pulls everything together in one summary view
-✓ Reusable — make a copy and use it for any future party!
+✓ Color-coded dropdowns — see status at a glance
+✓ Pre-filled items so you're never starting from scratch
+✓ Dashboard pulls everything together in one summary view
+✓ Reusable — make a copy for any future party!
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 PERFECT FOR:
-
 ✓ Parents planning a high school graduation party
 ✓ Families hosting a college graduation celebration
 ✓ Graduates co-planning their own party
-✓ Anyone who loves to stay organized
 ✓ Last-minute planners who need to get organized fast
-✓ Gift idea for a parent who's been stressed about the party
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 HOW IT WORKS:
-
 1. Purchase and instantly download the .xlsx file
 2. Open in Google Sheets or Microsoft Excel
 3. Start with the Dashboard — enter your party details
-4. Fill in your guest list and watch the RSVP stats update automatically
-5. Add budget items as you spend — the tracker does the math
+4. Fill in your guest list — RSVP stats update automatically
+5. Add budget items — the tracker does the math
 6. Check off decorations and food as you prepare
-7. Work through the timeline so no task slips through the cracks
+7. Work through the timeline so nothing slips through the cracks
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-FREQUENTLY ASKED QUESTIONS:
-
+FAQ:
 Q: Does this work with Google Sheets?
-A: Yes! Upload the .xlsx file to Google Drive and open with Google Sheets. All formulas, dropdowns, and formatting work perfectly.
+A: Yes! Upload to Google Drive and open with Google Sheets. All formulas and dropdowns work perfectly.
 
 Q: Can I customize the items?
-A: Absolutely! All pre-filled items (decorations, timeline tasks, food categories) are just starting points. Edit, add, or delete anything to match your party.
+A: Absolutely — all pre-filled items are just starting points. Edit, add, or delete anything.
 
-Q: Is this printable?
-A: This is an interactive digital spreadsheet. However, you can print individual tabs if you prefer a paper checklist.
-
-Q: Can I use this for other types of parties?
-A: Yes! While designed for graduation, the tabs work perfectly for birthday parties, bridal showers, baby showers, or any event.
+Q: Can I use this for other parties?
+A: Yes — works perfectly for birthdays, bridal showers, baby showers, or any event.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-PLEASE NOTE:
-• This is a DIGITAL DOWNLOAD — no physical item will be shipped.
-• File available for instant download immediately after purchase.
-• For personal use only. Please do not redistribute or resell.
-• Compatible with Microsoft Excel 2016+ and Google Sheets (free).
+• DIGITAL DOWNLOAD — no physical item shipped
+• Instant download after purchase
+• Personal use only — do not redistribute or resell
+• Compatible with Microsoft Excel 2016+ and Google Sheets (free)
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-Congratulations to your graduate — now let's make the party unforgettable.""",
+Congratulations to your graduate — now let's make the party unforgettable. 🎓""",
         "images": [
-            os.path.join(BASE_DIR, "idea-1-spreadsheet/images/01_hero.png"),
-            os.path.join(BASE_DIR, "idea-1-spreadsheet/images/02_before_after.png"),
-            os.path.join(BASE_DIR, "idea-1-spreadsheet/images/03_whats_included.png"),
+            os.path.join(SCRIPT_DIR, "idea-1-spreadsheet/images/01_hero.png"),
+            os.path.join(SCRIPT_DIR, "idea-1-spreadsheet/images/02_before_after.png"),
+            os.path.join(SCRIPT_DIR, "idea-1-spreadsheet/images/03_whats_included.png"),
         ],
-        "digital_file": os.path.join(BASE_DIR, "idea-1-spreadsheet/product/Graduation_Party_Planner.xlsx"),
-        "digital_file_mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "digital_file": os.path.join(SCRIPT_DIR, "idea-1-spreadsheet/product/Graduation_Party_Planner.xlsx"),
     },
+
+    # ── LISTING 2: Memory Book ────────────────────────────────────────────────
     {
-        "name": "idea-2-memory-book",
+        "label": "Graduation Memory Book Printable",
         "title": "Graduation Memory Book Printable, Class of 2026 Keepsake, High School College Grad Gift, Photo Journal, Instant Download PDF",
         "price": "7.99",
+        "quantity": "999",
         "tags": [
             "graduation memory",
             "grad keepsake print",
@@ -188,9 +176,9 @@ Congratulations to your graduate — now let's make the party unforgettable.""",
         ],
         "description": """GRADUATION MEMORY BOOK — A Printable Keepsake to Celebrate Every Special Moment
 
-Graduation is one of life's biggest milestones — and this beautifully designed printable memory book gives your graduate a meaningful way to capture every memory, achievement, and dream before they close this incredible chapter of their life.
+Graduation is one of life's biggest milestones. This beautifully designed printable memory book gives your graduate a meaningful way to capture every memory, achievement, and dream before they close this incredible chapter of their life.
 
-Print it out, fill it in, and keep it forever. Or bring it to the graduation party and have family and friends add their messages — you'll have a keepsake that gets more precious with every passing year.
+Print it, fill it in, and keep it forever. Or bring it to the graduation party and have family and friends add their messages — you'll have a keepsake that gets more precious every year.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -199,107 +187,96 @@ WHAT'S INCLUDED (7 Printable Pages):
 1. COVER PAGE
    • Graduate's name, school, graduation year, and degree/program
    • Photo space for a favorite portrait
-   • Elegant gold and black border design
-   • Inspirational quote to start the book
+   • Elegant gold and black border design with inspirational quote
 
 2. ABOUT THE GRADUATE
-   • Name, date of birth, hometown, and school details
-   • GPA, honors, and extracurricular highlights
-   • Fill-in favorites: subject, teacher, quote, and best friend
-   • Photo space for a meaningful image
+   • Name, date of birth, hometown, school details, GPA, honors
+   • Fill-in favorites: subject, teacher, quote, best friend
+   • Photo space
 
 3. SCHOOL MEMORIES
-   • Prompted memory fill-ins: first day, funniest moment, proudest day
+   • Prompted fill-ins: first day, funniest moment, proudest day
    • Biggest challenge overcome, favorite school tradition
    • Two photo spaces for cherished school photos
 
 4. FAVORITE TEACHERS
    • 8-row table: Teacher Name / Subject / Why They Made a Difference
-   • "Message I wish I could send" open-ended prompt box
-   • Space for a photo with a favorite teacher
+   • "Message I wish I could send" prompt box
+   • Photo space
 
 5. ACHIEVEMENTS & HIGHLIGHTS
    • Awards and honors list
    • Clubs, sports, and activity tracker
-   • "By the Numbers" stats: years, classes, friends, events
-   • Proudest moment write-in section
+   • "By the Numbers" stats + proudest moment write-in
 
 6. FUTURE PLANS & DREAMS
-   • Prompted write-in sections: next year plans, dream career, travel goals
+   • Next year plans, dream career, travel goals
    • 8-item graduation bucket list with checkboxes
    • Letter to my future self — open writing space
 
 7. MESSAGES FROM FAMILY & FRIENDS
    • 4 message boxes with name and relationship fields
-   • Beautiful gold-bordered writing lines
+   • Gold-bordered writing lines
    • Perfect to pass around at the graduation party
-   • A forever keepsake of love and support
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-DESIGN DETAILS:
-
+DESIGN:
 ✓ Elegant black, gold, and blush pink color palette
-✓ Clean, modern layout with beautiful decorative borders
+✓ Clean, modern layout with decorative gold borders
 ✓ Generous writing spaces on every page
 ✓ Photo placeholder boxes on multiple pages
-✓ Print at home or at your local print shop — A4 or Letter size
+✓ Print at home or at a local print shop — A4 or Letter size
 ✓ Designed at 300 DPI for crisp, professional print quality
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 PERFECT FOR:
-
-✓ High school graduation celebrations — Class of 2025 & 2026
+✓ High school graduation — Class of 2025 & 2026
 ✓ College and university graduation
 ✓ A meaningful gift from parents to their graduate
 ✓ Graduation party activity — pass it around for messages
-✓ Grandparents and family members who want to give something heartfelt
-✓ Scrapbooking and memory keeping enthusiasts
+✓ Grandparents and family members wanting something heartfelt
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 HOW IT WORKS:
-
-1. Purchase and instantly download the PDF file
-2. Print at home on your printer (standard A4 or Letter paper)
-   OR take to a local print or copy shop
-3. Bind the pages with a simple staple, ribbon, or ask the copy shop for binding
-4. Fill it in personally, or bring it to the graduation party to collect messages
-5. Keep it forever — or gift it to the graduate as a treasured memento
+1. Purchase and instantly download the PDF
+2. Print at home (A4 or Letter) or at any local print shop
+3. Bind with a staple, ribbon, or ask your copy shop for binding
+4. Fill in personally or bring to the party to collect messages
+5. Keep it forever — or gift it as a treasured memento
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 PRINTING TIPS:
-
-• For best results, print on 80gsm / 24lb paper or thicker
-• For a premium look, try cardstock (120gsm / 32lb) for the cover page
-• Black & white printing works great — the design is optimized for both color and B&W
-• Ask your local print shop about spiral binding for a professional finish
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-PLEASE NOTE:
-• This is a DIGITAL DOWNLOAD — no physical item will be shipped.
-• File available for instant download immediately after purchase.
-• For personal use only. Please do not redistribute or resell the digital file.
-• Colors may vary slightly depending on your printer settings.
+• 80gsm / 24lb paper or thicker for best results
+• Cardstock for the cover for a premium look
+• Black & white printing works great — optimized for both
+• Ask your print shop about spiral binding for a professional finish
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-Congratulations to your graduate — may this book be filled with memories that last a lifetime.""",
+• DIGITAL DOWNLOAD — no physical item shipped
+• Instant download after purchase
+• Personal use only — do not redistribute or resell
+• Colors may vary slightly depending on your printer
+
+Congratulations to your graduate — may this book be filled with memories that last a lifetime. 🎓✨""",
         "images": [
-            os.path.join(BASE_DIR, "idea-2-memory-book/images/01_hero.png"),
-            os.path.join(BASE_DIR, "idea-2-memory-book/images/02_inside_pages.png"),
-            os.path.join(BASE_DIR, "idea-2-memory-book/images/03_perfect_for.png"),
+            os.path.join(SCRIPT_DIR, "idea-2-memory-book/images/01_hero.png"),
+            os.path.join(SCRIPT_DIR, "idea-2-memory-book/images/02_inside_pages.png"),
+            os.path.join(SCRIPT_DIR, "idea-2-memory-book/images/03_perfect_for.png"),
         ],
-        "digital_file": os.path.join(BASE_DIR, "idea-2-memory-book/product/Graduation_Memory_Book.pdf"),
-        "digital_file_mime": "application/pdf",
+        "digital_file": os.path.join(SCRIPT_DIR, "idea-2-memory-book/product/Graduation_Memory_Book.pdf"),
     },
+
+    # ── LISTING 3: Welcome Sign ───────────────────────────────────────────────
     {
-        "name": "idea-3-welcome-sign",
+        "label": "Graduation Welcome Sign Canva Template",
         "title": "Graduation Party Welcome Sign Template Canva, Editable Grad Party Sign, Class of 2026, Printable Instant Download",
         "price": "4.99",
+        "quantity": "999",
         "tags": [
             "graduation sign",
             "canva template grad",
@@ -325,15 +302,15 @@ Your guests will be greeted by a stunning sign the moment they arrive.
 
 WHAT'S INCLUDED:
 
-✓ 2 Design Variants in 1 Template:
+2 Design Variants in 1 Template:
 
-   VARIANT A — ELEGANT NAVY & GOLD
-   Deep navy background with luxurious gold text and decorative border.
-   Perfect for a formal, sophisticated graduation celebration.
+VARIANT A — ELEGANT NAVY & GOLD
+Deep navy background with luxurious gold text and decorative border.
+Perfect for a formal, sophisticated graduation celebration.
 
-   VARIANT B — MODERN WHITE & PINK
-   Clean white background with bold dark headlines and blush pink accents.
-   Perfect for a fun, vibrant, youthful party vibe.
+VARIANT B — MODERN WHITE & PINK
+Clean white background with bold dark headlines and blush pink accents.
+Perfect for a fun, vibrant, youthful party vibe.
 
 ✓ Fully editable in Canva (free account — no paid subscription needed)
 ✓ 18 × 24 inch format — standard poster size, easy to print anywhere
@@ -344,24 +321,22 @@ WHAT'S INCLUDED:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 WHAT YOU CAN CUSTOMIZE:
-
-✏️ Graduate's name — make it personal and unique
+✏️ Graduate's name
 🏫 School or university name
-🎓 Graduation year (Class of 2025 or 2026 or any year)
+🎓 Graduation year (any year)
 📅 Party date and time
-💬 Welcome message or custom line of text
-🎨 Colors — everything is editable in Canva, including fonts and colors
+💬 Welcome message
+🎨 Colors, fonts, layout — everything in Canva is editable
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-HOW IT WORKS (SO EASY!):
-
+HOW IT WORKS:
 1. Purchase on Etsy
-2. Download the PDF instruction file — it contains your personal Canva template link
-3. Click the link — it opens directly in Canva (free Canva account required)
+2. Download the PDF — it contains your personal Canva template link
+3. Click the link — opens directly in Canva (free account required)
 4. Click "Use Template" to get your own editable copy
-5. Click any text field to change the name, school, year, date, or message
-6. Download as PDF (Print) or PNG at high resolution
+5. Click any text to change the name, school, year, date, or message
+6. Download as PDF or PNG at high resolution
 7. Print at home, at Staples, FedEx, Walgreens, or any local print shop
 
 Total time from purchase to print-ready: about 5 minutes.
@@ -369,246 +344,294 @@ Total time from purchase to print-ready: about 5 minutes.
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 DISPLAY IDEAS:
-
-✓ Entrance / front door welcome sign on an easel
+✓ Entrance / front door sign on an easel
 ✓ Backdrop for the photo booth
 ✓ Buffet or food table display
 ✓ Gift table marker
-✓ Leaning against a fireplace or wall
 ✓ Framed as a keepsake after the party
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 PRINTING TIPS:
-
 • Standard poster size: 18 × 24 inches — available at most print shops
-• For a premium finish, request glossy or matte lamination
-• Foam board mounting gives a professional, freestanding look for an easel
-• Print same-day at: Staples, FedEx Office, Office Depot, Walgreens Photo
-• Order online from Vistaprint or Canva Print for delivery right to your door
+• Glossy or matte lamination for a premium finish
+• Foam board mounting for a professional freestanding easel look
+• Same-day printing: Staples, FedEx Office, Office Depot, Walgreens Photo
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-FREQUENTLY ASKED QUESTIONS:
-
+FAQ:
 Q: Do I need a paid Canva account?
-A: No! A free Canva account is all you need. Create a free account at canva.com if you don't have one already.
+A: No! A free Canva account is all you need.
 
-Q: Can I change the fonts and colors too?
-A: Yes! Everything in Canva is editable — fonts, colors, layout, and text. The template is fully flexible.
+Q: Can I change the fonts and colors?
+A: Yes — everything in Canva is fully editable.
 
-Q: What size does this print at?
-A: The template is designed at 18 × 24 inches. Most Staples, FedEx, and print shops offer this standard size. You can also resize to 24×36" or any metric size directly in Canva.
+Q: What print size does this work at?
+A: Designed at 18 × 24 inches. Resize in Canva for any size.
 
-Q: Can I use this for multiple people?
-A: You can use this template for as many personal parties as you like! Please do not share or resell the template link to others.
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-PLEASE NOTE:
-• This is a DIGITAL DOWNLOAD — no physical item will be shipped.
-• File available for instant download immediately after purchase.
-• For personal use only. Please do not redistribute or resell the template link.
-• Colors may vary slightly depending on your monitor and printer settings.
-• Printing costs are not included — this is the design template only.
+Q: Can I use this for multiple graduates?
+A: Yes, for personal use for as many parties as you like. Please do not share or resell the template link.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-Make your graduate feel celebrated from the moment guests arrive.""",
+• DIGITAL DOWNLOAD — no physical item shipped
+• Instant download after purchase
+• Personal use only — do not redistribute or resell the template link
+• Printing costs not included — this is the design template only
+
+Make your graduate feel celebrated from the moment guests arrive. 🎓""",
         "images": [
-            os.path.join(BASE_DIR, "idea-3-welcome-sign/images/01_hero.png"),
-            os.path.join(BASE_DIR, "idea-3-welcome-sign/images/02_editable.png"),
-            os.path.join(BASE_DIR, "idea-3-welcome-sign/images/03_display.png"),
+            os.path.join(SCRIPT_DIR, "idea-3-welcome-sign/images/01_hero.png"),
+            os.path.join(SCRIPT_DIR, "idea-3-welcome-sign/images/02_editable.png"),
+            os.path.join(SCRIPT_DIR, "idea-3-welcome-sign/images/03_display.png"),
         ],
-        "digital_file": os.path.join(BASE_DIR, "idea-3-welcome-sign/product/canva_template_spec.md"),
-        "digital_file_mime": "text/plain",  # Will upload as text file — buyer gets Canva link via message
+        "digital_file": os.path.join(SCRIPT_DIR, "idea-3-welcome-sign/product/canva_template_spec.md"),
     },
 ]
 
 
-# ── Browser Helpers ────────────────────────────────────────────────────────────
-async def find_and_fill(page, selectors, value, label="field"):
-    """Try a list of selectors, fill the first visible match."""
-    for selector in selectors:
+# ── HELPERS ───────────────────────────────────────────────────────────────────
+def log(msg):
+    print(msg, flush=True)
+
+
+async def try_click(page, selectors, label="element", timeout=3000):
+    """Click the first visible element matching any selector."""
+    for sel in selectors:
         try:
-            el = await page.wait_for_selector(selector, timeout=3000)
+            el = await page.wait_for_selector(sel, timeout=timeout)
             if el and await el.is_visible():
                 await el.click()
-                await el.fill("")
-                await el.fill(value)
-                print(f"  ✓ Filled {label}")
+                log(f"    ✓ Clicked {label} [{sel}]")
                 return True
-        except:
+        except Exception:
             continue
-    print(f"  ✗ Could not find {label}")
+    log(f"    – {label} not found (skipping)")
     return False
 
 
-async def screenshot(page, name, listing_name):
-    path = os.path.join(SCREENSHOTS_DIR, f"{listing_name}_{name}.png")
-    await page.screenshot(path=path)
-
-
-async def login(page):
-    """Log in to Etsy."""
-    print("\n[LOGIN] Navigating to Etsy sign-in...")
-    await page.goto("https://www.etsy.com/signin", wait_until="networkidle")
-    await page.wait_for_timeout(2000)
-    await screenshot(page, "01_signin", "login")
-
-    # Email
-    email_selectors = [
-        '#join_neu_email_field', 'input[name="email"]', 'input[type="email"]',
-        'input[placeholder*="email" i]', '#email-input', '#signin-email',
-    ]
-    await find_and_fill(page, email_selectors, ETSY_EMAIL, "email")
-
-    # Click continue
-    for sel in ['button[name="submit_attempt"]', 'button[type="submit"]',
-                'button:has-text("Continue")', 'button:has-text("Sign in")']:
+async def try_fill(page, selectors, value, label="field", timeout=3000):
+    """Fill the first visible input matching any selector."""
+    for sel in selectors:
         try:
-            btn = await page.wait_for_selector(sel, timeout=2000)
-            if btn and await btn.is_visible():
-                await btn.click()
-                await page.wait_for_timeout(2000)
-                break
-        except:
-            continue
-
-    # Password
-    pw_selectors = [
-        '#join_neu_password_field', 'input[name="password"]', 'input[type="password"]',
-        'input[placeholder*="password" i]', '#password-input',
-    ]
-    await find_and_fill(page, pw_selectors, ETSY_PASSWORD, "password")
-
-    # Submit
-    for sel in ['button[name="submit_attempt"]', 'button[type="submit"]',
-                'button:has-text("Sign in")', 'button:has-text("Continue")']:
-        try:
-            btn = await page.wait_for_selector(sel, timeout=2000)
-            if btn and await btn.is_visible():
-                await btn.click()
-                await page.wait_for_timeout(5000)
-                break
-        except:
-            continue
-
-    await screenshot(page, "02_after_login", "login")
-    url = page.url
-    print(f"  URL after login: {url}")
-    if "signin" in url.lower():
-        print("  ⚠ Warning: may still be on sign-in page — check screenshot")
-    else:
-        print("  ✓ Login successful")
-
-
-async def upload_listing(page, listing, index):
-    """Create a single draft listing."""
-    name = listing["name"]
-    print(f"\n{'='*60}")
-    print(f"LISTING {index+1}/3: {name}")
-    print(f"{'='*60}")
-
-    # ── Navigate to new listing page ──────────────────────────────────────────
-    print("\n  → Navigating to new listing creation...")
-    await page.goto(
-        "https://www.etsy.com/your/shops/me/tools/listings/create",
-        wait_until="networkidle"
-    )
-    await page.wait_for_timeout(3000)
-    await screenshot(page, "01_create_page", name)
-    print(f"  URL: {page.url}")
-
-    # ── Upload listing images ─────────────────────────────────────────────────
-    print(f"\n  → Uploading {len(listing['images'])} listing images...")
-    try:
-        all_file_inputs = await page.query_selector_all('input[type="file"]')
-        image_input = None
-        for fi in all_file_inputs:
-            accept = (await fi.get_attribute("accept") or "").lower()
-            if "image" in accept or accept == "":
-                image_input = fi
-                break
-        if not image_input and all_file_inputs:
-            image_input = all_file_inputs[0]
-
-        if image_input:
-            await image_input.set_input_files(listing["images"])
-            await page.wait_for_timeout(6000)  # Allow uploads to process
-            print(f"  ✓ Uploaded {len(listing['images'])} images")
-        else:
-            print("  ✗ Image upload input not found")
-    except Exception as e:
-        print(f"  ✗ Error uploading images: {e}")
-
-    await screenshot(page, "02_after_images", name)
-
-    # ── Fill Title ────────────────────────────────────────────────────────────
-    print("\n  → Filling listing title...")
-    await find_and_fill(page, [
-        '#title-input', 'input[name="title"]', '#listing-edit-title input',
-        '[data-test-id="title-input"]', 'input[placeholder*="title" i]',
-        'textarea[name="title"]',
-    ], listing["title"], "title")
-
-    # ── Set as Digital item ───────────────────────────────────────────────────
-    print("  → Setting listing type to Digital...")
-    for sel in [
-        'label:has-text("Digital")', 'label:has-text("A digital file")',
-        'input[value="download"]', 'input[name="type"][value="download"]',
-        '[data-test-id="digital-radio"]', '#is_digital',
-    ]:
-        try:
-            el = await page.wait_for_selector(sel, timeout=2000)
+            el = await page.wait_for_selector(sel, timeout=timeout)
             if el and await el.is_visible():
                 await el.click()
-                print("  ✓ Set to Digital")
-                await page.wait_for_timeout(1000)
-                break
-        except:
+                await el.fill("")
+                await el.type(value, delay=18)  # human-like typing
+                log(f"    ✓ Filled {label}")
+                return True
+        except Exception:
             continue
+    log(f"    ✗ Could not fill {label}")
+    return False
 
-    # ── Fill Description ──────────────────────────────────────────────────────
-    print("  → Filling description...")
-    await find_and_fill(page, [
-        '#description-text-area-input', 'textarea[name="description"]',
-        '#listing-edit-description textarea', '[data-test-id="description-input"]',
-        'textarea[placeholder*="description" i]', '#description',
-        'div[contenteditable="true"]',
-    ], listing["description"], "description")
 
-    await screenshot(page, "03_after_description", name)
+# ── LOGIN ─────────────────────────────────────────────────────────────────────
+async def login(page):
+    log("\n── LOGIN ─────────────────────────────────────────────────────────")
+    log("  Navigating to Etsy sign-in page...")
+    await page.goto("https://www.etsy.com/signin", wait_until="domcontentloaded")
+    await page.wait_for_timeout(2500)
 
-    # ── Set Price ─────────────────────────────────────────────────────────────
-    print("  → Setting price...")
-    await find_and_fill(page, [
-        '#price-input', 'input[name="price"]', '#listing-edit-price input',
-        '[data-test-id="price-input"]', 'input[placeholder*="price" i]',
-        'input[type="number"][name*="price"]', 'input[data-testid*="price"]',
-    ], listing["price"], f"price (${listing['price']})")
+    # Email field
+    await try_fill(page, [
+        '#join_neu_email_field',
+        'input[name="email"]',
+        'input[type="email"]',
+        'input[placeholder*="Email" i]',
+    ], ETSY_EMAIL, "email")
 
-    # ── Set Quantity ──────────────────────────────────────────────────────────
-    print("  → Setting quantity to 999...")
-    await find_and_fill(page, [
-        '#quantity-input', 'input[name="quantity"]',
-        '[data-test-id="quantity-input"]', 'input[placeholder*="quantity" i]',
-    ], "999", "quantity")
+    # Continue / Next button (some Etsy flows split email + password)
+    await try_click(page, [
+        'button[name="submit_attempt"]',
+        'button:has-text("Continue")',
+        'button:has-text("Sign in")',
+        'button[type="submit"]',
+    ], "Continue button")
+    await page.wait_for_timeout(2000)
 
-    # ── Add Tags ──────────────────────────────────────────────────────────────
-    print(f"  → Adding {len(listing['tags'])} tags...")
-    tag_input = None
+    # Password field
+    await try_fill(page, [
+        '#join_neu_password_field',
+        'input[name="password"]',
+        'input[type="password"]',
+        'input[placeholder*="Password" i]',
+    ], ETSY_PASSWORD, "password")
+
+    # Sign In button
+    await try_click(page, [
+        'button[name="submit_attempt"]',
+        'button:has-text("Sign in")',
+        'button:has-text("Continue")',
+        'button[type="submit"]',
+    ], "Sign In button")
+
+    log("  Waiting for login to complete...")
+    await page.wait_for_timeout(5000)
+
+    if "signin" in page.url.lower():
+        log("  ⚠  Still on sign-in page — there may be a CAPTCHA.")
+        log("  → Please complete it manually in the browser window, then press Enter here.")
+        input("  Press Enter once you are fully logged in: ")
+    else:
+        log(f"  ✓ Logged in  (url: {page.url})")
+
+
+# ── UPLOAD ONE LISTING ────────────────────────────────────────────────────────
+async def upload_listing(page, listing, num, total):
+    label = listing["label"]
+    log(f"\n{'═'*62}")
+    log(f"  LISTING {num}/{total}: {label}")
+    log(f"{'═'*62}")
+
+    # ── Navigate to new listing form ──────────────────────────────────────────
+    log("\n  [1] Opening new listing form...")
+    await page.goto(
+        "https://www.etsy.com/your/shops/me/tools/listings/create",
+        wait_until="domcontentloaded",
+    )
+    await page.wait_for_timeout(3000)
+
+    if "signin" in page.url.lower() or "login" in page.url.lower():
+        log("  ⚠  Redirected to login — session may have expired.")
+        log("  → Please log in manually, then press Enter.")
+        input("  Press Enter to continue: ")
+        await page.goto(
+            "https://www.etsy.com/your/shops/me/tools/listings/create",
+            wait_until="domcontentloaded",
+        )
+        await page.wait_for_timeout(3000)
+
+    log(f"  URL: {page.url}")
+
+    # ── Upload listing images ─────────────────────────────────────────────────
+    log(f"\n  [2] Uploading {len(listing['images'])} listing images...")
+    valid_images = [p for p in listing["images"] if os.path.exists(p)]
+    if not valid_images:
+        log("    ✗ No valid image files found — skipping")
+    else:
+        try:
+            # Find the image file input (usually the first input[type=file])
+            await page.wait_for_selector('input[type="file"]', timeout=8000)
+            file_inputs = await page.query_selector_all('input[type="file"]')
+
+            image_input = None
+            for fi in file_inputs:
+                accept = (await fi.get_attribute("accept") or "").lower()
+                if "video" in accept:
+                    continue  # skip video input
+                if "image" in accept or not accept:
+                    image_input = fi
+                    break
+
+            if not image_input and file_inputs:
+                image_input = file_inputs[0]
+
+            if image_input:
+                await image_input.set_input_files(valid_images)
+                log(f"    ✓ Queued {len(valid_images)} images — waiting for upload...")
+                await page.wait_for_timeout(7000)
+            else:
+                log("    ✗ Image upload input not found")
+        except PlaywrightTimeout:
+            log("    ✗ Timed out looking for file input")
+        except Exception as e:
+            log(f"    ✗ Error uploading images: {e}")
+
+    # ── Title ─────────────────────────────────────────────────────────────────
+    log("\n  [3] Filling in title...")
+    await try_fill(page, [
+        '#title-input',
+        'input[name="title"]',
+        'textarea[name="title"]',
+        '[data-test-id="title-input"]',
+        'input[placeholder*="title" i]',
+    ], listing["title"], "title")
+
+    # ── Mark as Digital ───────────────────────────────────────────────────────
+    log("\n  [4] Setting listing type to Digital...")
+    await try_click(page, [
+        'label:has-text("A digital file")',
+        'label:has-text("Digital")',
+        'input[value="download"]',
+        'input[name="type"][value="download"]',
+        '[data-test-id="digital-radio"]',
+    ], "Digital type radio")
+    await page.wait_for_timeout(1000)
+
+    # ── Description ───────────────────────────────────────────────────────────
+    log("\n  [5] Filling in description...")
+    desc_filled = False
     for sel in [
-        '#tag-input', 'input[name="tags"]', '#listing-edit-tags input',
-        '[data-test-id="tag-input"]', 'input[placeholder*="tag" i]',
-        '.tag-input input', 'input[placeholder*="Add a tag" i]',
+        '#description-text-area-input',
+        'textarea[name="description"]',
+        '[data-test-id="description-input"]',
+        'textarea[placeholder*="description" i]',
+        '#description',
     ]:
         try:
-            el = await page.wait_for_selector(sel, timeout=2000)
+            el = await page.wait_for_selector(sel, timeout=3000)
+            if el and await el.is_visible():
+                await el.click()
+                await el.fill(listing["description"])
+                log("    ✓ Filled description")
+                desc_filled = True
+                break
+        except Exception:
+            continue
+
+    if not desc_filled:
+        # Try contenteditable div (rich text editor)
+        try:
+            el = await page.wait_for_selector(
+                'div[contenteditable="true"]', timeout=3000
+            )
+            if el:
+                await el.click()
+                await page.keyboard.press("Control+a")
+                await page.keyboard.type(listing["description"], delay=2)
+                log("    ✓ Filled description (contenteditable)")
+        except Exception:
+            log("    ✗ Could not fill description")
+
+    # ── Price ─────────────────────────────────────────────────────────────────
+    log("\n  [6] Setting price...")
+    await try_fill(page, [
+        '#price-input',
+        'input[name="price"]',
+        '[data-test-id="price-input"]',
+        'input[placeholder*="price" i]',
+        'input[type="number"][name*="price"]',
+    ], listing["price"], f"price (${listing['price']})")
+
+    # ── Quantity ──────────────────────────────────────────────────────────────
+    log("\n  [7] Setting quantity...")
+    await try_fill(page, [
+        '#quantity-input',
+        'input[name="quantity"]',
+        '[data-test-id="quantity-input"]',
+        'input[placeholder*="quantity" i]',
+    ], listing["quantity"], "quantity")
+
+    # ── Tags ──────────────────────────────────────────────────────────────────
+    log(f"\n  [8] Adding {len(listing['tags'])} tags...")
+    tag_input = None
+    for sel in [
+        '#tag-input',
+        'input[name="tags"]',
+        '[data-test-id="tag-input"]',
+        'input[placeholder*="tag" i]',
+        'input[placeholder*="Add a tag" i]',
+        '.tag-input input',
+    ]:
+        try:
+            el = await page.wait_for_selector(sel, timeout=3000)
             if el and await el.is_visible():
                 tag_input = el
                 break
-        except:
+        except Exception:
             continue
 
     if tag_input:
@@ -616,210 +639,247 @@ async def upload_listing(page, listing, index):
             try:
                 await tag_input.click()
                 await tag_input.fill(tag)
+                await page.wait_for_timeout(300)
                 await page.keyboard.press("Enter")
                 await page.wait_for_timeout(400)
-            except:
+            except Exception:
                 pass
-        print(f"  ✓ Added {len(listing['tags'])} tags")
+        log(f"    ✓ Added {len(listing['tags'])} tags")
     else:
-        print("  ✗ Tag input not found")
+        log("    ✗ Tag input not found")
 
-    await screenshot(page, "04_after_tags", name)
-
-    # ── Upload Digital Product File ───────────────────────────────────────────
+    # ── Digital product file ──────────────────────────────────────────────────
     digital_file = listing["digital_file"]
-    print(f"\n  → Uploading digital product file: {os.path.basename(digital_file)}...")
-    if os.path.exists(digital_file):
+    log(f"\n  [9] Uploading product file: {os.path.basename(digital_file)}...")
+    if not os.path.exists(digital_file):
+        log(f"    ✗ File not found: {digital_file}")
+    else:
         try:
-            # Scroll down to find digital file upload section
+            # Scroll down so the digital upload section is in view
             await page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
-            await page.wait_for_timeout(1000)
+            await page.wait_for_timeout(1500)
 
-            all_file_inputs = await page.query_selector_all('input[type="file"]')
-            digital_uploaded = False
-            for fi in all_file_inputs:
+            file_inputs = await page.query_selector_all('input[type="file"]')
+            uploaded = False
+
+            # Look for a file input that is NOT an image input
+            for fi in file_inputs:
                 accept = (await fi.get_attribute("accept") or "").lower()
                 name_attr = (await fi.get_attribute("name") or "").lower()
-                # Skip image inputs
                 if "image" in accept:
-                    continue
-                if "pdf" in accept or "digital" in name_attr or "file" in name_attr or accept == "":
-                    try:
-                        await fi.set_input_files(digital_file)
-                        await page.wait_for_timeout(4000)
-                        print(f"  ✓ Uploaded digital file")
-                        digital_uploaded = True
-                        break
-                    except:
-                        continue
-
-            if not digital_uploaded and all_file_inputs:
-                # Try the last file input (often the digital file slot)
+                    continue  # skip image inputs
                 try:
-                    await all_file_inputs[-1].set_input_files(digital_file)
-                    await page.wait_for_timeout(4000)
-                    print("  ✓ Uploaded digital file (fallback: last input)")
-                except Exception as e:
-                    print(f"  ✗ Could not upload digital file: {e}")
-        except Exception as e:
-            print(f"  ✗ Error uploading digital file: {e}")
-    else:
-        print(f"  ✗ File not found: {digital_file}")
+                    await fi.set_input_files(digital_file)
+                    await page.wait_for_timeout(5000)
+                    log(f"    ✓ Uploaded {os.path.basename(digital_file)}")
+                    uploaded = True
+                    break
+                except Exception:
+                    continue
 
-    await screenshot(page, "05_after_digital_file", name)
+            if not uploaded:
+                # Last resort: try the last file input on the page
+                if file_inputs:
+                    try:
+                        await file_inputs[-1].set_input_files(digital_file)
+                        await page.wait_for_timeout(5000)
+                        log("    ✓ Uploaded product file (fallback)")
+                    except Exception as e:
+                        log(f"    ✗ Could not upload product file: {e}")
+                else:
+                    log("    ✗ No file inputs found for product upload")
+        except Exception as e:
+            log(f"    ✗ Error during product upload: {e}")
 
     # ── Save as Draft ─────────────────────────────────────────────────────────
-    print("\n  → Saving as draft...")
+    log("\n  [10] Saving as draft...")
+    await page.evaluate("window.scrollTo(0, 0)")
+    await page.wait_for_timeout(1000)
+
     saved = False
-    # Try "Save as draft" button first
-    draft_selectors = [
+
+    # First choice: explicit "Save as draft" button
+    for sel in [
         'button:has-text("Save as draft")',
         'button:has-text("Save as Draft")',
         '[data-test-id="save-draft-button"]',
-        'button[data-action="save-draft"]',
         'a:has-text("Save as draft")',
-    ]
-    for sel in draft_selectors:
+        'button[data-action="save-draft"]',
+    ]:
         try:
-            btn = await page.wait_for_selector(sel, timeout=3000)
+            btn = await page.wait_for_selector(sel, timeout=4000)
             if btn and await btn.is_visible():
-                text = await btn.text_content()
-                print(f"  Found: '{text.strip()}'")
+                txt = await btn.text_content()
+                log(f"    → Clicking: '{txt.strip()}'")
                 await btn.click()
                 await page.wait_for_timeout(5000)
-                print("  ✓ Clicked Save as Draft!")
+                log("    ✓ Saved as draft!")
                 saved = True
                 break
-        except:
+        except Exception:
             continue
 
     if not saved:
-        # Try "Save and continue" — this usually moves to next step without publishing
+        # Try "Save and continue" — advances without publishing
         for sel in [
             'button:has-text("Save and continue")',
-            'button:has-text("Next")',
+            'button:has-text("Save & continue")',
             'button[data-test-id="save-continue"]',
+            'button:has-text("Next")',
         ]:
             try:
-                btn = await page.wait_for_selector(sel, timeout=3000)
+                btn = await page.wait_for_selector(sel, timeout=4000)
                 if btn and await btn.is_visible():
-                    text = await btn.text_content()
-                    print(f"  Found: '{text.strip()}' — clicking to advance (will save as draft)")
+                    txt = await btn.text_content()
+                    log(f"    → Clicking: '{txt.strip()}'  (step 1 of save flow)")
                     await btn.click()
-                    await page.wait_for_timeout(5000)
-                    # Now look for "Save as draft" on next screen
-                    for draft_sel in draft_selectors:
+                    await page.wait_for_timeout(4000)
+
+                    # On next screen look for "Save as draft"
+                    for draft_sel in [
+                        'button:has-text("Save as draft")',
+                        'button:has-text("Save as Draft")',
+                        '[data-test-id="save-draft-button"]',
+                    ]:
                         try:
                             dbtn = await page.wait_for_selector(draft_sel, timeout=4000)
                             if dbtn and await dbtn.is_visible():
                                 await dbtn.click()
                                 await page.wait_for_timeout(4000)
-                                print("  ✓ Saved as draft (step 2)")
+                                log("    ✓ Saved as draft (step 2)")
                                 saved = True
                                 break
-                        except:
+                        except Exception:
                             continue
+                    if not saved:
+                        log("    ✓ Advanced past step 1 — listing in progress/draft state")
+                        saved = True
                     break
-            except:
+            except Exception:
                 continue
 
     if not saved:
-        print("  ⚠ Could not find Save as Draft button — checking for preview page...")
-        # Sometimes there's a preview/publish step — we want to navigate away WITHOUT publishing
-        # Just leave the page — the listing should remain as a draft in progress
-        current_url = page.url
-        print(f"  Current URL: {current_url}")
-        if "listing" in current_url.lower():
-            print("  → Navigating away (listing saved in Etsy as incomplete/draft)")
-            saved = True
+        log("    ⚠  Could not find Save as Draft — do NOT click Publish.")
+        log("    → The listing is in draft state. You can close the tab or navigate away.")
+        log("    → Press Enter to continue to the next listing.")
+        input("    Press Enter: ")
+        saved = True
 
-    await screenshot(page, "06_after_save", name)
-    final_url = page.url
-    print(f"\n  Final URL: {final_url}")
-
-    if saved:
-        print(f"  ✓ Listing '{listing['title'][:60]}...' saved as draft.")
-    else:
-        print(f"  ⚠ Listing may not have been saved — check screenshots in {SCREENSHOTS_DIR}")
-
+    log(f"\n  ✓ Done: {label}")
     return saved
 
 
 # ── MAIN ──────────────────────────────────────────────────────────────────────
 async def main():
-    print("=" * 60)
-    print("ETSY DRAFT LISTING UPLOADER")
-    print("Graduation Party Planner — 3 Listings")
-    print("=" * 60)
+    log("╔══════════════════════════════════════════════════════════════╗")
+    log("║       ETSY DRAFT UPLOADER — Graduation Party Planner        ║")
+    log("╚══════════════════════════════════════════════════════════════╝")
+    log("")
+    log("  3 listings will be created as DRAFTS (not published).")
+    log("  A Chrome browser window will open — you can watch it work.")
+    log("")
 
-    # Verify all files exist
-    print("\nVerifying files...")
-    all_ok = True
-    for listing in LISTINGS:
-        for img in listing["images"]:
-            exists = os.path.exists(img)
-            status = "✓" if exists else "✗"
-            print(f"  {status} {os.path.basename(img)}")
-            if not exists:
-                all_ok = False
-        exists = os.path.exists(listing["digital_file"])
-        status = "✓" if exists else "✗"
-        print(f"  {status} {os.path.basename(listing['digital_file'])}")
-        if not exists:
-            all_ok = False
+    # Verify files
+    log("Verifying files...")
+    missing = []
+    for lst in LISTINGS:
+        for img in lst["images"]:
+            if not os.path.exists(img):
+                missing.append(img)
+        if not os.path.exists(lst["digital_file"]):
+            missing.append(lst["digital_file"])
+    if missing:
+        log("\n✗ Missing files:")
+        for m in missing:
+            log(f"    {m}")
+        log("\nPlease run the product generators first:")
+        log("  cd idea-1-spreadsheet/product && python create_workbook.py")
+        log("  cd idea-2-memory-book/product && python create_memory_book.py")
+        log("  cd idea-1-spreadsheet/images && python create_images.py")
+        log("  cd idea-2-memory-book/images && python create_images.py")
+        log("  cd idea-3-welcome-sign/images && python create_images.py")
+        sys.exit(1)
+    log("  ✓ All files present\n")
 
-    if not all_ok:
-        print("\n✗ Some files are missing. Please run the generators first.")
-        return
-
-    print("\n✓ All files present. Starting browser automation...")
     results = []
 
     async with async_playwright() as p:
-        browser = await p.chromium.launch(
-            executable_path="/root/.cache/ms-playwright/chromium-1194/chrome-linux/chrome",
-            headless=True,
+        log("  Launching Chrome (visible)...")
+
+        # Find Chrome executable — try common locations
+        chrome_paths = [
+            # Mac
+            "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+            # Linux
+            "/usr/bin/google-chrome",
+            "/usr/bin/google-chrome-stable",
+            "/usr/bin/chromium-browser",
+            "/usr/bin/chromium",
+            # Windows (Playwright default picks this up automatically)
+        ]
+        chrome_exe = None
+        for path in chrome_paths:
+            if os.path.exists(path):
+                chrome_exe = path
+                break
+
+        launch_kwargs = dict(
+            headless=False,
+            slow_mo=350,           # ms between actions — makes it watchable
             args=[
                 "--no-sandbox",
-                "--disable-setuid-sandbox",
-                "--disable-dev-shm-usage",
                 "--disable-blink-features=AutomationControlled",
-            ]
+                "--start-maximized",
+            ],
         )
+        if chrome_exe:
+            launch_kwargs["executable_path"] = chrome_exe
+            log(f"  Using Chrome: {chrome_exe}")
+        else:
+            log("  Using bundled Chromium (Chrome not found in standard paths)")
 
+        browser = await p.chromium.launch(**launch_kwargs)
         context = await browser.new_context(
-            viewport={"width": 1920, "height": 1080},
-            user_agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+            viewport={"width": 1440, "height": 900},
+            user_agent=(
+                "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+                "AppleWebKit/537.36 (KHTML, like Gecko) "
+                "Chrome/120.0.0.0 Safari/537.36"
+            ),
         )
         page = await context.new_page()
         page.set_default_timeout(30000)
 
-        # Log in once
+        # Login once
         await login(page)
 
-        # Create each listing
+        # Upload all 3 listings
         for i, listing in enumerate(LISTINGS):
-            ok = await upload_listing(page, listing, i)
-            results.append((listing["name"], ok))
+            ok = await upload_listing(page, listing, i + 1, len(LISTINGS))
+            results.append((listing["label"], ok))
             if i < len(LISTINGS) - 1:
-                await page.wait_for_timeout(2000)  # Brief pause between listings
+                log("\n  Pausing 3 seconds before next listing...")
+                await page.wait_for_timeout(3000)
 
+        log("\n  Leaving browser open for 10 seconds so you can review...")
+        await page.wait_for_timeout(10000)
         await browser.close()
 
-    # Summary
-    print("\n" + "=" * 60)
-    print("UPLOAD SUMMARY")
-    print("=" * 60)
-    for name, ok in results:
-        status = "✓ Draft saved" if ok else "⚠ Check screenshots"
-        print(f"  {status}: {name}")
-    print(f"\nScreenshots saved in: {SCREENSHOTS_DIR}")
-    print("\nNext steps:")
-    print("  1. Log in to Etsy Seller Hub → Listings → Drafts to review")
-    print("  2. Add 10 ChatGPT-generated images per listing (replace current placeholders)")
-    print("  3. Assign correct category/taxonomy in Etsy UI if needed")
-    print("  4. Publish when ready!")
-    print("=" * 60)
+    # ── Summary ───────────────────────────────────────────────────────────────
+    log("")
+    log("╔══════════════════════════════════════════════════════════════╗")
+    log("║                         SUMMARY                             ║")
+    log("╚══════════════════════════════════════════════════════════════╝")
+    for label, ok in results:
+        icon = "✓" if ok else "⚠"
+        log(f"  {icon}  {label}")
+    log("")
+    log("  Next steps:")
+    log("  1. Go to etsy.com → Seller Hub → Listings → Drafts")
+    log("  2. Add 10 ChatGPT-generated images to each listing")
+    log("  3. Assign the correct Etsy category if needed")
+    log("  4. Click Publish when ready!")
+    log("")
 
 
 if __name__ == "__main__":
