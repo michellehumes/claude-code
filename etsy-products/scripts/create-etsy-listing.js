@@ -22,8 +22,9 @@ const path = require('path');
 // ── Config ───────────────────────────────────────────────────────────────────
 const PRODUCTS_DIR = '/Users/michellehumes/etsy-products';
 const LOGS_DIR = path.join(PRODUCTS_DIR, 'logs');
-// Dedicated Playwright profile — avoids conflict with running Chrome
-const CHROME_PROFILE = path.join(__dirname, '.playwright-profile');
+// Your regular Chrome profile — already logged into Etsy
+// Close Chrome before running the script to avoid profile lock conflicts
+const CHROME_PROFILE = '/Users/michellehumes/Library/Application Support/Google/Chrome';
 const DEFAULT_PRICE = '4.99';
 const ETSY_CREATE_URL = 'https://www.etsy.com/your/listings/create';
 
