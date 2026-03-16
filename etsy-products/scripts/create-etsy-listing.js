@@ -377,15 +377,22 @@ async function main() {
   const progress = loadProgress();
   const completedSlugs = new Set((progress.completed || []).map(c => c.slug));
 
-  log('\nLaunching browser (dedicated profile — won\'t conflict with Chrome)...');
-  const browser = await chromium.launchPersistentContext(CHROME_PROFILE, {
-    channel: 'chrome',  // Use real Chrome — bypasses bot detection
-    headless: false,
-    args: ['--no-first-run', '--no-default-browser-check'],
-    viewport: { width: 1280, height: 900 },
-  });
-
-  const page = await browser.newPage();
+  // Connect to your already-running Chrome (must be open with remote debug port)
+  // To enable: quit Chrome, then run:
+  //   /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --remote-debugging-port=9222
+  log('\nConnecting to your running Chrome...');
+  let browser, page;
+  try {
+    browser = await chromium.connectOverCDP('http://localhost:9222');
+    const ctx = browser.contexts()[0] || await browser.newContext();
+    page = await ctx.newPage();
+  } catch (e) {
+    log('ERROR: Could not connect to Chrome.');
+    log('Open Chrome with remote debugging enabled by running this command first:');
+    log('  /Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome --remote-debugging-port=9222');
+    log('Then re-run this script.');
+    process.exit(1);
+  }
   const results = { success: [], failed: [] };
 
   for (const product of products) {
@@ -401,8 +408,7 @@ async function main() {
       await humanDelay(3000);
     } catch (err) {
       if (err.fatal) {
-        log('\nNot logged into Etsy. Log in in the browser window, then re-run the script.');
-        await browser.close().catch(() => {});
+        log('\nNot logged into Etsy. Log in in Chrome, then re-run the script.');
         process.exit(1);
       }
       log(`ERROR on ${product.slug}: ${err.message}`);
@@ -416,7 +422,7 @@ async function main() {
     }
   }
 
-  await browser.close();
+  // Don't close browser — it's the user's running Chrome
 
   log('\n── Run Complete ──');
   log(`Success: ${results.success.length} | Failed: ${results.failed.length}`);
