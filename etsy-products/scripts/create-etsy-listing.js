@@ -378,6 +378,7 @@ async function main() {
 
   log('\nLaunching browser (dedicated profile — won\'t conflict with Chrome)...');
   const browser = await chromium.launchPersistentContext(CHROME_PROFILE, {
+    channel: 'chrome',  // Use real Chrome — bypasses bot detection
     headless: false,
     args: ['--no-first-run', '--no-default-browser-check'],
     viewport: { width: 1280, height: 900 },
