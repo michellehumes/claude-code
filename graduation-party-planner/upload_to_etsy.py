@@ -15,9 +15,12 @@ Products:
 """
 
 import asyncio
+import atexit
 import os
+import shutil
 import sys
 import subprocess
+import tempfile
 import time
 
 from playwright.async_api import async_playwright, TimeoutError as PlaywrightTimeout
@@ -806,28 +809,36 @@ async def main():
     results = []
 
     async with async_playwright() as p:
-        log("  Launching Google Chrome with your existing profile...")
-        log("  The script will automatically close any open Chrome windows first.")
+        log("  Launching Google Chrome with your existing session (cookies/login)...")
+        log("  Your real Chrome stays open — we use a temporary copy of your profile.")
         log("")
-        log("  ⚠  SAVE any open work in Chrome, then press Enter.")
-        input("  Press Enter to close Chrome and launch the Etsy uploader: ")
 
-        # Kill any background Chrome processes that may be holding the profile lock.
-        # (This is safe — it only affects Chrome, not this script.)
-        log("  Killing any background Chrome processes...")
-        subprocess.run(["pkill", "-9", "-f", "Google Chrome"], capture_output=True)
-        subprocess.run(["pkill", "-9", "-f", "Google Chrome Helper"], capture_output=True)
-        time.sleep(2)
-        log("  ✓ Chrome processes cleared\n")
+        # Chrome blocks DevTools (used by Playwright) on its default system profile.
+        # Fix: copy the Default profile folder to a temp dir — same cookies/session,
+        # but not the "default" path, so Chrome allows DevTools to connect.
 
-        # Use the real Chrome profile so Etsy sees a normal logged-in browser.
-        # No login step needed — your existing session/cookies are reused.
-        CHROME_PROFILE = os.path.expanduser(
-            "~/Library/Application Support/Google/Chrome"
-        )
+        CHROME_SRC = os.path.expanduser("~/Library/Application Support/Google/Chrome")
+
+        log("  Copying Chrome session to a temporary profile (this may take ~10s)...")
+        temp_profile = tempfile.mkdtemp(prefix="etsy_uploader_")
+        atexit.register(shutil.rmtree, temp_profile, ignore_errors=True)
+
+        # Copy the Default profile (cookies, session, localStorage)
+        src_default = os.path.join(CHROME_SRC, "Default")
+        dst_default = os.path.join(temp_profile, "Default")
+        if os.path.isdir(src_default):
+            shutil.copytree(src_default, dst_default)
+            log("  ✓ Session data copied")
+        else:
+            log("  ⚠  Default profile folder not found — you may need to log in manually")
+
+        # Copy Local State (Chrome needs this to recognise the profile)
+        src_ls = os.path.join(CHROME_SRC, "Local State")
+        if os.path.isfile(src_ls):
+            shutil.copy2(src_ls, os.path.join(temp_profile, "Local State"))
 
         context = await p.chromium.launch_persistent_context(
-            user_data_dir=CHROME_PROFILE,
+            user_data_dir=temp_profile,
             channel="chrome",
             headless=False,
             slow_mo=350,
@@ -836,8 +847,6 @@ async def main():
                 "--no-first-run",
                 "--no-default-browser-check",
                 "--disable-sync",
-                "--disable-extensions-except=",
-                "--disable-background-networking",
             ],
         )
 
