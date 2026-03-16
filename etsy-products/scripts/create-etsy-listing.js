@@ -22,9 +22,8 @@ const path = require('path');
 // ── Config ───────────────────────────────────────────────────────────────────
 const PRODUCTS_DIR = '/Users/michellehumes/etsy-products';
 const LOGS_DIR = path.join(PRODUCTS_DIR, 'logs');
-// Your regular Chrome profile — already logged into Etsy
-// Close Chrome before running the script to avoid profile lock conflicts
-const CHROME_PROFILE = '/Users/michellehumes/Library/Application Support/Google/Chrome';
+// Dedicated profile for automation — won't conflict with your running Chrome
+const CHROME_PROFILE = path.join(__dirname, '.etsy-chrome-profile');
 const DEFAULT_PRICE = '4.99';
 const ETSY_CREATE_URL = 'https://www.etsy.com/your/listings/create';
 
@@ -377,22 +376,21 @@ async function main() {
   const progress = loadProgress();
   const completedSlugs = new Set((progress.completed || []).map(c => c.slug));
 
-  // Connect to your already-running Chrome (must be open with remote debug port)
-  // To enable: quit Chrome, then run:
-  //   /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --remote-debugging-port=9222
-  log('\nConnecting to your running Chrome...');
-  let browser, page;
-  try {
-    browser = await chromium.connectOverCDP('http://localhost:9222');
-    const ctx = browser.contexts()[0] || await browser.newContext();
-    page = await ctx.newPage();
-  } catch (e) {
-    log('ERROR: Could not connect to Chrome.');
-    log('Open Chrome with remote debugging enabled by running this command first:');
-    log('  /Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome --remote-debugging-port=9222');
-    log('Then re-run this script.');
-    process.exit(1);
-  }
+  // Launch real Chrome with a dedicated profile (won't conflict with your running Chrome)
+  // First run: log into Etsy when the window opens, then Ctrl+C and re-run
+  log('\nLaunching Chrome...');
+  const browser = await chromium.launchPersistentContext(CHROME_PROFILE, {
+    channel: 'chrome',
+    headless: false,
+    ignoreDefaultArgs: ['--enable-automation'],
+    args: [
+      '--no-first-run',
+      '--no-default-browser-check',
+      '--disable-blink-features=AutomationControlled',
+    ],
+    viewport: null,
+  });
+  const page = await browser.newPage();
   const results = { success: [], failed: [] };
 
   for (const product of products) {
@@ -408,8 +406,8 @@ async function main() {
       await humanDelay(3000);
     } catch (err) {
       if (err.fatal) {
-        log('\nNot logged into Etsy. Log in in Chrome, then re-run the script.');
-        process.exit(1);
+        log('\nNot logged into Etsy. Log into Etsy in the Chrome window that just opened, then Ctrl+C and re-run.');
+        await new Promise(() => {}); // keep browser open so user can log in
       }
       log(`ERROR on ${product.slug}: ${err.message}`);
       markFailed(product.slug, err.message);
@@ -422,7 +420,7 @@ async function main() {
     }
   }
 
-  // Don't close browser — it's the user's running Chrome
+  await browser.close();
 
   log('\n── Run Complete ──');
   log(`Success: ${results.success.length} | Failed: ${results.failed.length}`);
