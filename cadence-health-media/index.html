@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cadence Health Media | HCP Media Strategy & Healthcare Marketing</title>
+<meta name="description" content="Strategic healthcare media consulting. 15+ years of HCP media strategy for oncology, endocrinology, and immunology brands.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Cadence Health Media | HCP Media Strategy & Healthcare Marketing">
+<meta property="og:description" content="Strategic healthcare media consulting. 15+ years of HCP media strategy for oncology, endocrinology, and immunology brands.">
+<meta property="og:url" content="https://cadencehealthmedia.com">
+<meta property="og:image" content="https://cadencehealthmedia.com/images/cadence-og.jpg">
+<meta property="og:site_name" content="Cadence Health Media">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Cadence Health Media | HCP Media Strategy & Healthcare Marketing">
+<meta name="twitter:description" content="Strategic healthcare media consulting for pharma and biotech brands.">
+<link rel="canonical" href="https://cadencehealthmedia.com/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0B2545;
+    --teal: #13838A;
+    --teal-light: #1A9FA7;
+    --sky: #E8F4F8;
+    --white: #FFFFFF;
+    --gray-50: #F8FAFB;
+    --gray-100: #EEF2F5;
+    --gray-400: #8896A6;
+    --gray-600: #4A5568;
+    --gray-800: #2D3748;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--gray-800);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.97);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--gray-100);
+    padding: 0 2rem;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--navy);
+    letter-spacing: -0.02em;
+  }
+
+  .logo span { color: var(--teal); }
+
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--gray-600);
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--teal); }
+
+  .nav-cta {
+    background: var(--teal);
+    color: var(--white) !important;
+    padding: 0.5rem 1.25rem;
+    border-radius: 6px;
+    transition: background 0.2s !important;
+  }
+
+  .nav-cta:hover { background: var(--teal-light) !important; }
+
+  .mobile-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 28px;
+    height: 20px;
+    position: relative;
+  }
+
+  .mobile-toggle span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: var(--navy);
+    position: absolute;
+    left: 0;
+    transition: 0.3s;
+  }
+
+  .mobile-toggle span:nth-child(1) { top: 0; }
+  .mobile-toggle span:nth-child(2) { top: 9px; }
+  .mobile-toggle span:nth-child(3) { top: 18px; }
+
+  /* HERO */
+  .hero {
+    padding: 10rem 2rem 6rem;
+    background: linear-gradient(160deg, var(--navy) 0%, #134E6F 50%, var(--teal) 100%);
+    color: var(--white);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(19,131,138,0.25) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .hero-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero h1 {
+    font-size: clamp(2rem, 5vw, 3.25rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.03em;
+  }
+
+  .hero p {
+    font-size: 1.15rem;
+    color: rgba(255,255,255,0.85);
+    max-width: 620px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.8;
+  }
+
+  .btn {
+    display: inline-block;
+    background: var(--white);
+    color: var(--teal);
+    padding: 0.9rem 2.25rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  }
+
+  .btn-primary {
+    background: var(--teal);
+    color: var(--white);
+  }
+
+  .btn-primary:hover {
+    background: var(--teal-light);
+  }
+
+  /* SECTIONS */
+  section { padding: 5rem 2rem; }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--teal);
+    margin-bottom: 0.75rem;
+  }
+
+  .section-title {
+    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 1.25rem;
+    letter-spacing: -0.02em;
+  }
+
+  .section-subtitle {
+    font-size: 1.05rem;
+    color: var(--gray-600);
+    max-width: 600px;
+    margin-bottom: 3rem;
+  }
+
+  /* SERVICES */
+  #services { background: var(--gray-50); }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 1rem;
+  }
+
+  .service-card {
+    background: var(--white);
+    padding: 2.25rem;
+    border-radius: 12px;
+    border: 1px solid var(--gray-100);
+    transition: box-shadow 0.3s, transform 0.3s;
+  }
+
+  .service-card:hover {
+    box-shadow: 0 12px 32px rgba(11,37,69,0.08);
+    transform: translateY(-4px);
+  }
+
+  .service-icon {
+    width: 48px;
+    height: 48px;
+    background: var(--sky);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.25rem;
+    color: var(--teal);
+    font-size: 1.25rem;
+  }
+
+  .service-card h3 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 0.75rem;
+  }
+
+  .service-card p {
+    color: var(--gray-600);
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  /* ABOUT */
+  #about { background: var(--white); }
+
+  .about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .about-text p {
+    color: var(--gray-600);
+    margin-bottom: 1.5rem;
+    font-size: 1.05rem;
+  }
+
+  .about-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .stat {
+    background: var(--sky);
+    padding: 1.5rem;
+    border-radius: 10px;
+    text-align: center;
+  }
+
+  .stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--teal);
+    line-height: 1;
+    margin-bottom: 0.35rem;
+  }
+
+  .stat-label {
+    font-size: 0.85rem;
+    color: var(--gray-600);
+    font-weight: 500;
+  }
+
+  /* APPROACH */
+  #approach { background: var(--gray-50); }
+
+  .approach-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 1rem;
+  }
+
+  .step {
+    text-align: center;
+    padding: 2rem 1.5rem;
+  }
+
+  .step-number {
+    width: 40px;
+    height: 40px;
+    background: var(--teal);
+    color: var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1rem;
+    margin: 0 auto 1.25rem;
+  }
+
+  .step h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 0.75rem;
+  }
+
+  .step p {
+    color: var(--gray-600);
+    font-size: 0.93rem;
+  }
+
+  /* CTA */
+  .cta-section {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--teal) 100%);
+    color: var(--white);
+    text-align: center;
+    padding: 5rem 2rem;
+  }
+
+  .cta-section h2 {
+    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+    font-weight: 700;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+  }
+
+  .cta-section p {
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.85);
+    margin-bottom: 2rem;
+    max-width: 550px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* CONTACT */
+  #contact { background: var(--white); }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+  }
+
+  .contact-info h3 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 1rem;
+  }
+
+  .contact-info p {
+    color: var(--gray-600);
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+  }
+
+  .contact-detail {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    color: var(--gray-600);
+    font-size: 0.95rem;
+  }
+
+  .contact-detail svg {
+    width: 20px;
+    height: 20px;
+    color: var(--teal);
+    flex-shrink: 0;
+  }
+
+  .contact-detail a {
+    color: var(--teal);
+    text-decoration: none;
+  }
+
+  .contact-detail a:hover { text-decoration: underline; }
+
+  /* FOOTER */
+  footer {
+    background: var(--navy);
+    color: rgba(255,255,255,0.6);
+    padding: 2.5rem 2rem;
+    text-align: center;
+    font-size: 0.85rem;
+  }
+
+  footer .logo {
+    color: var(--white);
+    margin-bottom: 0.75rem;
+    display: block;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .mobile-toggle { display: block; }
+
+    .nav-links.active {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 72px;
+      left: 0;
+      right: 0;
+      background: var(--white);
+      padding: 1.5rem 2rem;
+      border-bottom: 1px solid var(--gray-100);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
+
+    .hero { padding: 8rem 1.5rem 4rem; }
+
+    .about-content,
+    .contact-grid {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+
+    .services-grid { grid-template-columns: 1fr; }
+
+    section { padding: 3.5rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+  <div class="logo">Cadence <span>Health Media</span></div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#approach">Approach</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="https://calendly.com/cadencehealthmedia/30min" class="nav-cta">Start a Conversation</a></li>
+  </ul>
+  <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <h1>Strategic HCP Media Consulting for Pharma &amp; Biotech</h1>
+    <p>Data-driven media strategy that connects healthcare brands with the right physicians, at the right time, through the right channels.</p>
+    <a href="https://calendly.com/cadencehealthmedia/30min" class="btn">Start a Conversation</a>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="container">
+    <p class="section-label">Services</p>
+    <h2 class="section-title">What We Do</h2>
+    <p class="section-subtitle">End-to-end HCP media strategy and execution for pharmaceutical and biotech brands.</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        </div>
+        <h3>HCP Media Strategy</h3>
+        <p>Comprehensive media planning and buying strategies targeting healthcare professionals across endemic and non-endemic channels, optimized for reach, frequency, and clinical relevance.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+        </div>
+        <h3>Omnichannel Planning</h3>
+        <p>Integrated media plans that unify programmatic, point-of-care, conference, and peer-to-peer channels into a cohesive physician engagement journey.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        </div>
+        <h3>Analytics &amp; Measurement</h3>
+        <p>Rigorous performance analytics including Rx lift studies, NPI-level targeting, and real-time optimization to demonstrate clear ROI on media investments.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+        <h3>Launch Media Planning</h3>
+        <p>Strategic media planning for new product launches, including pre-launch disease awareness, launch amplification, and post-launch optimization across therapeutic areas.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3>Vendor &amp; Partner Management</h3>
+        <p>Expert negotiation and management of media vendor relationships, ensuring optimal rates, premium placements, and transparent reporting across all partners.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>Compliance &amp; Best Practices</h3>
+        <p>Media strategies built with regulatory compliance in mind, ensuring all HCP-directed communications meet industry standards and platform-specific requirements.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-content">
+      <div class="about-text">
+        <p class="section-label">About</p>
+        <h2 class="section-title">Meet Michelle</h2>
+        <p>With over 15 years across top-tier global health networks, Michelle has led HCP media strategy for blockbuster oncology, endocrinology, and immunology brands at the intersection of data, media, and patient outcomes.</p>
+        <p>Cadence Health Media was founded on the belief that pharmaceutical brands deserve media partners who understand both the science and the strategy. Every engagement is grounded in clinical context, audience insight, and measurable impact.</p>
+      </div>
+      <div class="about-stats">
+        <div class="stat">
+          <div class="stat-number">15+</div>
+          <div class="stat-label">Years of Experience</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">50+</div>
+          <div class="stat-label">Brand Launches</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">3</div>
+          <div class="stat-label">Therapeutic Areas</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">100%</div>
+          <div class="stat-label">Client Focused</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPROACH -->
+<section id="approach">
+  <div class="container">
+    <p class="section-label">Approach</p>
+    <h2 class="section-title">How We Work</h2>
+    <p class="section-subtitle">A proven framework that puts strategy before tactics and outcomes before outputs.</p>
+    <div class="approach-steps">
+      <div class="step">
+        <div class="step-number">1</div>
+        <h3>Discover</h3>
+        <p>Deep dive into your brand, therapeutic landscape, target HCP segments, and current media performance to identify opportunities.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <h3>Strategize</h3>
+        <p>Develop a data-informed media strategy with clear KPIs, channel mix recommendations, and audience targeting frameworks.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <h3>Execute</h3>
+        <p>Activate campaigns across programmatic, endemic, point-of-care, and peer channels with hands-on management and optimization.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">4</div>
+        <h3>Optimize</h3>
+        <p>Continuous measurement and refinement using Rx lift, engagement data, and NPI-level insights to maximize media ROI.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container">
+    <h2>Ready to Elevate Your HCP Media Strategy?</h2>
+    <p>Schedule a complimentary 30-minute consultation to discuss your brand's media challenges and opportunities.</p>
+    <a href="https://calendly.com/cadencehealthmedia/30min" class="btn">Start a Conversation</a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div>
+        <p class="section-label">Contact</p>
+        <h2 class="section-title">Get in Touch</h2>
+        <p class="section-subtitle">Whether you have a specific project in mind or want to explore how strategic media consulting can benefit your brand, we are here to help.</p>
+      </div>
+      <div class="contact-info">
+        <h3>Connect with Us</h3>
+        <p>We would love to hear about your media challenges and goals. Reach out to start the conversation.</p>
+        <div class="contact-detail">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <a href="mailto:hello@cadencehealthmedia.com">hello@cadencehealthmedia.com</a>
+        </div>
+        <div class="contact-detail">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          <a href="https://cadencehealthmedia.com">cadencehealthmedia.com</a>
+        </div>
+        <div class="contact-detail">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          <a href="https://calendly.com/cadencehealthmedia/30min">Book a 30-Minute Call</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="logo">Cadence <span>Health Media</span></div>
+    <p>&copy; 2026 Cadence Health Media. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('mobileToggle').addEventListener('click', function() {
+    document.getElementById('navLinks').classList.toggle('active');
+  });
+
+  // Close mobile menu on link click
+  document.querySelectorAll('.nav-links a').forEach(function(link) {
+    link.addEventListener('click', function() {
+      document.getElementById('navLinks').classList.remove('active');
+    });
+  });
+</script>
+
+</body>
+</html>

@@ -29,8 +29,9 @@
     --spacing-2xl: 4rem;
 
     /* Typography */
-    --font-primary: 'Barlow', sans-serif;
-    --font-heading: 'Barlow Condensed', sans-serif;
+    --font-primary: 'Source Sans 3', sans-serif;
+    --font-heading: 'Oswald', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
     --font-size-xs: 0.75rem;
     --font-size-sm: 0.875rem;
     --font-size-base: 1rem;
@@ -446,6 +447,7 @@ ul, ol {
     color: white;
     padding: var(--spacing-xs) var(--spacing-md);
     border-radius: 100px;
+    font-family: var(--font-mono);
     font-size: var(--font-size-sm);
     font-weight: 600;
     text-transform: uppercase;
@@ -500,6 +502,7 @@ ul, ol {
 
 .stat-label {
     display: block;
+    font-family: var(--font-mono);
     font-size: var(--font-size-sm);
     color: var(--text-secondary);
     text-transform: uppercase;
@@ -746,6 +749,7 @@ ul, ol {
     color: white;
     padding: 4px var(--spacing-sm);
     border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
     font-size: var(--font-size-xs);
     font-weight: 600;
     text-transform: uppercase;
@@ -815,6 +819,7 @@ ul, ol {
     background: var(--bg-tertiary);
     padding: 2px var(--spacing-sm);
     border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
     font-size: var(--font-size-xs);
     color: var(--text-secondary);
 }
