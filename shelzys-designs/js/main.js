@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initMobileMenu();
     initSmoothScroll();
     initFormHandler();
+    initEmailSignup();
     initScrollAnimations();
     initNavbarScroll();
 });
@@ -189,6 +190,51 @@ function showNotification(message, type) {
             notification.remove();
         }
     }, 5000);
+}
+
+// ============================================
+// EMAIL SIGNUP HANDLER
+// ============================================
+function initEmailSignup() {
+    const form = document.getElementById('emailSignupForm');
+    if (!form) return;
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const emailInput = document.getElementById('signupEmail');
+        const message = document.getElementById('signupMessage');
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const email = emailInput.value.trim();
+
+        // Validate email format
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            message.textContent = 'please enter a valid email address.';
+            message.style.display = 'block';
+            message.style.color = '#ff7675';
+            return;
+        }
+
+        submitBtn.textContent = 'signing up...';
+        submitBtn.disabled = true;
+
+        try {
+            await simulateSubmission();
+
+            message.textContent = "You're in! Check your inbox for your discount code.";
+            message.style.display = 'block';
+            message.style.color = '#00d9a5';
+            emailInput.value = '';
+        } catch (error) {
+            message.textContent = 'oops! something went wrong. try again.';
+            message.style.display = 'block';
+            message.style.color = '#ff7675';
+        }
+
+        submitBtn.textContent = 'sign me up';
+        submitBtn.disabled = false;
+    });
 }
 
 // ============================================
