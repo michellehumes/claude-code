@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+@theme {
+  --color-pink: #E86F8A;
+  --color-pink-hover: #d4597a;
+  --color-charcoal: #2D2D2D;
+  --color-teal: #4CA89D;
+  --color-orange: #E8913A;
+  --color-blue: #6B9BD2;
+  --color-light-gray: #F5F5F5;
+  --color-mid-gray: #E0E0E0;
+  --color-text-light: #6B6B6B;
+  --font-heading: "Montserrat", sans-serif;
+  --font-body: "Inter", sans-serif;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-charcoal);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+}

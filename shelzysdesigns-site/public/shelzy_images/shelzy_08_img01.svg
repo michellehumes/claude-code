@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" fill="none">
+  <rect width="400" height="300" rx="12" fill="#FFF3E0"/>
+  <rect x="40" y="40" width="320" height="30" rx="6" fill="#E8913A" opacity="0.3"/>
+  <rect x="40" y="85" width="100" height="100" rx="8" fill="#E8913A" opacity="0.2"/>
+  <rect x="155" y="85" width="100" height="100" rx="8" fill="#E8913A" opacity="0.15"/>
+  <rect x="270" y="85" width="90" height="100" rx="8" fill="#E8913A" opacity="0.1"/>
+  <rect x="40" y="200" width="320" height="12" rx="6" fill="#E8913A" opacity="0.15"/>
+  <rect x="40" y="220" width="240" height="12" rx="6" fill="#E8913A" opacity="0.15"/>
+  <text x="200" y="260" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#E8913A">Business Planner</text>
+</svg>
