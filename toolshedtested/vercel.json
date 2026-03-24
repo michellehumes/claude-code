@@ -1,0 +1,24 @@
+{
+  "redirects": [
+    {
+      "source": "/buying-guides-hub",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/tool-comparisons-hub",
+      "destination": "/blog/dewalt-vs-milwaukee-2026.html",
+      "permanent": true
+    },
+    {
+      "source": "/best-tool-deals",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/category/how-to",
+      "destination": "/blog/how-to-choose-first-power-tool-set.html",
+      "permanent": true
+    }
+  ]
+}
