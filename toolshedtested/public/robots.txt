@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /_next/
+Disallow: /api/
+Disallow: /buying-guides-hub
+Disallow: /tool-comparisons-hub
+Disallow: /best-tool-deals
+Sitemap: https://www.toolshedtested.com/sitemap.xml
